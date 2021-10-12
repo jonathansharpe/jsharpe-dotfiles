@@ -1,0 +1,35 @@
+{
+	"presets": {
+		"4102276927854966": {
+			"pos": 2,
+			"emojiInfo": {
+				"id": null,
+				"name": "⌨️",
+				"animated": false
+			},
+			"status": "online",
+			"text": "programming, but only sometimes"
+		},
+		"4436422608436492": {
+			"pos": 1,
+			"emojiInfo": {
+				"id": null,
+				"name": "😩",
+				"animated": false
+			},
+			"status": "online",
+			"text": "probably gaming"
+		},
+		"7075546754383459": {
+			"pos": 0,
+			"clearAfter": "TODAY",
+			"emojiInfo": {
+				"id": "813483155793248316",
+				"name": "thonk",
+				"animated": false
+			},
+			"status": "online",
+			"text": "being mildly productive"
+		}
+	}
+}

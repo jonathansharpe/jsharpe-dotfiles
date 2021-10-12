@@ -1,0 +1,47 @@
+{
+	"amounts": {
+		"maxDaysAgo": 0
+	},
+	"choices": {
+		"timestampLang": "own",
+		"timestampToolLang": "$discord"
+	},
+	"dates": {
+		"timestampDate": {
+			"formatString": "$day $date $time12 ",
+			"dateString": "$m.$d.$yyyy",
+			"timeString": "$h:$mm"
+		},
+		"tooltipDate": {
+			"formatString": "$day $date $time12 ",
+			"dateString": "$m.$d.$yyyy",
+			"timeString": "$h:$mm"
+		}
+	},
+	"formats": {
+		"ownFormat": "$hour:$minute $timemode $month.$day.$year",
+		"ownFormatTool": "$hour:$minute $timemode $month.$day.$year"
+	},
+	"general": {
+		"showInChat": true,
+		"showInEmbed": true,
+		"showInMarkup": true,
+		"showInAuditLogs": true,
+		"changeForChat": true,
+		"changeForEdit": true,
+		"changeForMarkup": true
+	},
+	"settings": {
+		"changeForChat": true,
+		"changeForEdit": true,
+		"cutSeconds": true,
+		"displayDate": true,
+		"displayTime": true,
+		"forceZeros": false,
+		"otherOrder": false,
+		"showInAuditLogs": true,
+		"showInChat": true,
+		"showInEmbed": true,
+		"useDateInDaysAgo": false
+	}
+}
