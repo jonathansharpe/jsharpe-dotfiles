@@ -23,7 +23,7 @@
 			"category": "Discord",
 			"focus": true,
 			"mute": true,
-			"sound": "Call Calling",
+			"sound": "Mention",
 			"volume": 100
 		},
 		"role": {
