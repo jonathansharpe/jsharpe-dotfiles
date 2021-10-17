@@ -79,6 +79,13 @@
                 "ownerId": "141205037413040128"
             },
             {
+                "id": "321845546534830085",
+                "invalid": false,
+                "name": "Emoji.gg | Discord Emojis, Servers & Bots ★ Nitro Emotes, Stickers, Anime",
+                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_4ab388276d7cc61bc16b5ab3807745ca.webp?size=4096",
+                "ownerId": "116218776495587329"
+            },
+            {
                 "id": "334731532965249025",
                 "invalid": false,
                 "name": "Zeal",
@@ -216,13 +223,6 @@
                 "name": "Seattle Pacific University",
                 "iconUrl": "https://cdn.discordapp.com/icons/882703727994236939/a74a73aa22480b3eecaf57849c511235.webp?size=4096",
                 "ownerId": "643945264868098049"
-            },
-            {
-                "id": "321845546534830085",
-                "invalid": false,
-                "name": "Emoji.gg | Discord Emojis, Servers & Bots ★ Nitro Emotes, Stickers, Anime",
-                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_923f7c496e38e07b89d56179f7dc6291.webp?size=4096",
-                "ownerId": "116218776495587329"
             }
         ],
         "friendsSnapshot": [
@@ -295,6 +295,13 @@
                 "tag": "FlameKnight15#0001",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
                 "avatarUrl": "https://cdn.discordapp.com/avatars/221404922615300096/6db717b2a7da7e496d142630d265c8f4.webp?size=320"
+            },
+            {
+                "id": "227706973158768640",
+                "invalid": false,
+                "tag": "JuddTh3SPUd#5001",
+                "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
+                "avatarUrl": "https://cdn.discordapp.com/avatars/227706973158768640/cf9f725769bce8227e5525f5e5f48d14.webp?size=320"
             },
             {
                 "id": "264243681727348746",
@@ -574,7 +581,7 @@
                 "invalid": false,
                 "tag": "Anna Dominguez#5111",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/597855c6db400bfeaaacf74d9efe63a7.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/deadeb9af0da66ad3c41b8c0bb80c5ab.webp?size=320"
             },
             {
                 "id": "696565724595880028",

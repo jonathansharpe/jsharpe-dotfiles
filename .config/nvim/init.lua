@@ -11,6 +11,7 @@ set.relativenumber = true
 set.spelllang = 'en_us'
 set.fdm = 'indent'
 vim.cmd 'set noexpandtab'
+--vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 set.mouse = 'a'
 	require'lualine'.setup {
 		options = {

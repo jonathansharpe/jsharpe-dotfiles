@@ -194,8 +194,7 @@ return require('packer').startup(function()
    }
    use {
       'iamcco/markdown-preview.nvim', 
-      run = 'cd app && yarn install', 
-      cmd = 'MarkdownPreview'
+      run = 'cd app && yarn install'
    }
 
    -- IDE features
