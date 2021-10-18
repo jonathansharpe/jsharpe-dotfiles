@@ -1,0 +1,942 @@
+[19Sep2021 19:43:32.510] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--username, AvgUsrName, --version, MultiMC5, --gameDir, /home/jonathansharpe/.local/share/multimc/instances/Optifine 1.16.5 -Forge-/.minecraft, --assetsDir, /home/jonathansharpe/.local/share/multimc/assets, --assetIndex, 1.16, --uuid, d92786309e2042ee9c0f21e648294ced, --accessToken, ❄❄❄❄❄❄❄❄, --userType, mojang, --versionType, release, --launchTarget, fmlclient, --fml.forgeVersion, 36.1.1, --fml.mcVersion, 1.16.5, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20210115.111550, --width, 854, --height, 480]
+[19Sep2021 19:43:32.513] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 8.0.9+86+master.3cf110c starting: java version 11.0.12 by Oracle Corporation
+[19Sep2021 19:43:32.612] [main/INFO] [optifine.OptiFineTransformationService/]: OptiFineTransformationService.onLoad
+[19Sep2021 19:43:32.612] [main/INFO] [optifine.OptiFineTransformationService/]: OptiFine ZIP file: /home/jonathansharpe/.local/share/multimc/instances/Optifine 1.16.5 -Forge-/.minecraft/mods/OptiFine_1.16.5_HD_U_G7.jar
+[19Sep2021 19:43:32.614] [main/INFO] [optifine.OptiFineTransformer/]: Target.PRE_CLASS is available
+[19Sep2021 19:43:32.674] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[19Sep2021 19:43:32.707] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.2 Source=file:/home/jonathansharpe/.local/share/multimc/libraries/org/spongepowered/mixin/0.8.2/mixin-0.8.2.jar Service=ModLauncher Env=CLIENT
+[19Sep2021 19:43:32.711] [main/INFO] [optifine.OptiFineTransformationService/]: OptiFineTransformationService.initialize
+[19Sep2021 19:43:33.171] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[19Sep2021 19:43:33.226] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[19Sep2021 19:43:33.230] [main/INFO] [STDERR/]: [jdk.nashorn.api.scripting.NashornScriptEngine:<init>:143]: Warning: Nashorn engine is planned to be removed from a future JDK release
+[19Sep2021 19:43:33.311] [main/INFO] [optifine.OptiFineTransformationService/]: OptiFineTransformationService.transformers
+[19Sep2021 19:43:33.317] [main/INFO] [optifine.OptiFineTransformer/]: Targets: 308
+[19Sep2021 19:43:33.662] [main/INFO] [optifine.OptiFineTransformationService/]: additionalClassesLocator: [optifine., net.optifine.]
+[19Sep2021 19:43:33.669] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'fmlclient' with arguments [--version, MultiMC5, --gameDir, /home/jonathansharpe/.local/share/multimc/instances/Optifine 1.16.5 -Forge-/.minecraft, --assetsDir, /home/jonathansharpe/.local/share/multimc/assets, --uuid, d92786309e2042ee9c0f21e648294ced, --username, AvgUsrName, --assetIndex, 1.16, --accessToken, ❄❄❄❄❄❄❄❄, --userType, mojang, --versionType, release, --width, 854, --height, 480]
+[19Sep2021 19:43:37.055] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 19:43:37.866] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: AvgUsrName
+[19Sep2021 19:43:37.944] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Class not present: net.minecraft.launchwrapper.Launch
+[19Sep2021 19:43:37.952] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.2.2 build 10
+[19Sep2021 19:43:38.083] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] 
+[19Sep2021 19:43:38.084] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] OptiFine_1.16.5_HD_U_G7
+[19Sep2021 19:43:38.086] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Build: 20210305-003221
+[19Sep2021 19:43:38.086] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] OS: Linux (amd64) version 5.4.144-1-MANJARO
+[19Sep2021 19:43:38.087] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Java: 11.0.12, Oracle Corporation
+[19Sep2021 19:43:38.087] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] VM: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+[19Sep2021 19:43:38.088] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] LWJGL: 3.3.0 X11 GLX EGL OSMesa clock_gettime evdev shared
+[19Sep2021 19:43:38.089] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] OpenGL: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2, version 4.6.0 NVIDIA 470.63.01, NVIDIA Corporation
+[19Sep2021 19:43:38.090] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] OpenGL Version: 4.6.0
+[19Sep2021 19:43:38.097] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Maximum texture size: 32768x32768
+[19Sep2021 19:43:38.102] [VersionCheck/INFO] [net.optifine.Config/]: [OptiFine] Checking for new version
+[19Sep2021 19:43:38.121] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] OpenGL Version: 4.6.0 NVIDIA 470.63.01
+[19Sep2021 19:43:38.121] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Vendor:  NVIDIA Corporation
+[19Sep2021 19:43:38.121] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Renderer: NVIDIA GeForce GTX 1050 Ti/PCIe/SSE2
+[19Sep2021 19:43:38.121] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Capabilities:  2.0  2.1  3.0  3.2  4.0 
+[19Sep2021 19:43:38.121] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] GL_MAX_DRAW_BUFFERS: 8
+[19Sep2021 19:43:38.122] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] GL_MAX_COLOR_ATTACHMENTS_EXT: 8
+[19Sep2021 19:43:38.122] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] GL_MAX_TEXTURE_IMAGE_UNITS: 32
+[19Sep2021 19:43:38.122] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Load shaders configuration.
+[19Sep2021 19:43:38.123] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Save shaders configuration.
+[19Sep2021 19:43:38.127] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] No shaderpack loaded.
+[19Sep2021 19:43:38.134] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Class not present: net.minecraftforge.fml.common.Loader
+[19Sep2021 19:43:38.248] [VersionCheck/INFO] [net.optifine.Config/]: [OptiFine] Version found: G7
+[19Sep2021 19:43:38.446] [modloading-worker-11/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 36.1.1, for MC 1.16.5 with MCP 20210115.111550
+[19Sep2021 19:43:38.446] [modloading-worker-11/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v36.1.1 Initialized
+[19Sep2021 19:43:38.756] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] java.lang.ClassNotFoundException: sun.misc.SharedSecrets
+[19Sep2021 19:43:38.757] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] java.lang.reflect.InaccessibleObjectException: Unable to make public static jdk.internal.misc.JavaNioAccess jdk.internal.misc.SharedSecrets.getJavaNioAccess() accessible: module java.base does not "exports jdk.internal.misc" to unnamed module @61554b6b
+[19Sep2021 19:43:38.758] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] java.lang.ClassNotFoundException: sun.misc.VM
+[19Sep2021 19:43:38.758] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] java.lang.reflect.InaccessibleObjectException: Unable to make public static long jdk.internal.misc.VM.maxDirectMemory() accessible: module java.base does not "exports jdk.internal.misc" to unnamed module @61554b6b
+[19Sep2021 19:43:39.450] [Render thread/WARN] [com.mojang.text2speech.NarratorLinux/]: ERROR : Couldn't load Narrator library : Unable to load library 'fliteWrapper': Native library (linux-x86-64/libfliteWrapper.so) not found in resource path (/usr/share/multimc/jars/NewLaunch.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-glfw/3.2.2/lwjgl-glfw-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-jemalloc/3.2.2/lwjgl-jemalloc-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-openal/3.2.2/lwjgl-openal-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-opengl/3.2.2/lwjgl-opengl-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-stb/3.2.2/lwjgl-stb-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl-tinyfd/3.2.2/lwjgl-tinyfd-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/lwjgl/lwjgl/3.2.2/lwjgl-3.2.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/patchy/1.2.3/patchy-1.2.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/oshi-project/oshi-core/1.1/oshi-core-1.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/java/dev/jna/jna/4.4.0/jna-4.4.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/java/dev/jna/platform/3.4.0/platform-3.4.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/ibm/icu/icu4j/66.1/icu4j-66.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/javabridge/1.0.22/javabridge-1.0.22.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/sf/jopt-simple/jopt-simple/5.0.4/jopt-simple-5.0.4.jar:/home/jonathansharpe/.local/share/multimc/libraries/io/netty/netty-all/4.1.25.Final/netty-all-4.1.25.Final.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/google/guava/guava/21.0/guava-21.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar:/home/jonathansharpe/.local/share/multimc/libraries/commons-io/commons-io/2.5/commons-io-2.5.jar:/home/jonathansharpe/.local/share/multimc/libraries/commons-codec/commons-codec/1.10/commons-codec-1.10.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/brigadier/1.0.17/brigadier-1.0.17.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/datafixerupper/4.0.26/datafixerupper-4.0.26.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/authlib/2.1.28/authlib-2.1.28.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/httpcomponents/httpclient/4.3.3/httpclient-4.3.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/logging/log4j/log4j-api/2.11.2/log4j-api-2.11.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/logging/log4j/log4j-core/2.11.2/log4j-core-2.11.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/text2speech/1.11.3/text2speech-1.11.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/io/github/zekerzhayard/ForgeWrapper/1.5.1/ForgeWrapper-1.5.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/forge/1.16.5-36.1.1/forge-1.16.5-36.1.1-launcher.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/ow2/asm/asm/9.0/asm-9.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/ow2/asm/asm-commons/9.0/asm-commons-9.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/ow2/asm/asm-tree/9.0/asm-tree-9.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/ow2/asm/asm-util/9.0/asm-util-9.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/ow2/asm/asm-analysis/9.0/asm-analysis-9.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/cpw/mods/modlauncher/8.0.9/modlauncher-8.0.9.jar:/home/jonathansharpe/.local/share/multimc/libraries/cpw/mods/grossjava9hacks/1.3.0/grossjava9hacks-1.3.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/accesstransformers/3.0.1/accesstransformers-3.0.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/antlr/antlr4-runtime/4.9.1/antlr4-runtime-4.9.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/eventbus/4.0.0/eventbus-4.0.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/forgespi/3.2.0/forgespi-3.2.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/coremods/4.0.6/coremods-4.0.6.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/unsafe/0.2.0/unsafe-0.2.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/electronwill/night-config/core/3.6.3/core-3.6.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/electronwill/night-config/toml/3.6.3/toml-3.6.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/jline/jline/3.12.1/jline-3.12.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/apache/maven/maven-artifact/3.6.3/maven-artifact-3.6.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/jodah/typetools/0.8.3/typetools-0.8.3.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecrell/terminalconsoleappender/1.2.0/terminalconsoleappender-1.2.0.jar:/home/jonathansharpe/.local/share/multimc/libraries/org/spongepowered/mixin/0.8.2/mixin-0.8.2.jar:/home/jonathansharpe/.local/share/multimc/libraries/net/minecraftforge/nashorn-core-compat/15.1.1.1/nashorn-core-compat-15.1.1.1.jar:/home/jonathansharpe/.local/share/multimc/libraries/com/mojang/minecraft/1.16.5/minecraft-1.16.5-client.jar)
+[19Sep2021 19:43:39.490] [Render thread/INFO] [net.minecraft.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
+[19Sep2021 19:43:39.501] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading textures ***
+[19Sep2021 19:43:39.502] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Resource packs: Mod Resources
+[19Sep2021 19:43:39.584] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
+[19Sep2021 19:43:39.702] [Worker-Main-13/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:39.702] [Worker-Main-12/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:39.703] [Worker-Main-9/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:39.714] [Render thread/INFO] [net.optifine.reflect.Reflector/]: [OptiFine] *** Reflector Forge ***
+[19Sep2021 19:43:39.714] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Class not present: mods.betterfoliage.client.BetterFoliageClient
+[19Sep2021 19:43:39.783] [Render thread/WARN] [net.optifine.Log/]: [OptiFine] (Reflector) More than one method found: net.minecraftforge.client.ForgeHooksClient.renderMainMenu
+[19Sep2021 19:43:39.783] [Render thread/WARN] [net.optifine.Log/]: [OptiFine] (Reflector)  - public static void net.minecraftforge.client.ForgeHooksClient.renderMainMenu(net.minecraft.client.gui.screen.MainMenuScreen,com.mojang.blaze3d.matrix.MatrixStack,net.minecraft.client.gui.FontRenderer,int,int)
+[19Sep2021 19:43:39.783] [Render thread/WARN] [net.optifine.Log/]: [OptiFine] (Reflector)  - public static void net.minecraftforge.client.ForgeHooksClient.renderMainMenu(net.minecraft.client.gui.screen.MainMenuScreen,com.mojang.blaze3d.matrix.MatrixStack,net.minecraft.client.gui.FontRenderer,int,int,int)
+[19Sep2021 19:43:39.798] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Field not present: net.minecraftforge.client.model.pipeline.LightUtil.itemConsumer
+[19Sep2021 19:43:39.799] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Field not present: net.minecraftforge.client.model.pipeline.LightUtil.tessellator
+[19Sep2021 19:43:39.802] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] (Reflector) Class not present: net.minecraftforge.fml.common.ModContainer
+[19Sep2021 19:43:39.848] [Render thread/INFO] [net.optifine.reflect.Reflector/]: [OptiFine] *** Reflector Vanilla ***
+[19Sep2021 19:43:39.966] [Worker-Main-10/INFO] [zsawyer.mods.mumblelink.MumbleLinkImpl/]: Loading library 'LinkAPI' from: /tmp/MumbleLink8540779279281298422native
+[19Sep2021 19:43:40.023] [Worker-Main-10/INFO] [zsawyer.mods.mumblelink.MumbleLinkImpl/]: loaded and active
+[19Sep2021 19:43:40.605] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 36.1.1 Target: 36.2.0
+[19Sep2021 19:43:41.771] [Worker-Main-11/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:41.771] [Worker-Main-11/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:41.772] [Worker-Main-11/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:41.772] [Worker-Main-11/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:42.048] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:42.060] [Worker-Main-11/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:42.064] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:43:42.072] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_pane_white.properties
+[19Sep2021 19:43:42.088] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_white.properties
+[19Sep2021 19:43:42.096] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_orange.properties
+[19Sep2021 19:43:42.106] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_pane_orange.properties
+[19Sep2021 19:43:42.116] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_magenta.properties
+[19Sep2021 19:43:42.122] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_pane_magenta.properties
+[19Sep2021 19:43:42.132] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_light_blue.properties
+[19Sep2021 19:43:42.139] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_pane_light_blue.properties
+[19Sep2021 19:43:42.145] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_pane_yellow.properties
+[19Sep2021 19:43:42.152] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_yellow.properties
+[19Sep2021 19:43:42.157] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_lime.properties
+[19Sep2021 19:43:42.166] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_pane_lime.properties
+[19Sep2021 19:43:42.172] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pane_pink.properties
+[19Sep2021 19:43:42.178] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pink.properties
+[19Sep2021 19:43:42.184] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_gray.properties
+[19Sep2021 19:43:42.191] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_pane_gray.properties
+[19Sep2021 19:43:42.197] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_light_gray.properties
+[19Sep2021 19:43:42.203] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_pane_light_gray.properties
+[19Sep2021 19:43:42.211] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_cyan.properties
+[19Sep2021 19:43:42.217] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_pane_cyan.properties
+[19Sep2021 19:43:42.223] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_pane_purple.properties
+[19Sep2021 19:43:42.229] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_purple.properties
+[19Sep2021 19:43:42.235] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_blue.properties
+[19Sep2021 19:43:42.241] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_pane_blue.properties
+[19Sep2021 19:43:42.247] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_brown.properties
+[19Sep2021 19:43:42.252] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_pane_brown.properties
+[19Sep2021 19:43:42.258] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_green.properties
+[19Sep2021 19:43:42.266] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_pane_green.properties
+[19Sep2021 19:43:42.272] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_pane_red.properties
+[19Sep2021 19:43:42.277] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_red.properties
+[19Sep2021 19:43:42.283] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_black.properties
+[19Sep2021 19:43:42.289] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_pane_black.properties
+[19Sep2021 19:43:42.295] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass.properties
+[19Sep2021 19:43:42.301] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass_pane.properties
+[19Sep2021 19:43:42.307] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/30_bookshelf/bookshelf.properties
+[19Sep2021 19:43:42.307] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/40_sandstone/sandstone.properties
+[19Sep2021 19:43:42.308] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/41_red_sandstone/red_sandstone.properties
+[19Sep2021 19:43:42.309] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:43:42.311] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] BetterGrass: Parsing default configuration optifine/bettergrass.properties
+[19Sep2021 19:43:42.926] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 4
+[19Sep2021 19:43:43.581] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.583] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.583] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.587] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.598] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.598] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.613] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.623] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.624] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.634] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.637] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.637] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.640] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.648] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.648] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.657] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:43:43.665] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:43:43.665] [Worker-Main-11/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:43:43.686] [Worker-Main-12/INFO] [zsawyer.mods.mumblelink.addons.pa.es.ExtendedPASupport/]: loaded and active
+[19Sep2021 19:43:44.973] [Render thread/INFO] [net.minecraft.client.audio.SoundSystem/]: OpenAL initialized.
+[19Sep2021 19:43:44.974] [Render thread/INFO] [net.minecraft.client.audio.SoundEngine/SOUNDS]: Sound engine started
+[19Sep2021 19:43:45.189] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[19Sep2021 19:43:45.214] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 43
+[19Sep2021 19:43:45.216] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[19Sep2021 19:43:45.216] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.217] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[19Sep2021 19:43:45.217] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.217] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[19Sep2021 19:43:45.218] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.218] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[19Sep2021 19:43:45.219] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[19Sep2021 19:43:45.219] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.219] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[19Sep2021 19:43:45.220] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.780] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[19Sep2021 19:43:45.782] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.783] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[19Sep2021 19:43:45.784] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.784] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[19Sep2021 19:43:45.785] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:43:45.786] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading custom textures ***
+[19Sep2021 19:43:45.790] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:45.803] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:45.804] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:47.327] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:47.376] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:47.377] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:43:47.379] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Disable Forge light pipeline
+[19Sep2021 19:43:47.379] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] Set ForgeConfig.CLIENT.forgeLightPipelineEnabled=false
+[19Sep2021 19:45:25.827] [Render thread/INFO] [net.minecraft.client.gui.screen.ConnectingScreen/]: Connecting to spu.gearlab.net, 25501
+[19Sep2021 19:45:26.289] [Netty Epoll Client IO #0/INFO] [net.minecraftforge.fml.network.NetworkHooks/]: Connected to a vanilla server. Catching up missing behaviour.
+[19Sep2021 19:45:26.589] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 19:45:26.981] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName joined the game
+[19Sep2021 19:45:26.981] [Thread-6/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Mumble linked.
+[19Sep2021 19:45:27.129] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 19:49:03.098] [Render thread/INFO] [net.minecraft.client.gui.screen.ConnectingScreen/]: Connecting to spu.gearlab.net, 25501
+[19Sep2021 19:49:03.825] [Netty Epoll Client IO #1/INFO] [net.minecraftforge.fml.network.NetworkHooks/]: Connected to a vanilla server. Catching up missing behaviour.
+[19Sep2021 19:49:03.970] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 19:49:04.242] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName joined the game
+[19Sep2021 19:49:04.417] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 19:50:44.214] [Render thread/INFO] [net.minecraft.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
+[19Sep2021 19:50:44.214] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading textures ***
+[19Sep2021 19:50:44.214] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Resource packs: Mod Resources
+[19Sep2021 19:50:44.219] [Worker-Main-17/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:44.219] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:44.219] [Worker-Main-19/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:44.725] [Worker-Main-10/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:44.725] [Worker-Main-10/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:44.725] [Worker-Main-10/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:44.725] [Worker-Main-10/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:44.811] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:44.813] [Worker-Main-10/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:44.813] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:50:44.814] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_pane_white.properties
+[19Sep2021 19:50:44.817] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_white.properties
+[19Sep2021 19:50:44.820] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_orange.properties
+[19Sep2021 19:50:44.823] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_pane_orange.properties
+[19Sep2021 19:50:44.825] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_magenta.properties
+[19Sep2021 19:50:44.827] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_pane_magenta.properties
+[19Sep2021 19:50:44.830] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_light_blue.properties
+[19Sep2021 19:50:44.832] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_pane_light_blue.properties
+[19Sep2021 19:50:44.835] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_pane_yellow.properties
+[19Sep2021 19:50:44.838] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_yellow.properties
+[19Sep2021 19:50:44.840] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_lime.properties
+[19Sep2021 19:50:44.843] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_pane_lime.properties
+[19Sep2021 19:50:44.845] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pane_pink.properties
+[19Sep2021 19:50:44.847] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pink.properties
+[19Sep2021 19:50:44.850] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_gray.properties
+[19Sep2021 19:50:44.852] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_pane_gray.properties
+[19Sep2021 19:50:44.856] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_light_gray.properties
+[19Sep2021 19:50:44.858] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_pane_light_gray.properties
+[19Sep2021 19:50:44.861] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_cyan.properties
+[19Sep2021 19:50:44.863] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_pane_cyan.properties
+[19Sep2021 19:50:44.865] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_pane_purple.properties
+[19Sep2021 19:50:44.868] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_purple.properties
+[19Sep2021 19:50:44.870] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_blue.properties
+[19Sep2021 19:50:44.873] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_pane_blue.properties
+[19Sep2021 19:50:44.876] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_brown.properties
+[19Sep2021 19:50:44.878] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_pane_brown.properties
+[19Sep2021 19:50:44.881] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_green.properties
+[19Sep2021 19:50:44.884] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_pane_green.properties
+[19Sep2021 19:50:44.891] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_pane_red.properties
+[19Sep2021 19:50:44.895] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_red.properties
+[19Sep2021 19:50:44.899] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_black.properties
+[19Sep2021 19:50:44.904] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_pane_black.properties
+[19Sep2021 19:50:44.908] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass.properties
+[19Sep2021 19:50:44.912] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass_pane.properties
+[19Sep2021 19:50:44.916] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/30_bookshelf/bookshelf.properties
+[19Sep2021 19:50:44.916] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/40_sandstone/sandstone.properties
+[19Sep2021 19:50:44.916] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/41_red_sandstone/red_sandstone.properties
+[19Sep2021 19:50:44.917] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:50:44.917] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] BetterGrass: Parsing default configuration optifine/bettergrass.properties
+[19Sep2021 19:50:45.206] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 4
+[19Sep2021 19:50:45.461] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.462] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.462] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.463] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.467] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.467] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.470] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.474] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.474] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.477] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.478] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.478] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.480] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.481] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.481] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.483] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:45.484] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:45.484] [Worker-Main-10/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:45.692] [Render thread/INFO] [net.minecraft.client.audio.SoundSystem/]: OpenAL initialized.
+[19Sep2021 19:50:45.692] [Render thread/INFO] [net.minecraft.client.audio.SoundEngine/SOUNDS]: Sound engine started
+[19Sep2021 19:50:45.855] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[19Sep2021 19:50:45.862] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 43
+[19Sep2021 19:50:45.863] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[19Sep2021 19:50:45.863] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:45.863] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[19Sep2021 19:50:45.863] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:45.864] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[19Sep2021 19:50:45.864] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:45.864] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[19Sep2021 19:50:45.864] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:45.864] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[19Sep2021 19:50:45.865] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:45.865] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[19Sep2021 19:50:45.865] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:46.066] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[19Sep2021 19:50:46.066] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:46.066] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[19Sep2021 19:50:46.066] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:46.067] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[19Sep2021 19:50:46.067] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:50:46.067] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading custom textures ***
+[19Sep2021 19:50:46.067] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:46.070] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:46.070] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:47.097] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:47.114] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:47.115] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:47.115] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Disable Forge light pipeline
+[19Sep2021 19:50:47.115] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] Set ForgeConfig.CLIENT.forgeLightPipelineEnabled=false
+[19Sep2021 19:50:57.797] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Loaded shaderpack: BSL_v8.0.zip
+[19Sep2021 19:50:57.798] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Worlds: -1, 0, 1
+[19Sep2021 19:50:57.989] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Ambiguous shader option: colortexR
+[19Sep2021 19:50:57.990] [Render thread/WARN] [net.optifine.Config/]: [OptiFine]  - in world-1/deferred1.vsh: colortex5
+[19Sep2021 19:50:57.990] [Render thread/WARN] [net.optifine.Config/]: [OptiFine]  - in world-1/deferred1.vsh: colortex0
+[19Sep2021 19:50:58.593] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing block mappings: /shaders/block.properties
+[19Sep2021 19:50:58.594] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_lava
+[19Sep2021 19:50:58.594] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_water
+[19Sep2021 19:50:58.595] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:sign
+[19Sep2021 19:50:58.595] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:wall_sign
+[19Sep2021 19:50:58.595] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing item mappings: /shaders/item.properties
+[19Sep2021 19:50:58.595] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing entity mappings: /shaders/entity.properties
+[19Sep2021 19:50:58.598] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] [Shaders] Invalid screen: [LEGACY], key: screen
+[19Sep2021 19:50:58.602] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom texture: texture.composite.depthtex2 = tex/dirt.png
+[19Sep2021 19:50:58.602] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: tAmin
+[19Sep2021 19:50:58.606] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: tAlin
+[19Sep2021 19:50:58.606] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: hA
+[19Sep2021 19:50:58.606] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: tAfrc
+[19Sep2021 19:50:58.607] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: tAfrs
+[19Sep2021 19:50:58.607] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: tAmix
+[19Sep2021 19:50:58.607] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: timeAngle
+[19Sep2021 19:50:58.607] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: timeBrightness
+[19Sep2021 19:50:58.607] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: shadowFade
+[19Sep2021 19:50:58.608] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom variable: blindFactorSqrt
+[19Sep2021 19:50:58.608] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: blindFactor
+[19Sep2021 19:50:58.608] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isCold
+[19Sep2021 19:50:58.608] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isDesert
+[19Sep2021 19:50:58.609] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isMesa
+[19Sep2021 19:50:58.609] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isSwamp
+[19Sep2021 19:50:58.609] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isMushroom
+[19Sep2021 19:50:58.609] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isSavanna
+[19Sep2021 19:50:58.609] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isValley
+[19Sep2021 19:50:58.610] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isCrimson
+[19Sep2021 19:50:58.610] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isWarped
+[19Sep2021 19:50:58.610] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: isBasalt
+[19Sep2021 19:50:58.610] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Custom uniform: framemod8
+[19Sep2021 19:50:58.612] [Render thread/INFO] [net.minecraft.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
+[19Sep2021 19:50:58.612] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading textures ***
+[19Sep2021 19:50:58.612] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Resource packs: Mod Resources
+[19Sep2021 19:50:58.618] [Worker-Main-17/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:58.618] [Worker-Main-18/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:58.619] [Worker-Main-9/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.019] [Worker-Main-16/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:59.019] [Worker-Main-16/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:59.019] [Worker-Main-16/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:59.019] [Worker-Main-16/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:59.095] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.096] [Worker-Main-16/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:50:59.097] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:50:59.098] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_pane_white.properties
+[19Sep2021 19:50:59.100] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_white.properties
+[19Sep2021 19:50:59.102] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_orange.properties
+[19Sep2021 19:50:59.104] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_pane_orange.properties
+[19Sep2021 19:50:59.106] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_magenta.properties
+[19Sep2021 19:50:59.108] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_pane_magenta.properties
+[19Sep2021 19:50:59.110] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_light_blue.properties
+[19Sep2021 19:50:59.112] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_pane_light_blue.properties
+[19Sep2021 19:50:59.113] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_pane_yellow.properties
+[19Sep2021 19:50:59.115] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_yellow.properties
+[19Sep2021 19:50:59.117] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_lime.properties
+[19Sep2021 19:50:59.119] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_pane_lime.properties
+[19Sep2021 19:50:59.121] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pane_pink.properties
+[19Sep2021 19:50:59.123] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pink.properties
+[19Sep2021 19:50:59.125] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_gray.properties
+[19Sep2021 19:50:59.127] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_pane_gray.properties
+[19Sep2021 19:50:59.129] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_light_gray.properties
+[19Sep2021 19:50:59.131] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_pane_light_gray.properties
+[19Sep2021 19:50:59.133] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_cyan.properties
+[19Sep2021 19:50:59.135] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_pane_cyan.properties
+[19Sep2021 19:50:59.137] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_pane_purple.properties
+[19Sep2021 19:50:59.139] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_purple.properties
+[19Sep2021 19:50:59.141] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_blue.properties
+[19Sep2021 19:50:59.143] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_pane_blue.properties
+[19Sep2021 19:50:59.145] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_brown.properties
+[19Sep2021 19:50:59.147] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_pane_brown.properties
+[19Sep2021 19:50:59.149] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_green.properties
+[19Sep2021 19:50:59.151] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_pane_green.properties
+[19Sep2021 19:50:59.153] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_pane_red.properties
+[19Sep2021 19:50:59.155] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_red.properties
+[19Sep2021 19:50:59.157] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_black.properties
+[19Sep2021 19:50:59.159] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_pane_black.properties
+[19Sep2021 19:50:59.161] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass.properties
+[19Sep2021 19:50:59.163] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass_pane.properties
+[19Sep2021 19:50:59.165] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/30_bookshelf/bookshelf.properties
+[19Sep2021 19:50:59.166] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/40_sandstone/sandstone.properties
+[19Sep2021 19:50:59.166] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/41_red_sandstone/red_sandstone.properties
+[19Sep2021 19:50:59.166] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 19:50:59.166] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] BetterGrass: Parsing default configuration optifine/bettergrass.properties
+[19Sep2021 19:50:59.358] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 4
+[19Sep2021 19:50:59.684] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.684] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.685] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.686] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.691] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.691] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.696] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.701] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.701] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.706] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.707] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.708] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.709] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.711] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.711] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.713] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 19:50:59.715] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 19:50:59.715] [Worker-Main-16/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 19:50:59.926] [Render thread/INFO] [net.minecraft.client.audio.SoundSystem/]: OpenAL initialized.
+[19Sep2021 19:50:59.926] [Render thread/INFO] [net.minecraft.client.audio.SoundEngine/SOUNDS]: Sound engine started
+[19Sep2021 19:51:00.034] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[19Sep2021 19:51:00.034] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 1024x512, mipmaps: 4
+[19Sep2021 19:51:00.034] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 1024x512, mipmaps: 4
+[19Sep2021 19:51:00.041] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 43
+[19Sep2021 19:51:00.052] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[19Sep2021 19:51:00.052] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 256x128, mipmaps: 4
+[19Sep2021 19:51:00.052] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 256x128, mipmaps: 4
+[19Sep2021 19:51:00.053] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.053] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[19Sep2021 19:51:00.053] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 512x512, mipmaps: 4
+[19Sep2021 19:51:00.053] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 512x512, mipmaps: 4
+[19Sep2021 19:51:00.053] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.054] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[19Sep2021 19:51:00.054] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 512x512, mipmaps: 4
+[19Sep2021 19:51:00.054] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 512x512, mipmaps: 4
+[19Sep2021 19:51:00.054] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 256x256, mipmaps: 4
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 256x256, mipmaps: 4
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 512x256, mipmaps: 4
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 512x256, mipmaps: 4
+[19Sep2021 19:51:00.055] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.056] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[19Sep2021 19:51:00.056] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 512x256, mipmaps: 4
+[19Sep2021 19:51:00.056] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 512x256, mipmaps: 4
+[19Sep2021 19:51:00.056] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.238] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[19Sep2021 19:51:00.238] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 256x256, mipmaps: 0
+[19Sep2021 19:51:00.238] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 256x256, mipmaps: 0
+[19Sep2021 19:51:00.238] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 256x256, mipmaps: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 256x256, mipmaps: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map normal: 128x128, mipmaps: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Allocate texture map specular: 128x128, mipmaps: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 19:51:00.239] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading custom textures ***
+[19Sep2021 19:51:00.240] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:00.242] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:00.243] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:01.232] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:01.249] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:01.250] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 19:51:01.250] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Disable Forge light pipeline
+[19Sep2021 19:51:01.250] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] Set ForgeConfig.CLIENT.forgeLightPipelineEnabled=false
+[19Sep2021 19:51:03.427] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Save shaders configuration.
+[19Sep2021 20:05:23.984] [Render thread/INFO] [net.minecraft.client.gui.screen.ConnectingScreen/]: Connecting to spu.gearlab.net, 25501
+[19Sep2021 20:05:24.603] [Netty Epoll Client IO #2/INFO] [net.minecraftforge.fml.network.NetworkHooks/]: Connected to a vanilla server. Catching up missing behaviour.
+[19Sep2021 20:05:24.694] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 20:05:24.729] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:24.729] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:24.729] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:24.794] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/shadow
+[19Sep2021 20:05:25.159] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.159] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.159] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.216] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_basic
+[19Sep2021 20:05:25.232] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.232] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.232] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.259] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_textured
+[19Sep2021 20:05:25.283] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.283] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.283] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.324] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_skybasic
+[19Sep2021 20:05:25.338] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.338] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.338] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.348] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_skytextured
+[19Sep2021 20:05:25.361] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.361] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.361] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.371] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_clouds
+[19Sep2021 20:05:25.391] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.391] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.391] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.495] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_terrain
+[19Sep2021 20:05:25.538] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.539] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.539] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.544] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_damagedblock
+[19Sep2021 20:05:25.559] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.559] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.559] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.600] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_block
+[19Sep2021 20:05:25.613] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.613] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.613] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.619] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_beaconbeam
+[19Sep2021 20:05:25.644] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.644] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.644] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.680] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_entities
+[19Sep2021 20:05:25.696] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.696] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.696] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.733] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_entities_glowing
+[19Sep2021 20:05:25.746] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.746] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.746] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.750] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_armor_glint
+[19Sep2021 20:05:25.763] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.763] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.763] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.767] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_spidereyes
+[19Sep2021 20:05:25.785] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.785] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.785] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.829] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_hand
+[19Sep2021 20:05:25.842] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.842] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.842] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.854] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_weather
+[19Sep2021 20:05:25.866] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.866] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.866] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.877] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/deferred
+[19Sep2021 20:05:25.894] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:25.894] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:25.894] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:25.895] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex4 mipmap enabled
+[19Sep2021 20:05:25.933] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/deferred1
+[19Sep2021 20:05:26.091] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.091] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.091] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.225] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_water
+[19Sep2021 20:05:26.249] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.249] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.249] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.250] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex5 clear disabled
+[19Sep2021 20:05:26.276] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite
+[19Sep2021 20:05:26.288] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.288] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.288] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.289] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex1 mipmap enabled
+[19Sep2021 20:05:26.297] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite1
+[19Sep2021 20:05:26.297] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/composite2
+[19Sep2021 20:05:26.307] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/composite3
+[19Sep2021 20:05:26.330] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.330] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.330] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.331] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex0 mipmap enabled
+[19Sep2021 20:05:26.343] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite4
+[19Sep2021 20:05:26.357] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.357] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.357] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.357] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex2 clear disabled
+[19Sep2021 20:05:26.409] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite5
+[19Sep2021 20:05:26.422] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.422] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.422] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.435] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite6
+[19Sep2021 20:05:26.539] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 2048
+[19Sep2021 20:05:26.539] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 256.0
+[19Sep2021 20:05:26.539] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex0 format: R11F_G11F_B10F
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex1 format: RGB8
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex2 format: RGBA16
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex3 format: RGB8
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux1 format: R8
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux2 format: RGB10_A2
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux3 format: RGB16
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux4 format: RGB16
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Hardware shadow filtering enabled.
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow distance render mul: 1.0
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Noise texture enabled
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Noise texture resolution: 512
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Dryness halflife: 25.0
+[19Sep2021 20:05:26.540] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Wetness halflife: 200.0
+[19Sep2021 20:05:26.544] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/final
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedColorBuffers: 6
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedDepthBuffers: 3
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedShadowColorBuffers: 1
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedShadowDepthBuffers: 2
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedColorAttachs: 6
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedDrawBuffers: 2
+[19Sep2021 20:05:26.545] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] bindImageTextures: false
+[19Sep2021 20:05:26.549] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Framebuffer created: dfb
+[19Sep2021 20:05:26.549] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Framebuffer created: sfb
+[19Sep2021 20:05:26.560] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing block mappings: /shaders/block.properties
+[19Sep2021 20:05:26.561] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_lava
+[19Sep2021 20:05:26.561] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_water
+[19Sep2021 20:05:26.561] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:sign
+[19Sep2021 20:05:26.561] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:wall_sign
+[19Sep2021 20:05:26.561] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing item mappings: /shaders/item.properties
+[19Sep2021 20:05:26.562] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing entity mappings: /shaders/entity.properties
+[19Sep2021 20:05:26.562] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Reset model renderers
+[19Sep2021 20:05:26.562] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Reset world renderers
+[19Sep2021 20:05:26.944] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName joined the game
+[19Sep2021 20:05:26.946] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:05:37.484] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath left the game
+[19Sep2021 20:05:40.285] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] artemisfowl5 left the game
+[19Sep2021 20:08:51.037] [Render thread/INFO] [net.minecraft.client.gui.screen.ConnectingScreen/]: Connecting to spu.gearlab.net, 25501
+[19Sep2021 20:08:51.622] [Netty Epoll Client IO #3/INFO] [net.minecraftforge.fml.network.NetworkHooks/]: Connected to a vanilla server. Catching up missing behaviour.
+[19Sep2021 20:08:51.737] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 20:08:52.042] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName joined the game
+[19Sep2021 20:08:52.376] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:09:05.363] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Save shaders configuration.
+[19Sep2021 20:09:09.775] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Uninit
+[19Sep2021 20:09:09.794] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:09.794] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:09.794] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:09.851] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/shadow
+[19Sep2021 20:09:10.214] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.214] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.214] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.249] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_basic
+[19Sep2021 20:09:10.267] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.267] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.267] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.291] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_textured
+[19Sep2021 20:09:10.316] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.316] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.316] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.357] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_skybasic
+[19Sep2021 20:09:10.372] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.372] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.372] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.381] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_skytextured
+[19Sep2021 20:09:10.396] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.396] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.396] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.405] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_clouds
+[19Sep2021 20:09:10.424] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.424] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.424] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.488] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_terrain
+[19Sep2021 20:09:10.532] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.532] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.532] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.537] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_damagedblock
+[19Sep2021 20:09:10.557] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.557] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.557] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.603] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_block
+[19Sep2021 20:09:10.617] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.617] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.617] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.623] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_beaconbeam
+[19Sep2021 20:09:10.652] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.652] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.652] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.693] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_entities
+[19Sep2021 20:09:10.711] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.711] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.711] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.744] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_entities_glowing
+[19Sep2021 20:09:10.758] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.759] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.759] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.764] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_armor_glint
+[19Sep2021 20:09:10.778] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.778] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.778] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.783] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_spidereyes
+[19Sep2021 20:09:10.800] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.801] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.801] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.834] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_hand
+[19Sep2021 20:09:10.848] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.849] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.849] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.858] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_weather
+[19Sep2021 20:09:10.858] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/deferred
+[19Sep2021 20:09:10.888] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:10.888] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:10.888] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:10.916] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/deferred1
+[19Sep2021 20:09:11.078] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.078] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.078] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.191] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/gbuffers_water
+[19Sep2021 20:09:11.217] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.217] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.217] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.219] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex5 clear disabled
+[19Sep2021 20:09:11.231] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite
+[19Sep2021 20:09:11.231] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/composite1
+[19Sep2021 20:09:11.242] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/composite2
+[19Sep2021 20:09:11.252] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program disabled: world0/composite3
+[19Sep2021 20:09:11.276] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.276] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.276] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.278] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex0 mipmap enabled
+[19Sep2021 20:09:11.288] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite4
+[19Sep2021 20:09:11.303] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.303] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.303] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.305] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex2 clear disabled
+[19Sep2021 20:09:11.332] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite5
+[19Sep2021 20:09:11.347] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.347] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.347] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.364] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/composite6
+[19Sep2021 20:09:11.471] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map resolution: 1024
+[19Sep2021 20:09:11.471] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow map distance: 128.0
+[19Sep2021 20:09:11.471] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Sun path rotation: -40.0
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex0 format: R11F_G11F_B10F
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex1 format: RGB8
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex2 format: RGBA16
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] colortex3 format: RGB8
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux1 format: R8
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux2 format: RGB10_A2
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux3 format: RGB16
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] gaux4 format: RGB16
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Hardware shadow filtering enabled.
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Shadow distance render mul: 1.0
+[19Sep2021 20:09:11.474] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Noise texture enabled
+[19Sep2021 20:09:11.475] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Noise texture resolution: 512
+[19Sep2021 20:09:11.475] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Dryness halflife: 25.0
+[19Sep2021 20:09:11.475] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Wetness halflife: 200.0
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Program loaded: world0/final
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedColorBuffers: 6
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedDepthBuffers: 3
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedShadowColorBuffers: 0
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedShadowDepthBuffers: 1
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedColorAttachs: 6
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] usedDrawBuffers: 2
+[19Sep2021 20:09:11.478] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] bindImageTextures: false
+[19Sep2021 20:09:11.479] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Framebuffer created: dfb
+[19Sep2021 20:09:11.480] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Framebuffer created: sfb
+[19Sep2021 20:09:11.491] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing block mappings: /shaders/block.properties
+[19Sep2021 20:09:11.491] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_lava
+[19Sep2021 20:09:11.491] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:flowing_water
+[19Sep2021 20:09:11.491] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:sign
+[19Sep2021 20:09:11.492] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Shaders: Block not found for name: minecraft:wall_sign
+[19Sep2021 20:09:11.492] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing item mappings: /shaders/item.properties
+[19Sep2021 20:09:11.492] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] [Shaders] Parsing entity mappings: /shaders/entity.properties
+[19Sep2021 20:09:11.492] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Reset model renderers
+[19Sep2021 20:09:11.492] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Reset world renderers
+[19Sep2021 20:09:12.476] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Save shaders configuration.
+[19Sep2021 20:28:29.132] [Render thread/INFO] [net.minecraft.client.gui.screen.ConnectingScreen/]: Connecting to spu.gearlab.net, 25501
+[19Sep2021 20:28:29.746] [Netty Epoll Client IO #4/INFO] [net.minecraftforge.fml.network.NetworkHooks/]: Connected to a vanilla server. Catching up missing behaviour.
+[19Sep2021 20:28:29.837] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 20:28:30.149] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName joined the game
+[19Sep2021 20:28:30.567] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:28:32.199] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath left the game
+[19Sep2021 20:28:43.150] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath joined the game
+[19Sep2021 20:28:52.584] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] artemisfowl5 joined the game
+[19Sep2021 20:29:18.434] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath left the game
+[19Sep2021 20:31:16.188] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:31:49.172] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:32:59.316] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] [Debug]: Reloading all chunks
+[19Sep2021 20:33:08.391] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] iceblaster9 joined the game
+[19Sep2021 20:33:09.091] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath joined the game
+[19Sep2021 20:33:15.591] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PorcelainFae joined the game
+[19Sep2021 20:33:19.541] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] FanaticMarioMan joined the game
+[19Sep2021 20:33:24.775] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman joined the game
+[19Sep2021 20:33:36.084] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: now we can chat here
+[19Sep2021 20:33:47.442] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] park321 joined the game
+[19Sep2021 20:33:51.959] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] alovelytree joined the game
+[19Sep2021 20:34:13.142] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: I can't see anything
+[19Sep2021 20:34:29.244] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: press f3+a, or teleport to someone by middle clicking, press 1, then choose
+[19Sep2021 20:34:31.210] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] iceblaster9 has made the advancement [Into Fire]
+[19Sep2021 20:34:32.453] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] [Debug]: Reloading all chunks
+[19Sep2021 20:34:38.360] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: it's like the chunks haven't loaded
+[19Sep2021 20:34:50.229] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: i think it's that way sometimes in spectator
+[19Sep2021 20:35:00.494] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: that's happened to me before
+[19Sep2021 20:35:06.878] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: oh i got it
+[19Sep2021 20:35:18.995] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: i'm possesing blake right now
+[19Sep2021 20:35:47.162] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] waaaaahluigi joined the game
+[19Sep2021 20:36:14.013] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: no idea where they are
+[19Sep2021 20:36:22.380] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: also how and where did you die again?
+[19Sep2021 20:36:49.580] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: the nether, to the left of the portal
+[19Sep2021 20:37:10.597] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: ah i see
+[19Sep2021 20:37:40.997] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: ethan and jordan are doing a good job of commentating so far
+[19Sep2021 20:37:47.365] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:38:15.748] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: jason dmd me "i'm going to have to put on such a false attitude"
+[19Sep2021 20:38:37.649] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: OH NO
+[19Sep2021 20:38:46.149] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: Actually? haha he sounded serriously nnoyed to me
+[19Sep2021 20:38:57.150] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: what?
+[19Sep2021 20:39:05.500] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: they don't know you're dead!
+[19Sep2021 20:39:33.650] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman whispers to you: let me take care of it
+[19Sep2021 20:39:41.367] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] No shaderpack loaded.
+[19Sep2021 20:39:41.369] [Render thread/INFO] [net.minecraft.resources.SimpleReloadableResourceManager/]: Reloading ResourceManager: Default, Mod Resources
+[19Sep2021 20:39:41.369] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading textures ***
+[19Sep2021 20:39:41.369] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Resource packs: Mod Resources
+[19Sep2021 20:39:41.413] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Uninit
+[19Sep2021 20:39:41.414] [Worker-Main-30/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:41.414] [Worker-Main-31/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:41.414] [Worker-Main-32/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.024] [Worker-Main-29/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:42.024] [Worker-Main-29/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:42.024] [Worker-Main-29/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:42.024] [Worker-Main-29/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:42.099] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.100] [Worker-Main-29/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:42.100] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 20:39:42.101] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_pane_white.properties
+[19Sep2021 20:39:42.104] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/00_glass_white/glass_white.properties
+[19Sep2021 20:39:42.107] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_orange.properties
+[19Sep2021 20:39:42.109] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/01_glass_orange/glass_pane_orange.properties
+[19Sep2021 20:39:42.111] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_magenta.properties
+[19Sep2021 20:39:42.114] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/02_glass_magenta/glass_pane_magenta.properties
+[19Sep2021 20:39:42.116] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_light_blue.properties
+[19Sep2021 20:39:42.118] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/03_glass_light_blue/glass_pane_light_blue.properties
+[19Sep2021 20:39:42.121] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_pane_yellow.properties
+[19Sep2021 20:39:42.123] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/04_glass_yellow/glass_yellow.properties
+[19Sep2021 20:39:42.125] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_lime.properties
+[19Sep2021 20:39:42.127] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/05_glass_lime/glass_pane_lime.properties
+[19Sep2021 20:39:42.129] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pane_pink.properties
+[19Sep2021 20:39:42.131] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/06_glass_pink/glass_pink.properties
+[19Sep2021 20:39:42.133] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_gray.properties
+[19Sep2021 20:39:42.135] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/07_glass_gray/glass_pane_gray.properties
+[19Sep2021 20:39:42.137] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_light_gray.properties
+[19Sep2021 20:39:42.140] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/08_glass_light_gray/glass_pane_light_gray.properties
+[19Sep2021 20:39:42.142] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_cyan.properties
+[19Sep2021 20:39:42.144] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/09_glass_cyan/glass_pane_cyan.properties
+[19Sep2021 20:39:42.145] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_pane_purple.properties
+[19Sep2021 20:39:42.147] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/10_glass_purple/glass_purple.properties
+[19Sep2021 20:39:42.149] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_blue.properties
+[19Sep2021 20:39:42.151] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/11_glass_blue/glass_pane_blue.properties
+[19Sep2021 20:39:42.154] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_brown.properties
+[19Sep2021 20:39:42.156] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/12_glass_brown/glass_pane_brown.properties
+[19Sep2021 20:39:42.158] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_green.properties
+[19Sep2021 20:39:42.161] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/13_glass_green/glass_pane_green.properties
+[19Sep2021 20:39:42.163] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_pane_red.properties
+[19Sep2021 20:39:42.165] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/14_glass_red/glass_red.properties
+[19Sep2021 20:39:42.167] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_black.properties
+[19Sep2021 20:39:42.169] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/15_glass_black/glass_pane_black.properties
+[19Sep2021 20:39:42.171] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass.properties
+[19Sep2021 20:39:42.173] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/20_glass/glass_pane.properties
+[19Sep2021 20:39:42.176] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/30_bookshelf/bookshelf.properties
+[19Sep2021 20:39:42.176] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/40_sandstone/sandstone.properties
+[19Sep2021 20:39:42.176] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] ConnectedTextures: optifine/ctm/default/41_red_sandstone/red_sandstone.properties
+[19Sep2021 20:39:42.176] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multipass connected textures: false
+[19Sep2021 20:39:42.177] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] BetterGrass: Parsing default configuration optifine/bettergrass.properties
+[19Sep2021 20:39:42.374] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 4
+[19Sep2021 20:39:42.635] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.636] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.636] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:42.637] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.640] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.641] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:42.643] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.647] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.647] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:42.650] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.651] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.651] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:42.652] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.653] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.653] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:42.654] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Multitexture: false
+[19Sep2021 20:39:42.656] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Sprite size: 64
+[19Sep2021 20:39:42.656] [Worker-Main-29/INFO] [net.optifine.Config/]: [OptiFine] Mipmap levels: 6
+[19Sep2021 20:39:43.633] [Render thread/INFO] [net.minecraft.client.audio.SoundSystem/]: OpenAL initialized.
+[19Sep2021 20:39:43.633] [Render thread/INFO] [net.minecraft.client.audio.SoundEngine/SOUNDS]: Sound engine started
+[19Sep2021 20:39:43.748] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[19Sep2021 20:39:43.755] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 43
+[19Sep2021 20:39:43.755] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.756] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[19Sep2021 20:39:43.757] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.757] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[19Sep2021 20:39:43.757] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.757] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[19Sep2021 20:39:43.757] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.923] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[19Sep2021 20:39:43.923] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.923] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[19Sep2021 20:39:43.924] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.924] [Render thread/INFO] [net.minecraft.client.renderer.texture.AtlasTexture/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[19Sep2021 20:39:43.924] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Animated sprites: 0
+[19Sep2021 20:39:43.924] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] *** Reloading custom textures ***
+[19Sep2021 20:39:43.924] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:43.927] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:43.927] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:44.891] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:44.907] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:44.907] [Render thread/WARN] [net.optifine.Config/]: [OptiFine] Unknown resource pack file: mod_resources
+[19Sep2021 20:39:44.907] [Render thread/INFO] [net.optifine.Config/]: [OptiFine] Disable Forge light pipeline
+[19Sep2021 20:39:44.907] [Render thread/INFO] [net.optifine.Log/]: [OptiFine] Set ForgeConfig.CLIENT.forgeLightPipelineEnabled=false
+[19Sep2021 20:39:46.935] [Render thread/INFO] [net.optifine.shaders.SMCLog/]: [Shaders] Save shaders configuration.
+[19Sep2021 20:39:55.152] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: hmm ok
+[19Sep2021 20:41:14.786] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PowerUser64 left the game
+[19Sep2021 20:41:40.337] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <Walter_Melon> same as yesterday
+[19Sep2021 20:42:29.338] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] You whisper to SaviorsSwordsman: i didn't realize diego knew
+[19Sep2021 20:42:48.039] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <Walter_Melon> sleep?
+[19Sep2021 20:43:05.440] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <alovelytree> SLEEP
+[19Sep2021 20:43:08.073] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <waaaaahluigi> slep
+[19Sep2021 20:43:10.223] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <alovelytree> :)
+[19Sep2021 20:43:10.340] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <waaaaahluigi> pls
+[19Sep2021 20:43:19.473] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <alovelytree> PCK SLEEP
+[19Sep2021 20:43:20.640] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <waaaaahluigi> pck slep
+[19Sep2021 20:43:37.874] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] SaviorsSwordsman left the game
+[19Sep2021 20:45:22.527] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PowerUser64 joined the game
+[19Sep2021 20:47:16.314] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:47:52.201] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 20:49:23.384] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:49:41.918] [Render thread/WARN] [net.minecraft.client.audio.SoundEngine/SOUNDS]: Unable to play empty soundEvent: minecraft:block.roots.step
+[19Sep2021 20:51:45.656] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:52:04.373] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:52:27.040] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:52:34.657] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:53:14.841] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:53:18.691] [Render thread/WARN] [net.minecraft.client.network.play.ClientPlayNetHandler/]: Received passengers for unknown entity
+[19Sep2021 20:53:52.393] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] alovelytree has made the advancement [Eye Spy]
+[19Sep2021 20:53:53.360] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon has made the advancement [Eye Spy]
+[19Sep2021 20:53:55.680] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 20:53:56.594] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName has made the advancement [Eye Spy]
+[19Sep2021 20:53:56.595] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 197 advancements
+[19Sep2021 20:54:28.394] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] artemisfowl5 has made the advancement [Eye Spy]
+[19Sep2021 20:54:32.061] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PowerUser64 has made the advancement [Eye Spy]
+[19Sep2021 20:55:52.263] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PorcelainFae has made the advancement [Eye Spy]
+[19Sep2021 20:57:44.483] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_20.57.43.png
+[19Sep2021 20:57:47.816] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_20.57.47.png
+[19Sep2021 20:59:53.137] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_20.59.52.png
+[19Sep2021 20:59:54.787] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_20.59.54.png
+[19Sep2021 21:00:08.820] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_21.00.08.png
+[19Sep2021 21:00:45.256] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon has made the advancement [The End?]
+[19Sep2021 21:00:46.322] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] alovelytree has made the advancement [The End?]
+[19Sep2021 21:00:52.038] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] artemisfowl5 has made the advancement [The End?]
+[19Sep2021 21:00:52.822] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] waaaaahluigi has made the advancement [The End?]
+[19Sep2021 21:00:53.572] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath has made the advancement [The End?]
+[19Sep2021 21:00:54.338] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] iceblaster9 has made the advancement [The End?]
+[19Sep2021 21:01:00.105] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PorcelainFae has made the advancement [The End?]
+[19Sep2021 21:01:00.139] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] FanaticMarioMan has made the advancement [The End?]
+[19Sep2021 21:01:02.455] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PowerUser64 has made the advancement [The End?]
+[19Sep2021 21:02:24.408] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] iceblaster9 was killed by Ender Dragon using magic
+[19Sep2021 21:02:34.742] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath has made the advancement [Take Aim]
+[19Sep2021 21:02:36.492] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] waaaaahluigi has reached the goal [You Need a Mint]
+[19Sep2021 21:02:49.209] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] waaaaahluigi fell from a high place
+[19Sep2021 21:03:35.310] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PorcelainFae fell from a high place
+[19Sep2021 21:04:02.498] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 21:04:03.378] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] AvgUsrName has made the advancement [The End?]
+[19Sep2021 21:04:03.379] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 203 advancements
+[19Sep2021 21:04:37.029] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] alovelytree has made the advancement [Take Aim]
+[19Sep2021 21:05:04.780] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] park321 has made the advancement [A Seedy Place]
+[19Sep2021 21:05:11.097] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Saved screenshot as 2021-09-19_21.05.10.png
+[19Sep2021 21:05:34.147] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon has reached the goal [You Need a Mint]
+[19Sep2021 21:05:48.998] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon has made the advancement [Cover Me With Diamonds]
+[19Sep2021 21:06:39.299] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] artemisfowl5 was slain by Walter_Melon
+[19Sep2021 21:06:40.032] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath has made the advancement [Free the End]
+[19Sep2021 21:06:49.732] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] alovelytree was slain by Walter_Melon
+[19Sep2021 21:06:52.899] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Lickiwrath was slain by Walter_Melon
+[19Sep2021 21:07:07.599] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] FanaticMarioMan was slain by Walter_Melon
+[19Sep2021 21:07:36.933] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] PowerUser64 fell out of the world
+[19Sep2021 21:07:41.500] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] FanaticMarioMan left the game
+[19Sep2021 21:08:00.818] [Sound engine/ERROR] [net.minecraft.client.audio.ALUtils/]: Stop: Invalid name parameter.
+[19Sep2021 21:08:00.848] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[19Sep2021 21:08:43.134] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon left the game
+[19Sep2021 21:09:20.418] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] iceblaster9 left the game
+[19Sep2021 21:09:43.302] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] Walter_Melon joined the game
+[19Sep2021 21:09:55.052] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <Walter_Melon> hey pck
+[19Sep2021 21:09:57.702] [Render thread/INFO] [net.minecraft.client.gui.NewChatGui/]: [CHAT] <Walter_Melon> we won
+[19Sep2021 21:10:35.532] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

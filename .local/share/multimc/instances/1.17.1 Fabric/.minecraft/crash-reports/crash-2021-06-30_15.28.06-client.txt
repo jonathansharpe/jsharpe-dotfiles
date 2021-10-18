@@ -1,0 +1,265 @@
+---- Minecraft Crash Report ----
+// Oh - I know what I did wrong!
+
+Time: 6/30/21, 3:28 PM
+Description: Rendering entity in world
+
+org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:208)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:178)
+	at org.spongepowered.asm.mixin.transformer.FabricMixinTransformerProxy.transformClassBytes(FabricMixinTransformerProxy.java:23)
+	at net.fabricmc.loader.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:162)
+	at net.fabricmc.loader.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:154)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at net.minecraft.class_806.method_3495(class_806.java:129)
+	at net.minecraft.class_918.method_4019(class_918.java:392)
+	at net.minecraft.class_918.method_23177(class_918.java:409)
+	at net.minecraft.class_918.method_23178(class_918.java:402)
+	at net.minecraft.class_915.method_3994(class_915.java:127)
+	at net.minecraft.class_915.method_3936(class_915.java:32)
+	at net.minecraft.class_898.method_3954(class_898.java:178)
+	at net.minecraft.class_761.method_22977(class_761.java:2197)
+	at net.minecraft.class_761.method_22710(class_761.java:1799)
+	at net.minecraft.class_757.method_3188(class_757.java:1510)
+	at net.minecraft.class_757.method_3192(class_757.java:1150)
+	at net.minecraft.class_310.method_1523(class_310.java:1114)
+	at net.minecraft.class_310.method_1514(class_310.java:730)
+	at net.minecraft.client.main.Main.main(Main.java:217)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at net.fabricmc.loader.game.MinecraftGameProvider.launch(MinecraftGameProvider.java:234)
+	at net.fabricmc.loader.launch.knot.Knot.launch(Knot.java:153)
+	at net.fabricmc.loader.launch.knot.KnotClient.main(KnotClient.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.multimc.onesix.OneSixLauncher.launchWithMainClass(OneSixLauncher.java:196)
+	at org.multimc.onesix.OneSixLauncher.launch(OneSixLauncher.java:231)
+	at org.multimc.EntryPoint.listen(EntryPoint.java:143)
+	at org.multimc.EntryPoint.main(EntryPoint.java:34)
+Caused by: java.lang.NullPointerException: Cannot read field "left" because "r" is null
+	at java.base/java.util.TreeMap.rotateLeft(TreeMap.java:2541)
+	at java.base/java.util.TreeMap.fixAfterInsertion(TreeMap.java:2588)
+	at java.base/java.util.TreeMap.addEntry(TreeMap.java:762)
+	at java.base/java.util.TreeMap.put(TreeMap.java:820)
+	at java.base/java.util.TreeMap.put(TreeMap.java:534)
+	at org.spongepowered.asm.util.perf.Profiler.get(Profiler.java:552)
+	at org.spongepowered.asm.util.perf.Profiler.begin(Profiler.java:625)
+	at org.spongepowered.asm.util.perf.Profiler.begin(Profiler.java:600)
+	at org.spongepowered.asm.mixin.transformer.MixinPreProcessorStandard.conform(MixinPreProcessorStandard.java:237)
+	at org.spongepowered.asm.mixin.transformer.MixinPreProcessorStandard.conform(MixinPreProcessorStandard.java:232)
+	at org.spongepowered.asm.mixin.transformer.MixinPreProcessorStandard.createContextFor(MixinPreProcessorStandard.java:263)
+	at org.spongepowered.asm.mixin.transformer.MixinInfo.createContextFor(MixinInfo.java:1272)
+	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:287)
+	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:345)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:569)
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:351)
+	... 35 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:363)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:208)
+	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:178)
+	at org.spongepowered.asm.mixin.transformer.FabricMixinTransformerProxy.transformClassBytes(FabricMixinTransformerProxy.java:23)
+	at net.fabricmc.loader.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:162)
+	at net.fabricmc.loader.launch.knot.KnotClassLoader.loadClass(KnotClassLoader.java:154)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:519)
+	at net.minecraft.class_806.method_3495(class_806.java:129)
+	at net.minecraft.class_918.method_4019(class_918.java:392)
+	at net.minecraft.class_918.method_23177(class_918.java:409)
+	at net.minecraft.class_918.method_23178(class_918.java:402)
+	at net.minecraft.class_915.method_3994(class_915.java:127)
+	at net.minecraft.class_915.method_3936(class_915.java:32)
+
+-- Entity being rendered --
+Details:
+	Entity Type: minecraft:item_frame (net.minecraft.class_1533)
+	Entity ID: 2574643
+	Entity Name: Item Frame
+	Entity's Exact location: 141.97, 77.50, 129.50
+	Entity's Block location: World: (141,77,129), Section: (at 13,13,1 in 8,4,8; chunk contains blocks 128,-64,128 to 143,319,143), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Entity's Momentum: 0.00, 0.00, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+
+-- Renderer details --
+Details:
+	Assigned renderer: net.minecraft.class_915@1c7d3fd5
+	Location: 5.90,-2.50,-8.06 - World: (5,-3,-9), Section: (at 5,13,7 in 0,-1,-1; chunk contains blocks 0,-64,-16 to 15,319,-1), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,-64,-512 to 511,319,-1)
+	Rotation: 90.0
+	Delta: 0.58016014
+Stacktrace:
+	at net.minecraft.class_898.method_3954(class_898.java:178)
+	at net.minecraft.class_761.method_22977(class_761.java:2197)
+	at net.minecraft.class_761.method_22710(class_761.java:1799)
+	at net.minecraft.class_757.method_3188(class_757.java:1510)
+
+-- Affected level --
+Details:
+	All players: 1 total; [class_746['AvgUsrName'/2753379, l='ClientLevel', x=136.07, y=80.00, z=137.56]]
+	Chunk stats: 625, 395
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (96,70,48), Section: (at 0,6,0 in 6,4,3; chunk contains blocks 96,-64,48 to 111,319,63), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 19383498 game time, 25327148 day time
+	Server brand: Spigot
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.class_638.method_8538(class_638.java:476)
+	at net.minecraft.class_310.method_1587(class_310.java:2399)
+	at net.minecraft.class_310.method_1514(class_310.java:749)
+	at net.minecraft.client.main.Main.main(Main.java:217)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at net.fabricmc.loader.game.MinecraftGameProvider.launch(MinecraftGameProvider.java:234)
+	at net.fabricmc.loader.launch.knot.Knot.launch(Knot.java:153)
+	at net.fabricmc.loader.launch.knot.KnotClient.main(KnotClient.java:28)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.multimc.onesix.OneSixLauncher.launchWithMainClass(OneSixLauncher.java:196)
+	at org.multimc.onesix.OneSixLauncher.launch(OneSixLauncher.java:231)
+	at org.multimc.EntryPoint.listen(EntryPoint.java:143)
+	at org.multimc.EntryPoint.main(EntryPoint.java:34)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: Default, Fabric Mods, Minecraft Plus v3.7.zip, Blue Netherite.zip, VanillaTweaks-june-27.zip, Custom Font.zip
+
+-- System Details --
+Details:
+	Minecraft Version: 1.17
+	Minecraft Version ID: 1.17
+	Operating System: Linux (amd64) version 5.10.42-1-MANJARO
+	Java Version: 16.0.1, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 666633840 bytes (635 MiB) / 1287651328 bytes (1228 MiB) up to 2147483648 bytes (2048 MiB)
+	CPUs: 8
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-8705G CPU @ 3.10GHz
+	Identifier: Intel64 Family 6 Model 158 Stepping 9
+	Microarchitecture: Kaby Lake
+	Frequency (GHz): 3.10
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 8
+	Graphics card #0 name: HD Graphics 630
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MB): 256.00
+	Graphics card #0 deviceId: 0x591b
+	Graphics card #0 versionInfo: unknown
+	Graphics card #1 name: 100 Series/C230 Series Chipset Family Integrated Sensor Hub
+	Graphics card #1 vendor: Intel Corporation (0x8086)
+	Graphics card #1 VRAM (MB): 0.00
+	Graphics card #1 deviceId: 0xa135
+	Graphics card #1 versionInfo: unknown
+	Virtual memory max (MB): 7864.68
+	Virtual memory used (MB): 9691.36
+	Swap memory total (MB): 0.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 2 total; -Xms512m -Xmx2048m
+	Fabric Mods: 
+		appleskin: AppleSkin mc1.17-2.0.0
+		architectury: Architectury 2.0.11
+		cloth-basic-math: Cloth Basic Math 0.5.1
+		cloth-config2: Cloth Config v4 5.0.34
+		fabric: Fabric API 0.36.0+1.17
+		fabric-api-base: Fabric API Base 0.3.0+a02b44633d
+		fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.2.0+2b5c62d03d
+		fabric-biome-api-v1: Fabric Biome API (v1) 3.1.11+c345aea83d
+		fabric-blockrenderlayer-v1: Fabric BlockRenderLayer Registration (v1) 1.1.5+a02b44633d
+		fabric-command-api-v1: Fabric Command API (v1) 1.1.1+a02b44633d
+		fabric-commands-v0: Fabric Commands (v0) 0.2.2+92519afa3d
+		fabric-containers-v0: Fabric Containers (v0) 0.1.12+a02b44633d
+		fabric-content-registries-v0: Fabric Content Registries (v0) 0.2.2+a02b44633d
+		fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.1.5+be9da3103d
+		fabric-dimensions-v1: Fabric Dimensions API (v1) 2.0.10+a02b44633d
+		fabric-entity-events-v1: Fabric Entity Events (v1) 1.1.0+a02b44633d
+		fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.4.9+a722d8c03d
+		fabric-events-lifecycle-v0: Fabric Events Lifecycle (v0) 0.2.1+92519afa3d
+		fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.6+a02b44633d
+		fabric-item-api-v1: Fabric Item API (v1) 1.2.4+a02b44633d
+		fabric-item-groups-v0: Fabric Item Groups (v0) 0.2.10+b7ab61213d
+		fabric-key-binding-api-v1: Fabric Key Binding API (v1) 1.0.4+a02b44633d
+		fabric-keybindings-v0: Fabric Key Bindings (v0) 0.2.2+36b77c3e3d
+		fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 1.4.4+a02b44633d
+		fabric-loot-tables-v1: Fabric Loot Tables (v1) 1.0.4+a02b44633d
+		fabric-mining-levels-v0: Fabric Mining Levels (v0) 0.1.3+92519afa3d
+		fabric-models-v0: Fabric Models (v0) 0.3.0+a02b44633d
+		fabric-networking-api-v1: Fabric Networking API (v1) 1.0.11+b7ab61213d
+		fabric-networking-blockentity-v0: Fabric Networking Block Entity (v0) 0.2.11+a02b44633d
+		fabric-networking-v0: Fabric Networking (v0) 0.3.2+92519afa3d
+		fabric-object-builder-api-v1: Fabric Object Builder API (v1) 1.10.9+b7ab61213d
+		fabric-object-builders-v0: Fabric Object Builders (v0) 0.7.3+a02b44633d
+		fabric-particles-v1: Fabric Particles (v1) 0.2.4+a02b44633d
+		fabric-registry-sync-v0: Fabric Registry Sync (v0) 0.7.10+e2961fee3d
+		fabric-renderer-api-v1: Fabric Renderer API (v1) 0.4.3+676f40fa3d
+		fabric-renderer-indigo: Fabric Renderer - Indigo 0.4.8+a02b44633d
+		fabric-renderer-registries-v1: Fabric Renderer Registries (v1) 3.2.0+a02b44633d
+		fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.1.5+a02b44633d
+		fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 0.1.13+a02b44633d
+		fabric-rendering-v0: Fabric Rendering (v0) 1.1.2+92519afa3d
+		fabric-rendering-v1: Fabric Rendering (v1) 1.6.0+a02b44633d
+		fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.4.7+b7ab61213d
+		fabric-screen-api-v1: Fabric Screen API (v1) 1.0.4+198a96213d
+		fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.1.8+a02b44633d
+		fabric-structure-api-v1: Fabric Structure API (v1) 1.1.11+e36969833d
+		fabric-tag-extensions-v0: Fabric Tag Extensions (v0) 1.1.4+a02b44633d
+		fabric-textures-v0: Fabric Textures (v0) 1.0.6+a02b44633d
+		fabric-tool-attribute-api-v1: Fabric Tool Attribute API (v1) 1.2.12+b7ab61213d
+		fabricloader: Fabric Loader 0.11.6
+		java: Java HotSpot(TM) 64-Bit Server VM 16
+		lightoverlay: Light Overlay 6.0.0
+		minecraft: Minecraft 1.17
+		mm: Manningham Mills 2.2
+		modmenu: Mod Menu 2.0.2
+		optifabric: OptiFabric 1.11.9
+		voxelmap: VoxelMap 1.10.15
+	Launched Version: MultiMC5
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: AMD VEGAM (DRM 3.40.0, 5.10.42-1-MANJARO, LLVM 12.0.0) GL version 4.6 (Compatibility Profile) Mesa 21.1.2, AMD
+	Window size: 3840x2033
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fabric'
+	Type: Client (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: vanilla, Fabric Mods, file/Minecraft Plus v3.7.zip, file/Blue Netherite.zip (incompatible), file/VanillaTweaks-june-27.zip, file/Custom Font.zip
+	Current Language: English (US)
+	CPU: 8x Intel(R) Core(TM) i7-8705G CPU @ 3.10GHz
+	OptiFine Version: OptiFine_1.17_HD_U_G9_pre21
+	OptiFine Build: 20210612-020007
+	Render Distance Chunks: 12
+	Mipmaps: 0
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 4.6 (Compatibility Profile) Mesa 21.1.2
+	OpenGlRenderer: AMD VEGAM (DRM 3.40.0, 5.10.42-1-MANJARO, LLVM 12.0.0)
+	OpenGlVendor: AMD
+	CpuCount: 8
+
+-- OptiFabric --
+Details:
+	OptiFine jar designed for: 1.17
+	OptiFine jar version: OptiFine_1.17_HD_U_G9_pre21
+	OptiFine jar status: Valid OptiFine mod
+	OptiFine remapped jar: /home/jonathansharpe/.local/share/multimc/instances/1.171/.minecraft/.optifine/OptiFine_1.17_HD_U_G9_pre21/Optifine-mapped.jar
+	OptiFabric error: <None>
