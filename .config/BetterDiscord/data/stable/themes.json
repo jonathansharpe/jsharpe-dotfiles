@@ -33,5 +33,6 @@
     "        Tranquil": false,
     "T1": false,
     "Translucence": false,
-    "ClearVision": true
+    "ClearVision": false,
+    "midnight": true
 }

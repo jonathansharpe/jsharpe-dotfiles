@@ -2,12 +2,12 @@
     "settings": {
         "tabs": [
             {
-                "name": "@PowerUser",
-                "url": "/channels/@me/777427650498527252",
+                "name": "#minecraft",
+                "url": "/channels/585609051745026060/585609052185296897",
                 "selected": true,
-                "currentStatus": "dnd",
-                "iconUrl": "https://cdn.discordapp.com/avatars/365341207133421568/4b7b667759e0165ee2ec219749f0fa90.webp?size=320",
-                "channelId": "777427650498527252"
+                "currentStatus": "none",
+                "iconUrl": "https://cdn.discordapp.com/icons/585609051745026060/16ba041d364df1ba0629a3669a485aa5.webp?",
+                "channelId": "585609052185296897"
             }
         ],
         "favs": [
