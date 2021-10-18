@@ -1,0 +1,7 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "block/warped_sprouts4",
+		"particle": "block/warped_sprouts4"
+    }
+}

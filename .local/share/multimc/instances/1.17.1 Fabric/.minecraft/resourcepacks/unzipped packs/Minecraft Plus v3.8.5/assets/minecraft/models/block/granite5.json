@@ -1,0 +1,6 @@
+{
+    "parent":"block/stalactite4",
+    "textures": {
+	"all":"block/granite"
+    }
+}

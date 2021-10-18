@@ -1,0 +1,19 @@
+#Sat Oct 16 22:45:26 PDT 2021
+handDepthMul=0.0625
+TexMinFilB=0
+oldLighting=default
+TexMagFilN=0
+tweakBlockDamage=false
+cloudShadow=false
+TexMagFilS=0
+shaderPack=BSL_v8.1p1.zip
+TexMinFilN=0
+specularMapEnabled=true
+normalMapEnabled=true
+renderResMul=0.75
+oldHandLight=default
+TexMinFilS=0
+shadowResMul=0.75
+shadowClipFrustrum=true
+TexMagFilB=0
+antialiasingLevel=0

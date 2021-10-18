@@ -1,0 +1,195 @@
+{
+	"textureSize": [48, 32],
+	"models": [
+		{
+			"part": "head",
+			"id": "head",
+			"invertAxis": "xy",
+			"translate": [-1, -7.5, 3],
+			"boxes": [
+				{
+					"coordinates": [-3.5, 4, -8, 7, 6, 6],
+					"uvNorth": [8, 11, 15, 17],
+					"uvEast": [1, 11, 7, 17],
+					"uvSouth": [20, 11, 27, 17],
+					"uvWest": [15, 11, 21, 17],
+					"uvUp": [14, 11, 7, 5],
+					"uvDown": [23, 5, 16, 11]
+				},
+				{
+					"coordinates": [-4, 9.5, -7, 2, 2, 1],
+					"uvNorth": [16, 2, 18, 4],
+					"uvEast": [15, 2, 16, 4],
+					"uvSouth": [19, 2, 21, 4],
+					"uvWest": [18, 2, 19, 4],
+					"uvUp": [18, 2, 16, 1],
+					"uvDown": [20, 1, 18, 2]
+				},
+				{
+					"coordinates": [2, 9.5, -7, 2, 2, 1],
+					"uvNorth": [9, 2, 11, 4],
+					"uvEast": [8, 2, 9, 4],
+					"uvSouth": [12, 2, 14, 4],
+					"uvWest": [11, 2, 12, 4],
+					"uvUp": [11, 2, 9, 1],
+					"uvDown": [13, 1, 11, 2]
+				},
+				{
+					"coordinates": [-1.5, 4.5, -11, 3, 2, 3],
+					"uvNorth": [9, 21, 13, 23],
+					"uvEast": [6, 21, 9, 23],
+					"uvSouth": [16, 21, 20, 23],
+					"uvWest": [13, 21, 16, 23],
+					"uvUp": [13, 21, 9, 18],
+					"uvDown": [17, 18, 13, 21]
+				},
+				{
+					"coordinates": [-5, 4.5, -6.5, 10, 3, 0],
+					"uvNorth": [25, 0, 35, 3],
+					"uvEast": [0, 0, 0, 3],
+					"uvSouth": [25, 0, 35, 3],
+					"uvWest": [0, 0, 0, 3],
+					"uvUp": [0, 0, 10, 0],
+					"uvDown": [0, 0, 10, 0]
+				}
+			]
+		},
+		{
+			"part": "body",
+			"id": "body",
+			"invertAxis": "xy",
+			"translate": [0, -16.5, -3.5],
+			"submodels": [
+				{
+					"id": "body_rotation",
+					"invertAxis": "xy",
+					"translate": [0, 7.5, 3],
+					"rotate": [-90, 0, 0],
+					"boxes": [
+						{
+							"coordinates": [-3, -6, -4, 6, 11, 6],
+							"uvNorth": [30, 21, 36, 32],
+							"uvEast": [24, 21, 30, 32],
+							"uvSouth": [42, 21, 48, 32],
+							"uvWest": [36, 21, 42, 32],
+							"uvUp": [36, 21, 30, 15],
+							"uvDown": [42, 15, 36, 21]
+						},
+						{
+							"coordinates": [-3.5, -5.99, -4.1, 7, 11, 7],
+							"uvNorth": [0, 0, 6, 11],
+							"uvEast": [0, 0, 6, 11],
+							"uvSouth": [0, 0, 6, 11],
+							"uvWest": [0, 0, 6, 11],
+							"uvUp": [48, 21, 42, 15],
+							"uvDown": [29, 5, 23, 11]
+						}
+					]
+				}
+			],
+			"animations": [
+				{
+					"body_rotation.rx": "0"
+				}
+			]
+		},
+		{
+			"part": "leg1",
+			"id": "leg1",
+			"invertAxis": "xy",
+			"translate": [-5, -6.5, -7],
+			"boxes": [
+				{
+					"coordinates": [1.001, 0, 6, 2, 6, 2],
+					"uvNorth": [15, 26, 17, 32],
+					"uvEast": [13, 26, 15, 32],
+					"uvSouth": [19, 26, 21, 32],
+					"uvWest": [17, 26, 19, 32],
+					"uvUp": [17, 26, 15, 24],
+					"uvDown": [19, 24, 17, 26]
+				}
+			]
+		},
+		{
+			"part": "leg2",
+			"id": "leg2",
+			"invertAxis": "xy",
+			"translate": [-1, -6.5, -7],
+			"boxes": [
+				{
+					"coordinates": [-3.001, 0, 6, 2, 6, 2],
+					"uvNorth": [6, 26, 8, 32],
+					"uvEast": [4, 26, 6, 32],
+					"uvSouth": [10, 26, 12, 32],
+					"uvWest": [8, 26, 10, 32],
+					"uvUp": [8, 26, 6, 24],
+					"uvDown": [10, 24, 8, 26]
+				}
+			]
+		},
+		{
+			"part": "leg3",
+			"id": "leg3",
+			"invertAxis": "xy",
+			"translate": [-5, -6.5, 0],
+			"boxes": [
+				{
+					"coordinates": [1.001, 0, -1, 2, 6, 2],
+					"uvNorth": [15, 26, 17, 32],
+					"uvEast": [13, 26, 15, 32],
+					"uvSouth": [19, 26, 21, 32],
+					"uvWest": [17, 26, 19, 32],
+					"uvUp": [17, 26, 15, 24],
+					"uvDown": [19, 24, 17, 26]
+				}
+			]
+		},
+		{
+			"part": "leg4",
+			"id": "leg4",
+			"invertAxis": "xy",
+			"translate": [-1, -6.5, 0],
+			"boxes": [
+				{
+					"coordinates": [-3.001, 0, -1, 2, 6, 2],
+					"uvNorth": [6, 26, 8, 32],
+					"uvEast": [4, 26, 6, 32],
+					"uvSouth": [10, 26, 12, 32],
+					"uvWest": [8, 26, 10, 32],
+					"uvUp": [8, 26, 6, 24],
+					"uvDown": [10, 24, 8, 26]
+				}
+			]
+		},
+		{
+			"part": "tail",
+			"id": "tail",
+			"invertAxis": "xy",
+			"translate": [-4, -11, -10],
+			"submodels": [
+				{
+					"id": "tail_rotation",
+					"invertAxis": "xy",
+					"translate": [0, 8.5, 11.5],
+					"rotate": [-90, 0, 0],
+					"boxes": [
+						{
+							"coordinates": [-2, -6.5, -4.5, 4, 9, 5],
+							"uvNorth": [35, 5, 39, 14],
+							"uvEast": [30, 5, 35, 14],
+							"uvSouth": [44, 5, 48, 14],
+							"uvWest": [39, 5, 44, 14],
+							"uvUp": [39, 5, 35, 0],
+							"uvDown": [43, 0, 39, 5]
+						}
+					]
+				}
+			],
+			"animations": [
+				{
+					"tail_rotation.rx": "0"
+				}
+			]
+		}
+	]
+}
