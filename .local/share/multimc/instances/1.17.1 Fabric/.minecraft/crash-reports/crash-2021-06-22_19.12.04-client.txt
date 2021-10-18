@@ -1,0 +1,186 @@
+---- Minecraft Crash Report ----
+// Ouch. That hurt :(
+
+Time: 6/22/21, 7:12 PM
+Description: Batching chunks
+
+java.lang.NoSuchFieldError: field_4480
+	at net.minecraft.class_852.method_3685(class_852.java:124)
+	at net.minecraft.class_852.method_3687(class_852.java:90)
+	at net.minecraft.class_852.method_3679(class_852.java:70)
+	at net.minecraft.class_846$class_851$class_4578.method_22785(class_846.java:1081)
+	at net.minecraft.class_846$class_851$class_4578.method_22783(class_846.java:847)
+	at net.minecraft.class_846.method_22757(class_846.java:194)
+	at java.base/java.util.concurrent.CompletableFuture$UniCompose.tryFire(CompletableFuture.java:1146)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1792)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:295)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1016)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1665)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1598)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.class_852.method_3685(class_852.java:124)
+	at net.minecraft.class_852.method_3687(class_852.java:90)
+
+-- Affected level --
+Details:
+	All players: 1 total; [class_746['AvgUsrName'/989672, l='ClientLevel', x=129.41, y=72.00, z=54.46]]
+	Chunk stats: 625, 434
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (96,70,48), Section: (at 0,6,0 in 6,4,3; chunk contains blocks 96,-64,48 to 111,319,63), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 5831358 game time, 7946952 day time
+	Server brand: Spigot
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.class_638.method_8538(class_638.java:476)
+	at net.minecraft.class_310.method_1587(class_310.java:2399)
+	at net.minecraft.class_846.method_22755(class_846.java:200)
+	at java.base/java.util.concurrent.CompletableFuture.uniWhenComplete(CompletableFuture.java:859)
+	at java.base/java.util.concurrent.CompletableFuture$UniWhenComplete.tryFire(CompletableFuture.java:837)
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:506)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1806)
+	at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1792)
+	at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:295)
+	at java.base/java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1016)
+	at java.base/java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1665)
+	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1598)
+	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: Default, Fabric Mods, Minecraft Plus 1.17 pre3.zip, Blue Netherite.zip, VanillaTweaks-june-20.zip, Custom Font.zip
+
+-- System Details --
+Details:
+	Minecraft Version: 1.17
+	Minecraft Version ID: 1.17
+	Operating System: Linux (amd64) version 5.10.42-1-MANJARO
+	Java Version: 16.0.1, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 518404800 bytes (494 MiB) / 1280311296 bytes (1221 MiB) up to 2147483648 bytes (2048 MiB)
+	CPUs: 8
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-8705G CPU @ 3.10GHz
+	Identifier: Intel64 Family 6 Model 158 Stepping 9
+	Microarchitecture: Kaby Lake
+	Frequency (GHz): 3.10
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 8
+	Graphics card #0 name: HD Graphics 630
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MB): 256.00
+	Graphics card #0 deviceId: 0x591b
+	Graphics card #0 versionInfo: unknown
+	Graphics card #1 name: 100 Series/C230 Series Chipset Family Integrated Sensor Hub
+	Graphics card #1 vendor: Intel Corporation (0x8086)
+	Graphics card #1 VRAM (MB): 0.00
+	Graphics card #1 deviceId: 0xa135
+	Graphics card #1 versionInfo: unknown
+	Virtual memory max (MB): 7864.68
+	Virtual memory used (MB): 11261.39
+	Swap memory total (MB): 0.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 2 total; -Xms512m -Xmx2048m
+	Fabric Mods: 
+		appleskin: AppleSkin mc1.17-2.0.0
+		architectury: Architectury 2.0.11
+		cloth-basic-math: Cloth Basic Math 0.5.1
+		cloth-config2: Cloth Config v4 5.0.34
+		fabric: Fabric API 0.36.0+1.17
+		fabric-api-base: Fabric API Base 0.3.0+a02b44633d
+		fabric-api-lookup-api-v1: Fabric API Lookup API (v1) 1.2.0+2b5c62d03d
+		fabric-biome-api-v1: Fabric Biome API (v1) 3.1.11+c345aea83d
+		fabric-blockrenderlayer-v1: Fabric BlockRenderLayer Registration (v1) 1.1.5+a02b44633d
+		fabric-command-api-v1: Fabric Command API (v1) 1.1.1+a02b44633d
+		fabric-commands-v0: Fabric Commands (v0) 0.2.2+92519afa3d
+		fabric-containers-v0: Fabric Containers (v0) 0.1.12+a02b44633d
+		fabric-content-registries-v0: Fabric Content Registries (v0) 0.2.2+a02b44633d
+		fabric-crash-report-info-v1: Fabric Crash Report Info (v1) 0.1.5+be9da3103d
+		fabric-dimensions-v1: Fabric Dimensions API (v1) 2.0.10+a02b44633d
+		fabric-entity-events-v1: Fabric Entity Events (v1) 1.1.0+a02b44633d
+		fabric-events-interaction-v0: Fabric Events Interaction (v0) 0.4.9+a722d8c03d
+		fabric-events-lifecycle-v0: Fabric Events Lifecycle (v0) 0.2.1+92519afa3d
+		fabric-game-rule-api-v1: Fabric Game Rule API (v1) 1.0.6+a02b44633d
+		fabric-item-api-v1: Fabric Item API (v1) 1.2.4+a02b44633d
+		fabric-item-groups-v0: Fabric Item Groups (v0) 0.2.10+b7ab61213d
+		fabric-key-binding-api-v1: Fabric Key Binding API (v1) 1.0.4+a02b44633d
+		fabric-keybindings-v0: Fabric Key Bindings (v0) 0.2.2+36b77c3e3d
+		fabric-lifecycle-events-v1: Fabric Lifecycle Events (v1) 1.4.4+a02b44633d
+		fabric-loot-tables-v1: Fabric Loot Tables (v1) 1.0.4+a02b44633d
+		fabric-mining-levels-v0: Fabric Mining Levels (v0) 0.1.3+92519afa3d
+		fabric-models-v0: Fabric Models (v0) 0.3.0+a02b44633d
+		fabric-networking-api-v1: Fabric Networking API (v1) 1.0.11+b7ab61213d
+		fabric-networking-blockentity-v0: Fabric Networking Block Entity (v0) 0.2.11+a02b44633d
+		fabric-networking-v0: Fabric Networking (v0) 0.3.2+92519afa3d
+		fabric-object-builder-api-v1: Fabric Object Builder API (v1) 1.10.9+b7ab61213d
+		fabric-object-builders-v0: Fabric Object Builders (v0) 0.7.3+a02b44633d
+		fabric-particles-v1: Fabric Particles (v1) 0.2.4+a02b44633d
+		fabric-registry-sync-v0: Fabric Registry Sync (v0) 0.7.10+e2961fee3d
+		fabric-renderer-api-v1: Fabric Renderer API (v1) 0.4.3+676f40fa3d
+		fabric-renderer-indigo: Fabric Renderer - Indigo 0.4.8+a02b44633d
+		fabric-renderer-registries-v1: Fabric Renderer Registries (v1) 3.2.0+a02b44633d
+		fabric-rendering-data-attachment-v1: Fabric Rendering Data Attachment (v1) 0.1.5+a02b44633d
+		fabric-rendering-fluids-v1: Fabric Rendering Fluids (v1) 0.1.13+a02b44633d
+		fabric-rendering-v0: Fabric Rendering (v0) 1.1.2+92519afa3d
+		fabric-rendering-v1: Fabric Rendering (v1) 1.6.0+a02b44633d
+		fabric-resource-loader-v0: Fabric Resource Loader (v0) 0.4.7+b7ab61213d
+		fabric-screen-api-v1: Fabric Screen API (v1) 1.0.4+198a96213d
+		fabric-screen-handler-api-v1: Fabric Screen Handler API (v1) 1.1.8+a02b44633d
+		fabric-structure-api-v1: Fabric Structure API (v1) 1.1.11+e36969833d
+		fabric-tag-extensions-v0: Fabric Tag Extensions (v0) 1.1.4+a02b44633d
+		fabric-textures-v0: Fabric Textures (v0) 1.0.6+a02b44633d
+		fabric-tool-attribute-api-v1: Fabric Tool Attribute API (v1) 1.2.12+b7ab61213d
+		fabricloader: Fabric Loader 0.11.6
+		java: Java HotSpot(TM) 64-Bit Server VM 16
+		lightoverlay: Light Overlay 6.0.0
+		minecraft: Minecraft 1.17
+		mm: Manningham Mills 2.2
+		modmenu: Mod Menu 2.0.2
+		optifabric: OptiFabric 1.11.9
+		voxelmap: VoxelMap 1.10.15
+	Launched Version: MultiMC5
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: ERR
+	Window size: 3840x2038
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'fabric'
+	Type: Client (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: vanilla, Fabric Mods, file/Minecraft Plus 1.17 pre3.zip, file/Blue Netherite.zip (incompatible), file/VanillaTweaks-june-20.zip, file/Custom Font.zip
+	Current Language: English (US)
+	CPU: 8x Intel(R) Core(TM) i7-8705G CPU @ 3.10GHz
+	OptiFine Version: OptiFine_1.17_HD_U_G9_pre21
+	OptiFine Build: 20210612-020007
+	Render Distance Chunks: 12
+	Mipmaps: 0
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 4.6 (Compatibility Profile) Mesa 21.1.2
+	OpenGlRenderer: AMD VEGAM (DRM 3.40.0, 5.10.42-1-MANJARO, LLVM 12.0.0)
+	OpenGlVendor: AMD
+	CpuCount: 8
+
+-- OptiFabric --
+Details:
+	OptiFine jar designed for: 1.17
+	OptiFine jar version: OptiFine_1.17_HD_U_G9_pre21
+	OptiFine jar status: Valid OptiFine mod
+	OptiFine remapped jar: /home/jonathansharpe/.local/share/multimc/instances/1.171/.minecraft/.optifine/OptiFine_1.17_HD_U_G9_pre21/Optifine-mapped.jar
+	OptiFabric error: <None>

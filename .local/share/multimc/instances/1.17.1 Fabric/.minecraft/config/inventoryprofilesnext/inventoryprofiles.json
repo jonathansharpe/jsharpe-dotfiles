@@ -1,0 +1,31 @@
+{
+  "ModSettings": {
+    "sort_order": "CUSTOM",
+    "custom_rule": "@custom_set",
+    "always_include_hotbar": true,
+    "lock_slots_config_key": {
+      "main": {
+        "keys": "BUTTON_2"
+      }
+    },
+    "show_locked_slots_foreground": false,
+    "locked_slots_allow_pickup_into_empty": true,
+    "refill_before_tool_break": false
+  },
+  "GuiSettings": {
+    "enable_profiles_ui": false,
+    "continuous_crafting_saved_value": false
+  },
+  "Hotkeys": {
+    "sort_inventory": {
+      "main": {
+        "keys": "Z"
+      }
+    },
+    "move_all_items": {
+      "main": {
+        "keys": "X"
+      }
+    }
+  }
+}

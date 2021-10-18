@@ -1,0 +1,190 @@
+{
+	"textureSize": [64, 64],
+	"models": [
+		{
+			"part": "body",
+			"id": "body",
+			"invertAxis": "xy",
+			"translate": [0, -13, -2],
+			"submodels": [
+				{
+					"id": "rotation",
+					"invertAxis": "xy",
+					"translate": [0, 13, 2],
+					"rotate": [-90, 0, 0],
+					"boxes": [
+						{"coordinates": [-5, -6, -7, 10, 16, 8], "textureOffset": [28, 8]}
+					],
+					"submodels": [
+						{
+							"id": "body_dry",
+							"invertAxis": "xy",
+							"translate": [0, 2, -3]
+						}
+					]
+				}
+			],
+			"animations": [
+				{
+					"rotation.rx": "0",
+					"body_dry.ty": "if(is_in_water, 10000, -2)"
+				}
+			]
+		},
+		{
+			"part": "head",
+			"id": "head",
+			"invertAxis": "xy",
+			"translate": [0, -12, 6],
+			"boxes": [
+				{"coordinates": [-3, 9, -15, 1, 1, 1], "textureOffset": [60, 7]},
+				{"coordinates": [-4, 8, -14, 8, 8, 8], "textureOffset": [0, 0]},
+				{"coordinates": [2, 9, -15, 1, 1, 1], "textureOffset": [60, 32]},
+				{"coordinates": [3, 9, -15, 1, 2, 1], "textureOffset": [60, 43]},
+				{"coordinates": [-4, 9, -15, 1, 2, 1], "textureOffset": [60, 50]},
+				{"coordinates": [-2, 9, -15, 4, 3, 1], "textureOffset": [16, 16]},
+				{"coordinates": [-4, 17, -11, 4, 6, 0], "textureOffset": [0, 0]},
+				{"coordinates": [-3, 16, -13, 4, 1, 4], "textureOffset": [40, 0]}
+			],
+			"submodels": [
+				{
+					"id": "flower",
+					"invertAxis": "xy",
+					"translate": [0, 0, 0],
+					"boxes": [
+						{"coordinates": [-3, 16, -13, 4, 1, 4], "textureOffset": [24, 0]},
+						{"coordinates": [-4, 17, -11, 4, 6, 0], "textureOffset": [16, 20]}
+					]
+				},
+				{
+					"id": "head_dry",
+					"invertAxis": "xy",
+					"translate": [0, 12, -6],
+					"boxes": [
+						{"coordinates": [-4, -4, -8, 8, 8, 8], "textureOffset": [0, 48], "sizeAdd": 0.1}
+					]
+				},
+				{
+					"id": "right_ear",
+					"invertAxis": "xy",
+					"translate": [3.5, 14, -10],
+					"rotate": [0, 0, 25],
+					"boxes": [
+						{"coordinates": [0, -5, -2, 1, 5, 4], "textureOffset": [36, 8]}
+					]
+				},
+				{
+					"id": "left_ear",
+					"invertAxis": "xy",
+					"translate": [-3.5, 14, -10],
+					"rotate": [0, 0, -25],
+					"boxes": [
+						{"coordinates": [-1, -5, -2, 1, 5, 4], "textureOffset": [36, 8]}
+					]
+				}
+			],
+			"animations": [
+				{
+					"head_dry.ty": "if(is_in_water, 10000, -12)",
+					"flower.ty": "if(is_in_water, 0, 10000)"
+				}
+			]
+		},
+		{
+			"part": "leg1",
+			"id": "leg1",
+			"invertAxis": "xy",
+			"translate": [-3, -6, -7],
+			"boxes": [
+				{"coordinates": [-5, 0, 5, 4, 6, 4], "textureOffset": [0, 16]}
+			],
+			"submodels": [
+				{
+					"id": "leg1_dry",
+					"invertAxis": "xy",
+					"translate": [-3, 3, 7],
+					"boxes": [
+						{"coordinates": [-2, -3, -2, 4, 6, 4], "textureOffset": [0, 36], "sizeAdd": 0.1}
+					]
+				}
+			],
+			"animations": [
+				{
+					"leg1_dry.ty": "if(is_in_water, 10000, -3)"
+				}
+			]
+		},
+		{
+			"part": "leg2",
+			"id": "leg2",
+			"invertAxis": "xy",
+			"translate": [3, -6, -7],
+			"boxes": [
+				{"coordinates": [1, 0, 5, 4, 6, 4], "textureOffset": [0, 16]}
+			],
+			"submodels": [
+				{
+					"id": "leg2_dry",
+					"invertAxis": "xy",
+					"translate": [3, 3, 7],
+					"boxes": [
+						{"coordinates": [-2, -3, -2, 4, 6, 4], "textureOffset": [0, 36], "sizeAdd": 0.1}
+					]
+				}
+			],
+			"animations": [
+				{
+					"leg2_dry.ty": "if(is_in_water, 10000, -3)"
+				}
+			]
+		},
+		{
+			"part": "leg3",
+			"id": "leg3",
+			"invertAxis": "xy",
+			"translate": [-3, -6, 5],
+			"boxes": [
+				{"coordinates": [-5, 0, -7, 4, 6, 4], "textureOffset": [0, 26]}
+			],
+			"submodels": [
+				{
+					"id": "leg3_dry",
+					"invertAxis": "xy",
+					"translate": [-3, 3, -5],
+					"boxes": [
+						{"coordinates": [-2, -3, -2, 4, 6, 4], "textureOffset": [0, 36], "sizeAdd": 0.1}
+					]
+				}
+			],
+			"animations": [
+				{
+					"leg3_dry.ty": "if(is_in_water, 10000, -3)"
+				}
+			]
+		},
+		{
+			"part": "leg4",
+			"id": "leg4",
+			"invertAxis": "xy",
+			"translate": [3, -6, 5],
+			"boxes": [
+				{"coordinates": [1, 0, -7, 4, 6, 4], "textureOffset": [0, 26]}
+			],
+			"submodels": [
+				{
+					"id": "leg4_dry",
+					"invertAxis": "xy",
+					"translate": [3, 3, -5],
+					"boxes": [
+						{"coordinates": [-2, -3, -2, 4, 6, 4], "textureOffset": [0, 36], "sizeAdd": 0.1}
+					]
+				}
+			],
+			"animations": [
+				{
+					"leg4_dry.ty": "if(is_in_water, 10000, -3)"
+				}
+			]
+		}
+	]
+}
