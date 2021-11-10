@@ -1,17 +1,7 @@
 {
 	"presets": {
-		"4102276927854966": {
-			"pos": 2,
-			"emojiInfo": {
-				"id": null,
-				"name": "⌨️",
-				"animated": false
-			},
-			"status": "online",
-			"text": "programming, but only sometimes"
-		},
 		"4436422608436492": {
-			"pos": 1,
+			"pos": 0,
 			"emojiInfo": {
 				"id": null,
 				"name": "😩",
@@ -20,12 +10,12 @@
 			"status": "online",
 			"text": "probably gaming"
 		},
-		"7075546754383459": {
-			"pos": 0,
+		"9011529025487270": {
+			"pos": 1,
 			"clearAfter": "TODAY",
 			"emojiInfo": {
-				"id": "813483155793248316",
-				"name": "thonk",
+				"id": "763098338886418462",
+				"name": "clarence",
 				"animated": false
 			},
 			"status": "online",

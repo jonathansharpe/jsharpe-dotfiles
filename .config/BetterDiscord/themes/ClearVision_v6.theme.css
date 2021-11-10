@@ -1,7 +1,7 @@
 /**
  * @name ClearVision
  * @author ClearVision Team
- * @version 6.1.2
+ * @version 6.1.3
  * @description Highly customizable theme for BetterDiscord.
  * @source https://github.com/ClearVision/ClearVision-v6
  * @website https://clearvision.gitlab.io
@@ -41,7 +41,7 @@
 	/* APP BACKGROUND */
 	--background-shading: 100%; /* app background shading (0 for complete smoothness) [default: 100%] */
 	--background-overlay: rgba(0, 0, 0, 0.2); /* app background overlay color/gradient [default: rgba(0, 0, 0, 0.6)] */
-	--background-image: url(https://cdn.pling.com/img/b/3/7/3/60ce52fda907ae5ee5e169bbbbd7a71357cf033186b25d3137d10384a9b5aede30d5.png); /* app background image (link must be HTTPS) [default: url(https://clearvision.gitlab.io/images/sapphire.jpg)]*/
+	--background-image: url(https://raw.githubusercontent.com/vinceliuice/Monterey-kde/main/wallpaper/Monterey-dark/contents/images/3840x2160.png); /* app background image (link must be HTTPS) [default: url(https://clearvision.gitlab.io/images/sapphire.jpg)]*/
 	--background-position: center; /* app background position [default: center] */
 	--background-size: cover; /* app background size [default: cover] */
 	--background-repeat: no-repeat; /* app background repeat [default: no-repeat] */
