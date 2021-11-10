@@ -1,6 +1,8 @@
 {
 	"blacklist": [],
-	"categorydata": [],
+	"categorydata": [
+		"516820477067657228_hidden"
+	],
 	"channels": {
 		"GUILD_TEXT": true,
 		"GUILD_VOICE": true,
