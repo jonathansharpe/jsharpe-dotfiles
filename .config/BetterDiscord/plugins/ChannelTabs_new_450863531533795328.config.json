@@ -2,12 +2,12 @@
     "settings": {
         "tabs": [
             {
-                "name": "#minecraft",
-                "url": "/channels/585609051745026060/585609052185296897",
+                "name": "#other-games",
+                "url": "/channels/585609051745026060/691360775650148434",
                 "selected": true,
                 "currentStatus": "none",
                 "iconUrl": "https://cdn.discordapp.com/icons/585609051745026060/16ba041d364df1ba0629a3669a485aa5.webp?",
-                "channelId": "585609052185296897"
+                "channelId": "691360775650148434"
             }
         ],
         "favs": [

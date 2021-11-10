@@ -277,6 +277,13 @@
 			"mute": true,
 			"sound": "Mention",
 			"volume": 100
+		},
+		"success": {
+			"category": "---",
+			"focus": null,
+			"mute": false,
+			"sound": "---",
+			"volume": 100
 		}
 	},
 	"volumes": {
