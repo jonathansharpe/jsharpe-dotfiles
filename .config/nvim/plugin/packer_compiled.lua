@@ -158,6 +158,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim"
+  },
   ["neoscroll.nvim"] = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/neoscroll.nvim"
@@ -186,11 +190,6 @@ _G.packer_plugins = {
   ["nvim-lspinstall"] = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/nvim-lspinstall"
-  },
-  ["nvim-tree.lua"] = {
-    config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\rnvimtree\nother\frequire\0" },
-    loaded = true,
-    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-treesitter"] = {
     config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\15treesitter\blsp\frequire\0" },
@@ -258,10 +257,6 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for auto-session]], true)
 try_loadstring("\27LJ\1\0029\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\16autosession\nother\frequire\0", "config", "auto-session")
 time([[Config for auto-session]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\rnvimtree\nother\frequire\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
 -- Config for: DAPInstall.nvim
 time([[Config for DAPInstall.nvim]], true)
 try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\15dapinstall\blsp\frequire\0", "config", "DAPInstall.nvim")

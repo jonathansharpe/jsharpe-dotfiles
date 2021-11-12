@@ -8,6 +8,7 @@ set.softtabstop = 4
 set.expandtab = true
 set.number = true
 set.relativenumber = true
+set.spell = true
 set.spelllang = 'en_us'
 set.fdm = 'indent'
 vim.cmd 'set noexpandtab'
