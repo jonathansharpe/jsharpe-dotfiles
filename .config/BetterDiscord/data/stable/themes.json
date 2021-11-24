@@ -7,7 +7,7 @@
     "Horizontal Server List": false,
     "Midnight Mars": false,
     "RadialStatus": false,
-    "SettingsModal": false,
+    "SettingsModal": true,
     "SimplyDark": false,
     "Discolored": false,
     "DTM-08": false,
@@ -33,8 +33,8 @@
     "        Tranquil": false,
     "T1": false,
     "Translucence": false,
-    "ClearVision": true,
-    "midnight": false,
+    "ClearVision": false,
+    "midnight": true,
     "       NOVATURIENT": false,
     "Vibrant Glass": false,
     "AMOLED-Cord": false,
@@ -42,5 +42,10 @@
     "FluentCord": false,
     "CyberFox": false,
     "Cat and a Jar": false,
-    "SoftX": false
+    "SoftX": false,
+    "EzLight": false,
+    "Tokyo Night": false,
+    "Comfy": false,
+    "Slate": false,
+    "Nebula": false
 }
