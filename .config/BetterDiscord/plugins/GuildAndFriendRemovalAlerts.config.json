@@ -6,6 +6,13 @@
     "settings": {
         "removedGuildHistory": [
             {
+                "id": "845005478111346708",
+                "invalid": false,
+                "name": "System76",
+                "iconUrl": "https://cdn.discordapp.com/icons/845005478111346708/a_df13ea4a7a7163a4249190ec8c11e86d.webp?size=4096",
+                "ownerId": "316380543727960064"
+            },
+            {
                 "id": "807338155031658498",
                 "invalid": false,
                 "name": "Blubbr",
@@ -96,7 +103,7 @@
                 "id": "321845546534830085",
                 "invalid": false,
                 "name": "🎅 Emoji.gg | Discord Emojis, Servers & Bots ★ Nitro Emotes, Stickers, Anime",
-                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_79280fde544e658e0798aa0d0c8fe1fc.webp?size=4096",
+                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_da46adf2ebeed12a831bf2c98d651393.webp?size=4096",
                 "ownerId": "116218776495587329"
             },
             {
@@ -208,6 +215,7 @@
                 "id": "835189344809385986",
                 "invalid": false,
                 "name": "Apartment Bros. 2021-2022",
+                "iconUrl": "https://cdn.discordapp.com/icons/835189344809385986/e120451a4ec4e942fd19bfacb91eba5f.webp?size=4096",
                 "ownerId": "208327149768146944"
             },
             {
@@ -218,18 +226,18 @@
                 "ownerId": "396117645226803200"
             },
             {
-                "id": "845005478111346708",
-                "invalid": false,
-                "name": "System76",
-                "iconUrl": "https://cdn.discordapp.com/icons/845005478111346708/a_df13ea4a7a7163a4249190ec8c11e86d.webp?size=4096",
-                "ownerId": "316380543727960064"
-            },
-            {
                 "id": "882703727994236939",
                 "invalid": false,
                 "name": "Seattle Pacific University",
                 "iconUrl": "https://cdn.discordapp.com/icons/882703727994236939/a74a73aa22480b3eecaf57849c511235.webp?size=4096",
                 "ownerId": "643945264868098049"
+            },
+            {
+                "id": "905048727100731402",
+                "invalid": false,
+                "name": "RiiBalanced Server Backup",
+                "iconUrl": "https://cdn.discordapp.com/icons/905048727100731402/89138b9924e4fd126292e339dba0332c.webp?size=4096",
+                "ownerId": "766642828645629992"
             }
         ],
         "friendsSnapshot": [
@@ -392,7 +400,7 @@
                 "invalid": false,
                 "tag": "redplum#3650",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/377667644863676416/f351461c1b62f137abe23b821dbc1bef.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/377667644863676416/3457e55f83d87c4d72f04ae052de870a.webp?size=320"
             },
             {
                 "id": "378347332816732160",
@@ -507,6 +515,13 @@
                 "avatarUrl": "https://cdn.discordapp.com/avatars/586417923615096863/f3bb42cc6381c9e4c0b0523d7ac847f6.webp?size=320"
             },
             {
+                "id": "588160193813282848",
+                "invalid": false,
+                "tag": "Ultimate Joey#7632",
+                "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
+                "avatarUrl": "https://cdn.discordapp.com/avatars/588160193813282848/db6bfbf2c0719a89e6d48df21e432450.webp?size=320"
+            },
+            {
                 "id": "592896350849466378",
                 "invalid": false,
                 "tag": "Cameron#6658",
@@ -595,7 +610,7 @@
                 "invalid": false,
                 "tag": "Anna Dominguez#5111",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/3e21b622f41aff045474c7821cdc3cde.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/deadeb9af0da66ad3c41b8c0bb80c5ab.webp?size=320"
             },
             {
                 "id": "696042367689556118",
@@ -617,6 +632,13 @@
                 "tag": "thestuntenchilada#7164",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
                 "avatarUrl": "https://cdn.discordapp.com/avatars/705241962642669588/d0b22b5d030fb39bcba892737034fc21.webp?size=320"
+            },
+            {
+                "id": "748335380943601735",
+                "invalid": false,
+                "tag": "Zth#8655",
+                "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
+                "avatarUrl": "/assets/1f0bfc0865d324c2587920a7d80c609b.png"
             },
             {
                 "id": "752681558309208148",
