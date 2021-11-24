@@ -1,4 +1,7 @@
 require('plugins')
+-- require('lspconfig').pylsp.setup{}
+-- require('lspconfig/prolog_lsp')
+-- require('lspconfig').prolog_lsp.setup{}
 local set = vim.opt
 
 -- Set the behavior of tab
