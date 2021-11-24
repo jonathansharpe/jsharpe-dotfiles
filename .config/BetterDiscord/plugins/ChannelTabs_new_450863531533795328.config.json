@@ -2,12 +2,12 @@
     "settings": {
         "tabs": [
             {
-                "name": "#other-games",
-                "url": "/channels/585609051745026060/691360775650148434",
+                "name": "Friends",
+                "url": "/channels/@me",
                 "selected": true,
                 "currentStatus": "none",
-                "iconUrl": "https://cdn.discordapp.com/icons/585609051745026060/16ba041d364df1ba0629a3669a485aa5.webp?",
-                "channelId": "691360775650148434"
+                "iconUrl": "https://discordapp.com/assets/322c936a8c8be1b803cd94861bdfa868.png",
+                "channelId": "855159643361509446"
             }
         ],
         "favs": [
@@ -63,7 +63,7 @@
         ],
         "favGroups": [],
         "showTabBar": false,
-        "showFavBar": true,
+        "showFavBar": false,
         "reopenLastChannel": false,
         "showFavUnreadBadges": true,
         "showFavMentionBadges": true,

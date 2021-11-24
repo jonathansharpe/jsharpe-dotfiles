@@ -40,8 +40,8 @@
 
 	/* APP BACKGROUND */
 	--background-shading: 100%; /* app background shading (0 for complete smoothness) [default: 100%] */
-	--background-overlay: rgba(0, 0, 0, 0.2); /* app background overlay color/gradient [default: rgba(0, 0, 0, 0.6)] */
-	--background-image: url(https://raw.githubusercontent.com/vinceliuice/Monterey-kde/main/wallpaper/Monterey-dark/contents/images/3840x2160.png); /* app background image (link must be HTTPS) [default: url(https://clearvision.gitlab.io/images/sapphire.jpg)]*/
+	--background-overlay: rgba(0, 0, 0, 0.1); /* app background overlay color/gradient [default: rgba(0, 0, 0, 0.6)] */
+	--background-image: url(https://raw.githubusercontent.com/Pr0cella/glassy-kde/master/Pictures/Wallpaper.png); /* app background image (link must be HTTPS) [default: url(https://clearvision.gitlab.io/images/sapphire.jpg)]*/
 	--background-position: center; /* app background position [default: center] */
 	--background-size: cover; /* app background size [default: cover] */
 	--background-repeat: no-repeat; /* app background repeat [default: no-repeat] */
@@ -52,7 +52,7 @@
 	--background-invert: 0%; /* app background invert (0 - 100%)  [default: 0%] */
 	--background-grayscale: 0%; /* app background grayscale ( 0 - 100%) [default: 0%] */
 	--background-sepia: 0%; /* app background sepia (0 - 100%) [default: 0%] */
-	--background-blur: 0px; /* app background blur [default: 0px] */
+	--background-blur: 3px; /* app background blur [default: 0px] */
 	
 	/* HOME BUTTON ICON */
 	--home-icon: url(https://clearvision.gitlab.io/icons/discord.svg); /* home button icon (link must be HTTPS) [default: url(https://clearvision.gitlab.io/icons/discord.svg)]*/
