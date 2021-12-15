@@ -1,0 +1,17 @@
+# LAUNCH COMMAND
+launch() {
+	$@ &> /dev/null &
+	disown
+}
+
+# VARIABLES
+FDOW='/home/jonathansharpe/Downloads'
+MULTIMC18='/home/jonathansharpe/.local/share/multimc/instances/1.18-Fabric/.minecraft'
+
+# ALIASES
+alias ex="exa"
+alias lu='launch'
+alias lux='launch xdg-open'
+alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview'
+alias nvimconf='cd /home/jonathansharpe/.config/nvim && nvim -p init.lua lua/sharpe-plugins.lua'
+alias shellconf='cd /home/jonathansharpe/.config/shell && nvim -p jonathan-config'
