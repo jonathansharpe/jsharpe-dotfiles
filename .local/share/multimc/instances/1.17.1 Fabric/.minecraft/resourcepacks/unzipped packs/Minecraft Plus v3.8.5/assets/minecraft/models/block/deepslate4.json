@@ -1,6 +1,0 @@
-{
-    "parent":"block/stalactite3",
-    "textures": {
-	"all":"block/deepslate"
-    }
-}

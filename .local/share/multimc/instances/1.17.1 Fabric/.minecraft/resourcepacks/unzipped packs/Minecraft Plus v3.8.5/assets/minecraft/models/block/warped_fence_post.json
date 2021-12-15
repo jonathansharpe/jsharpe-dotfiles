@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/fence_post",
-  "textures": {
-    "particle": "minecraft:block/warped_stem",
-    "texture": "minecraft:block/warped_campfire_log"
-  }
-}

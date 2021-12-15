@@ -1,7 +1,0 @@
-#Sun Sep 19 20:09:09 PDT 2021
-shadowDistance=128.0
-LIGHT_SHAFT=false
-SHADOW_FILTER=false
-shadowMapResolution=1024
-AO=false
-SHADOW_COLOR=false
