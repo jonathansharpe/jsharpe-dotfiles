@@ -1,0 +1,14 @@
+/**
+ * @name Smooth Theme
+ * @version 1.2.3
+ * @description Black & White theme for discord, Simplicity in two colors, the best theme for you.
+ * @author @dtsf#3763 (discord) / @datsfilipe (github)
+ * @github: https://github.com/datsfilipe
+ * @website https://datsfilipe.github.io/smooth-theme/
+*/
+
+@import "https://datsfilipe.github.io/smooth-theme/src/theme/source.css";
+
+:root {
+  --version1-2-3: none;
+}
