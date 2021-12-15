@@ -6,6 +6,13 @@
     "settings": {
         "removedGuildHistory": [
             {
+                "id": "456144415401181215",
+                "invalid": false,
+                "name": "r/MarioKartWii",
+                "iconUrl": "https://cdn.discordapp.com/icons/456144415401181215/a_320e4ff0e59ee3b3d673dfe8c8581a58.webp?size=4096",
+                "ownerId": "312715611413413889"
+            },
+            {
                 "id": "845005478111346708",
                 "invalid": false,
                 "name": "System76",
@@ -93,6 +100,13 @@
                 "ownerId": "249746236008169473"
             },
             {
+                "id": "86312116675448832",
+                "invalid": false,
+                "name": "Mario Kart",
+                "iconUrl": "https://cdn.discordapp.com/icons/86312116675448832/a_73613fedaa5d262c24adab4f5fa08e0d.webp?size=4096",
+                "ownerId": "84365543947112448"
+            },
+            {
                 "id": "286531622101057537",
                 "invalid": false,
                 "name": "Vanilla Tweaks",
@@ -103,7 +117,7 @@
                 "id": "321845546534830085",
                 "invalid": false,
                 "name": "🎅 Emoji.gg | Discord Emojis, Servers & Bots ★ Nitro Emotes, Stickers, Anime",
-                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_da46adf2ebeed12a831bf2c98d651393.webp?size=4096",
+                "iconUrl": "https://cdn.discordapp.com/icons/321845546534830085/a_5178bd33728ebfce5e1622f993f51520.webp?size=4096",
                 "ownerId": "116218776495587329"
             },
             {
@@ -128,11 +142,25 @@
                 "ownerId": "391387640345395201"
             },
             {
+                "id": "477294415791128576",
+                "invalid": false,
+                "name": "Emil's Curry Crew",
+                "iconUrl": "https://cdn.discordapp.com/icons/477294415791128576/3b88757b3c602c3c75d2c88c0d553812.webp?size=4096",
+                "ownerId": "82862780591378432"
+            },
+            {
                 "id": "507304429255393322",
                 "invalid": false,
                 "name": "The Fabric Project",
                 "iconUrl": "https://cdn.discordapp.com/icons/507304429255393322/a8d95702e817df75ae70660692f077fa.webp?size=4096",
                 "ownerId": "213314529755529216"
+            },
+            {
+                "id": "508039146888232970",
+                "invalid": false,
+                "name": "The Comet Observatory - Home of the Cosmic Duo",
+                "iconUrl": "https://cdn.discordapp.com/icons/508039146888232970/a_ba122d9e64d766f43ec3b577d74c647e.webp?size=4096",
+                "ownerId": "124692899353985026"
             },
             {
                 "id": "516820477067657228",
@@ -177,6 +205,13 @@
                 "ownerId": "669290347477860352"
             },
             {
+                "id": "706044147513163837",
+                "invalid": false,
+                "name": "Formula Kart Wii γ1.6 - Autumn 2021",
+                "iconUrl": "https://cdn.discordapp.com/icons/706044147513163837/a_6dfca9c76ca418c3123fcd0d6319256b.webp?size=4096",
+                "ownerId": "324615747663822848"
+            },
+            {
                 "id": "709465553626202222",
                 "invalid": false,
                 "name": "Honors 2023",
@@ -191,6 +226,13 @@
                 "ownerId": "706834179970564116"
             },
             {
+                "id": "750849885896572969",
+                "invalid": false,
+                "name": "Mario Kart Wii Deluxe",
+                "iconUrl": "https://cdn.discordapp.com/icons/750849885896572969/a_da78e1bbdaf18633f9ca05598e0b7605.webp?size=4096",
+                "ownerId": "312067145351561217"
+            },
+            {
                 "id": "752581935825420349",
                 "invalid": false,
                 "name": "SPU Developers",
@@ -203,6 +245,13 @@
                 "name": "SPU Honors",
                 "iconUrl": "https://cdn.discordapp.com/icons/763085886178852914/0f5ba9bee57a6311cefe28b584e353b3.webp?size=4096",
                 "ownerId": "129062421225537536"
+            },
+            {
+                "id": "795568028649127997",
+                "invalid": false,
+                "name": "QuantumFusion",
+                "iconUrl": "https://cdn.discordapp.com/icons/795568028649127997/266287b98262d8269b52eca4438311e7.webp?size=4096",
+                "ownerId": "262994685562191873"
             },
             {
                 "id": "803392203447074817",
@@ -235,9 +284,16 @@
             {
                 "id": "905048727100731402",
                 "invalid": false,
-                "name": "RiiBalanced Server Backup",
-                "iconUrl": "https://cdn.discordapp.com/icons/905048727100731402/89138b9924e4fd126292e339dba0332c.webp?size=4096",
-                "ownerId": "766642828645629992"
+                "name": "RiiBalanced Riiformed",
+                "iconUrl": "https://cdn.discordapp.com/icons/905048727100731402/140e516b9219c4f5d1d501eef7170be7.webp?size=4096",
+                "ownerId": "912750220234879038"
+            },
+            {
+                "id": "356170700752420874",
+                "invalid": false,
+                "name": "Bodation Nation",
+                "iconUrl": "https://cdn.discordapp.com/icons/356170700752420874/2e417093ade880787a11f7d01d4d5a92.webp?size=4096",
+                "ownerId": "207999438034042880"
             }
         ],
         "friendsSnapshot": [
@@ -302,7 +358,7 @@
                 "invalid": false,
                 "tag": "dubstep raver#4961",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/206171889272356864/07df773a7716394fdcb4d394e75bcf05.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/206171889272356864/024a290f5eeb2638270835fd355fa7ba.webp?size=320"
             },
             {
                 "id": "208327149768146944",
@@ -386,7 +442,7 @@
                 "invalid": false,
                 "tag": "Danevur#0192",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/329716169709715458/528f7a1be940a6e0373c7fe23fde8cc5.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/329716169709715458/9a07ca2078ef03d52258e9fc43b71d6f.webp?size=320"
             },
             {
                 "id": "365341207133421568",
@@ -519,7 +575,7 @@
                 "invalid": false,
                 "tag": "Ultimate Joey#7632",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/588160193813282848/db6bfbf2c0719a89e6d48df21e432450.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/588160193813282848/d8461f2c73ee01258471fda2d12273c7.webp?size=320"
             },
             {
                 "id": "592896350849466378",
@@ -610,7 +666,7 @@
                 "invalid": false,
                 "tag": "Anna Dominguez#5111",
                 "avatarURL": "/assets/1cbd08c76f8af6dddce02c5138971129.png",
-                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/deadeb9af0da66ad3c41b8c0bb80c5ab.webp?size=320"
+                "avatarUrl": "https://cdn.discordapp.com/avatars/691790342717964311/831fb95746075e06bd20c0da712d5c7e.webp?size=320"
             },
             {
                 "id": "696042367689556118",

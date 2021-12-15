@@ -6,7 +6,7 @@
     "GitHub Dark": false,
     "Horizontal Server List": false,
     "Midnight Mars": false,
-    "RadialStatus": false,
+    "RadialStatus": true,
     "SettingsModal": true,
     "SimplyDark": false,
     "Discolored": false,
@@ -25,7 +25,7 @@
     "Nox": false,
     "ThemeFixer": false,
     "Friends-Grid": false,
-    "CreArts": false,
+    "CreArts": true,
     "Alexis Modern Discord Theme": false,
     "Dark Neon": false,
     "WindowsXI": false,
@@ -34,7 +34,7 @@
     "T1": false,
     "Translucence": false,
     "ClearVision": false,
-    "midnight": true,
+    "midnight": false,
     "       NOVATURIENT": false,
     "Vibrant Glass": false,
     "AMOLED-Cord": false,
@@ -47,5 +47,6 @@
     "Tokyo Night": false,
     "Comfy": false,
     "Slate": false,
-    "Nebula": false
+    "Nebula": false,
+    "Smooth Theme": false
 }
