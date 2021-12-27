@@ -1,9 +1,11 @@
 require('sharpe-plugins')
+require'lspconfig'.html.setup{}
+local coq = require "coq"
+-- lsp.html.setup(coq.lsp_ensure_capabilities())
 -- require('lspconfig').pylsp.setup{}
 -- require('lspconfig/prolog_lsp')
 -- require('lspconfig').prolog_lsp.setup{}
 local set = vim.opt
-
 -- Set the behavior of tab
 set.tabstop = 4
 set.shiftwidth = 4
@@ -15,39 +17,32 @@ set.spell = true
 set.spelllang = 'en_us'
 set.fdm = 'indent'
 set.termguicolors = true
-require("bufferline").setup{}
+set.laststatus=2
+set.showtabline=2
 vim.cmd 'set noexpandtab'
-vim.g.material_style = 'deep ocean'
-vim.cmd 'colorscheme material'
+vim.cmd 'colorscheme base16-isotope'
 --vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 set.mouse = 'a'
-	require'lualine'.setup {
-		options = {
-			icons_enabled = true,
-			theme = 'material-nvim',
-			component_separators = {'', ''},
-			section_separators = {'', ''},
-			disabled_filetypes = {}
-		},
-		sections = {
-			lualine_a = {'mode'},
-			lualine_b = {'branch'},
-			lualine_c = {'filename'},
-			lualine_x = {'encoding', 'fileformat', 'filetype'},
-			lualine_y = {'progress'},
-			lualine_z = {'location'}
-		},
-		inactive_sections = {
-			lualine_a = {},
-			lualine_b = {},
-			lualine_c = {'filename'},
-			lualine_x = {'location'},
-			lualine_y = {},
-			lualine_z = {}
-		},
-		tabline = {},
-		extensions = {}
+
+-- CONFIG STUFF
+-- may want to put the following in a separate file at some point idk
+require('staline').setup{
+	defaults = {
+		left_separator = "",
+		right_separator = "",
+		cool_symbol = "",
+		branch_symbol = "",
+		fg = "#FFFFFF",
 	}
+}
+require('stabline').setup{
+	style = "bubble",
+	stab_left = "",
+	stab_right = "",
+	font_active = "bold",
+	fg = "#1E2127",
+	bg = "#aaaaaa"
+}
 require('neoscroll').setup({
 	mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
                 '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
@@ -60,18 +55,3 @@ require('neoscroll').setup({
     pre_hook = nil,              -- Function to run before the scrolling animation starts
     post_hook = nil,              -- Function to run after the scrolling animation ends
 })
--- require("transparent").setup({
---   enable = false, -- boolean: enable transparent
---   extra_groups = { -- table/string: additional groups that should be clear
---     -- In particular, when you set it to 'all', that means all avaliable groups
-
---     -- example of akinsho/nvim-bufferline.lua
---     "BufferLineTabClose",
---     "BufferlineBufferSelected",
---     "BufferLineFill",
---     "BufferLineBackground",
---     "BufferLineSeparator",
---     "BufferLineIndicatorSelected",
---   },
---   exclude = {}, -- table: groups you don't want to clear
--- })

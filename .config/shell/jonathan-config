@@ -7,6 +7,7 @@ launch() {
 # VARIABLES
 FDOW='/home/jonathansharpe/Downloads'
 MULTIMC18='/home/jonathansharpe/.local/share/multimc/instances/1.18-Fabric/.minecraft'
+RIIV='/home/jonathansharpe/.local/share/dolphin-emu/Load/Riivolution'
 
 # ALIASES
 alias ex="exa"

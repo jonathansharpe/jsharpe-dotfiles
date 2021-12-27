@@ -25,7 +25,7 @@
     "Nox": false,
     "ThemeFixer": false,
     "Friends-Grid": false,
-    "CreArts": true,
+    "CreArts": false,
     "Alexis Modern Discord Theme": false,
     "Dark Neon": false,
     "WindowsXI": false,
@@ -48,5 +48,12 @@
     "Comfy": false,
     "Slate": false,
     "Nebula": false,
-    "Smooth Theme": false
+    "Smooth Theme": false,
+    "AmoledDarkTheme": false,
+    "gamesense theme": false,
+    "Just_Black": false,
+    "Omni": false,
+    "Ovel": false,
+    "Purpura": false,
+    "Simplify": true
 }

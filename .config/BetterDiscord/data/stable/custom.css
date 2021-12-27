@@ -1,8 +1,8 @@
 ::-webkit-input-placeholder, body, button, input, select, textarea {
-    font-family: "IBM Plex Sans Light" !important;
+    font-family: "Inter" !important;
 }
 element.style {
 }
 code.inline, .markup-2BOw-j code {
-    font-family: "Cartograph CF" !important;
+    font-family: "VictorMono Nerd Font" !important;
 }
