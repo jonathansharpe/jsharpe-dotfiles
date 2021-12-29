@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "particle": "minecraft:block/jungle_log",
+    "texture": "minecraft:block/jungle_campfire_log"
+  }
+}

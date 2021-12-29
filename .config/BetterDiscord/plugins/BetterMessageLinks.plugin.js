@@ -23,10 +23,29 @@
 			"discord_id": "324622488644616195",
 			"github_username": "Juby210"
 		}],
-		"version": "1.3.1",
+		"version": "1.4.0",
 		"description": "Instead of just showing the long and useless discord message link, make it smaller and add a preview.",
-		"github_raw": "https://raw.githubusercontent.com/TheGreenPig/BetterDiscordPlugins/main/BetterMessageLinks/BetterMessageLinks.plugin.js"
+		"github_raw": "https://raw.githubusercontent.com/TheGreenPig/BetterDiscordPlugins/main/BetterMessageLinks/BetterMessageLinks.plugin.js",
 	},
+	"changelog": [
+		{
+			"title": "Added",
+			"type": "added",
+			"items": [
+				"Be able to turn off the replacement of message or attachment links (for compatibility with HideEmbedLink for example)",
+				"Completely reworked the preview Popup to allow scrolling, clicking on stuff and the Popup staying open when you hover over it (Thanks Strencher as always <3)",
+				"^ Because of this, the styling might be a little off. Please tell me if you notice anything that's different.",
+			]
+		},
+		{
+			"title": "Fixed",
+			"type": "fixed",
+			"items": [
+				"Fixed the css slightly to wrap codeblocks and display quotes correctly (Thanks fabJunior)",
+				"I'm aware that the loading bar for the messages isn't loading smoothly anymore, but I haven't figured out yet why. Please wait for me to fix it, or if you found a way to make the loading icon go smoothly, please let me know!",
+			]
+		},
+	],
 }
 
 /* ----Useful links----
@@ -67,12 +86,23 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	.betterMessageLinks.Tooltip {
 		max-width: 280px; 
 	  	max-height: 450px;
+		overflow:auto;  
+		-webkit-user-select: text;
 	}
-	.betterMessageLinks > em {
+	.betterMessageLinks.Tooltip::-webkit-scrollbar {
+		display:none;
+	}
+	.betterMessageLinks em {
 		font-style: italic;
 	}
-	.betterMessageLinks > strong {
+	.betterMessageLinks strong {
 		font-weight: bold;
+	}
+	.betterMessageLinks code {
+		white-space: pre-wrap;
+	}
+	.betterMessageLinks blockquote  {
+		max-width: calc(100% - 4px);
 	}
 	.betterMessageLinks.Image {
 		border-radius: 10px;
@@ -115,7 +145,10 @@ module.exports = !global.ZeresPluginLibrary ? class {
 		transform: rotate(-90deg);
 	}
 	`
+
 	const defaultSettings = {
+		ignoreMessage: false,
+		ignoreAttachment: false,
 		messageReplaceText: "<Message>",
 		attachmentReplaceText: "<Attachment>",
 		showAuthorIcon: true,
@@ -126,8 +159,8 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	const validTitleValues = ["authorName", "guildName", "guildId", "channelName", "channelId", "messageId", "timestamp", "nsfw"]
 
 	//Settings and imports
-	const { Toasts, WebpackModules, Patcher, React, Settings, DiscordModules } = { ...Library, ...BdApi };
-	const { SettingPanel, Switch, Slider, RadioGroup, Textbox } = Settings;
+	const { Toasts, WebpackModules, Patcher, React, Settings, DiscordModules, ReactTools, DiscordClasses, DiscordClassModules } = { ...Library, ...BdApi };
+	const { SettingPanel, Switch, Slider, RadioGroup, Textbox, SettingGroup } = Settings;
 
 	//Modules
 	const MessageContent = WebpackModules.getModule(m => m.type?.displayName === "MessageContent");
@@ -140,7 +173,9 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	const { stringify } = WebpackModules.getByProps('stringify', 'parse', 'encode');
 	const ImagePlaceHolder = WebpackModules.findByDisplayName("ImagePlaceholder");
 	const BotTag = WebpackModules.findByDisplayName("BotTag");
+	const Popout = WebpackModules.getByDisplayName("Popout");
 	const RenderMessageMarkupToASTModule = WebpackModules.getByProps("renderMessageMarkupToAST");
+	const TooltipClasses = DiscordClassModules.Tooltips;
 	let cache = {};
 	let lastFetch = 0;
 	let linkQueue = [];
@@ -207,7 +242,7 @@ module.exports = !global.ZeresPluginLibrary ? class {
 				let guildId = numberMatches.length > 2 ? numberMatches[numberMatches.length - 3] : undefined;
 
 				linkQueue.push(this)
-				this.setState({ originalIndex: linkQueue.length})
+				this.setState({ originalIndex: linkQueue.length })
 				let message = await getMsgWithQueue(channelId, messageId, this);
 				if (!message) return
 				message.guild = guildId ? GetGuildModule.getGuild(guildId) : "@me";
@@ -215,6 +250,31 @@ module.exports = !global.ZeresPluginLibrary ? class {
 			}
 		}
 		wrapInTooltip(tooltipText, child, color) {
+			//this took me so long, I honestly might quit programming. But thanks Strencher (as always)
+			function HoveringComponent() {
+				const [isMouseOver, setMouseOver] = React.useState(false);
+				let el = React.createElement(Popout, {
+					shouldShow: isMouseOver,
+					position: Popout.Positions.TOP,
+					animation: Popout.Animation.NONE,
+					renderPopout: () => React.createElement("div", {
+						style: {
+							position: "relative",
+							left: "-25%", 
+							marginBottom: "-10px",
+						}
+					}, React.createElement("div", {
+						class: `${TooltipClasses.tooltip} ${TooltipClasses["tooltip" + color.charAt(0).toUpperCase() + color.slice(1)]} thin-1ybCId scrollerBase-289Jih betterMessageLinks AlignMiddle Tooltip`,
+					}, React.createElement("div", { class: TooltipClasses.tooltipContent }, tooltipText)))
+				}, () => React.createElement("span", {
+					onMouseEnter: () => setMouseOver(true),
+					style: { cursor: "pointer" }
+				}, child));
+				return el;
+			}
+
+			return React.createElement(HoveringComponent, {})
+
 			return React.createElement(TooltipWrapper, {
 				color: color,
 				tooltipClassName: "betterMessageLinks AlignMiddle Tooltip",
@@ -245,12 +305,12 @@ module.exports = !global.ZeresPluginLibrary ? class {
 
 			if (this.state.queue && !this.state.id) {
 				let loadedPercent = Math.max(Math.min(Math.round(((this.state.originalIndex - this.state.queue.indexOf(this)) / this.state.originalIndex) * 100), 100), 0);
-				if(loadedPercent===100&&this.props.attachmentLink) return this.wrapInTooltip(this.props.original.props.href.split("/").slice(-1), messageReplace, TooltipWrapper.Colors.PRIMARY);
+				if (loadedPercent === 100 && this.props.attachmentLink) return this.wrapInTooltip(this.props.original.props.href.split("/").slice(-1), messageReplace, TooltipWrapper.Colors.PRIMARY);
 
 				const LoadingCircle = (percentage) => {
 					const r = 20;
 					const circ = 2 * Math.PI * r;
-					const strokePct = ((100 - percentage) * circ) / 100; 
+					const strokePct = ((100 - percentage) * circ) / 100;
 
 					return React.createElement("div", {},
 						React.createElement("span", { class: "betterMessageLinks AlignMiddle Loading Text" }, `Loading ${loadedPercent}% `),
@@ -262,11 +322,11 @@ module.exports = !global.ZeresPluginLibrary ? class {
 								x2: "0%",
 								y2: "100%",
 							}, React.createElement("stop", {
-								offset: "0%", 
-								stopColor: "#2F997F", 
-							}),React.createElement("stop", {
-								offset: "100%", 
-								stopColor: "#026C99", 
+								offset: "0%",
+								stopColor: "#2F997F",
+							}), React.createElement("stop", {
+								offset: "100%",
+								stopColor: "#026C99",
 							})),
 							React.createElement("circle", {
 								class: "betterMessageLinks AlignMiddle Loading Contour",
@@ -323,7 +383,6 @@ module.exports = !global.ZeresPluginLibrary ? class {
 					children: message.content
 				});
 			} else {
-				// message.content = message.content.length > displayCharacters ? message.content.substring(0, displayCharacters) + "..." : message.content;
 				let formattedMessageArray = RenderMessageMarkupToASTModule.default(Object.assign({}, message), { renderMediaEmbeds: true, formatInline: false, isInteracting: true }).content;
 
 				formattedMessageArray = this.processNewLines(formattedMessageArray);
@@ -377,7 +436,7 @@ module.exports = !global.ZeresPluginLibrary ? class {
 
 			let authorIcon = this.props.settings.showAuthorIcon ? React.createElement("img", { src: author.getAvatarURL(), class: "replyAvatar-1K9Wmr betterMessageLinks AlignMiddle Icon" }) : null;
 			let guildIcon = null;
-			if (this.props.settings.showGuildIcon && message.guild?.icon && message.guild.id !== ZLibrary.DiscordModules.SelectedGuildStore.getGuildId()) {
+			if (this.props.settings.showGuildIcon && message.guild?.icon && message.guild.id !== DiscordModules.SelectedGuildStore.getGuildId()) {
 				guildIcon = React.createElement("img", { src: `https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}.webp`, class: "replyAvatar-1K9Wmr betterMessageLinks AlignMiddle Icon" })
 			}
 
@@ -433,6 +492,7 @@ module.exports = !global.ZeresPluginLibrary ? class {
 			});
 
 			let newLink = this.wrapInTooltip(messagePreview, messageReplace, TooltipWrapper.Colors.PRIMARY);
+
 			return newLink
 		}
 
@@ -459,9 +519,9 @@ module.exports = !global.ZeresPluginLibrary ? class {
 			Patcher.after(config.info.name, MessageContent, "type", (_, [props], ret) => {
 				if (ret?.props?.children[0].length > 0) {
 					ret.props.children[0].forEach((child, i) => {
-						if (/https:\/\/(ptb.|canary.)?discord.com\/channels\/(\d+|@me)\/\d+\/\d+/gi.test(child.props?.href)) {
+						if (/https:\/\/(ptb.|canary.)?discord.com\/channels\/(\d+|@me)\/\d+\/\d+/gi.test(child.props?.href) && !this.settings.ignoreMessage) {
 							ret.props.children[0][i] = React.createElement(BetterLink, { original: child, settings: this.settings });
-						} else if (/https:\/\/(media|cdn).discordapp.(com|net)\/attachments\/\d+\/\d+\/.+/gi.test(child.props?.href)) {
+						} else if (/https:\/\/(media|cdn).discordapp.(com|net)\/attachments\/\d+\/\d+\/.+/gi.test(child.props?.href) && !this.settings.ignoreAttachment) {
 							ret.props.children[0][i] = React.createElement(BetterLink, { original: child, settings: this.settings, attachmentLink: true });
 						}
 					});
@@ -480,14 +540,19 @@ module.exports = !global.ZeresPluginLibrary ? class {
 				class: "betterMessageLinks List"
 			});
 
-			//build the settings panel
-			return SettingPanel.build(() => this.saveSettings(this.settings),
-				new Textbox("Message Replace", "Replace all Discord message links with the following text. Leave empty to not change the Discord Link at all.", this.settings.messageReplaceText, (i) => {
+			let messageReplaceGroup = new SettingGroup("Message Replace").append(
+				new Textbox("", "Replace all Discord message links with the following text. Leave empty to not change the Discord Link at all.", this.settings.messageReplaceText, (i) => {
 					this.settings.messageReplaceText = i;
-				}),
-				new Textbox("Attachment Replace", "Replace all Discord Attachment links with the following text. Leave empty to not change the Discord Link at all.", this.settings.attachmentReplaceText, (i) => {
+				}, { placeholder: "<Message>" }),
+			)
+
+			let attachmentReplaceGroup = new SettingGroup("Attachment Replace").append(
+				new Textbox("", "Replace all Discord Attachment links with the following text. Leave empty to not change the Discord Link at all.", this.settings.attachmentReplaceText, (i) => {
 					this.settings.attachmentReplaceText = i;
-				}),
+				}, { placeholder: "<Attachment>" }),
+			)
+
+			let appearanceSettingsGroup = new SettingGroup("Appearance").append(
 				new Switch("Show Author icon", "Display the icon of the Message Author.", this.settings.showAuthorIcon, (i) => {
 					this.settings.showAuthorIcon = i;
 				}),
@@ -502,6 +567,41 @@ module.exports = !global.ZeresPluginLibrary ? class {
 				}),
 			)
 
+
+			messageReplaceGroup.group.className += " betterMessageLinks Settings Message";
+			attachmentReplaceGroup.group.className += " betterMessageLinks Settings Attachment";
+			appearanceSettingsGroup.group.className += " betterMessageLinks Settings Appearance";
+
+			this.updateSettingsCSS()
+			//build the settings panel
+			return SettingPanel.build(() => this.saveSettings(this.settings),
+				new Switch("Ignore message links", "Message links will not get replaced or have a preview.", this.settings.ignoreMessage, (i) => {
+					this.settings.ignoreMessage = i;
+					this.updateSettingsCSS()
+				}),
+				new Switch("Ignore attachment links", "Attachment links will not get replaced or have a preview. (Recommended when using HideEmbedLink for example)", this.settings.ignoreAttachment, (i) => {
+					this.settings.ignoreAttachment = i;
+					this.updateSettingsCSS()
+				}),
+				messageReplaceGroup,
+				attachmentReplaceGroup,
+				appearanceSettingsGroup,
+			)
+
+		}
+		updateSettingsCSS() {
+			let suffix = "";
+			if (this.settings.ignoreMessage && this.settings.ignoreAttachment) {
+				suffix = `.betterMessageLinks.Settings {display:none;}`;
+			}
+			else if (this.settings.ignoreMessage) {
+				suffix = `.betterMessageLinks.Settings.Message {display:none;}`;
+			}
+			else if (this.settings.ignoreAttachment) {
+				suffix = `.betterMessageLinks.Settings.Attachment {display:none;}`;
+			}
+
+			BdApi.injectCSS(config.info.name, customCSS + suffix)
 		}
 
 
