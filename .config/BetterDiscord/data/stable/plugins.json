@@ -18,7 +18,7 @@
     "PluginRepo": true,
     "QuickToggler": false,
     "RoleMembers": false,
-    "ServerDetails": false,
+    "ServerDetails": true,
     "ShowHiddenChannels": false,
     "ShutUpClyde": false,
     "SubtleDevicePrompt": true,

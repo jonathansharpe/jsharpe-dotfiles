@@ -1,7 +1,7 @@
 {
     "BlurpleRecolor": false,
     "Dark+": false,
-    "EmojiReplace": true,
+    "EmojiReplace": false,
     "Eris": false,
     "GitHub Dark": false,
     "Horizontal Server List": false,
@@ -52,8 +52,10 @@
     "AmoledDarkTheme": false,
     "gamesense theme": false,
     "Just_Black": false,
-    "Omni": false,
+    "Omni": true,
     "Ovel": false,
     "Purpura": false,
-    "Simplify": true
+    "Simplify": false,
+    "Ultra": false,
+    "        Quiet": false
 }
