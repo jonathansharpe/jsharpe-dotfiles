@@ -69,10 +69,20 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["FTerm.nvim"] = {
+    loaded = true,
+    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/FTerm.nvim",
+    url = "https://github.com/numToStr/FTerm.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["bufferline.nvim"] = {
+    loaded = true,
+    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
   },
   ["cheatsheet.nvim"] = {
     loaded = true,
@@ -93,6 +103,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/coq_nvim",
     url = "https://github.com/ms-jpq/coq_nvim"
+  },
+  ["feline.nvim"] = {
+    loaded = true,
+    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/feline.nvim",
+    url = "https://github.com/feline-nvim/feline.nvim"
   },
   ["gkeep.nvim"] = {
     loaded = true,
@@ -155,11 +170,6 @@ _G.packer_plugins = {
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
-  ["staline.nvim"] = {
-    loaded = true,
-    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/staline.nvim",
-    url = "https://github.com/tamton-aquib/staline.nvim"
-  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -169,6 +179,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
+  },
+  ["vim-easy-align"] = {
+    loaded = true,
+    path = "/home/jonathansharpe/.local/share/nvim/site/pack/packer/start/vim-easy-align",
+    url = "https://github.com/junegunn/vim-easy-align"
   },
   ["vim-surround"] = {
     loaded = true,

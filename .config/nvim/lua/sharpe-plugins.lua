@@ -16,6 +16,12 @@ use {
 		require('nvim-autopairs').setup{}
 	end
 }
+use {
+	"numToStr/FTerm.nvim"
+}
+use {
+	'junegunn/vim-easy-align'
+}
 use { -- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
 	'kyazdani42/nvim-web-devicons'
 }
@@ -27,8 +33,12 @@ use {
 		{'nvim-lua/plenary.nvim'},
 	}
 }
-use { -- plugin for modifying status line and tabline
-	'tamton-aquib/staline.nvim'
+use {
+	'feline-nvim/feline.nvim'
+}
+use { -- for bufferline
+	'akinsho/bufferline.nvim',
+	requires = {'kyazdani42/nvim-web-devicons'}
 }
 use { -- neovim completion!
 	'ms-jpq/coq_nvim',
