@@ -1,5 +1,10 @@
 require('sharpe-plugins')
 require'lspconfig'.html.setup{}
+require'lspconfig'.denols.setup{}
+require'lspconfig'.ltex.setup{}
+vim.g.coq_settings = {
+	auto_start = 'shut-up'
+}
 local coq = require "coq"
 -- lsp.html.setup(coq.lsp_ensure_capabilities())
 -- require('lspconfig').pylsp.setup{}
@@ -20,29 +25,31 @@ set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-isotope'
---vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
+vim.cmd 'colorscheme base16-eighties'
+vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
+vim.g.mkdp_auto_close = 0
 set.mouse = 'a'
 
 -- CONFIG STUFF
 -- may want to put the following in a separate file at some point idk
-require('staline').setup{
-	defaults = {
-		left_separator = "",
-		right_separator = "",
-		cool_symbol = "",
-		branch_symbol = "",
-		fg = "#FFFFFF",
+require('feline').setup()
+local map = vim.api.nvim_set_keymap
+local opts = {noremap = true, silent = true}
+
+map('n', '<A-c>', ':BufferLineCyclePrev<CR>', opts)
+map('n', '<A-v>', ':BufferLineCycleNext<CR>', opts)
+map('n', '<A-x>', ':BufferLinePickClose<CR>', opts)
+
+require("bufferline").setup{
+	options = {
+		separator_style = "slant",
 	}
 }
-require('stabline').setup{
-	style = "bubble",
-	stab_left = "",
-	stab_right = "",
-	font_active = "bold",
-	fg = "#1E2127",
-	bg = "#aaaaaa"
-}
+require'FTerm'.setup({
+	cmd = "zsh"
+})
+map('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
+
 require('neoscroll').setup({
 	mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
                 '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
