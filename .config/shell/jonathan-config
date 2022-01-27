@@ -5,14 +5,16 @@ launch() {
 }
 
 # VARIABLES
-FDOW='/home/jonathansharpe/Downloads'
-MULTIMC18='/home/jonathansharpe/.local/share/multimc/instances/1.18-Fabric/.minecraft'
-RIIV='/home/jonathansharpe/.local/share/dolphin-emu/Load/Riivolution'
+export FDOW="$HOME/Downloads"
+export MULTIMC18="$HOME/.local/share/multimc/instances/1.18-Fabric/.minecraft"
+export RIIV="$HOME/.local/share/dolphin-emu/Load/Riivolution"
+export WEBS="$HOME/git/baseball-website"
+export JW="$HOME/OneDrive/school-papers/jw-junior-winter/"
 
 # ALIASES
 alias ex="exa"
 alias lu='launch'
 alias lux='launch xdg-open'
 alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview'
-alias nvimconf='cd /home/jonathansharpe/.config/nvim && nvim -p init.lua lua/sharpe-plugins.lua'
-alias shellconf='cd /home/jonathansharpe/.config/shell && nvim -p jonathan-config'
+alias nvimconf='cd /home/jonathansharpe/.config/nvim && nvim init.lua lua/sharpe-plugins.lua'
+alias shellconf='cd /home/jonathansharpe/.config/shell && nvim jonathan-config $HOME/.zshrc'
