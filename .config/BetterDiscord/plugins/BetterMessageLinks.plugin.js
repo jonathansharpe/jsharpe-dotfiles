@@ -3,46 +3,27 @@
  * @author AGreenPig
  * @updateUrl https://raw.githubusercontent.com/TheGreenPig/BetterDiscordPlugins/main/BetterMessageLinks/BetterMessageLinks.plugin.js
  * @authorLink https://github.com/TheGreenPig
- * @source https://github.com/TheGreenPig/BetterDiscordPlugins/main/BetterMessageLinks/BetterMessageLinks.plugin.js
+ * @source https://github.com/TheGreenPig/BetterDiscordPlugins/blob/main/BetterMessageLinks/BetterMessageLinks.plugin.js
  */
- const config = {
+const config = {
 	"info": {
 		"name": "BetterMessageLinks",
 		"authors": [{
 			"name": "AGreenPig",
 			"discord_id": "427179231164760066",
 			"github_username": "TheGreenPig"
-		}, {
-			"name": "Strencher",
-			"discord_id": "415849376598982656",
-			"github_username": "Strencher",
-			"twitter_username": "Strencher3"
-		},
-		{
-			"name": "Juby210",
-			"discord_id": "324622488644616195",
-			"github_username": "Juby210"
 		}],
-		"version": "1.4.0",
-		"description": "Instead of just showing the long and useless discord message link, make it smaller and add a preview.",
+		"version": "1.4.9",
+		"description": "Instead of just showing the long and useless discord message link, make it smaller and add a preview. Thanks a ton Strencher for helping me refactor my code and Juby for making the message queueing system. ",
 		"github_raw": "https://raw.githubusercontent.com/TheGreenPig/BetterDiscordPlugins/main/BetterMessageLinks/BetterMessageLinks.plugin.js",
 	},
 	"changelog": [
 		{
-			"title": "Added",
-			"type": "added",
-			"items": [
-				"Be able to turn off the replacement of message or attachment links (for compatibility with HideEmbedLink for example)",
-				"Completely reworked the preview Popup to allow scrolling, clicking on stuff and the Popup staying open when you hover over it (Thanks Strencher as always <3)",
-				"^ Because of this, the styling might be a little off. Please tell me if you notice anything that's different.",
-			]
-		},
-		{
 			"title": "Fixed",
 			"type": "fixed",
 			"items": [
-				"Fixed the css slightly to wrap codeblocks and display quotes correctly (Thanks fabJunior)",
-				"I'm aware that the loading bar for the messages isn't loading smoothly anymore, but I haven't figured out yet why. Please wait for me to fix it, or if you found a way to make the loading icon go smoothly, please let me know!",
+				"Fixed message regex so attachment links with a different domain than discord don't get replaced. (Security update)",
+	
 			]
 		},
 	],
@@ -83,17 +64,40 @@ module.exports = !global.ZeresPluginLibrary ? class {
 } : (([Plugin, Library]) => {
 	//Custom css
 	const customCSS = `
-	.betterMessageLinks.Tooltip {
-		max-width: 280px; 
+	.betterMessageLinks.Popout {
+		max-width: 280px;
+		font-size: 14px;
+		width: fit-content; 
 	  	max-height: 450px;
-		overflow:auto;  
+		overflow: auto;  
 		-webkit-user-select: text;
-	}
-	.betterMessageLinks.Tooltip::-webkit-scrollbar {
-		display:none;
+		background: var(--background-floating);
+		border-radius: 4px;
+		padding: 1em;
+		color: var(--text-normal);
+		overflow-wrap: break-word;
+		word-wrap: break-word;
+		-webkit-box-shadow: var(--elevation-high);
+		box-shadow: var(--elevation-high);
 	}
 	.betterMessageLinks em {
 		font-style: italic;
+	}
+	.betterMessageLinks.Settings.Spinner div.info-2FZci4 {
+		display: flex;
+	}
+	.betterMessageLinks.Settings.Spinner div.size14-3fJ-ot:not(.description-30xx7u){
+		margin-left: auto;
+	}
+	.betterMessageLinks.Loading {
+		display: flex;
+		align-items: center;
+	}
+	.betterMessageLinks.Loading.Spinner {
+		padding-left: 1.5em;
+	}
+	.betterMessageLinks.Loading.Text {
+		vertical-align: middle;
 	}
 	.betterMessageLinks strong {
 		font-weight: bold;
@@ -104,14 +108,14 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	.betterMessageLinks blockquote  {
 		max-width: calc(100% - 4px);
 	}
-	.betterMessageLinks.Image {
-		border-radius: 10px;
-		max-width: 255px;
-		padding-top: 5px;
-	}
+	
 	.betterMessageLinks.Author{
 		font-weight: bold;
-		padding-right: 5px;
+	}
+	.betterMessageLinks.Image {
+		border-radius: 10px;
+		max-width: 250px;
+		padding-top: 5px;
 	}
 	.betterMessageLinks.AlignMiddle{
 		vertical-align: middle;
@@ -120,7 +124,13 @@ module.exports = !global.ZeresPluginLibrary ? class {
 		width: 25px;
 		height: 25px;
 	}
+	.betterMessageLinks.Footer{
+		color: var(--text-muted);
+		font-size: 0.6rem;
+		padding-top: 8px;
+	}
 	.betterMessageLinks.BotTag{
+		padding-left: 5px;
 		padding-right: 5px;
 	}
 	.betterMessageLinks.List{
@@ -135,17 +145,9 @@ module.exports = !global.ZeresPluginLibrary ? class {
 		font-size: 1.1em;
 		padding-right: 3px;
 	}
-	.betterMessageLinks.AlignMiddle.Loading.Line{
-		transition: stroke-dashoffset 1s ease;
-	}
-	.betterMessageLinks.AlignMiddle.Loading.Contour{
-		opacity: 0.4;
-	}
-	.betterMessageLinks.AlignMiddle.Loading.Container{
-		transform: rotate(-90deg);
-	}
 	`
 
+	
 	const defaultSettings = {
 		ignoreMessage: false,
 		ignoreAttachment: false,
@@ -153,18 +155,22 @@ module.exports = !global.ZeresPluginLibrary ? class {
 		attachmentReplaceText: "<Attachment>",
 		showAuthorIcon: true,
 		showGuildIcon: true,
+		noDisplayIfSameGuild: true,
 		progressBar: true,
-		advancedTitle: `Author: $authorName, Guild: $guildName, Channel: $channelName, Id: $messageId at $timestamp`,
+		spinner: 0,
+		advancedFooter: `$guildName, $channelName at $timestamp`,
 	};
-	const validTitleValues = ["authorName", "guildName", "guildId", "channelName", "channelId", "messageId", "timestamp", "nsfw"]
-
+	const validFooterValues = ["authorName", "guildName", "guildId", "channelName", "channelId", "messageId", "timestamp", "nsfw"]
+	
 	//Settings and imports
-	const { Toasts, WebpackModules, Patcher, React, Settings, DiscordModules, ReactTools, DiscordClasses, DiscordClassModules } = { ...Library, ...BdApi };
+	const { Toasts, WebpackModules, Patcher, Settings, DiscordModules, ReactTools, DiscordClasses, DiscordClassModules, Utilities } = { ...BdApi, ...Library };
 	const { SettingPanel, Switch, Slider, RadioGroup, Textbox, SettingGroup } = Settings;
-
+	/**@type {typeof import("react")} */
+	const React = DiscordModules.React;
 	//Modules
 	const MessageContent = WebpackModules.getModule(m => m.type?.displayName === "MessageContent");
-	const GetMessageModule = DiscordModules.MessageStore;
+	// const MessageStore = DiscordModules.MessageStore;
+	const MessageStore = WebpackModules.getByProps("hasCurrentUserSentMessage", "getMessage");
 	const GetGuildModule = DiscordModules.GuildStore;
 	const GetChannelModule = DiscordModules.ChannelStore;
 	const TooltipWrapper = WebpackModules.getByPrototypes("renderTooltip");
@@ -175,14 +181,17 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	const BotTag = WebpackModules.findByDisplayName("BotTag");
 	const Popout = WebpackModules.getByDisplayName("Popout");
 	const RenderMessageMarkupToASTModule = WebpackModules.getByProps("renderMessageMarkupToAST");
-	const TooltipClasses = DiscordClassModules.Tooltips;
+	const RepliedMessage = WebpackModules.getModule(m => m && m.default && m.default.displayName == "RepliedMessage");
+	const MarkdownModule = WebpackModules.getByProps("parseTopic");
+	const MaskedLinkComponent = WebpackModules.findByDisplayName("MaskedLink");
 	let cache = {};
 	let lastFetch = 0;
 	let linkQueue = [];
-
+	const spinnerTypes = Object.values(DiscordModules.Spinner.Type)
+	
 	async function getMsg(channelId, messageId) {
-		let message = GetMessageModule.getMessage(channelId, messageId) || cache[messageId]
-
+		let message = MessageStore.getMessage(channelId, messageId) || cache[messageId]
+		
 		if (!message) {
 			if (lastFetch > Date.now() - 2500) await new Promise(r => setTimeout(r, 2500))
 			const data = await DiscordModules.APIModule.get({
@@ -200,6 +209,7 @@ module.exports = !global.ZeresPluginLibrary ? class {
 				message = data.body[0]
 
 				if (!message) return
+
 				message.author = new User(message.author)
 				message.timestamp = new Timestamp(message.timestamp)
 			} else {
@@ -232,219 +242,86 @@ module.exports = !global.ZeresPluginLibrary ? class {
 	class BetterLink extends React.Component {
 		constructor(props) {
 			super(props)
-			this.state = null;
+			this.state = { loaded: false, message: null };
 		}
 		async componentDidMount() {
-			if (!this.state) {
-				let numberMatches = this.props.original.props.href.split("/").filter((e) => /^\d+$/.test(e));
+			if (!this.state.loaded) {
+				let numberMatches = this.props.original.split("/").filter((e) => /^\d+$/.test(e));
 				let messageId = numberMatches[numberMatches.length - 1];
 				let channelId = numberMatches[numberMatches.length - 2];
 				let guildId = numberMatches.length > 2 ? numberMatches[numberMatches.length - 3] : undefined;
 
 				linkQueue.push(this)
-				this.setState({ originalIndex: linkQueue.length })
+				this.setState({ originalIndex: linkQueue.length, queue: linkQueue })
 				let message = await getMsgWithQueue(channelId, messageId, this);
 				if (!message) return
 				message.guild = guildId ? GetGuildModule.getGuild(guildId) : "@me";
-				this.setState(message);
+				this.setState({ loaded: true, message });
 			}
 		}
-		wrapInTooltip(tooltipText, child, color) {
-			//this took me so long, I honestly might quit programming. But thanks Strencher (as always)
-			function HoveringComponent() {
-				const [isMouseOver, setMouseOver] = React.useState(false);
-				let el = React.createElement(Popout, {
-					shouldShow: isMouseOver,
-					position: Popout.Positions.TOP,
-					animation: Popout.Animation.NONE,
-					renderPopout: () => React.createElement("div", {
-						style: {
-							position: "relative",
-							left: "-25%", 
-							marginBottom: "-10px",
-						}
-					}, React.createElement("div", {
-						class: `${TooltipClasses.tooltip} ${TooltipClasses["tooltip" + color.charAt(0).toUpperCase() + color.slice(1)]} thin-1ybCId scrollerBase-289Jih betterMessageLinks AlignMiddle Tooltip`,
-					}, React.createElement("div", { class: TooltipClasses.tooltipContent }, tooltipText)))
-				}, () => React.createElement("span", {
-					onMouseEnter: () => setMouseOver(true),
-					style: { cursor: "pointer" }
-				}, child));
-				return el;
+
+		renderLoading() {
+			let loadedPercent = Math.max(Math.min(Math.round(((this.state.originalIndex - this.state.queue.indexOf(this)) / this.state.originalIndex) * 100), 100), 0);
+			return React.createElement("div", { className: "betterMessageLinks AlignMiddle Loading" },
+				React.createElement("span", { className: "betterMessageLinks AlignMiddle Loading Text" }, `Loading ... ${loadedPercent}%`),
+				React.createElement("span", { className: "betterMessageLinks AlignMiddle Loading Spinner" },
+					React.createElement(DiscordModules.Spinner, { type: spinnerTypes[this.props.settings.spinner] })
+				),
+			)
+
+		}
+
+		renderError(message) {
+			let content = "Unknown Error while trying to fetch message."
+			if (message.body?.message) {
+				content = `Error: ${message.body?.message}`;
 			}
+			return React.createElement("div", { className: "betterMessageLinks AlignMiddle Error" },
+				React.createElement("span", { className: "betterMessageLinks AlignMiddle Loading Text" }, content),
+			)
 
-			return React.createElement(HoveringComponent, {})
+		}
 
-			return React.createElement(TooltipWrapper, {
-				color: color,
-				tooltipClassName: "betterMessageLinks AlignMiddle Tooltip",
-				text: tooltipText,
-				disableTooltipPointerEvents: false,
-				children: (tipProps) => {
-					return React.createElement("span", Object.assign({
-						children: [
-							child
-						],
-					}, tipProps))
-				}
+		renderHeader(message, hasAttachments) {
+			const { settings } = this.props;
+
+			return React.createElement("div", {
+				className: "betterMessageLinks-header",
+				children: [
+					settings.showGuildIcon && message.guild?.id && (message.guild?.id !== DiscordModules.SelectedGuildStore.getGuildId() || !settings.noDisplayIfSameGuild)
+						? React.createElement("img", { src: `https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}.webp`, className: "replyAvatar-sHd2sU betterMessageLinks AlignMiddle Icon" })
+						: null,
+					settings.showAuthorIcon
+						? React.createElement("img", { src: message.author.getAvatarURL(), className: "replyAvatar-sHd2sU betterMessageLinks AlignMiddle Icon" })
+						: null,
+					React.createElement("span", { className: "betterMessageLinks Author AlignMiddle" }, message.author.username),
+					settings.showAuthorIcon && message.author.bot
+						? React.createElement("span", { className: "betterMessageLinks AlignMiddle BotTag" }, React.createElement(BotTag, {}))
+						: null,
+					React.createElement("span", { className: "betterMessageLinks Author AlignMiddle", style: { paddingLeft: "0px" } }, ":"),
+					hasAttachments
+						? React.createElement(ImagePlaceHolder, { width: "20px", height: "20px", class: "betterMessageLinks AlignMiddle" })
+						: null
+				]
 			})
 		}
-		render() {
-			let messageReplace = this.props.original;
-			messageReplace.props.class = `betterMessageLinks Link`
 
-			if (this.props.attachmentLink && this.props.settings.attachmentReplaceText !== "") {
-				messageReplace.props.children[0] = this.props.settings.attachmentReplaceText;
-			}
-			else if (!this.props.attachmentLink && this.props.settings.messageReplaceText !== "") {
-				messageReplace.props.children[0] = this.props.settings.messageReplaceText;
-			}
-			if (!this.state) {
-				return this.wrapInTooltip("Loading...", messageReplace, "yellow")
-			}
+		renderContent(message) {
+			let content = null;
 
-			if (this.state.queue && !this.state.id) {
-				let loadedPercent = Math.max(Math.min(Math.round(((this.state.originalIndex - this.state.queue.indexOf(this)) / this.state.originalIndex) * 100), 100), 0);
-				if (loadedPercent === 100 && this.props.attachmentLink) return this.wrapInTooltip(this.props.original.props.href.split("/").slice(-1), messageReplace, TooltipWrapper.Colors.PRIMARY);
-
-				const LoadingCircle = (percentage) => {
-					const r = 20;
-					const circ = 2 * Math.PI * r;
-					const strokePct = ((100 - percentage) * circ) / 100;
-
-					return React.createElement("div", {},
-						React.createElement("span", { class: "betterMessageLinks AlignMiddle Loading Text" }, `Loading ${loadedPercent}% `),
-						React.createElement("svg", { class: "betterMessageLinks AlignMiddle Loading Container", width: 25, viewBox: "0 0 50 50" },
-							React.createElement("linearGradient", {
-								id: "betterMessageLinksGradient",
-								x1: "0%",
-								y1: "0%",
-								x2: "0%",
-								y2: "100%",
-							}, React.createElement("stop", {
-								offset: "0%",
-								stopColor: "#2F997F",
-							}), React.createElement("stop", {
-								offset: "100%",
-								stopColor: "#026C99",
-							})),
-							React.createElement("circle", {
-								class: "betterMessageLinks AlignMiddle Loading Contour",
-								r: r,
-								cx: 25,
-								cy: 25,
-								fill: "transparent",
-								stroke: "#656566",
-								strokeWidth: "5px",
-							}),
-							React.createElement("circle", {
-								class: "betterMessageLinks AlignMiddle Loading Line",
-								r: r,
-								cx: 25,
-								cy: 25,
-								fill: "transparent",
-								stroke: "url(#betterMessageLinksGradient)",
-								strokeWidth: "5px",
-								strokeDasharray: circ,
-								strokeDashoffset: strokePct,
-								strokeLinecap: "round",
-							}),
-						)
-					)
-
-				};
-				let loadingBar = this.props.settings.progressBar ? LoadingCircle(loadedPercent) : React.createElement("span", { class: "betterMessageLinks AlignMiddle Loading Text" }, `Loading ${loadedPercent}% `);
-
-				return this.wrapInTooltip(loadingBar, messageReplace, "yellow")
-			}
-			else if (this.state.ok === false) {
-				if (this.props.attachmentLink) {
-					//if it's an attachment, display the file name instead of an error 
-					let fileName = this.props.original.props.href.split("/").slice(-1);
-
-					return this.wrapInTooltip(fileName, messageReplace, TooltipWrapper.Colors.PRIMARY);
-				}
-				if (this.state.body?.message) {
-					return this.wrapInTooltip(this.state.body?.message, messageReplace, "red")
-				}
-				return messageReplace;
-			}
-
-			let message = this.state;
-			let channel = GetChannelModule.getChannel(message.channel_id);
-			if (!channel) return messageReplace;
-
-			let messageContent = "";
 			if (this.props.attachmentLink) {
-				message.content = this.props.original.props.href.split("/").slice(-1);
-
-				messageContent = React.createElement("span", {
-					class: "betterMessageLinks AlignMiddle",
-					children: message.content
-				});
+				content = this.props.original.split("/").pop();
 			} else {
-				let formattedMessageArray = RenderMessageMarkupToASTModule.default(Object.assign({}, message), { renderMediaEmbeds: true, formatInline: false, isInteracting: true }).content;
-
-				formattedMessageArray = this.processNewLines(formattedMessageArray);
-
-				messageContent = React.createElement("span", {
-					class: "betterMessageLinks AlignMiddle",
-					children: formattedMessageArray
-				});
+				content = this.processNewLines(RenderMessageMarkupToASTModule.default(Object.assign({}, message), { renderMediaEmbeds: true, formatInline: false, isInteracting: true }).content);
 			}
 
-			let author = message?.author;
-			let authorName = author.username;
-			let authorId = author.id;
-			let guildName, guildId = "";
-			let channelName = "";
-			let channelId = channel.id;
-			let messageId = message.id;
-			let timestamp = new Date(message.timestamp).toLocaleString();
-			let nsfw = channel.nsfw;
+			return React.createElement("span", {
+				className: "betterMessageLinks AlignMiddle"
+			}, content);
+		}
 
-			if (channel.type === DiscordModules.DiscordConstants.ChannelTypes.DM) {
-				guildName = "DM";
-				guildId = "@me";
-				channelName = channel.rawRecipients[0].username;
-			}
-			else if (channel.type === DiscordModules.DiscordConstants.ChannelTypes.GROUP_DM) {
-				guildName = "DMs"
-				guildId = "@me";
-				channelName = channel.rawRecipients.map((e) => e.username).slice(0, 3).join("-");
-			}
-			else {
-				if (message.guild) {
-					guildName = message.guild.name;
-					guildId = message.guild.id;
-				}
-				channelName = "#" + channel.name;
-			}
-
-			if (this.props.settings.advancedTitle !== "") {
-				let title = this.props.settings.advancedTitle;
-				validTitleValues.forEach((value) => {
-					title = title.replace("$" + value, eval(value))
-				})
-				if (title.includes("$")) title = "Invalid variables set! Make sure you don't use $ unless it's a valid variable."
-				messageReplace.props.title = title;
-			}
-
-
-			let mention = React.createElement("span", { className: "betterMessageLinks Author AlignMiddle" }, author.username + ":");
-			let botIcon = this.props.settings.showAuthorIcon && author.bot ? React.createElement("span", { class: "betterMessageLinks AlignMiddle BotTag" }, React.createElement(BotTag, {})) : null;
-
-			let authorIcon = this.props.settings.showAuthorIcon ? React.createElement("img", { src: author.getAvatarURL(), class: "replyAvatar-1K9Wmr betterMessageLinks AlignMiddle Icon" }) : null;
-			let guildIcon = null;
-			if (this.props.settings.showGuildIcon && message.guild?.icon && message.guild.id !== DiscordModules.SelectedGuildStore.getGuildId()) {
-				guildIcon = React.createElement("img", { src: `https://cdn.discordapp.com/icons/${message.guild.id}/${message.guild.icon}.webp`, class: "replyAvatar-1K9Wmr betterMessageLinks AlignMiddle Icon" })
-			}
-
-			let attachmentIcon = null;
-			let attachment = null;
-			if (message.attachments.length > 0 || message.embeds.length > 0) {
-				attachmentIcon = React.createElement(ImagePlaceHolder, { width: "20px", height: "20px", class: "betterMessageLinks AlignMiddle" })
-
+		renderAttachment(message) {
+			if (message.attachments?.length > 0 || message.embeds?.length > 0 || message.sticker_items?.length > 0) {
 				let isVideo = false;
 				let url = "";
 
@@ -462,45 +339,160 @@ module.exports = !global.ZeresPluginLibrary ? class {
 					else if (message.embeds[0]?.image) {
 						url = message.embeds[0]?.image.proxyURL;
 					}
+				} else if (message.sticker_items?.length > 0) {
+					url = `https://media.discordapp.net/stickers/${message.sticker_items[0].id}.png`;
 				}
-				if (url) attachment = isVideo ?
-					React.createElement("video",
-						{
-							class: "betterMessageLinks AlignMiddle Image",
-							src: url,
-							loop: true, autoPlay: true, muted: true
-						})
-					: React.createElement("img",
-						{
-							class: "betterMessageLinks AlignMiddle Image",
-							src: url,
-						})
+				if (!url) return null;
+
+				return isVideo ?
+					React.createElement("video", {
+						className: "betterMessageLinks AlignMiddle Image",
+						src: url,
+						loop: true, autoPlay: true, muted: true,
+					})
+					: React.createElement("img", {
+						className: "betterMessageLinks AlignMiddle Image",
+						src: url,
+					})
 			}
-
-			let messagePreview = React.createElement("div", {
-				class: "betterMessageLinks AlignMiddle Container",
-				children: [
-					guildIcon,
-					authorIcon,
-					botIcon,
-					mention,
-					attachmentIcon,
-					React.createElement("br", {}),
-					messageContent,
-					attachment,
-				]
-			});
-
-			let newLink = this.wrapInTooltip(messagePreview, messageReplace, TooltipWrapper.Colors.PRIMARY);
-
-			return newLink
+			return null;
 		}
 
+		renderBetterFooter(advancedFooter, message) {
+			if (advancedFooter === "") return;
+			let channel = GetChannelModule.getChannel(message.channel_id);
+			let author = message?.author;
+			let authorName = author.username;
+			let authorId = author.id;
+			let guildName, guildId = "";
+			let channelName = "";
+			let channelId = channel?.id;
+			let messageId = message.id;
+			let timestamp = new Date(message.timestamp).toLocaleString();
+			let nsfw = channel?.nsfw;
+
+			if (channel) {
+				if (channel?.type === DiscordModules.DiscordConstants.ChannelTypes.DM) {
+					guildName = "DM";
+					guildId = "@me";
+					channelName = channel.rawRecipients[0].username;
+				}
+				else if (channel?.type === DiscordModules.DiscordConstants.ChannelTypes.GROUP_DM) {
+					guildName = "DMs"
+					guildId = "@me";
+					channelName = channel.rawRecipients.map((e) => e.username).slice(0, 3).join("-");
+				}
+				else {
+					if (message.guild) {
+						guildName = message.guild.name;
+						guildId = message.guild.id;
+					}
+					channelName = "#" + channel.name;
+				}
+			}
+
+			let footer = advancedFooter;
+			validFooterValues.forEach((value) => {
+				footer = footer.replace("$" + value, eval(value))
+			})
+			if (footer.includes("$")) footer = "Invalid variables set! Make sure you don't use $ unless it's a valid variable."
+			return React.createElement("div", {
+				className: "betterMessageLinks Footer"
+			}, footer);
+		}
+		renderAttachmentLink(link) {
+			let validImageExtensions = ["jpg", "jpeg", "png", "gif", "gifv", "apng", "avif", "jfif", "pjpeg", "pjp", "svg", "webp"]
+			let validVideoExtensions = ["mp4", "webm", "ogg"];
+			let extension = link.split(".").pop();
+
+			let preview = null;
+			if (validVideoExtensions.includes(extension)) {
+				preview = React.createElement("video", {
+					className: "betterMessageLinks AlignMiddle Image",
+					src: link,
+					loop: true, autoPlay: true, muted: true,
+				})
+			}
+			else if (validImageExtensions.includes(extension)) {
+				preview = React.createElement("img", {
+					className: "betterMessageLinks AlignMiddle Image",
+					src: link,
+				})
+			}
+			return React.createElement("div", { className: "betterMessageLinks Author AlignMiddle" },
+				link.split("/").pop(),
+				preview
+			)
+		}
+
+		renderMessage() {
+			if (this.props.attachmentLink) {
+				return React.createElement("div", {
+					className: "betterMessageLinks AlignMiddle Container",
+					children: [
+						this.renderAttachmentLink(this.props.original)
+					]
+				});
+			}
+			const { message } = this.state;
+			if (!message.ok && !message.id) return this.renderError(message);
+			let hasAttachments = message.attachments?.length > 0 || message.embeds?.length > 0 || message.sticker_items?.length > 0;
+			return React.createElement("div", {
+				className: "betterMessageLinks AlignMiddle Container",
+				children: [
+					this.renderHeader(message, hasAttachments),
+					this.renderContent(message),
+					this.renderAttachment(message),
+					this.renderBetterFooter(this.props.settings.advancedFooter, message)
+				]
+			});
+		}
+
+		render() {
+			let { settings } = this.props;
+			let attachmentLink = this.props.attachmentLink;
+
+			let messageReplace = this.props.original;
+			if (!this.props.replaceOverride) {
+				if (settings.messageReplaceText !== "" && !attachmentLink) {
+					messageReplace = settings.messageReplaceText;
+				} else if (settings.attachmentReplaceText !== "" && attachmentLink) {
+					messageReplace = settings.attachmentReplaceText;
+				}
+			} else {
+				messageReplace = this.props.replaceOverride;
+			}
+
+			return React.createElement(Popout, {
+				shouldShow: this.state.showPopout,
+				position: Popout.Positions.TOP,
+				align: Popout.Align.CENTER,
+				animation: Popout.Animation.TRANSLATE,
+				spacing: 0,
+				renderPopout: () => {
+					return React.createElement("div", {
+						className: "thin-31rlnD scrollerBase-_bVAAt betterMessageLinks Popout",
+						onMouseEnter: () => this.setState({ showPopout: true }),
+						onMouseLeave: () => this.setState({ showPopout: false })
+					}, this.state.loaded || this.props.attachmentLink ? this.renderMessage() : this.renderLoading())
+				}
+			}, () => React.createElement(MaskedLinkComponent, {
+				className: "betterMessageLinks Link wrapper-1ZcZW- mention interactive",
+				href: this.props.original,
+				children: [messageReplace],
+				onMouseEnter: () => this.setState({ showPopout: true }),
+				onMouseLeave: () => this.setState({ showPopout: false })
+			}))
+		}
 		processNewLines(array) {
 			let processedArray = [];
+			let tempArray = [];
 			array.forEach((messageElement) => {
 				if (!messageElement.type && messageElement.includes("\n")) {
-					processedArray.push(messageElement.split("\n").map(e => React.createElement("div", {}, e)));
+					//replaces \n in text with actual newline elements
+					let split = messageElement.split("\n");
+					let newLine = React.createElement("br", {});
+					processedArray.push([newLine].concat(...split.map(e => [e, newLine])).slice(1, -1))
 				}
 				else {
 					processedArray.push(messageElement)
@@ -515,22 +507,38 @@ module.exports = !global.ZeresPluginLibrary ? class {
 			//inject css
 			BdApi.injectCSS(config.info.name, customCSS)
 			this.settings = this.loadSettings(defaultSettings);
-			//add a MessageContent patcher
-			Patcher.after(config.info.name, MessageContent, "type", (_, [props], ret) => {
-				if (ret?.props?.children[0].length > 0) {
-					ret.props.children[0].forEach((child, i) => {
-						if (/https:\/\/(ptb.|canary.)?discord.com\/channels\/(\d+|@me)\/\d+\/\d+/gi.test(child.props?.href) && !this.settings.ignoreMessage) {
-							ret.props.children[0][i] = React.createElement(BetterLink, { original: child, settings: this.settings });
-						} else if (/https:\/\/(media|cdn).discordapp.(com|net)\/attachments\/\d+\/\d+\/.+/gi.test(child.props?.href) && !this.settings.ignoreAttachment) {
-							ret.props.children[0][i] = React.createElement(BetterLink, { original: child, settings: this.settings, attachmentLink: true });
+
+			Patcher.after(MarkdownModule.defaultRules.link, "react", (_, [props], ret) => {
+				return this.handleLink(ret);
+			})
+
+			//replied messages get checked extra. This isn't really nice code, but it works I guess.
+			Patcher.after(RepliedMessage, "default", (_, [props], ret) => {
+				if (props.content?.length > 0) {
+					props.content.forEach((element, i) => {
+						if (element.type?.displayName === "MaskedLink") {
+							props.content[i] = this.handleLink(element);
 						}
 					});
 				}
 			})
+
 		}
+		handleLink(ret) {
+			//check if it already is a masked link (the href and content aren't the same), if so, we don't want to change the text. (Can happen in embeds for example)
+			let isMaskedLink = ret.props.children[0] !== ret.props.href;
+
+			if (/^https:\/\/(ptb.|canary.)?discord(app)?.com\/channels\/(\d+|@me)\/\d+\/\d+$/gi.test(ret.props.href) && !this.settings.ignoreMessage) {
+				return React.createElement(BetterLink, { original: ret.props.href, settings: this.settings, key: config.info.name, replaceOverride: isMaskedLink && ret.props.children[0] })
+			} else if (/^https:\/\/(media|cdn).discordapp.(com|net)\/attachments\/\d+\/\d+\/.+$/gi.test(ret.props.href) && !this.settings.ignoreAttachment) {
+				return React.createElement(BetterLink, { original: ret.props.href.split("?")[0], settings: this.settings, attachmentLink: true, key: config.info.name, replaceOverride: isMaskedLink && ret.props.children[0] });
+			}
+			return ret;
+		}
+
 		getSettingsPanel() {
 			let listArray = [];
-			validTitleValues.forEach((value) => {
+			validFooterValues.forEach((value) => {
 				listArray.push(React.createElement("li", { class: "betterMessageLinks ListElement" },
 					React.createElement("span", { class: "betterMessageLinks ListElement Symbol" }, "$"),
 					value));
@@ -552,25 +560,48 @@ module.exports = !global.ZeresPluginLibrary ? class {
 				}, { placeholder: "<Attachment>" }),
 			)
 
+			let noDisplayIfSameGuildSwitch = new Switch("Don't display Guild icon, if in same Guild", "If you are currently in the same Guild as the message from the link, the icon of the Guild will not be displayed.", this.settings.noDisplayIfSameGuild, (i) => {
+				this.settings.noDisplayIfSameGuild = i;
+			})
+			noDisplayIfSameGuildSwitch.inputWrapper.className += " betterMessageLinks Settings noDisplayIfSameGuildSwitch"
+			
+			let spinnerSetting = []
+			spinnerTypes.forEach((spinnerType, i) => {
+				let name = spinnerType.replace(/([A-Z])/g, " $1");
+				name = name.charAt(0).toUpperCase() + name.slice(1);
+				spinnerSetting.push({
+					name: name,
+					desc: React.createElement(DiscordModules.Spinner, { type: spinnerType },),
+					value: i
+				})
+			})
+
+			let spinnerRadio = new RadioGroup('Spinner', "Choose the spinner that gets displayed when the message is loading", this.settings.spinner || 0, spinnerSetting, (i) => {
+				this.settings.spinner = i;
+			})
+			spinnerRadio.inputWrapper.className += " betterMessageLinks Settings Spinner";
+
 			let appearanceSettingsGroup = new SettingGroup("Appearance").append(
 				new Switch("Show Author icon", "Display the icon of the Message Author.", this.settings.showAuthorIcon, (i) => {
 					this.settings.showAuthorIcon = i;
 				}),
 				new Switch("Show Guild icon", "Display the guild icon of the message next to the author icon if you aren't in the same guild as the linked message.", this.settings.showGuildIcon, (i) => {
 					this.settings.showGuildIcon = i;
+					this.updateSettingsCSS();
 				}),
+				noDisplayIfSameGuildSwitch,
 				new Switch("Show progress bar", "Display a circular progress bar when loading a message.", this.settings.progressBar, (i) => {
 					this.settings.progressBar = i;
 				}),
-				new Textbox("Advanced link title", React.createElement("div", {}, "Changes the title of the link. Use $value to display specific values. Valid values: ", unorderedList), this.settings.advancedTitle, (i) => {
-					this.settings.advancedTitle = i;
+				spinnerRadio,
+				new Textbox("Advanced link footer", React.createElement("div", {}, "Add a footer to the popout containing information about the message. Use $value to display specific values. Valid values: ", unorderedList), this.settings.advancedFooter, (i) => {
+					this.settings.advancedFooter = i;
 				}),
 			)
 
-
-			messageReplaceGroup.group.className += " betterMessageLinks Settings Message";
-			attachmentReplaceGroup.group.className += " betterMessageLinks Settings Attachment";
-			appearanceSettingsGroup.group.className += " betterMessageLinks Settings Appearance";
+			messageReplaceGroup.group.className += " betterMessageLinks SettingsGroup Message";
+			attachmentReplaceGroup.group.className += " betterMessageLinks SettingsGroup Attachment";
+			appearanceSettingsGroup.group.className += " betterMessageLinks SettingsGroup Appearance";
 
 			this.updateSettingsCSS()
 			//build the settings panel
@@ -590,18 +621,21 @@ module.exports = !global.ZeresPluginLibrary ? class {
 
 		}
 		updateSettingsCSS() {
-			let suffix = "";
+			let hideArray = [];
 			if (this.settings.ignoreMessage && this.settings.ignoreAttachment) {
-				suffix = `.betterMessageLinks.Settings {display:none;}`;
+				hideArray.push("SettingsGroup");
 			}
 			else if (this.settings.ignoreMessage) {
-				suffix = `.betterMessageLinks.Settings.Message {display:none;}`;
+				hideArray.push("SettingsGroup.Message");
 			}
 			else if (this.settings.ignoreAttachment) {
-				suffix = `.betterMessageLinks.Settings.Attachment {display:none;}`;
+				hideArray.push("SettingsGroup.Attachment");
 			}
-
-			BdApi.injectCSS(config.info.name, customCSS + suffix)
+			if (!this.settings.showGuildIcon) {
+				hideArray.push("Settings.noDisplayIfSameGuildSwitch");
+			}
+			let hideCss = hideArray.length > 0 ? hideArray.map(e => `.betterMessageLinks.${e}`).join(", ") + " {display:none;}" : "";
+			BdApi.injectCSS(config.info.name, customCSS + hideCss)
 		}
 
 

@@ -45,10 +45,10 @@
 			"volume": 100
 		},
 		"here": {
-			"category": "Discord",
+			"category": "zelda",
 			"focus": true,
 			"mute": true,
-			"sound": "Mention",
+			"sound": "song-correct",
 			"volume": 100
 		},
 		"deafen": {

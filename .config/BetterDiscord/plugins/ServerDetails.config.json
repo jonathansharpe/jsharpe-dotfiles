@@ -21,6 +21,6 @@
 		"channels": true,
 		"roles": true,
 		"boosts": true,
-		"region": true
+		"language": true
 	}
 }
