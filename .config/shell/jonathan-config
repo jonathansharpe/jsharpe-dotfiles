@@ -10,6 +10,7 @@ export MULTIMC18="$HOME/.local/share/multimc/instances/1.18-Fabric/.minecraft"
 export RIIV="$HOME/.local/share/dolphin-emu/Load/Riivolution"
 export WEBS="$HOME/git/baseball-website"
 export JW="$HOME/OneDrive/school-papers/jw-junior-winter/"
+export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keymaps/jsharpe/"
 
 # ALIASES
 alias ex="exa"

@@ -17,13 +17,20 @@ use {
 	end
 }
 use {
+	'noib3/nvim-cokeline',
+	requires = 'kyazdani42/nvim-web-devicons',
+	config = function()
+		require('cokeline').setup()
+	end
+}
+use {
 	"numToStr/FTerm.nvim"
 }
 use {
 	'junegunn/vim-easy-align'
 }
 use { -- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
-	'kyazdani42/nvim-web-devicons'
+'kyazdani42/nvim-web-devicons'
 }
 use {
 	'sudormrfbin/cheatsheet.nvim',
@@ -36,10 +43,10 @@ use {
 use {
 	'feline-nvim/feline.nvim'
 }
-use { -- for bufferline
-	'akinsho/bufferline.nvim',
-	requires = {'kyazdani42/nvim-web-devicons'}
-}
+-- use { -- for bufferline
+-- 	'akinsho/bufferline.nvim',
+-- 	requires = {'kyazdani42/nvim-web-devicons'}
+-- }
 use { -- neovim completion!
 	'ms-jpq/coq_nvim',
 	branch = 'coq'
