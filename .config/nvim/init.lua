@@ -28,6 +28,7 @@ vim.cmd 'set noexpandtab'
 vim.cmd 'colorscheme base16-eighties'
 vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
+vim.g.mkdp_auto_start = 1
 set.mouse = 'a'
 
 -- CONFIG STUFF
@@ -40,13 +41,56 @@ map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
 map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
 map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
 
--- map('n', '<A-c>', ':BufferLineCyclePrev<CR>', opts)
--- map('n', '<A-v>', ':BufferLineCycleNext<CR>', opts)
--- map('n', '<A-x>', ':BufferLinePickClose<CR>', opts)
-
+-- COKELINE SETUP
+--
 local is_picking_focus = require('cokeline/mappings').is_picking_focus
 local is_picking_close = require('cokeline/mappings').is_picking_close
 local get_hex = require('cokeline/utils').get_hex
+
+local components = {
+	space = {
+		text = ' ',
+		truncation = {priority = 1}
+	},
+	two_spaces = {
+		text = '  ',
+		truncation = {priority = 1}
+	},
+	separator = {
+		text = function(buffer)
+			return buffer.index ~= 1 and ' ' or ''
+		end,
+		truncation = {priority = 1}
+	},
+	devicon = {
+		text = function(buffer)
+			return
+			(is_picking_focus() or is_picking_close())
+			and buffer.pick_letter .. ' '
+			or buffer.devicon.icon
+		end,
+		hl = {
+			fg = function(buffer)
+				return
+				(is_picking_focus() and yellow)
+				or (is_picking_close() and red)
+				or buffer.devicon.color
+			end,
+			style = function(_)
+				return
+				(is_picking_focus() or is_picking_close())
+				and 'italic,bold'
+				or nil
+			end,
+		}
+	},
+	index = {
+		text = function(buffer)
+			return buffer.index .. ': '
+		end,
+		truncation = {priority = 1}
+	}
+}
 
 require('cokeline').setup({
 	default_hl = {
@@ -60,44 +104,13 @@ require('cokeline').setup({
 		},
 	},
 	components = {
-		{
-			text = ' ',
-			hl = {
-				bg = get_hex('Normal', 'bg'),
-			},
-		},
-		{
-			text = '',
-			hl = {
-				fg = get_hex('ColorColumn', 'bg'),
-				bg = get_hex('Normal', 'bg'),
-			},
-		},
-		{
-			text = function(buffer)
-				return
-				(is_picking_focus() or is_picking_close())
-				and buffer.pick_letter .. ' '
-				or buffer.devicon.icon
-			end,
-			hl = {
-				fg = function(buffer)
-					return
-					(is_picking_focus() and yellow)
-					or (is_picking_close() and red)
-					or buffer.devicon.color
-				end,
-				style = function(_)
-					return
-					(is_picking_focus() or is_picking_close())
-					and 'italic,bold'
-					or nil
-				end,
-			},
-		},
-		{
-			text = ' ',
-		},
+		components.space,
+		components.separator,
+		components.space,
+		components.devicon,
+		components.space,
+		components.index,
+		components.space,
 		{
 			text = function(buffer) return buffer.filename .. '  ' end,
 			hl = {
@@ -110,13 +123,7 @@ require('cokeline').setup({
 			text = '',
 			delete_buffer_on_left_click = true,
 		},
-		{
-			text = '',
-			hl = {
-				fg = get_hex('ColorColumn', 'bg'),
-				bg = get_hex('Normal', 'bg'),
-			},
-		},
+		components.space,
 	},
 })
 require'FTerm'.setup({
