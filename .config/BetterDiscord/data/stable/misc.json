@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0",
+    "version": "1.5.1",
     "addonlistControls": {
         "theme": {
             "view": "grid"
@@ -13,10 +13,11 @@
         "settings": {
             "addons": false,
             "customcss": false,
-            "developer": false,
+            "developer": true,
             "window": false,
             "appearance": false,
-            "general": false
+            "general": false,
+            "editor": false
         }
     }
 }

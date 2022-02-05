@@ -28,26 +28,36 @@ vim.cmd 'set noexpandtab'
 vim.cmd 'colorscheme base16-eighties'
 vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
-vim.g.mkdp_auto_start = 1
+vim.g.mkdp_auto_start = 0
 set.mouse = 'a'
 
 -- CONFIG STUFF
 -- may want to put the following in a separate file at some point idk
+-- STATUSLINE SETUP
+-- plugin is feline.nvim
+local components_feline = {}
 require('feline').setup()
 local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
+-- GENERAL REMAPS
+map('n', 'j', 'gj', opts)
+map('n', 'k', 'gk', opts)
+map('n', 'gj', 'j', opts)
+map('n', 'gk', 'k', opts)
+
+-- COKELINE REMAPS
 map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
 map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
 map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
 
--- COKELINE SETUP
---
+-- BUFFERLINE SETUP
+-- plugin is cokeline.nvim
 local is_picking_focus = require('cokeline/mappings').is_picking_focus
 local is_picking_close = require('cokeline/mappings').is_picking_close
 local get_hex = require('cokeline/utils').get_hex
 
-local components = {
+local components_cokeline = {
 	space = {
 		text = ' ',
 		truncation = {priority = 1}
@@ -104,13 +114,13 @@ require('cokeline').setup({
 		},
 	},
 	components = {
-		components.space,
-		components.separator,
-		components.space,
-		components.devicon,
-		components.space,
-		components.index,
-		components.space,
+		components_cokeline.space,
+		components_cokeline.separator,
+		components_cokeline.space,
+		components_cokeline.devicon,
+		components_cokeline.space,
+		components_cokeline.index,
+		components_cokeline.space,
 		{
 			text = function(buffer) return buffer.filename .. '  ' end,
 			hl = {
@@ -123,7 +133,7 @@ require('cokeline').setup({
 			text = '',
 			delete_buffer_on_left_click = true,
 		},
-		components.space,
+		components_cokeline.space,
 	},
 })
 require'FTerm'.setup({
