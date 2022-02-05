@@ -6,7 +6,7 @@
     "GitHub Dark": false,
     "Horizontal Server List": false,
     "Midnight Mars": false,
-    "RadialStatus": true,
+    "RadialStatus": false,
     "SettingsModal": true,
     "SimplyDark": false,
     "Discolored": false,
@@ -52,10 +52,10 @@
     "AmoledDarkTheme": false,
     "gamesense theme": false,
     "Just_Black": false,
-    "Omni": true,
+    "Omni": false,
     "Ovel": false,
     "Purpura": false,
     "Simplify": false,
-    "Ultra": false,
+    "Ultra": true,
     "        Quiet": false
 }

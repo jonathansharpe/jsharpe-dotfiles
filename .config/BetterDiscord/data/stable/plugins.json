@@ -34,5 +34,6 @@
     "VoiceUsersCounter": true,
     "PermissionsViewer": false,
     "DoubleClickToEdit": false,
-    "BetterMessageLinks": false
+    "BetterMessageLinks": false,
+    "Animations": true
 }

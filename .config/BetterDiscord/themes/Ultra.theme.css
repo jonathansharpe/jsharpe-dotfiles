@@ -1,7 +1,7 @@
 /**
  * @name Ultra
- * @version 1.0.3
- * @author TheCommieAxolotl#6898
+ * @version 1.0.5
+ * @author TheCommieAxolotl#0001
  * @authorId 538487970408300544
  * @description A Smooth, Black theme
  * @source https://github.com/TheCommieAxolotl/BetterDiscord-Stuff/tree/main/Ultra
@@ -12,7 +12,7 @@
 /* Imports */ 
 @import url("https://discord-custom-covers.github.io/usrbg/dist/usrbg.css");
 @import url("https://thecommieaxolotl.github.io/BetterDiscord-Stuff/Imports/UserBadges.css");
-@import url("https://thecommieaxolotl.github.io/BetterDiscord-Stuff/Imports/InviteRedesign.css");
+@import url("https://maendisease.github.io/BetterDiscordStuff/css/bettterInvites.css");
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;200;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source Code Pro:wght@550&display=swap");
 
@@ -20,7 +20,7 @@
 @import url("https://thecommieaxolotl.github.io/BetterDiscord-Stuff/Ultra/Ultra.css");
 
 :root {
-    --version1_0_3: none;
+    --version1_0_5: none;
     --text-normal: #dcddde;
     --text-muted: #4A4A52;
     --text-link: #6E6AF6;
