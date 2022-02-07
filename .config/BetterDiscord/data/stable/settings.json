@@ -26,7 +26,7 @@
     },
     "window": {
         "transparency": true,
-        "removeMinimumSize": false,
+        "removeMinimumSize": true,
         "frame": false
     },
     "developer": {
