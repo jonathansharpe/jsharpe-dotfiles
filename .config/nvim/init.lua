@@ -25,7 +25,7 @@ set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-eighties'
+vim.cmd 'colorscheme base16-macintosh'
 vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
@@ -57,6 +57,10 @@ local is_picking_focus = require('cokeline/mappings').is_picking_focus
 local is_picking_close = require('cokeline/mappings').is_picking_close
 local get_hex = require('cokeline/utils').get_hex
 
+local blue = vim.g.terminal_color_4
+local gray = vim.g.terminal_color_8
+local lightgray = vim.g.terminal_color_7
+
 local components_cokeline = {
 	space = {
 		text = ' ',
@@ -66,27 +70,23 @@ local components_cokeline = {
 			return buffer.index == 1 and '' or ''
 		end,
 		hl = {
-			focused = {
-				fg = '#ff0000',
-				bg = '#00ffff',
-			},
-			unfocused = {
-				fg = '#00ffff',
-				bg = '#ff0000',
-			},
+			fg = function(buffer)
+				return buffer.is_focused and lightgray or blue
+			end,
+			bg = function(buffer)
+				return buffer.is_focused and blue or lightgray
+			end,
 		},
 	},
 	separator_right = {
 		text = '',
 		hl = {
-			unfocused = {
-				fg = get_hex('Comment', 'fg'),
-				bg = get_hex('ColorColumn', 'bg'),
-			},
-			focused = {
-				fg = get_hex('ColorColumn', 'fg'),
-				bg = get_hex('Normal', 'bg'),
-			},
+			bg = function(buffer)
+				return buffer.is_focused and lightgray or blue
+			end,
+			fg = function(buffer)
+				return buffer.is_focused and blue or lightgray
+			end,
 		},
 	},
 	devicon = {
@@ -133,12 +133,12 @@ local components_cokeline = {
 require('cokeline').setup({
 	default_hl = {
 		focused = {
-			fg = '#ffff00',
-			bg = '#ff00ff',
+			fg = lightgray,
+			bg = blue,
 		},
 		unfocused = {
-			bg = '#ffff00',
-			fg = '#ff00ff',
+			bg = lightgray,
+			fg = blue,
 		},
 	},
 	components = {
@@ -152,6 +152,10 @@ require('cokeline').setup({
 		components_cokeline.separator_right,
 	},
 })
+-- base00 = '#000000', base01 = '#404040', base02 = '#404040', base03 = '#808080',
+-- base04 = '#808080', base05 = '#c0c0c0', base06 = '#c0c0c0', base07 = '#ffffff',
+-- base08 = '#dd0907', base09 = '#ff6403', base0A = '#fbf305', base0B = '#1fb714',
+-- base0C = '#02abea', base0D = '#0000d3', base0E = '#4700a5', base0F = '#90713a'
 require'FTerm'.setup({
 	cmd = "zsh"
 })
