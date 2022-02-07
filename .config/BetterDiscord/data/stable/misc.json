@@ -14,7 +14,7 @@
             "addons": false,
             "customcss": false,
             "developer": true,
-            "window": false,
+            "window": true,
             "appearance": false,
             "general": false,
             "editor": false

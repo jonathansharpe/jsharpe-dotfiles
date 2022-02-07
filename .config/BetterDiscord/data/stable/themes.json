@@ -6,7 +6,7 @@
     "GitHub Dark": false,
     "Horizontal Server List": false,
     "Midnight Mars": false,
-    "RadialStatus": false,
+    "RadialStatus": true,
     "SettingsModal": true,
     "SimplyDark": false,
     "Discolored": false,
@@ -44,7 +44,7 @@
     "Cat and a Jar": false,
     "SoftX": false,
     "EzLight": false,
-    "Tokyo Night": false,
+    "Tokyo Night": true,
     "Comfy": false,
     "Slate": false,
     "Nebula": false,
@@ -56,6 +56,7 @@
     "Ovel": false,
     "Purpura": false,
     "Simplify": false,
-    "Ultra": true,
-    "        Quiet": false
+    "Ultra": false,
+    "        Quiet": false,
+    "Float": true
 }
