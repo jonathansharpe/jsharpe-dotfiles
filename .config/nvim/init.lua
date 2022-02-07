@@ -60,17 +60,34 @@ local get_hex = require('cokeline/utils').get_hex
 local components_cokeline = {
 	space = {
 		text = ' ',
-		truncation = {priority = 1}
 	},
-	two_spaces = {
-		text = '  ',
-		truncation = {priority = 1}
-	},
-	separator = {
+	separator_left = {
 		text = function(buffer)
-			return buffer.index ~= 1 and ' ' or ''
+			return buffer.index == 1 and '' or ''
 		end,
-		truncation = {priority = 1}
+		hl = {
+			focused = {
+				fg = '#ff0000',
+				bg = '#00ffff',
+			},
+			unfocused = {
+				fg = '#00ffff',
+				bg = '#ff0000',
+			},
+		},
+	},
+	separator_right = {
+		text = '',
+		hl = {
+			unfocused = {
+				fg = get_hex('Comment', 'fg'),
+				bg = get_hex('ColorColumn', 'bg'),
+			},
+			focused = {
+				fg = get_hex('ColorColumn', 'fg'),
+				bg = get_hex('Normal', 'bg'),
+			},
+		},
 	},
 	devicon = {
 		text = function(buffer)
@@ -98,42 +115,41 @@ local components_cokeline = {
 		text = function(buffer)
 			return buffer.index .. ': '
 		end,
-		truncation = {priority = 1}
-	}
+	},
+	filename = {
+		text = function(buffer) return buffer.filename .. '  ' end,
+		hl = {
+			style = function(buffer)
+				return buffer.is_focused and 'bold' or nil
+			end,
+		}
+	},
+	close_button = {
+		text = '',
+		delete_buffer_on_left_click = true,
+    },
 }
 
 require('cokeline').setup({
 	default_hl = {
 		focused = {
-			fg = get_hex('Normal', 'fg'),
-			bg = get_hex('ColorColumn', 'bg'),
+			fg = '#ffff00',
+			bg = '#ff00ff',
 		},
 		unfocused = {
-			fg = get_hex('Comment', 'fg'),
-			bg = get_hex('ColorColumn', 'bg'),
+			bg = '#ffff00',
+			fg = '#ff00ff',
 		},
 	},
 	components = {
-		components_cokeline.space,
-		components_cokeline.separator,
+		components_cokeline.separator_left,
 		components_cokeline.space,
 		components_cokeline.devicon,
 		components_cokeline.space,
 		components_cokeline.index,
+		components_cokeline.filename,
 		components_cokeline.space,
-		{
-			text = function(buffer) return buffer.filename .. '  ' end,
-			hl = {
-				style = function(buffer)
-					return buffer.is_focused and 'bold' or nil
-				end,
-			}
-		},
-		{
-			text = '',
-			delete_buffer_on_left_click = true,
-		},
-		components_cokeline.space,
+		components_cokeline.separator_right,
 	},
 })
 require'FTerm'.setup({
