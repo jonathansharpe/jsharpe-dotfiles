@@ -25,7 +25,7 @@ set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-macintosh'
+vim.cmd 'colorscheme base16-bespin'
 vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
@@ -60,6 +60,9 @@ local get_hex = require('cokeline/utils').get_hex
 local blue = vim.g.terminal_color_4
 local gray = vim.g.terminal_color_8
 local lightgray = vim.g.terminal_color_7
+local lightblue = vim.g.terminal_color_6
+local darkgray = get_hex('ColorColumn', 'bg')
+
 
 local components_cokeline = {
 	space = {
@@ -71,10 +74,10 @@ local components_cokeline = {
 		end,
 		hl = {
 			fg = function(buffer)
-				return buffer.is_focused and lightgray or blue
+				return buffer.is_focused and darkgray or lightblue
 			end,
 			bg = function(buffer)
-				return buffer.is_focused and blue or lightgray
+				return buffer.is_focused and lightblue or darkgray
 			end,
 		},
 	},
@@ -82,10 +85,10 @@ local components_cokeline = {
 		text = '',
 		hl = {
 			bg = function(buffer)
-				return buffer.is_focused and lightgray or blue
+				return buffer.is_focused and darkgray or lightblue
 			end,
 			fg = function(buffer)
-				return buffer.is_focused and blue or lightgray
+				return buffer.is_focused and lightblue or darkgray
 			end,
 		},
 	},
@@ -133,12 +136,12 @@ local components_cokeline = {
 require('cokeline').setup({
 	default_hl = {
 		focused = {
-			fg = lightgray,
-			bg = blue,
+			fg = darkgray,
+			bg = lightblue,
 		},
 		unfocused = {
-			bg = lightgray,
-			fg = blue,
+			bg = darkgray,
+			fg = lightblue,
 		},
 	},
 	components = {
