@@ -1,14 +1,8 @@
 {
 	"changeLogs": {
-		"BDFDB": "2.0.6",
-		"CompleteTimestamps": "1.6.0",
-		"CustomStatusPresets": "1.0.7",
-		"ImageUtilities": "4.5.2",
-		"NotificationSounds": "3.6.3",
-		"PluginRepo": "2.2.3",
-		"ServerDetails": "1.1.1",
-		"ShowHiddenChannels": "3.0.2",
-		"ThemeRepo": "2.2.3"
+		"BDFDB": "2.1.7",
+		"CompleteTimestamps": "1.6.1",
+		"NotificationSounds": "3.6.4"
 	},
 	"choices": {
 		"toastPosition": "right"
@@ -19,7 +13,7 @@
 		"useChromium": false
 	},
 	"hashes": {
-		"0BDFDB.data.json": "6161bf8d9b4106e6ca412d1e0481a882156f2aa5",
+		"0BDFDB.data.json": "a1c81f439e8c846c48c0af47eb32f7d0e405e3a6",
 		"0BDFDB.raw.css": "a1036e10077b9457f3903795204f7dbd91d7646d"
 	}
 }

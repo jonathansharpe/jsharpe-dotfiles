@@ -2,7 +2,7 @@
  * @name NotificationSounds
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.6.3
+ * @version 3.6.4
  * @description Allows you to replace the native Sounds with custom Sounds
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,25 +17,17 @@ module.exports = (_ => {
 		"info": {
 			"name": "NotificationSounds",
 			"author": "DevilBro",
-			"version": "3.6.3",
+			"version": "3.6.4",
 			"description": "Allows you to replace the native Sounds with custom Sounds"
 		},
 		"changeLog": {
-			"added": {
-				"Force Play": "Added option to play mention ping sounds even if the server/channel is muted"
+			"fixed": {
+				"Double Play": "No longer plays the default and custom sound when Desktop Notifications are enabled"
 			}
 		}
 	};
 
-	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord)) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return "Do not use LightCord!";}
-		load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
-		start() {}
-		stop() {}
-	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -85,6 +77,7 @@ module.exports = (_ => {
 		
 		const message1Types = {
 			dm:			{src: "./message3.mp3", name: "Message (Direct Message)", force: null, focus: true},
+			groupdm:	{src: "./message3.mp3", name: "Message (Group Message)", force: null, focus: true},
 			mentioned:	{src: "./message2.mp3", name: "Message Mentioned", force: false, focus: true},
 			reply:		{src: "./message2.mp3", name: "Message Mentioned (reply)", force: false, focus: true},
 			role:		{src: "./mention1.mp3", name: "Message Mentioned (role)", force: false, focus: true},
@@ -238,11 +231,13 @@ module.exports = (_ => {
 						const message = e.methodArguments[0].message;
 						const guildId = message.guild_id || null;
 						if (message.author.id != BDFDB.UserUtils.me.id && !BDFDB.LibraryModules.RelationshipStore.isBlocked(message.author.id)) {
+							const channel = BDFDB.LibraryModules.ChannelStore.getChannel(message.channel_id);
+							const isGroupDM = channel.isGroupDM();
 							const muted = BDFDB.LibraryModules.MutedUtils.isGuildOrCategoryOrChannelMuted(guildId, message.channel_id);
 							const focused = document.hasFocus() && BDFDB.LibraryModules.LastChannelStore.getChannelId() == message.channel_id;
-							if (!guildId && !muted && !(choices.dm.focus && focused)) {
-								this.fireEvent("dm");
-								this.playAudio("dm");
+							if (!guildId && !muted && !(choices[isGroupDM ? "groupdm" : "dm"].focus && focused)) {
+								this.fireEvent(isGroupDM ? "groupdm" : "dm");
+								this.playAudio(isGroupDM ? "groupdm" : "dm");
 								return;
 							}
 							else if (BDFDB.LibraryModules.MentionUtils.isRawMessageMentioned(message, BDFDB.UserUtils.me.id)) {
@@ -282,11 +277,15 @@ module.exports = (_ => {
 						}
 					}
 				}});
-
+				
+				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.DesktopNotificationUtils, "showNotification", {before: e => {
+					if (e.methodArguments[3] && e.methodArguments[3].sound && e.methodArguments[3].sound.includes("message")) e.methodArguments[3].sound = `_BDFDB_${e.methodArguments[3].sound.split("").reverse().join("")}`;
+				}});
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "playSound", {instead: e => {
 					let type = e.methodArguments[0];
 					if (!type) return;
-					else if (choices[type]) {
+					if (type.indexOf("_BDFDB_") == 0) type = type.replace("_BDFDB_", "").split("").reverse().join("");
+					if (choices[type]) {
 						e.stopOriginalMethodCall();
 						BDFDB.TimeUtils.timeout(_ => {
 							if (type == "message1") {
