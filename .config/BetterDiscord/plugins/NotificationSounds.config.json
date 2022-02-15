@@ -288,6 +288,13 @@
 			"mute": false,
 			"sound": "---",
 			"volume": 100
+		},
+		"groupdm": {
+			"category": "---",
+			"focus": true,
+			"mute": true,
+			"sound": "---",
+			"volume": 100
 		}
 	},
 	"volumes": {
