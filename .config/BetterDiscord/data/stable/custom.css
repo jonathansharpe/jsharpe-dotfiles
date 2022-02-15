@@ -1,8 +1,9 @@
 ::-webkit-input-placeholder, body, button, input, select, textarea {
-    font-family: "M PLUS 1" !important;
+    font-family: "Public Sans" !important;
+	font-weight: lighter;
 }
 element.style {
 }
 code.inline, .markup-2BOw-j code {
-    font-family: "JetBrains Mono" !important;
+    font-family: "JetBrainsMono Nerd Font" !important;
 }
