@@ -1,7 +1,7 @@
 require('sharpe-plugins')
 require'lspconfig'.html.setup{}
 require'lspconfig'.denols.setup{}
-require'lspconfig'.ltex.setup{}
+-- require'lspconfig'.ltex.setup{}
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
 }
