@@ -1,8 +1,9 @@
 {
 	"changeLogs": {
-		"BDFDB": "2.1.7",
+		"BDFDB": "2.1.9",
 		"CompleteTimestamps": "1.6.1",
-		"NotificationSounds": "3.6.4"
+		"ImageUtilities": "4.6.4",
+		"NotificationSounds": "3.6.7"
 	},
 	"choices": {
 		"toastPosition": "right"
@@ -13,7 +14,7 @@
 		"useChromium": false
 	},
 	"hashes": {
-		"0BDFDB.data.json": "a1c81f439e8c846c48c0af47eb32f7d0e405e3a6",
-		"0BDFDB.raw.css": "a1036e10077b9457f3903795204f7dbd91d7646d"
+		"0BDFDB.data.json": "73615764072d475408816a0a8857482687eb6c38",
+		"0BDFDB.raw.css": "5b4dfd0092eb658a85c3896c5fdab49cf83d0cee"
 	}
 }

@@ -19,7 +19,7 @@
 	"general": {
 		"resizeImage": true,
 		"addDetails": true,
-		"showAsHeader": true,
+		"showInDescription": true,
 		"showOnHover": false,
 		"enableGallery": true,
 		"enableZoom": true,
