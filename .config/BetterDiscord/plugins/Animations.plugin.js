@@ -1,6 +1,6 @@
 /**
  * @name Animations
- * @version 1.2.8.2
+ * @version 1.2.10.3
  * @description This plugin is designed to animate different objects (lists, buttons, panels, etc.) with the ability to set delays, durations, types and sequences of these animations.
  * @author Mops
  * @authorLink https://github.com/Mopsgamer/
@@ -19,17 +19,17 @@
                     name: 'Mops',
                     discord_id: '538010208023347200',
                     github_username: 'Mopsgamer',
-                },
+                }
             ],
-            version: '1.2.8.2',
+            version: '1.2.10.3',
             description: 'This plugin is designed to animate different objects (lists, buttons, panels, etc.) with the ability to set delays, durations, types and sequences of these animations.',
             github: 'https://github.com/Mopsgamer/Animations/blob/main/Animations.plugin.js',
             github_raw: 'https://raw.githubusercontent.com/Mopsgamer/Animations/main/Animations.plugin.js',
         },
         changelog: [
-            { "title": "New Stuff", "items": ["Changelog button.", "New animations: Circle, Polygon.", "Added settings for popout animation. Does not apply to the plugin settings window."] },
-            { "title": "Improvements", "type": "improved", "items": ["Reworking text labels. (~850 line in the code, you can translate it)", "WebpackModules: now discord updates are not so scary."] },
-            //{ "title": "Fixes", "type": "fixed", "items": ["Sometimes missing animations.", "Update button."] }
+            { "title": "New Stuff", "items": ["Adding localization: Japanese (Thanks mirukuPC!)."] },
+            //{ "title": "Improvements", "type": "improved", "items": ["Reworked the tabs of the groups, now the setting will be more comfortable.", "Sliders have been replaced by input boxes."] },
+            { "title": "Fixes", "type": "fixed", "items": ["Integer input fields."] }
         ],
         main: 'index.js',
     };
@@ -216,6 +216,30 @@
                     'fromLast',
                 ]
 
+                static modules = {
+                    Button: WebpackModules.getByProps('button', 'sizeIcon').button,
+                    ButtonSizeSmall: WebpackModules.getByProps('button', 'sizeIcon').sizeSmall,
+                    ButtonText: WebpackModules.getByProps('buttonText', 'giftIcon').buttonText,
+                    ContentThin: WebpackModules.getByProps('content', 'thin').content,
+                    ContainerDefault: WebpackModules.getByProps('containerDefault').containerDefault,
+                    ContainerDefaultSpaceBeforeCategory: WebpackModules.getByProps('containerDefault', 'spaceBeforeCategory').containerDefault,
+                    ContainerSpine: WebpackModules.getByProps('container', 'spine').container,
+                    ChatContent: WebpackModules.getByProps('chatContent').chatContent,
+                    DividerReplying: WebpackModules.getByProps('divider', 'replying').divider,
+                    InputDefault: WebpackModules.getByProps('inputDefault', 'focused').inputDefault,
+                    IsSending: WebpackModules.getByProps('isSending').isSending,
+                    IsFailed: WebpackModules.getByProps('isFailed').isFailed,
+                    Message: WebpackModules.getByProps('message').message,
+                    MessageListItem: WebpackModules.getByProps('messageListItem').messageListItem,
+                    Side: WebpackModules.getByProps('side').side,
+                    ScrollbarDefault: WebpackModules.getByProps('scrollbarDefault').scrollbarDefault,
+                    TextArea: WebpackModules.getByProps('textArea').textArea,
+                    Offline: WebpackModules.getByProps('offline').offline,
+                    GuildsSidebar: WebpackModules.getByProps('guilds', 'sidebar').guilds,
+                    WrapperTypeThread: WebpackModules.getByProps('wrapper', 'typeThread').wrapper,
+                    VideoLead: WebpackModules.getByProps('video', 'lead').video
+                }
+
                 get countStyles() {
                     let result = '';
 
@@ -255,18 +279,21 @@
 
                 }
 
+
+
                 threadsWithChannels = (removeAnimations = false) => {
+
                         if (!this.settings.lists.enabled) return;
-                        var channelsListElements = document.querySelectorAll(`#channels .${WebpackModules.getByProps('content', 'thin').content} > [class]`);
-                        var count = document.querySelectorAll(`#channels .${WebpackModules.getByProps('content', 'thin').content} > [class]`)?.length ?? 40;
+                        var channelsListElements = document.querySelectorAll(`#channels .${Animations.modules.ContentThin} > [class]`);
+                        var count = document.querySelectorAll(`#channels .${Animations.modules.ContentThin} > [class]`)?.length ?? 40;
 
                         for (var i = 0, threadsCount = 0; i < count; i++) {
                             let children = channelsListElements[(this.settings.lists.sequence == "fromFirst" ? i : count - i - 1)];
                             if (!children) return;
 
-                            if (children.classList.contains(WebpackModules.getByProps('containerDefault').containerDefault)
-                                || children.classList.contains(WebpackModules.getByProps('containerDefault', 'spaceBeforeCategory').containerDefault)
-                                || children.classList.contains(WebpackModules.getByProps('wrapper', 'typeThread').wrapper)
+                            if (children.classList.contains(Animations.modules.ContainerDefault)
+                                || children.classList.contains(Animations.modules.ContainerDefaultSpaceBeforeCategory)
+                                || children.classList.contains(Animations.modules.WrapperTypeThread)
                             ) {
                                 if (removeAnimations) {
                                     children.style.transform = 'none'
@@ -280,9 +307,9 @@
                                 }
                             }
 
-                            else if (children.classList.contains(WebpackModules.getByProps('container', 'spine').container)) {
-                                var threadsForkElement = children.querySelector(`.${WebpackModules.getByProps('container', 'spine').container} > svg`);
-                                var threadsListElements = children.querySelectorAll(`.${WebpackModules.getByProps('containerDefault').containerDefault}`);
+                            else if (children.classList.contains(Animations.modules.ContainerSpine)) {
+                                var threadsForkElement = children.querySelector(`.${Animations.modules.ContainerSpine} > svg`);
+                                var threadsListElements = children.querySelectorAll(`.${Animations.modules.ContainerDefault}`);
 
                                 threadsForkElement.style.animationDelay = `${((i + threadsCount) * this.settings.lists.delay).toFixed(2)}s`;
                                 threadsForkElement.style.animationName = 'slide-right';
@@ -303,8 +330,7 @@
                         }
                 }
 
-                changeStyles(delay=0) {
-
+                async changeStyles(delay=0) {
                     var createKeyFrame = function(name, originalName, rotate=0, opacity=1) {
                         var keyframes = {
                             "in":
@@ -635,7 +661,7 @@
 
                         Animations.names.forEach(animName => {
                             for (var i = 1; i < 5; i++) {
-                                result += `.animPreview[data-animation="${animName}"]:hover > .animTempBlock:nth-child(${i})`
+                                result += `.animPreview[data-animation="${animName}"]:hover > .animPreviewTempsContainer > .animTempBlock:nth-child(${i})`
                                     + ` {
                                         transform: scale(0); animation-name: ${animName};
                                         animation-fill-mode: forwards;
@@ -662,7 +688,7 @@
                         }
 
                         for (var i = 1; i < this.settings.messages.limit; i++) {
-                            result += `.${WebpackModules.getByProps('messageListItem').messageListItem}:nth-last-child(${i}) > .${WebpackModules.getByProps('message').message}
+                            result += `.${Animations.modules.MessageListItem}:nth-last-child(${i}) > .${Animations.modules.Message}
                             {animation-delay:${((i - 1) * this.settings.messages.delay).toFixed(2)}s}\n`
                         }
 
@@ -671,15 +697,15 @@
 
                     this.styles = `
                 /*lists limit*/
-                .${WebpackModules.getByProps('side').side} > :nth-child(n+${this.settings.lists.limit}),
-                .${WebpackModules.getByProps('content', 'thin').content} > :nth-child(n+${this.settings.lists.limit})
+                .${Animations.modules.Side} > :nth-child(n+${this.settings.lists.limit}),
+                .${Animations.modules.ContentThin} > :nth-child(n+${this.settings.lists.limit})
                 {animation: none !important; transform: none !important}
 
                 ${!this.settings.lists.enabled ? '' : `
                 /* wawes */
                 /*channels*/
-                .${WebpackModules.getByProps('containerDefault', 'spaceBeforeCategory').containerDefault},
-                .${WebpackModules.getByProps('containerDefault').containerDefault}
+                .${Animations.modules.ContainerDefaultSpaceBeforeCategory},
+                .${Animations.modules.ContainerDefault}
                 {
                     transform: scaleX(0);
                     animation-fill-mode: forwards;
@@ -687,7 +713,7 @@
                 }
 
                 /* members offline */
-                .${WebpackModules.getByProps('offline').offline}
+                .${Animations.modules.Offline}
                 {
                     animation-name: ${this.settings.lists.name}_offline !important;
                 }
@@ -704,7 +730,7 @@
                 }
 
                 ${!BdApi.Themes.isEnabled('Horizontal Server List')? '' : `
-                #app-mount .${WebpackModules.getByProps('guilds', 'sidebar').guilds} [class*=listItem]:not([class*=listItemWrapper]) {
+                #app-mount .${Animations.modules.GuildsSidebar} [class*=listItem]:not([class*=listItemWrapper]) {
                     transform: scaleX(0) rotate(90deg);
                     animation-name: ${this.settings.lists.name}_90;
                 }
@@ -738,7 +764,7 @@
 
                 ${!this.settings.messages.enabled ? '' : `
                 /* messages */
-                .${WebpackModules.getByProps('messageListItem').messageListItem} > .${WebpackModules.getByProps('message').message}
+                .${Animations.modules.MessageListItem} > .${Animations.modules.Message}
                 {
                     transform: scale(0);
                     animation-fill-mode: forwards;
@@ -750,13 +776,13 @@
                 }
 
                 /*lines-forward-messages fix*/
-                .${WebpackModules.getByProps('divider', 'replying').divider} {z-index: 0}
+                .${Animations.modules.DividerReplying} {z-index: 0}
                 `}
 
                 /**Non-custom**/
 
                 /*threads fork*/
-                .${WebpackModules.getByProps('container', 'spine').container} > svg {
+                .${Animations.modules.ContainerSpine} > svg {
                     transform: scale(0);
                     transform-oringin: 100% 50%;
                     animation-timing-function: linear;
@@ -765,7 +791,7 @@
                 }
 
                 /*discord changelog video*/
-                .${WebpackModules.getByProps('video', 'lead').video} {
+                .${Animations.modules.VideoLead} {
                     animation-name: out !important;
                 }
 
@@ -793,16 +819,16 @@
                 @keyframes custom-popouts {
                     ${this.settings.popouts.custom.frames[this.settings.popouts.custom.page]}
                 }
-                `;
+                    `;
 
                     PluginUtilities.removeStyle('Animations-main');
                     PluginUtilities.removeStyle('Animations-count');
+
+                    await this.wait(delay)
                     
-                    setTimeout(()=>{
-                        PluginUtilities.addStyle('Animations-main', this.styles);
-                        PluginUtilities.addStyle('Animations-count', this.countStyles);
-                        this.threadsWithChannels();
-                    }, delay)
+                    PluginUtilities.addStyle('Animations-main', this.styles);
+                    PluginUtilities.addStyle('Animations-count', this.countStyles);
+                    this.threadsWithChannels();
                 }
 
                 closeSettings() {
@@ -837,9 +863,701 @@
                         //This is for translating the plugin (I won't do that, of course, a hundred labels) (possibly)
 
                         // case '*your language code*':
-                        //     TEMPS = *...copy from the bottom and translate*
+                        //     var TEMPS = *...copy from the bottom and translate*
                         // break;
 
+                        case 'fr':
+                            var TEMPS = {
+                                TOOLTIPS: {
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Dernier changement',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Rechercher des mises à jour',
+                                    BUTTON_ANIMATIONS_RESET: 'Réinitialise tous les paramètres',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Récrer les styles. Quand le plugin sera redémarré, les styles seront recrées',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Lien vers GitHub',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Lien vers GitHub',
+                                    BUTTON_LISTS_SWITCH: 'Activer/désactiver l\'animation des listes',
+                                    BUTTON_BUTTONS_SWITCH: 'Activer/désactiver l\'animation des boutons',
+                                    BUTTON_MESSAGES_SWITCH: 'Activer/désactiver l\'animation des messages',                                
+                                    BUTTON_POPOUTS_SWITCH: 'Activer/désactiver l\'animation des pop-out',                                
+                                    BUTTON_RESET_LISTS: 'Réinitialise les paramètres de listes',
+                                    BUTTON_RESET_BUTTONS: 'Réinitialise les paramètres de boutons',
+                                    BUTTON_RESET_MESSAGES: 'Réinitialise les paramètres de messages',
+                                    BUTTON_RESET_POPOUTS: 'Réinitialise les paramètres de pop-out',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'Restore les selecteurs par défauts',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Vider le champs de texte',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'Restore les selecteurs par défauts',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Vider le champs de texte',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'Restore les selecteurs par défauts',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Vider le champs de texte'
+                                },
+                                LABELS: {
+                                    BUTTON_ANIMATIONS_RESET: 'Tout réinitialiser',
+                                    BUTTON_ANIMATIONS_RESET_RESETING: 'Réinitialisation...',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Récréation des animations',
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Changelog',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Mise à jour',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING: 'Recherche de mise à jour...',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT: 'Temps de recherche excéder',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_ERROR: 'Une erreur est apparue',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_OLDER: (version_='{version}')=>`v${version_} - Mise à jour`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_TITLE: 'Votre version est obsolète',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (toi)  →  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_NOTE: 'Le plugin va être mis à jour.',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_NEWER: (version_='{version}')=>`v${version_} - Votre version`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_TITLE: 'Votre version est la plus récente',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (toi)  ←  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_NOTE: 'Votre version est la plus récente.',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_LATEST: (version_='{version}')=>`v${version_} - Dernière version`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_TITLE: 'Votre version est la plus récente',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_COMPARE: (yourV_, githubV_)=>`v${yourV_} (toi)  ↔  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_NOTE: 'Le plugin va être restoré.',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Problème',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Discussions',
+                                    BUTTON_LISTS_SWITCH: 'Listes',
+                                    BUTTON_BUTTONS_SWITCH: 'Boutons',
+                                    BUTTON_MESSAGES_SWITCH: 'Messages',
+                                    BUTTON_POPOUTS_SWITCH: 'Popouts',
+                                    BUTTON_RESET_LISTS: 'Réinitialiser listes',
+                                    BUTTON_RESET_BUTTONS: 'Réinitialiser boutons',
+                                    BUTTON_RESET_MESSAGES: 'Réinitialiser messages',
+                                    BUTTON_RESET_POPOUTS: 'Réinitialiser popouts',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'Par défaut',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Vider',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'Par défaut',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Vider',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'Par défaut',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Vider',
+
+                                    FIELD_NAME: 'Nom',
+                                    FIELD_SEQUENCE: 'Séquence',
+                                    FIELD_DELAY: 'Delai',
+                                    FIELD_LIMIT: 'Limite',
+                                    FIELD_DURATION: 'Durée',
+
+                                    FIELD_LISTS_NAME_NOTE: (default_='{default}')=>`[${default_}] L'animation à utiliser pour l'animation des éléments d'une liste.`,
+                                    FIELD_LISTS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] La séquence de comment se créer les éléments d'une liste.`,
+                                    FIELD_LISTS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Le délai avant l'apparition de chaque éléments d'une liste en seconde.`,
+                                    FIELD_LISTS_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Le nombre maximum d'élément d'une liste qui seront animé.`,
+                                    FIELD_LISTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] La durée de l'animation de chaque éléments d'une liste.`,
+
+                                    FIELD_BUTTONS_NAME_NOTE: (default_='{default}')=>`[${default_}] L'animation à utiliser pour l'animation des boutons.`,
+                                    FIELD_BUTTONS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] La séquence de comment se créer les boutons.`,
+                                    FIELD_BUTTONS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Le délai avant l'apparition de chaque boutons en seconde.`,
+                                    FIELD_BUTTONS_DURATION_NOTE: (default_='{default}')=>`[${default_}] La durée de l'animation de chaque boutons.`,
+
+                                    FIELD_MESSAGES_NAME_NOTE: (default_='{default}')=>`[${default_}] L'animation à utiliser pour l'animation des messages.`,
+                                    FIELD_MESSAGES_DELAY_NOTE: (default_='{default}')=>`[${default_}] La séquence de comment se créer les messages.`,
+                                    FIELD_MESSAGES_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Le délai avant l'apparition de chaque messages en seconde.`,
+                                    FIELD_MESSAGES_DURATION_NOTE: (default_='{default}')=>`[${default_}] La durée de l'animation de chaque messages.`,
+
+                                    FIELD_POPOUTS_NAME_NOTE: (default_='{default}')=>`[${default_}] L'animation à utiliser pour l'animation des popout.`,
+                                    FIELD_POPOUTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] La durée de l'animation de chaque popout.`,
+
+                                    FIELD_LISTS_SELECTORS: 'Selecteurs de listes',
+                                    FIELD_LISTS_SELECTORS_NOTE: 'Si vous laissez le champ vide, les selecteurs par défaut réapparaitrons au redémarrage. Les changement de selecteurs sont sauvegardé dès l\'écriture (si le code est valide). Le séparateur est une virgule (,).',
+                                    FIELD_BUTTONS_SELECTORS: 'Selecteurs de boutons',
+                                    FIELD_BUTTONS_SELECTORS_NOTE: 'Si vous laissez le champ vide, les selecteurs par défaut réapparaitrons au redémarrage. Les changement de selecteurs sont sauvegardé dès l\'écriture (si le code est valide). Le séparateur est une virgule (,).',
+                                    FIELD_POPOUTS_SELECTORS: 'Selecteurs de popout',
+                                    FIELD_POPOUTS_SELECTORS_NOTE: 'Si vous laissez le champ vide, les selecteurs par défaut réapparaitrons au redémarrage. Les changement de selecteurs sont sauvegardé dès l\'écriture (si le code est valide). Le séparateur est une virgule (,).',
+
+                                    PREVIEW_SELECTING: 'Selection',
+                                    PREVIEW_EDITING: 'Edition',
+                                    PREVIEW_BUTTON_TEMPLATE: 'Modèle',
+                                    PREVIEW_BUTTON_CLEAR: 'Vider',
+                                    PREVIEW_BUTTON_LOAD: 'Charger',
+                                    PREVIEW_BUTTON_SAVE: 'Sauvegarder',
+                                    PREVIEW_PLACEHOLDER_HINT: 'L\'élément animé a "scale(0)" dans sa transformation,\n donc votre transmation doit contenir "scale(1)" dans la dernière étape(100%).',
+                                    PREVIEW_IN: 'Dessus',
+                                    PREVIEW_OUT: 'Dessous',
+                                    PREVIEW_CIRCLE: 'Cercle',
+                                    PREVIEW_POLYGON: 'Polygone',
+                                    PREVIEW_OPACITY: 'Opacité',
+                                    PREVIEW_SLIME: 'Slime',
+                                    PREVIEW_BRICK_RIGHT: 'Brique droite',
+                                    PREVIEW_BRICK_LEFT: 'Brique gauche',
+                                    PREVIEW_BRICK_UP: 'Brick du dessus',
+                                    PREVIEW_BRICK_DOWN: 'Brick du dessous',
+                                    PREVIEW_SLIDE_RIGHT: 'Glissade droite',
+                                    PREVIEW_SLIDE_LEFT: 'Glissade gauche',
+                                    PREVIEW_SLIDE_UP: 'Glissade du dessus',
+                                    PREVIEW_SLIDE_DOWN: 'Glissade du dessous',
+                                    PREVIEW_SLIDE_UP_RIGHT: 'Glissade dessus (droite)',
+                                    PREVIEW_SLIDE_UP_LEFT: 'Glissade dessus (gauche)',
+                                    PREVIEW_SLIDE_DOWN_RIGHT: 'Glissade dessous (droite)',
+                                    PREVIEW_SLIDE_DOWN_LEFT: 'Glissade dessous (gauche)',
+                                    PREVIEW_SKEW_RIGHT: 'Inclinaison droite',
+                                    PREVIEW_SKEW_LEFT: 'Inclinaison gauche',
+                                    PREVIEW_WIDE_SKEW_RIGHT: 'Grande Inclinaison droite',
+                                    PREVIEW_WIDE_SKEW_LEFT: 'Grande Inclinaison gauche',
+
+                                    PREVIEW_VERTICAL_FROM_FIRST: '↓',
+                                    PREVIEW_VERTICAL_FROM_LAST: '↑',
+                                    PREVIEW_HORIZONTAL_FROM_FIRST: '→',
+                                    PREVIEW_HORIZONTAL_FROM_LAST: '←',
+
+                                    GROUP_LISTS: 'Listes',
+                                    GROUP_BUTTONS: 'Boutons',
+                                    GROUP_MESSAGES: 'Messages',
+                                    GROUP_POPOUTS: 'Popout',
+                                    
+                                    GROUP_ADVANCED: 'Avancés',
+                                }
+                            }
+                        break;
+
+                        case 'uk':
+                            var TEMPS = {
+                                TOOLTIPS: {
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Останні зміни',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Перевіряє оновлення',
+                                    BUTTON_ANIMATIONS_RESET: 'Скидає усі налаштування',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Перестворює стилі. При перезавантаженні плагіну стилі також перестворюються',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Посилання на GitHub',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Посилання на GitHub',
+                                    BUTTON_LISTS_SWITCH: 'Перемикання списків',
+                                    BUTTON_BUTTONS_SWITCH: 'Перемикання кнопок',
+                                    BUTTON_MESSAGES_SWITCH: 'Перемикання повідомлень',                                
+                                    BUTTON_POPOUTS_SWITCH: 'Перемикання вспливаючих вікон',                                
+                                    BUTTON_RESET_LISTS: 'Скидає налаштування списків',
+                                    BUTTON_RESET_BUTTONS: 'Скидає налаштування кнопок',
+                                    BUTTON_RESET_MESSAGES: 'Скидає налаштування повідомлень',
+                                    BUTTON_RESET_POPOUTS: 'Скидає налаштування вспливаючих вікон',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'Відновлює заводські селектори',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Очищає тектове поле',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'Відновлює заводські селектори',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Очищає тектове поле',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'Відновлює заводські селектори',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Очищає тектове поле'
+                                },
+                                LABELS: {
+                                    BUTTON_ANIMATIONS_RESET: 'Скинути все',
+                                    BUTTON_ANIMATIONS_RESET_RESETING: 'Скидання...',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Перестворити анімації',
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Список змін',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Оновити',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING: 'Пошук оновлень...',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT: 'Перевищено час очікування',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_ERROR: 'Сталася помилка',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_OLDER: (version_='{version}')=>`v${version_} - Оновити`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_TITLE: 'Ваша версія застаріла',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  →  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_NOTE: 'Плагін буде оновлено',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_NEWER: (version_='{version}')=>`v${version_} - Ваша версія`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_TITLE: 'Ваша версія новіша',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  ←  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_NOTE: 'Плагін буде деоновлений.',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_LATEST: (version_='{version}')=>`v${version_} - Остання версія`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_TITLE: 'Ваша версія остання',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  ↔  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_NOTE: 'Плагін буде перевстановлено.',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Проблеми',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Обговорення',
+                                    BUTTON_LISTS_SWITCH: 'Списки',
+                                    BUTTON_BUTTONS_SWITCH: 'Кнопки',
+                                    BUTTON_MESSAGES_SWITCH: 'Повідомлення',
+                                    BUTTON_POPOUTS_SWITCH: 'Вспл. вікна',
+                                    BUTTON_RESET_LISTS: 'Скинути списки',
+                                    BUTTON_RESET_BUTTONS: 'Скинути кнопки',
+                                    BUTTON_RESET_MESSAGES: 'Скинути повідомлення',
+                                    BUTTON_RESET_POPOUTS: 'Скинути вспл. вікна',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'За замовчуванням',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Очистити',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'За замовчуванням',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Очистити',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'За замовчуванням',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Очистити',
+    
+                                    FIELD_NAME: 'Назва',
+                                    FIELD_SEQUENCE: 'Напрямок',
+                                    FIELD_DELAY: 'Затримка',
+                                    FIELD_LIMIT: 'Ліміт',
+                                    FIELD_DURATION: 'Тривалість',
+    
+                                    FIELD_LISTS_NAME_NOTE: (default_='{default}')=>`[${default_}] Назва анимації елементів списку при їх появі.`,
+                                    FIELD_LISTS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] Напрямок в якому вибудовуватимуться елементи списку.`,
+                                    FIELD_LISTS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Затримка перед появою кожного елемента списку в секундах.`,
+                                    FIELD_LISTS_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Максимальна кількість елементів у списку, для яких відтворюватиметься анімація.`,
+                                    FIELD_LISTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Швидкість відтворення анімації в секундах для кожного списку після затримки.`,
+    
+                                    FIELD_BUTTONS_NAME_NOTE: (default_='{default}')=>`[${default_}] Назва анімації кнопок при їх появі.`,
+                                    FIELD_BUTTONS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] Послідовність, у якій вибудовуються кнопки.`,
+                                    FIELD_BUTTONS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Затримка перед появою кожної кнопки в секундах.`,
+                                    FIELD_BUTTONS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Швидкість відтворення анімації в секундах для кожної кнопки після затримки.`,
+    
+                                    FIELD_MESSAGES_NAME_NOTE: (default_='{default}')=>`[${default_}] Назва анімації повідомлень при їх появі.`,
+                                    FIELD_MESSAGES_DELAY_NOTE: (default_='{default}')=>`[${default_}] Затримка перед появою кожного повідомлення в секундах.`,
+                                    FIELD_MESSAGES_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Максимальна кількість повідомлень у списку, для яких відтворюватиметься анімація.`,
+                                    FIELD_MESSAGES_DURATION_NOTE: (default_='{default}')=>`[${default_}] Швидкість відтворення анімації в секундах для кожного повідомлення після затримки.`,
+    
+                                    FIELD_POPOUTS_NAME_NOTE: (default_='{default}')=>`[${default_}] Назва анімації вспливаючих вікон при їх появі.`,
+                                    FIELD_POPOUTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Швидкість відтворення анімації в секундах для вспливаючих вікон.`,
+    
+                                    FIELD_LISTS_SELECTORS: 'Селектори списків',
+                                    FIELD_LISTS_SELECTORS_NOTE: 'Якщо залишити це поле порожнім, при перезавантаженні тут відображатимуться селектори за замовчуванням. Зміни селекторів зберігаються під час введення (якщо код коректний). Розділювачем є кома (,).',
+                                    FIELD_BUTTONS_SELECTORS: 'Селектори кнопок',
+                                    FIELD_BUTTONS_SELECTORS_NOTE: 'Якщо залишити це поле порожнім, при перезавантаженні тут відображатимуться селектори за замовчуванням. Зміни селекторів зберігаються під час введення (якщо код коректний). Розділювачем є кома (,).',
+                                    FIELD_POPOUTS_SELECTORS: 'Селектори вспливаючих вікон',
+                                    FIELD_POPOUTS_SELECTORS_NOTE: 'Якщо залишити це поле порожнім, при перезавантаженні тут відображатимуться селектори за замовчуванням. Зміни селекторів зберігаються під час введення (якщо код коректний). Розділювачем є кома (,).',
+                                    PREVIEW_SELECTING: 'Обирати',
+                                    PREVIEW_EDITING: 'Редагувати',
+                                    PREVIEW_BUTTON_TEMPLATE: 'Шаблон',
+                                    PREVIEW_BUTTON_CLEAR: 'Очистити',
+                                    PREVIEW_BUTTON_LOAD: 'Завантажити',
+                                    PREVIEW_BUTTON_SAVE: 'Зберегти',
+                                    PREVIEW_PLACEHOLDER_HINT: 'Анімовані елементи мають "scale(0)" у трансформації,\nтому ваша анімація повинна мати "scale(1)" на останньому кадрі (100%).',
+                                    PREVIEW_IN: 'Вхід',
+                                    PREVIEW_OUT: 'Вихід',
+                                    PREVIEW_CIRCLE: 'Коло',
+                                    PREVIEW_POLYGON: 'Полігон',
+                                    PREVIEW_OPACITY: 'Прозорість',
+                                    PREVIEW_SLIME: 'Слиз',
+                                    PREVIEW_BRICK_RIGHT: 'Цеглина праворуч',
+                                    PREVIEW_BRICK_LEFT: 'Цеглина ліворуч',
+                                    PREVIEW_BRICK_UP: 'Цеглина вгору',
+                                    PREVIEW_BRICK_DOWN: 'Цеглина вниз',
+                                    PREVIEW_SLIDE_RIGHT: 'Ковзання праворуч',
+                                    PREVIEW_SLIDE_LEFT: 'Ковзання ліворуч',
+                                    PREVIEW_SLIDE_UP: 'Ковзання вгору',
+                                    PREVIEW_SLIDE_DOWN: 'Ковзання вниз',
+                                    PREVIEW_SLIDE_UP_RIGHT: 'Ковзання вгору (праворуч)',
+                                    PREVIEW_SLIDE_UP_LEFT: 'Ковзання вгору (ліворуч)',
+                                    PREVIEW_SLIDE_DOWN_RIGHT: 'Ковзання вниз (праворуч)',
+                                    PREVIEW_SLIDE_DOWN_LEFT: 'Ковзання вниз (ліворуч)',
+                                    PREVIEW_SKEW_RIGHT: 'Перекіс праворуч',
+                                    PREVIEW_SKEW_LEFT: 'Перекіс ліворуч',
+                                    PREVIEW_WIDE_SKEW_RIGHT: 'Широкий перекіс праворуч',
+                                    PREVIEW_WIDE_SKEW_LEFT: 'Широкий перекіс ліворуч',
+    
+                                    PREVIEW_VERTICAL_FROM_FIRST: '↓',
+                                    PREVIEW_VERTICAL_FROM_LAST: '↑',
+                                    PREVIEW_HORIZONTAL_FROM_FIRST: '→',
+                                    PREVIEW_HORIZONTAL_FROM_LAST: '←',
+    
+                                    GROUP_LISTS: 'Списки',
+                                    GROUP_BUTTONS: 'Кнопки',
+                                    GROUP_MESSAGES: 'Повідомлення',
+                                    GROUP_POPOUTS: 'Вспл. вікна',
+                                    
+                                    GROUP_ADVANCED: 'Розширені',
+                                }
+                            }
+                        break;
+
+                        case 'ru':
+                            var TEMPS = {
+                                TOOLTIPS: {
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Последние изменения',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Проверяет обновления',
+                                    BUTTON_ANIMATIONS_RESET: 'Сбрасывает все настройки',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Пересоздаёт стили. При перезагрузке плагина стили тоже пересоздаются',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Ссылка на GitHub',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Ссылка на GitHub',
+                                    BUTTON_LISTS_SWITCH: 'Переключение списков',
+                                    BUTTON_BUTTONS_SWITCH: 'Переключение кнопок',
+                                    BUTTON_MESSAGES_SWITCH: 'Переключение сообщений',                                
+                                    BUTTON_POPOUTS_SWITCH: 'Переключение всплывающих окон',                                
+                                    BUTTON_RESET_LISTS: 'Сбрасывает настройки списков',
+                                    BUTTON_RESET_BUTTONS: 'Сбрасывает настройки кнопок',
+                                    BUTTON_RESET_MESSAGES: 'Сбрасывает настройки сообщений',
+                                    BUTTON_RESET_POPOUTS: 'Сбрасывает настройки всплывающих окон',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'Восстанавливает заводские селекторы',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Очищает тектовое поле',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'Восстанавливает заводские селекторы',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Очищает тектовое поле',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'Восстанавливает заводские селекторы',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Очищает тектовое поле'
+                                },
+                                LABELS: {
+                                    BUTTON_ANIMATIONS_RESET: 'Сбросить всё',
+                                    BUTTON_ANIMATIONS_RESET_RESETING: 'Сбрасывание...',
+                                    BUTTON_ANIMATIONS_REBUILD: 'Пересоздать анимации',
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: 'Список изменений',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'Обновить',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING: 'Поиск обновлений...',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT: 'Превышено вр. ожидания',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_ERROR: 'Случилась ошибка',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_OLDER: (version_='{version}')=>`v${version_} - Обновить`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_TITLE: 'Ваша версия устарела',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  →  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_NOTE: 'Плагин будет обновлён.',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_NEWER: (version_='{version}')=>`v${version_} - Ваша версия`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_TITLE: 'Ваша версия новее',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  ←  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_NOTE: 'Плагин будет деобновлен.',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_LATEST: (version_='{version}')=>`v${version_} - Последняя версия`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_TITLE: 'Ваша версия последняя',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_COMPARE: (yourV_, githubV_)=>`v${yourV_} (ваша)  ↔  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_NOTE: 'Плагин будет переустановлен.',
+                                    BUTTON_ANIMATIONS_ISSUES: 'Проблемы',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'Обсуждения',
+                                    BUTTON_LISTS_SWITCH: 'Списки',
+                                    BUTTON_BUTTONS_SWITCH: 'Кнопки',
+                                    BUTTON_MESSAGES_SWITCH: 'Сообщения',
+                                    BUTTON_POPOUTS_SWITCH: 'Вспл. окна',
+                                    BUTTON_RESET_LISTS: 'Сбросить списки',
+                                    BUTTON_RESET_BUTTONS: 'Сбросить кнопки',
+                                    BUTTON_RESET_MESSAGES: 'Сбросить сообщения',
+                                    BUTTON_RESET_POPOUTS: 'Сбросить вспл. окна',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'По умолчанию',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'Очистить',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'По умолчанию',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'Очистить',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'По умолчанию',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'Очистить',
+    
+                                    FIELD_NAME: 'Название',
+                                    FIELD_SEQUENCE: 'Напраление',
+                                    FIELD_DELAY: 'Задержка',
+                                    FIELD_LIMIT: 'Лимит',
+                                    FIELD_DURATION: 'Длительность',
+    
+                                    FIELD_LISTS_NAME_NOTE: (default_='{default}')=>`[${default_}] Название анимации элементов списка при их появлении.`,
+                                    FIELD_LISTS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] Направление в котором будут выстраиваться элементы списка.`,
+                                    FIELD_LISTS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Задержка перед появлением для каждого элемента списка в секундах.`,
+                                    FIELD_LISTS_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Максимальное количество элементов в списке, для которых будет воспроизводиться анимация.`,
+                                    FIELD_LISTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Скорость воспроизведения анимации в секундах для каждого элемента списка после задержки.`,
+    
+                                    FIELD_BUTTONS_NAME_NOTE: (default_='{default}')=>`[${default_}] Название анимации кнопок при их появлении.`,
+                                    FIELD_BUTTONS_SEQUENCE_NOTE: (default_='{default}')=>`[${default_}] Последовательность, в которой выстраиваются кнопки.`,
+                                    FIELD_BUTTONS_DELAY_NOTE: (default_='{default}')=>`[${default_}] Задержка перед появлением каждой кнопки в секундах.`,
+                                    FIELD_BUTTONS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Скорость воспроизведения анимации в секундах для каждой кнопки после задержки.`,
+    
+                                    FIELD_MESSAGES_NAME_NOTE: (default_='{default}')=>`[${default_}] Название анимации сообщений при их появлении.`,
+                                    FIELD_MESSAGES_DELAY_NOTE: (default_='{default}')=>`[${default_}] Задержка перед появлением каждого сообщения в секундах.`,
+                                    FIELD_MESSAGES_LIMIT_NOTE: (default_='{default}')=>`[${default_}] Максимальное количество сообщений в списке, для которых будет воспроизводиться анимация.`,
+                                    FIELD_MESSAGES_DURATION_NOTE: (default_='{default}')=>`[${default_}] Скорость воспроизведения анимации в секундах для каждого сообщения после задержки.`,
+    
+                                    FIELD_POPOUTS_NAME_NOTE: (default_='{default}')=>`[${default_}] Название анимации всплывающих окон при их появлении.`,
+                                    FIELD_POPOUTS_DURATION_NOTE: (default_='{default}')=>`[${default_}] Скорость воспроизведения анимации в секундах для всплывающих окон.`,
+    
+                                    FIELD_LISTS_SELECTORS: 'Селекторы списков',
+                                    FIELD_LISTS_SELECTORS_NOTE: 'Если оставить это поле пустым, при перезагрузке здесь будут отображаться селекторы по умолчанию. Изменения селекторов сохраняются при вводе (если код корректен). Разделителем является запятая (,).',
+                                    FIELD_BUTTONS_SELECTORS: 'Селекторы кнопок',
+                                    FIELD_BUTTONS_SELECTORS_NOTE: 'Если оставить это поле пустым, при перезагрузке здесь будут отображаться селекторы по умолчанию. Изменения селекторов сохраняются при вводе (если код корректен). Разделителем является запятая (,).',
+                                    FIELD_POPOUTS_SELECTORS: 'Селекторы всплывающих окон',
+                                    FIELD_POPOUTS_SELECTORS_NOTE: 'Если оставить это поле пустым, при перезагрузке здесь будут отображаться селекторы по умолчанию. Изменения селекторов сохраняются при вводе (если код корректен). Разделителем является запятая (,).',
+                                    PREVIEW_SELECTING: 'Выбирать',
+                                    PREVIEW_EDITING: 'Редактировать',
+                                    PREVIEW_BUTTON_TEMPLATE: 'Шаблон',
+                                    PREVIEW_BUTTON_CLEAR: 'Очистить',
+                                    PREVIEW_BUTTON_LOAD: 'Загрузить',
+                                    PREVIEW_BUTTON_SAVE: 'Сохранить',
+                                    PREVIEW_PLACEHOLDER_HINT: 'Анимированные элементы имеют "scale(0)" в трансформации,\nпоэтому ваша анимация должна содержать "scale(1)" на конечном кадре (100%).',
+                                    PREVIEW_IN: 'Вход',
+                                    PREVIEW_OUT: 'Выход',
+                                    PREVIEW_CIRCLE: 'Круг',
+                                    PREVIEW_POLYGON: 'Полигон',
+                                    PREVIEW_OPACITY: 'Прозрачность',
+                                    PREVIEW_SLIME: 'Слизь',
+                                    PREVIEW_BRICK_RIGHT: 'Кирпич враво',
+                                    PREVIEW_BRICK_LEFT: 'Кирпич влево',
+                                    PREVIEW_BRICK_UP: 'Кирпич вверх',
+                                    PREVIEW_BRICK_DOWN: 'Кирпич вниз',
+                                    PREVIEW_SLIDE_RIGHT: 'Скольжение вправо',
+                                    PREVIEW_SLIDE_LEFT: 'Скольжение влево',
+                                    PREVIEW_SLIDE_UP: 'Скольжение вверх',
+                                    PREVIEW_SLIDE_DOWN: 'Скольжение вниз',
+                                    PREVIEW_SLIDE_UP_RIGHT: 'Скольжение вверх (вправо)',
+                                    PREVIEW_SLIDE_UP_LEFT: 'Скольжение вверх (влево)',
+                                    PREVIEW_SLIDE_DOWN_RIGHT: 'Скольжение вниз (вправо)',
+                                    PREVIEW_SLIDE_DOWN_LEFT: 'Скольжение вниз (влево)',
+                                    PREVIEW_SKEW_RIGHT: 'Перекос вправо',
+                                    PREVIEW_SKEW_LEFT: 'Перекос влево',
+                                    PREVIEW_WIDE_SKEW_RIGHT: 'Широкий перекос вправо',
+                                    PREVIEW_WIDE_SKEW_LEFT: 'Широкий перекос влево',
+    
+                                    PREVIEW_VERTICAL_FROM_FIRST: '↓',
+                                    PREVIEW_VERTICAL_FROM_LAST: '↑',
+                                    PREVIEW_HORIZONTAL_FROM_FIRST: '→',
+                                    PREVIEW_HORIZONTAL_FROM_LAST: '←',
+    
+                                    GROUP_LISTS: 'Списки',
+                                    GROUP_BUTTONS: 'Кнопки',
+                                    GROUP_MESSAGES: 'Сообщения',
+                                    GROUP_POPOUTS: 'Вспл. окна',
+                                    
+                                    GROUP_ADVANCED: 'Расширенные',
+                                }
+                            }
+                        break;
+
+                        case 'ja':
+                            var TEMPS = {
+                                TOOLTIPS: {
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: '最新の変更',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'アップデートを確認',
+                                    BUTTON_ANIMATIONS_RESET: '全設定をリセット',
+                                    BUTTON_ANIMATIONS_REBUILD: 'スタイルを再作成します。プラグインを再起動すると、スタイルも再作成されます。',
+                                    BUTTON_ANIMATIONS_ISSUES: 'GitHubへのリンク',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: 'GitHubへのリンク',
+                                    BUTTON_LISTS_SWITCH: 'リスト切り替え',
+                                    BUTTON_BUTTONS_SWITCH: 'ボタン切り替え',
+                                    BUTTON_MESSAGES_SWITCH: 'メッセージ切り替え',                                
+                                    BUTTON_POPOUTS_SWITCH: 'ポップアウト切り替え',                                
+                                    BUTTON_RESET_LISTS: 'リストの設定をリセットする',
+                                    BUTTON_RESET_BUTTONS: 'ボタンの設定をリセットする',
+                                    BUTTON_RESET_MESSAGES: 'メッセージの設定をリセットする',
+                                    BUTTON_RESET_POPOUTS: 'ポップアウトの設定をリセットする',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'デフォルトのセレクタに戻す',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'テキストエリアをクリアする',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'デフォルトのセレクタに戻す',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'テキストエリアをクリアする',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'デフォルトのセレクタに戻す',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'テキストエリアをクリアする'
+                                },
+                                LABELS: {
+                                    BUTTON_ANIMATIONS_RESET: 'すべてリセット',
+                                    BUTTON_ANIMATIONS_RESET_RESETING: 'リセット...',
+                                    BUTTON_ANIMATIONS_REBUILD: 'アニメーションの再構築',
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: '変更履歴',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: 'アップデート',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING: 'アップデートを調べる...',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT: 'タイムアウトを超過しました',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_ERROR: 'エラーが発生しました',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_OLDER: (version_='{version}')=>`v${version_} - Update`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_TITLE: 'あなたのバージョンは古いです',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (your)  →  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_NOTE: 'プラグインはアップデートされます',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_NEWER: (version_='{version}')=>`v${version_} - Your own version`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_TITLE: 'あなたのバージョンは最新です',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_COMPARE: (yourV_, githubV_)=>`v${yourV_} (your)  ←  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_NOTE: 'プラグインはダウンデートされます',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_LATEST: (version_='{version}')=>`v${version_} - Latest version`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_TITLE: 'あなたのバージョンは最新です',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_COMPARE: (yourV_, githubV_)=>`v${yourV_} (your)  ↔  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_NOTE: 'プラグインが復元されます',
+                                    BUTTON_ANIMATIONS_ISSUES: '問題',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: '議論',
+                                    BUTTON_LISTS_SWITCH: 'リスト',
+                                    BUTTON_BUTTONS_SWITCH: 'ボタン',
+                                    BUTTON_MESSAGES_SWITCH: 'メッセージ',
+                                    BUTTON_POPOUTS_SWITCH: 'ポップアウト',
+                                    BUTTON_RESET_LISTS: 'リストをリセット',
+                                    BUTTON_RESET_BUTTONS: 'ボタンをリセット',
+                                    BUTTON_RESET_MESSAGES: 'メッセージをリセット',
+                                    BUTTON_RESET_POPOUTS: 'ポップアウトをリセット',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: 'デフォルト',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: 'クリア',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: 'デフォルト',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: 'クリア',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: 'デフォルト',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: 'クリア',
+    
+                                    FIELD_NAME: '名前',
+                                    FIELD_SEQUENCE: '構築',
+                                    FIELD_DELAY: '遅延',
+                                    FIELD_LIMIT: '表示数',
+                                    FIELD_DURATION: '時間',
+    
+                                    FIELD_LISTS_NAME_NOTE: (default_='{default}')=>`[デフォルト:${default_}] リストが表示されるときのアニメーションの名前。`,
+                                    FIELD_LISTS_SEQUENCE_NOTE: (default_='{default}')=>`[デフォルト:${default_}] リストを構築する順序。`,
+                                    FIELD_LISTS_DELAY_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 各リストが表示されるまでの遅延時間(秒)。`,
+                                    FIELD_LISTS_LIMIT_NOTE: (default_='{default}')=>`[デフォルト:${default_}] アニメーションを再生するリスト内の最大項目数。`,
+                                    FIELD_LISTS_DURATION_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 遅延後の各リストのアニメーションの再生速度(秒)。`,
+    
+                                    FIELD_BUTTONS_NAME_NOTE: (default_='{default}')=>`[デフォルト:${default_}] ボタンが表示されるときのアニメーションの名前。`,
+                                    FIELD_BUTTONS_SEQUENCE_NOTE: (default_='{default}')=>`[デフォルト:${default_}] ボタンを構築する順序。`,
+                                    FIELD_BUTTONS_DELAY_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 各ボタンが表示されるまでの遅延時間(秒)。`,
+                                    FIELD_BUTTONS_DURATION_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 遅延後の各ボタンのアニメーションの再生速度(秒)。`,
+    
+                                    FIELD_MESSAGES_NAME_NOTE: (default_='{default}')=>`[デフォルト:${default_}] メッセージが表示されるときのアニメーションの名前。`,
+                                    FIELD_MESSAGES_DELAY_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 各メッセージが表示されるまでの遅延時間(秒)。`,
+                                    FIELD_MESSAGES_LIMIT_NOTE: (default_='{default}')=>`[デフォルト:${default_}] アニメーションが再生されるリスト内のメッセージの最大数。`,
+                                    FIELD_MESSAGES_DURATION_NOTE: (default_='{default}')=>`[デフォルト:${default_}] 遅延後の各メッセージのアニメーションの再生速度(秒)。`,
+    
+                                    FIELD_POPOUTS_NAME_NOTE: (default_='{default}')=>`[デフォルト:${default_}] ポップアップが表示されるときのアニメーションの名前。`,
+                                    FIELD_POPOUTS_DURATION_NOTE: (default_='{default}')=>`[デフォルト:${default_}] ポップアウトのアニメーションの再生速度(秒)。`,
+    
+                                    FIELD_LISTS_SELECTORS: 'リストのセレクタ',
+                                    FIELD_LISTS_SELECTORS_NOTE: 'このフィールドを空にすると、再読み込み時にデフォルトのセレクタがここに表示されます。セレクタの変更は、入力時に保存されます(コードが有効である場合)。セパレータはカンマ(,)です。',
+                                    FIELD_BUTTONS_SELECTORS: 'ボタンのセレクタ',
+                                    FIELD_BUTTONS_SELECTORS_NOTE: 'このフィールドを空にすると、再読み込み時にデフォルトのセレクタがここに表示されます。セレクタの変更は、入力時に保存されます(コードが有効である場合)。セパレータはカンマ(,)です。',
+                                    FIELD_POPOUTS_SELECTORS: 'ポップアウトのセレクタ',
+                                    FIELD_POPOUTS_SELECTORS_NOTE: 'このフィールドを空にすると、再読み込み時にデフォルトのセレクタがここに表示されます。セレクタの変更は、入力時に保存されます(コードが有効である場合)。セパレータはカンマ(,)です。',
+    
+                                    PREVIEW_SELECTING: '選択',
+                                    PREVIEW_EDITING: '編集',
+                                    PREVIEW_BUTTON_TEMPLATE: 'テンプレート',
+                                    PREVIEW_BUTTON_CLEAR: '削除',
+                                    PREVIEW_BUTTON_LOAD: '読込',
+                                    PREVIEW_BUTTON_SAVE: '保存',
+                                    PREVIEW_PLACEHOLDER_HINT: 'アニメーションの要素の変換には"scale(0)"が含まれるため、\n最終フレーム(100%)に"scale(1)"を含んでいなければなりません。',
+                                    PREVIEW_IN: 'In',
+                                    PREVIEW_OUT: 'Out',
+                                    PREVIEW_CIRCLE: 'Circle',
+                                    PREVIEW_POLYGON: 'Polygon',
+                                    PREVIEW_OPACITY: 'Opacity',
+                                    PREVIEW_SLIME: 'Slime',
+                                    PREVIEW_BRICK_RIGHT: 'Brick right',
+                                    PREVIEW_BRICK_LEFT: 'Brick left',
+                                    PREVIEW_BRICK_UP: 'Brick up',
+                                    PREVIEW_BRICK_DOWN: 'Brick down',
+                                    PREVIEW_SLIDE_RIGHT: 'Slide right',
+                                    PREVIEW_SLIDE_LEFT: 'Slide left',
+                                    PREVIEW_SLIDE_UP: 'Slide up',
+                                    PREVIEW_SLIDE_DOWN: 'Slide down',
+                                    PREVIEW_SLIDE_UP_RIGHT: 'Slide up (right)',
+                                    PREVIEW_SLIDE_UP_LEFT: 'Slide up (left)',
+                                    PREVIEW_SLIDE_DOWN_RIGHT: 'Slide down (right)',
+                                    PREVIEW_SLIDE_DOWN_LEFT: 'Slide down (left)',
+                                    PREVIEW_SKEW_RIGHT: 'Skew right',
+                                    PREVIEW_SKEW_LEFT: 'Skew left',
+                                    PREVIEW_WIDE_SKEW_RIGHT: 'Wide skew right',
+                                    PREVIEW_WIDE_SKEW_LEFT: 'Wide skew left',
+    
+                                    PREVIEW_VERTICAL_FROM_FIRST: '↓',
+                                    PREVIEW_VERTICAL_FROM_LAST: '↑',
+                                    PREVIEW_HORIZONTAL_FROM_FIRST: '→',
+                                    PREVIEW_HORIZONTAL_FROM_LAST: '←',
+    
+                                    GROUP_LISTS: 'リスト',
+                                    GROUP_BUTTONS: 'ボタン',
+                                    GROUP_MESSAGES: 'メッセージ',
+                                    GROUP_POPOUTS: 'ポップアウト',
+                                    
+                                    GROUP_ADVANCED: '高度',
+                                }
+                            }
+                        break;
+
+                        case 'zh-TW':
+                            var TEMPS = {
+                                TOOLTIPS: {
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: '最近更新',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: '檢查更新',
+                                    BUTTON_ANIMATIONS_RESET: '重設所有設定',
+                                    BUTTON_ANIMATIONS_REBUILD: '重新生成樣式。當插件重新啟動時，樣式也會重新生成',
+                                    BUTTON_ANIMATIONS_ISSUES: '前往GitHub',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: '前往GitHub',
+                                    BUTTON_LISTS_SWITCH: '列表開關',
+                                    BUTTON_BUTTONS_SWITCH: '按鈕開關',
+                                    BUTTON_MESSAGES_SWITCH: '訊息開關',
+                                    BUTTON_POPOUTS_SWITCH: '彈出視窗開關',
+                                    BUTTON_RESET_LISTS: '重設列表設定',
+                                    BUTTON_RESET_BUTTONS: '重設按鈕設定',
+                                    BUTTON_RESET_MESSAGES: '重設訊息設定',
+                                    BUTTON_RESET_POPOUTS: '重設彈出視窗設定',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: '恢復至預設值',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: '清除所有選擇',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: '恢復至預設值',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: '清除所有選擇',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: '恢復至預設值',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: '清除所有選擇'
+                                },
+                                LABELS: {
+                                    BUTTON_ANIMATIONS_RESET: '重設所有設定',
+                                    BUTTON_ANIMATIONS_RESET_RESETING: '重設中...',
+                                    BUTTON_ANIMATIONS_REBUILD: '重新生成動畫',
+                                    BUTTON_ANIMATIONS_VERSION_CHANGELOG: '更新日誌',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK: '檢查更新',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING: '檢查更新中...',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT: '超時',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_ERROR: '發生錯誤',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_OLDER: (version_ = '{version}') => `v${version_} - 更新`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_TITLE: '您當前的版本較舊',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_COMPARE: (yourV_, githubV_) => `v${yourV_} (您的)  →  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_OLDER_NOTE: '插件將會更新',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_NEWER: (version_ = '{version}') => `v${version_} - 您的版本`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_TITLE: '您當前的版本較新',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_COMPARE: (yourV_, githubV_) => `v${yourV_} (您的)  ←  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_NEWER_NOTE: '插件將會降級',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_LATEST: (version_ = '{version}') => `v${version_} - 最新版本`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_TITLE: '您當前的版本為最新',
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_COMPARE: (yourV_, githubV_) => `v${yourV_} (您的)  ↔  v${githubV_} (github)`,
+                                    BUTTON_ANIMATIONS_VERSION_CHECK_CONFIRM_LATEST_NOTE: '插件將會恢復',
+                                    BUTTON_ANIMATIONS_ISSUES: '發生錯誤了?',
+                                    BUTTON_ANIMATIONS_DISCUSSIONS: '討論',
+                                    BUTTON_LISTS_SWITCH: '列表',
+                                    BUTTON_BUTTONS_SWITCH: '按鈕',
+                                    BUTTON_MESSAGES_SWITCH: '訊息',
+                                    BUTTON_POPOUTS_SWITCH: '彈出視窗',
+                                    BUTTON_RESET_LISTS: '重設列表',
+                                    BUTTON_RESET_BUTTONS: '重設按鈕',
+                                    BUTTON_RESET_MESSAGES: '重設訊息',
+                                    BUTTON_RESET_POPOUTS: '重設彈出視窗',
+                                    BUTTON_SELECTORS_LISTS_DEFAULT: '預設值',
+                                    BUTTON_SELECTORS_LISTS_CLEAR: '清除',
+                                    BUTTON_SELECTORS_BUTTONS_DEFAULT: '預設值',
+                                    BUTTON_SELECTORS_BUTTONS_CLEAR: '清除',
+                                    BUTTON_SELECTORS_POPOUTS_DEFAULT: '預設值',
+                                    BUTTON_SELECTORS_POPOUTS_CLEAR: '清除',
+
+                                    FIELD_NAME: '行式',
+                                    FIELD_SEQUENCE: '順序',
+                                    FIELD_DELAY: '延遲',
+                                    FIELD_LIMIT: '限制',
+                                    FIELD_DURATION: '持續時間',
+
+                                    FIELD_LISTS_NAME_NOTE: (default_ = '{default}') => `[${default_}] 列表項的動畫行式`,
+                                    FIELD_LISTS_SEQUENCE_NOTE: (default_ = '{default}') => `[${default_}] 生成列表項的順序`,
+                                    FIELD_LISTS_DELAY_NOTE: (default_ = '{default}') => `[${default_}] 每個列表項出現前的延遲（以秒為單位）`,
+                                    FIELD_LISTS_LIMIT_NOTE: (default_ = '{default}') => `[${default_}] 列表中將播放動畫的最大項目數`,
+                                    FIELD_LISTS_DURATION_NOTE: (default_ = '{default}') => `[${default_}] 延遲後每個列表項的動畫播放速度（以秒為單位）`,
+
+                                    FIELD_BUTTONS_NAME_NOTE: (default_ = '{default}') => `[${default_}] 按鈕項的動畫行式`,
+                                    FIELD_BUTTONS_SEQUENCE_NOTE: (default_ = '{default}') => `[${default_}] 生成按鈕項的順序`,
+                                    FIELD_BUTTONS_DELAY_NOTE: (default_ = '{default}') => `[${default_}] 每個按鈕項出現前的延遲（以秒為單位）`,
+                                    FIELD_BUTTONS_DURATION_NOTE: (default_ = '{default}') => `[${default_}] 延遲後每個按鈕項的動畫播放速度（以秒為單位）`,
+
+                                    FIELD_MESSAGES_NAME_NOTE: (default_ = '{default}') => `[${default_}] 訊息項的動畫行式`,
+                                    FIELD_MESSAGES_DELAY_NOTE: (default_ = '{default}') => `[${default_}] 每個訊息項出現前的延遲（以秒為單位）`,
+                                    FIELD_MESSAGES_LIMIT_NOTE: (default_ = '{default}') => `[${default_}] 訊息中將播放動畫的最大項目數.`,
+                                    FIELD_MESSAGES_DURATION_NOTE: (default_ = '{default}') => `[${default_}] 延遲後每個訊息項的動畫播放速度（以秒為單位）`,
+
+                                    FIELD_POPOUTS_NAME_NOTE: (default_ = '{default}') => `[${default_}] 彈出視窗的動畫行式`,
+                                    FIELD_POPOUTS_DURATION_NOTE: (default_ = '{default}') => `[${default_}] 彈出視窗的動畫播放速度（以秒為單位）。`,
+
+                                    FIELD_LISTS_SELECTORS: '列表項名單',
+                                    FIELD_LISTS_SELECTORS_NOTE: '如果您將此字段留空，則預設值將在重新加載時出現在此處。輸入時會保存對名單的更改（如果代碼有效）。分隔符是半形逗號 (,)',
+                                    FIELD_BUTTONS_SELECTORS: '按鈕項名單',
+                                    FIELD_BUTTONS_SELECTORS_NOTE: '如果您將此字段留空，則預設值將在重新加載時出現在此處。輸入時會保存對名單的更改（如果代碼有效）。分隔符是半形逗號 (,)',
+                                    FIELD_POPOUTS_SELECTORS: '彈出視窗名單',
+                                    FIELD_POPOUTS_SELECTORS_NOTE: '如果您將此字段留空，則預設值將在重新加載時出現在此處。輸入時會保存對名單的更改（如果代碼有效）。分隔符是半形逗號 (,)',
+
+                                    PREVIEW_SELECTING: '選擇',
+                                    PREVIEW_EDITING: '編輯',
+                                    PREVIEW_BUTTON_TEMPLATE: '樣板',
+                                    PREVIEW_BUTTON_CLEAR: '清除',
+                                    PREVIEW_BUTTON_LOAD: '載入',
+                                    PREVIEW_BUTTON_SAVE: '儲存',
+                                    PREVIEW_PLACEHOLDER_HINT: '動畫元素在變換中具有“scale(0)”\n因此您的動畫必須在最後一幀 (100%) 上包含“scale(1)”',
+                                    PREVIEW_IN: '由內往外',
+                                    PREVIEW_OUT: '由外往內',
+                                    PREVIEW_CIRCLE: '圓形展開',
+                                    PREVIEW_POLYGON: '多邊形展開',
+                                    PREVIEW_OPACITY: '淡入',
+                                    PREVIEW_SLIME: '史萊姆',
+                                    PREVIEW_BRICK_RIGHT: '由左滑入',
+                                    PREVIEW_BRICK_LEFT: '由右滑入',
+                                    PREVIEW_BRICK_UP: '由下滑入',
+                                    PREVIEW_BRICK_DOWN: '由上滑入',
+                                    PREVIEW_SLIDE_RIGHT: '由左填滿',
+                                    PREVIEW_SLIDE_LEFT: '由右填滿',
+                                    PREVIEW_SLIDE_UP: '由下填滿',
+                                    PREVIEW_SLIDE_DOWN: '由上填滿',
+                                    PREVIEW_SLIDE_UP_RIGHT: '由左下往右上填滿',
+                                    PREVIEW_SLIDE_UP_LEFT: '由右下往左上填滿',
+                                    PREVIEW_SLIDE_DOWN_RIGHT: '由左上往右下填滿',
+                                    PREVIEW_SLIDE_DOWN_LEFT: '由右上往左下填滿',
+                                    PREVIEW_SKEW_RIGHT: '向右旋轉',
+                                    PREVIEW_SKEW_LEFT: '向左旋轉',
+                                    PREVIEW_WIDE_SKEW_RIGHT: '向右旋轉(寬)',
+                                    PREVIEW_WIDE_SKEW_LEFT: '向左旋轉(寬)',
+
+                                    PREVIEW_VERTICAL_FROM_FIRST: '↓',
+                                    PREVIEW_VERTICAL_FROM_LAST: '↑',
+                                    PREVIEW_HORIZONTAL_FROM_FIRST: '→',
+                                    PREVIEW_HORIZONTAL_FROM_LAST: '←',
+
+                                    GROUP_LISTS: '列表',
+                                    GROUP_BUTTONS: '按鈕',
+                                    GROUP_MESSAGES: '訊息',
+                                    GROUP_POPOUTS: '彈出視窗',
+
+                                    GROUP_ADVANCED: '進階選項',
+                                }
+                            }
+                        break;
                         case 'en-US':
                         case 'en-GB':
                         default:
@@ -981,57 +1699,117 @@
                         }
                     }
 
-                    var ElementButton = (button) => {
+                    class ElementButton extends React.Component {
 
-                        return React.createElement('button', {
-                            style: {
-                                display: 'inline-block',
-                                width: button.width ?? 'fit-content',
-                                height: button.height ?? 'fit-content',
-                                padding: button.padding ?? '8px',
-                                margin: button.margin ?? '8px',
-                                'transition': 'background-color .17s ease, color .17s ease, opacity 250ms ease',
-                            },
-                            id: button.id,
-                            class: `${WebpackModules.getByProps('button', 'sizeIcon').button} ${WebpackModules.getByProps('button', 'sizeIcon').sizeSmall} ${button.inverted ? 'inverted' : 'filled'} ${button.color ?? 'blurple'} ${button.class ?? ''}`,
-                            onClick: button.onclick ?? null
-                        },
-                            React.createElement('div', {
+                        constructor(button) {
+                            super(button)
+                            this.state = button
+                        }
+
+                        render() {
+                            var button = this.state;
+                            return React.createElement('button', {
                                 style: {
-                                    'pointer-events': 'none',
-                                    'display': 'flex',
-                                    'align-items': 'center',
-                                    'justify-content': 'center'
-                                }
+                                    display: 'inline-block',
+                                    width: button.width ?? 'fit-content',
+                                    height: button.height ?? 'fit-content',
+                                    padding: button.padding ?? '8px',
+                                    margin: button.margin ?? '8px',
+                                    'transition': 'background-color .17s ease, color .17s ease, opacity 250ms ease',
+                                },
+                                id: button.id,
+                                class: `${Animations.modules.Button} ${Animations.modules.ButtonSizeSmall} ${button.inverted ? 'inverted' : 'filled'} ${button.color ?? 'blurple'} ${button.class ?? ''}`,
+                                onClick: button.onclick ?? null
                             },
-                                [
-                                    Array.isArray(button.svgPaths) ? React.createElement('svg',
-                                        {
-                                            viewBox: button.svgView ?? '0 0 24 24',
-                                            fill: '#fff',
+                                React.createElement('div', {
+                                    style: {
+                                        'pointer-events': 'none',
+                                        'display': 'flex',
+                                        'align-items': 'center',
+                                        'justify-content': 'center'
+                                    }
+                                },
+                                    [
+                                        Array.isArray(button.svgPaths) ? React.createElement('svg',
+                                            {
+                                                viewBox: button.svgView ?? '0 0 24 24',
+                                                fill: '#fff',
+                                                style: {
+                                                    width: '18px',
+                                                    height: '18px',
+                                                    'margin-right': '4px'
+                                                }
+                                            },
+                                            (() => {
+                                                var result = []
+                                                button.svgPaths.forEach(path => result.push(React.createElement('path', { d: path })));
+                                                return result;
+                                            })()
+                                        ) : null,
+                                        React.createElement('span', {
                                             style: {
-                                                width: '18px',
-                                                height: '18px',
-                                                'margin-right': '4px'
-                                            }
+                                                'max-width': 'none'
+                                            },
+                                            class: `${Animations.modules.ButtonText}`,
                                         },
-                                        (()=>{
-                                            var result = []
-                                            button.svgPaths.forEach(path=>result.push(React.createElement('path', { d: path })));
-                                            return result;
-                                        })()
-                                    ) : null,
-                                    React.createElement('span', {
-                                        style: {
-                                            'max-width': 'none'
-                                        },
-                                        class: `${WebpackModules.getByProps('buttonText', 'giftIcon').buttonText}`,
-                                    },
-                                        button.label
-                                    )
-                                ]
+                                            button.label
+                                        )
+                                    ]
+                                )
                             )
-                        )
+                        }
+                    }
+
+                    class ElementInput extends React.Component {
+
+                        constructor(input) {
+                            super(input)
+                            this.state = input
+                        }
+
+                        render() {
+                            var input = this.state;
+                            return React.createElement('input',
+                                {
+                                    style: {
+                                        display: 'inline-block',
+                                        width: input.width ?? '100%',
+                                        height: input.height ?? 'fit-content',
+                                        padding: input.padding ?? '8px',
+                                        margin: input.margin ?? '8px',
+                                    },
+                                    placeholder: input.placeholder ?? '',
+                                    maxlength: input.maxlength ?? '',
+                                    max: input.max ?? '',
+                                    min: input.min ?? '0',
+                                    size: input.size ?? '',
+                                    step: input.step ?? '0.01',
+                                    type: (['text', 'password', 'email', 'number', 'integer']).includes(input.type) ? (input.type=='integer'?'number':input.type) : 'text',
+                                    value: input.value ?? '',
+                                    id: input.id,
+                                    class: `${Animations.modules.InputDefault} ${input.class ?? ''}`,
+                                    onClick: input.onclick ?? null,
+                                    onChange: (e) => {
+                                        var value = e.currentTarget.value
+
+                                        if( (['number', 'integer']).includes(input.type) && !(/\d*,/).test(value) ) {
+                                            value = Number(value)
+                                            value = (value<=(input.max??Infinity) ? value : input.max)
+                                            value = (value>=(input.min??0) ? value : input.min??0)
+                                            value = (input.type=='integer'?Math.floor(value):value)
+                                        }
+                                        var newValue = String(value)
+
+                                        this.setState({
+                                            ...input,
+                                            value: newValue
+                                        })
+
+                                        input?.onchange(e, value)
+                                    }
+                                }
+                            )
+                        }
                     }
 
                     /**
@@ -1040,21 +1818,42 @@
                      * @param {object} options Panel optinons.
                      * @param {string} [options.widthAll] The width of each button, if the template does not specify a different width.
                      * @param {string} [options.heightAll] The height of each button, if the template does not specify a different height.
-                     * @param {string} [options.align="inline-flex"] `justify-content` css value for each button container. Default - `flex-start`.
+                     * @param {string} [options.align="flex-start"] `justify-content` css value for each button container.
+                     * @param {boolean} [options.nosidemargin=true] Zeroing the left and right margins for the first and last button respectively.
                      */
 
-                    var ButtonsPanel = (containersTemp = [], options = {}) => {
+                    var ElementsPanel = (containersTemp = [], options = {}) => {
                         var containerNodes = [];
-                        containersTemp.forEach(containerTemp=>{
-                            var buttonNodes = [];
-                            containerTemp.buttons.forEach(buttonTemp=>{
-                                buttonNodes.push(
-                                    ElementButton({
-                                        width: options.widthAll ?? containerTemp.options?.widthAll,
-                                        height: options.heightAll ?? containerTemp.options?.heightAll,
-                                        ...buttonTemp
-                                    })
-                                )
+                        containersTemp?.forEach(containerTemp => {
+                            var elementNodes = [];
+                            containerTemp.elements?.forEach(elementTemp => {
+                                switch (elementTemp.component) {
+                                    case 'button':
+                                        elementNodes.push(
+                                            React.createElement(ElementButton, {
+                                                width: options.widthAll ?? containerTemp.options?.widthAll,
+                                                height: options.heightAll ?? containerTemp.options?.heightAll,
+                                                margin: options.marginAll ?? containerTemp.options?.marginAll,
+                                                padding: options.paddingAll ?? containerTemp.options?.paddingAll,
+                                                ...elementTemp
+                                            })
+                                        )
+                                        break;
+                                    case 'input':
+                                        elementNodes.push(
+                                            React.createElement(ElementInput, {
+                                                width: options.widthAll ?? containerTemp.options?.widthAll,
+                                                height: options.heightAll ?? containerTemp.options?.heightAll,
+                                                margin: options.marginAll ?? containerTemp.options?.marginAll,
+                                                padding: options.paddingAll ?? containerTemp.options?.paddingAll,
+                                                ...elementTemp
+                                            })
+                                        )
+                                        break;
+                                
+                                    default:
+                                        break;
+                                }
                             })
                             containerNodes.push(
                                 React.createElement('div',
@@ -1064,9 +1863,9 @@
                                             width: '100%',
                                             'justify-content': options.align ?? containerTemp.options?.align ?? 'flex-start'
                                         },
-                                        class: `buttonsContainer`
+                                        class: `elementsContainer ${options.nosidemargin ?? containerTemp.options?.nosidemargin ?? true ? 'nosidemargin':''}`
                                     },
-                                    ...buttonNodes
+                                    ...elementNodes
                                 )
                             )
                         })
@@ -1078,7 +1877,7 @@
                                 'flex-direction': 'column',
                                 'justify-content': options.align ?? 'inline-flex'
                             },
-                            class: `buttonsPanel`
+                            class: `elementsPanel`
                         },
                             [
                                 ...containerNodes
@@ -1100,12 +1899,14 @@
                      * @param {string} [options.margin]
                      * @param {string} [options.padding]
                      * @param {string} [options.class]
-                     * @param {object} [options.buttonsPanel] ButtonsPanel.
-                     * @param {Array<object>} [options.buttonsPanel.containersTemp] Array with button container templates.
-                     * @param {object} [options.buttonsPanel.options] ButtonsPanel options.
-                     * @param {string} [options.buttonsPanel.options.widthAll] The width of each button, if the template does not specify a different width.
-                     * @param {string} [options.buttonsPanel.options.heightAll] The height of each button, if the template does not specify a different height.
-                     * @param {string} [options.buttonsPanel.options.align="inline-flex"] `justify-content` css value for each button container. Default - `flex-start`.
+                     * @param {object} [options.elementsPanel] ElementsPanel.
+                     * @param {Array<object>} [options.elementsPanel.containersTemp] Array with element container templates.
+                     * @param {object} [options.elementsPanel.options] ElementsPanel options.
+                     * @param {string} [options.elementsPanel.options.widthAll] The width of each element, if the template does not specify a different width.
+                     * @param {string} [options.elementsPanel.options.heightAll] The height of each element, if the template does not specify a different height.
+                     * @param {string} [options.elementsPanel.options.marginAll] The margin of each element, if the template does not specify a different height.
+                     * @param {string} [options.elementsPanel.options.paddingAll] The padding of each element, if the template does not specify a different height.
+                     * @param {string} [options.elementsPanel.options.align="inline-flex"] `justify-content` css value for each element container. Default - `flex-start`.
                      * @param {string} [options.class]
                      * @param {object} [options.textarea] Textarea options.
                      * @param {string} [options.textarea.width]
@@ -1126,7 +1927,7 @@
                             class: `animTextareaPanel ${options.class}`
                         },
                             [
-                                options.buttonsPanel?(ButtonsPanel(options.buttonsPanel.containersTemp, options.buttonsPanel.options ?? {}).render):null,
+                                options.elementsPanel?(ElementsPanel(options.elementsPanel.containersTemp, options.elementsPanel.options ?? {}).render):null,
                                 React.createElement('textarea',
                                     {
                                         style: {
@@ -1136,7 +1937,7 @@
                                         spellcheck: 'false',
                                         type: options.textarea?.type ?? 'text',
                                         placeholder: options.textarea?.placeholder ?? '',
-                                        class: `animTextarea ${options.textarea?.class ?? ''} ${WebpackModules.getByProps('inputDefault', 'focused').inputDefault} ${WebpackModules.getByProps('textArea').textArea} ${WebpackModules.getByProps('scrollbarDefault').scrollbarDefault}`,
+                                        class: `animTextarea ${options.textarea?.class ?? ''} ${Animations.modules.InputDefault} ${Animations.modules.TextArea} ${Animations.modules.ScrollbarDefault}`,
                                         onChange: onchange ?? null
                                     },
                                     value
@@ -1201,9 +2002,9 @@
                                 tempBlocks[i] = React.createElement('div', {
                                     class: 'animTempBlock',
                                     style: {
-                                        width: options?.tempBlocks?.width ?? (options?.horizontal?'15%':'auto'),
+                                        width: options?.tempBlocks?.width ?? (options?.horizontal?'100%':'auto'),
                                         height: options?.tempBlocks?.height ?? (options?.horizontal?'26px':'18%'),
-                                        margin: options?.tempBlocks?.margin ?? '4px'
+                                        margin: options?.tempBlocks?.margin ?? (options?.horizontal?'0 4px':'4px')
                                     }
                                 })
                             }
@@ -1220,10 +2021,17 @@
                                         e.currentTarget.classList.add('enabled');
                                     }
                                 },
-                                    [...tempBlocks, React.createElement('div', {
-                                        class: 'animPreviewLabel',
-                                        title: template.label
-                                    }, template.label
+                                [
+                                    React.createElement('div', {
+                                        class: 'animPreviewTempsContainer'
+                                    },
+                                        tempBlocks
+                                    ),
+
+                                    React.createElement('div', {
+                                        class: 'animPreviewLabel'
+                                    },
+                                        template.label
                                     )]
                                 )
                             )
@@ -1277,11 +2085,12 @@
                                 textareas.push(
                                     TextareaPanel(
                                         {
-                                            buttonsPanel: {
+                                            elementsPanel: {
                                                 containersTemp: [
                                                     {
-                                                        buttons: [
+                                                        elements: [
                                                             {
+                                                                component: 'button',
                                                                 label: TEMPS.LABELS.PREVIEW_BUTTON_TEMPLATE,
                                                                 onclick: (e) => {
                                                                     e.currentTarget.closest('.animTextareaPanel')
@@ -1289,6 +2098,7 @@
                                                                 }
                                                             },
                                                             {
+                                                                component: 'button',
                                                                 label: TEMPS.LABELS.PREVIEW_BUTTON_CLEAR,
                                                                 onclick: (e) => {
                                                                     var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
@@ -1297,6 +2107,7 @@
                                                                 }
                                                             },
                                                             {
+                                                                component: 'button',
                                                                 color: 'green',
                                                                 label: TEMPS.LABELS.PREVIEW_BUTTON_LOAD,
                                                                 onclick: (e) => {
@@ -1305,6 +2116,7 @@
                                                                 }
                                                             },
                                                             {
+                                                                component: 'button',
                                                                 color: 'green',
                                                                 label: TEMPS.LABELS.PREVIEW_BUTTON_SAVE,
                                                                 onclick: (e) => {
@@ -1318,11 +2130,12 @@
                                                     }
                                                 ],
                                                 options: {
-                                                    widthAll: '100%'
+                                                    widthAll: '100%',
+                                                    marginAll: '0 8px'
                                                 }
                                             },
                                             textarea: {
-                                                height: '281px',
+                                                height: '290px',
                                                 placeholder: `/*\n${TEMPS.LABELS.PREVIEW_PLACEHOLDER_HINT}\n*/\n\n0% {\n\ttransform: translate(0, 100%);\n}\n\n100% {\n\ttransform: translate(0, 0) scale(1);\n}`,
                                             },
                                             class: `${this.settings[options.class].custom.enabled && i == this.settings[options.class].custom.page ? 'show' : ''}`,
@@ -1483,6 +2296,113 @@
                         return {class: Panel, render: result};
                     }
 
+                    /**
+                     * any
+                     */
+
+                    var TabsPanel = (tabsTemp = [], options={}) => {
+
+                        var tabsNodes = [];
+                        var contentNodes = [];
+
+                        tabsTemp.forEach((tab, index)=>{
+                            tabsNodes.push(
+                                React.createElement('div',
+                                    {
+                                        'data-index': index,
+                                        class: `animTab`,
+                                        onClick: (e)=>{
+                                            var tab = e.currentTarget;
+                                            var panel = tab.closest('.animTabsPanel');
+
+                                            panel.querySelectorAll(`.animTab:not([data-index="${index}"])`).forEach(
+                                                (content) => {
+                                                    content.classList.remove('selected')
+                                                }
+                                            );                                            
+                                            panel.querySelectorAll(`.animContent:not([data-index="${index}"])`).forEach(
+                                                (content) => {
+                                                    content.classList.remove('show')
+                                                }
+                                            );
+                                            panel.querySelector(`.animTab[data-index="${index}"]`).classList.toggle('selected')
+                                            panel.querySelector(`.animContent[data-index="${index}"]`).classList.toggle('show')
+                                        }
+                                    },
+                                    tab.name
+                                )
+                            )
+                            contentNodes.push(
+                                React.createElement('div',
+                                    {
+                                        'data-index': index,
+                                        class: `animContent`
+                                    },
+                                    tab.content
+                                )
+                            )
+                        })
+
+                        var result = React.createElement('div', {
+                            style: {
+                                margin: options.margin ?? null,
+                                padding: options.padding ?? null
+                            },
+                            class: `animTabsPanel ${options.class}`
+                        },
+                            [
+                                React.createElement('div',
+                                    {
+                                        class: 'animTabsContainer'
+                                    },
+                                    tabsNodes
+                                ),
+
+                                React.createElement('div',
+                                    {
+                                        class: 'animContentsContainer'
+                                    },
+                                    contentNodes
+                                ),
+                            ]
+                        )
+
+                        class Panel extends React.Component {
+                            render() {
+                                return result
+                            }
+                        }
+
+                        return {class: Panel, render: result}
+                    }
+
+                    /**
+                     * SettingsField.
+                     */
+
+                    var Field = (title, note, settingstype) => {
+
+                        var result = React.createElement('div',
+                            {
+                                class: 'animField'
+                            },
+                            [
+                                React.createElement('div', {class: 'animFieldDivider'}),
+                                React.createElement('div', {class: 'animFieldTitle'}, title),
+                                React.createElement('div', {class: 'animFieldNote'}, note),
+                                settingstype
+                            ]
+                        )
+
+                        class Field extends React.Component {
+                            render() {
+                                return result
+                            }
+                        }
+
+                        return {class: Field, render: result}
+                    }
+
                     setTimeout(()=>{
                         Tooltip.create(document.getElementById('animations-version-changelog'), TEMPS.TOOLTIPS.BUTTON_ANIMATIONS_VERSION_CHANGELOG)
                         Tooltip.create(document.getElementById('animations-version-check'), TEMPS.TOOLTIPS.BUTTON_ANIMATIONS_VERSION_CHECK)
@@ -1511,15 +2431,17 @@
                         Tooltip.create(document.getElementById('popouts-selectors-clear'), TEMPS.TOOLTIPS.BUTTON_SELECTORS_POPOUTS_CLEAR)
                     }, 500)
 
-                    return Settings.SettingPanel.build(
+                    var settings_panel =
+                    Settings.SettingPanel.build(
                         this.saveSettings.bind(this),
 
                         new Settings.SettingField(null, null, null,
-                            ButtonsPanel(
+                            ElementsPanel(
                             [
                                 {
-                                    buttons: [
+                                    elements: [
                                         {
+                                            component: 'button',
                                             color: 'blurple',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHANGELOG,
                                             svgPaths: [
@@ -1532,6 +2454,7 @@
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             color: 'blurple',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK,
                                             svgPaths: [
@@ -1540,10 +2463,9 @@
                                             id: 'animations-version-check',
                                             inverted: false,
                                             onclick: (e) => {
-
                                                 let button = e.currentTarget;
 
-                                                button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING;
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_SEARCHING;
 
                                                 const Http = new XMLHttpRequest();
                                                 Http.open("GET", 'https://api.github.com/repos/Mopsgamer/BetterDiscord-codes/contents/plugins/Animations/Animations.plugin.js');
@@ -1551,7 +2473,7 @@
 
                                                 Http.timeout = 5000;
                                                 Http.ontimeout = function (e) {
-                                                    button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT;
+                                                    button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_TIMEOUT;
                                                     button.classList.remove('blurple')
                                                     button.classList.add('red')
                                                 };
@@ -1560,7 +2482,7 @@
                                                     if (e.currentTarget.readyState != 4) return
 
                                                     if (!Http.responseText) {
-                                                        button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_ERROR;
+                                                        button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_ERROR;
                                                         button.classList.remove('blurple')
                                                         button.classList.add('red')
                                                         return
@@ -1604,7 +2526,7 @@
 
                                                     switch (newerVersion(GitHubVersion, this.getVersion())) {
                                                         case GitHubVersion:
-                                                            button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_OLDER(GitHubVersion)
+                                                            button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_OLDER(GitHubVersion)
                                                             button.classList.remove('blurple')
                                                             button.classList.add('green')
                                                             button.addEventListener('click',
@@ -1627,7 +2549,7 @@
                                                             )
                                                             break;
                                                         case this.getVersion():
-                                                            button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_NEWER(this.getVersion())
+                                                            button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_NEWER(this.getVersion())
                                                             button.classList.remove('blurple')
                                                             button.classList.add('grey')
                                                             button.addEventListener('click',
@@ -1650,7 +2572,7 @@
                                                             )
                                                             break;
                                                         case false:
-                                                            button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_LATEST(this.getVersion())
+                                                            button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_VERSION_CHECK_LATEST(this.getVersion())
                                                             button.classList.remove('blurple')
                                                             button.classList.add('grey')
                                                             button.addEventListener('click',
@@ -1682,8 +2604,9 @@
                                     ],
                                 },
                                 {
-                                    buttons: [
+                                    elements: [
                                         {
+                                            component: 'button',
                                             color: 'blurple',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_RESET,
                                             id: 'animations-reset',
@@ -1694,29 +2617,31 @@
                                             onclick: async (e) => {
 
                                                 let button = e.currentTarget;
-                                                button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
                                                 await this.wait(500);
 
                                                 PluginUtilities.saveSettings(this.getName(), this.defaultSettings);
                                                 this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
-                                                this.changeStyles(200);
+                                                this.changeStyles();
                                                 this.closeSettings();
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             color: 'blurple',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_REBUILD,
                                             id: 'animations-rebuild',
                                             svgPaths: [
                                                 'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
                                             ],
-                                            onclick: (e) => this.changeStyles(200)
+                                            onclick: (e) => this.changeStyles()
                                         }
                                     ],
                                 },
                                 {
-                                    buttons: [
+                                    elements: [
                                         {
+                                            component: 'button',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_ISSUES,
                                             color: 'grey',
                                             id: 'animations-issues',
@@ -1728,6 +2653,7 @@
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             label: TEMPS.LABELS.BUTTON_ANIMATIONS_DISCUSSIONS,
                                             color: 'grey',
                                             id: 'animations-discussions',
@@ -1741,14 +2667,17 @@
                                     ],
                                 },
                                 {
-                                    buttons: [
+                                    elements: [
                                         {
+                                            component: 'button',
                                             color: this.settings.lists.enabled ? 'green' : 'red',
                                             label: TEMPS.LABELS.BUTTON_LISTS_SWITCH,
                                             id: 'lists-switch-button',
-                                            onclick: (e) => {
+                                            onclick: async (e) => {
 
                                                 let button = e.currentTarget
+
+                                                button.getElementsByTagName('span')[0].innerText = '...'
 
                                                 this.settings.lists.enabled = !this.settings.lists.enabled;
                                                 if (!this.settings.lists.enabled) {
@@ -1758,17 +2687,21 @@
                                                     button.classList.remove('red')
                                                     button.classList.add('green')
                                                 }
+                                                await this.changeStyles();
                                                 PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                this.changeStyles();
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_LISTS_SWITCH;
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             color: this.settings.buttons.enabled ? 'green' : 'red',
                                             label: TEMPS.LABELS.BUTTON_BUTTONS_SWITCH,
                                             id: 'buttons-switch-button',
-                                            onclick: (e) => {
+                                            onclick: async (e) => {
 
                                                 let button = e.currentTarget
+
+                                                button.getElementsByTagName('span')[0].innerText = '...'
 
                                                 this.settings.buttons.enabled = !this.settings.buttons.enabled;
                                                 if (!this.settings.buttons.enabled) {
@@ -1778,17 +2711,21 @@
                                                     button.classList.remove('red')
                                                     button.classList.add('green')
                                                 }
+                                                await this.changeStyles();
                                                 PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                this.changeStyles();
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_BUTTONS_SWITCH;
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             color: this.settings.messages.enabled ? 'green' : 'red',
                                             label: TEMPS.LABELS.BUTTON_MESSAGES_SWITCH,
                                             id: 'messages-switch-button',
-                                            onclick: (e) => {
+                                            onclick: async (e) => {
 
                                                 let button = e.currentTarget
+
+                                                button.getElementsByTagName('span')[0].innerText = '...'
 
                                                 this.settings.messages.enabled = !this.settings.messages.enabled;
                                                 if (!this.settings.messages.enabled) {
@@ -1798,17 +2735,21 @@
                                                     button.classList.remove('red')
                                                     button.classList.add('green')
                                                 }
+                                                await this.changeStyles();
                                                 PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                this.changeStyles();
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_MESSAGES_SWITCH;
                                             }
                                         },
                                         {
+                                            component: 'button',
                                             color: this.settings.popouts.enabled ? 'green' : 'red',
                                             label: TEMPS.LABELS.BUTTON_POPOUTS_SWITCH,
                                             id: 'popouts-switch-button',
-                                            onclick: (e) => {
+                                            onclick: async (e) => {
 
                                                 let button = e.currentTarget
+
+                                                button.getElementsByTagName('span')[0].innerText = '...'
 
                                                 this.settings.popouts.enabled = !this.settings.popouts.enabled;
                                                 if (!this.settings.popouts.enabled) {
@@ -1818,8 +2759,9 @@
                                                     button.classList.remove('red')
                                                     button.classList.add('green')
                                                 }
+                                                await this.changeStyles();
                                                 PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                this.changeStyles();
+                                                button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_POPOUTS_SWITCH;
                                             }
                                         }
                                     ]
@@ -1831,626 +2773,811 @@
                                 }).class
                         ),
 
-                        new Settings.SettingGroup(TEMPS.LABELS.GROUP_LISTS).append(
+                        new Settings.SettingField(null, null, null,
 
-                            new Settings.SettingField(null, null, null,
-                                ButtonsPanel(
-                                    [
-                                        {
-                                            buttons: [
-                                                {
-                                                    color: 'blurple',
-                                                    label: TEMPS.LABELS.BUTTON_RESET_LISTS,
-                                                    id: 'animations-reset-lists',
-                                                    svgView: '0 0 20 20',
-                                                    svgPaths: [
-                                                        'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
-                                                    ],
-                                                    onclick: async (e) => {
-        
-                                                        let button = e.currentTarget;
-                                                        button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
-                                                        await this.wait(500);
-        
-                                                        this.settings.lists = this.defaultSettings.lists
-                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
-                                                        this.changeStyles();
-                                                        this.closeSettings();
-                                                    },
-                                                }
-                                            ],
-                                            options: {
-                                                widthAll: '100%',
-                                                align: 'space-between'
-                                            }
-                                        }
-                                    ]
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_LISTS_NAME_NOTE(this.defaultSettings.lists.name), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
-                                    { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
-                                    { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
-                                    { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
-                                    { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
-                                ], {
-                                    type: 'lists-name',
-                                    class: 'lists',
-                                    custom: {
-                                        data: this.settings.lists.custom,
-                                    }
-                                },
-                                    this.settings.lists.name, (e) => {
-                                        this.settings.lists.name = e.value;
-                                        this.settings.lists.page = e.page;
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                    }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_SEQUENCE, TEMPS.LABELS.FIELD_LISTS_SEQUENCE_NOTE(this.defaultSettings.lists.sequence), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_VERTICAL_FROM_FIRST, value: 'fromFirst' },
-                                    { label: TEMPS.LABELS.PREVIEW_VERTICAL_FROM_LAST, value: 'fromLast' },
-                                ], {
-                                    type: 'lists-sequence'
-                                }, this.settings.lists.sequence, (e) => {
-                                    this.settings.lists.sequence = e.value;
-                                    PluginUtilities.saveSettings(this.getName(), this.settings);
-                                    this.changeStyles()
-                                }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_LISTS_DELAY_NOTE(this.defaultSettings.lists.delay), 1, 10, this.settings.lists.delay,
-                                (e) => {
-                                    this.settings.lists.delay = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0, 0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.15, 0.2],
-                                stickToMarkers: true
-                            }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_LIMIT, TEMPS.LABELS.FIELD_LISTS_LIMIT_NOTE(this.defaultSettings.lists.limit), 6, 54, this.settings.lists.limit,
-                                (e) => {
-                                    this.settings.lists.limit = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [10, 15, 20, 25, 30, 35, 50, 65, 100],
-                                stickToMarkers: true
-                            }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_LISTS_DURATION_NOTE(this.defaultSettings.lists.duration), 1, 10, this.settings.lists.duration,
-                                (e) => {
-                                    this.settings.lists.duration = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 2],
-                                stickToMarkers: true
-                            }
-                            ),
-                        ),
-
-                        new Settings.SettingGroup(TEMPS.LABELS.GROUP_BUTTONS).append(
-
-                            new Settings.SettingField(null, null, null,
-                                ButtonsPanel(
-                                    [
-                                        {
-                                            buttons: [
-                                                {
-                                                    color: 'blurple',
-                                                    label: TEMPS.LABELS.BUTTON_RESET_BUTTONS,
-                                                    id: 'animations-reset-buttons',
-                                                    svgView: '0 0 20 20',
-                                                    svgPaths: [
-                                                        'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
-                                                    ],
-                                                    onclick: async (e) => {
-        
-                                                        let button = e.currentTarget;
-                                                        button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
-                                                        await this.wait(500);
-        
-                                                        this.settings.buttons = this.defaultSettings.buttons
-                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
-                                                        this.changeStyles();
-                                                        this.closeSettings();
-                                                    },
-                                                }
-                                            ],
-                                            options: {
-                                                widthAll: '100%',
-                                                align: 'space-between'
-                                            }
-                                        }
-                                    ]
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_BUTTONS_NAME_NOTE(this.defaultSettings.buttons.name), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
-                                    { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
-                                    { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
-                                    { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
-                                    { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
-                                ], {
-                                    type: 'buttons-name',
-                                    class: 'buttons',
-                                    horizontal: true,
-                                    custom: {
-                                        data: this.settings.buttons.custom,
-                                    }
-                                },
-                                    this.settings.buttons.name, (e) => {
-                                        this.settings.buttons.name = e.value;
-                                        this.settings.buttons.page = e.page;
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                    }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_SEQUENCE, TEMPS.LABELS.FIELD_BUTTONS_SEQUENCE_NOTE(this.defaultSettings.buttons.sequence), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_HORIZONTAL_FROM_FIRST, value: 'fromFirst' },
-                                    { label: TEMPS.LABELS.PREVIEW_HORIZONTAL_FROM_LAST, value: 'fromLast' },
-                                ], {
-                                    type: 'buttons-sequence',
-                                    horizontal: true
-                                }, this.settings.buttons.sequence, (e) => {
-                                    this.settings.buttons.sequence = e.value;
-                                    PluginUtilities.saveSettings(this.getName(), this.settings);
-                                    this.changeStyles()
-                                }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_BUTTONS_DELAY_NOTE(this.defaultSettings.buttons.delay), 1, 10, this.settings.buttons.delay,
-                                (e) => {
-                                    this.settings.buttons.delay = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0, 0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.15, 0.2, 0.25, 0.3],
-                                stickToMarkers: true
-                            }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_BUTTONS_DURATION_NOTE(this.defaultSettings.buttons.duration), 1, 10, this.settings.buttons.duration,
-                                (e) => {
-                                    this.settings.buttons.duration = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 2],
-                                stickToMarkers: true
-                            }
-                            )
-                        ),
-
-                        new Settings.SettingGroup(TEMPS.LABELS.GROUP_MESSAGES).append(
-
-                            new Settings.SettingField(null, null, null,
-                                ButtonsPanel(
-                                    [
-                                        {
-                                            buttons: [
-                                                {
-                                                    color: 'blurple',
-                                                    label: TEMPS.LABELS.BUTTON_RESET_MESSAGES,
-                                                    id: 'animations-reset-messages',
-                                                    svgView: '0 0 20 20',
-                                                    svgPaths: [
-                                                        'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
-                                                    ],
-                                                    onclick: async (e) => {
-        
-                                                        let button = e.currentTarget;
-                                                        button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
-                                                        await this.wait(500);
-        
-                                                        this.settings.messages = this.defaultSettings.messages
-                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
-                                                        this.changeStyles();
-                                                        this.closeSettings();
-                                                    },
-                                                }
-                                            ],
-                                            options: {
-                                                widthAll: '100%',
-                                                align: 'space-between'
-                                            }
-                                        }
-                                    ]
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_MESSAGES_NAME_NOTE(this.defaultSettings.messages.name), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
-                                    { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
-                                    { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
-                                    { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
-                                    { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
-                                ], {
-                                    type: 'messages-name',
-                                    class: 'messages',
-                                    custom: {
-                                        data: this.settings.messages.custom,
-                                    }
-                                },
-                                    this.settings.messages.name, (e) => {
-                                        this.settings.messages.name = e.value;
-                                        this.settings.messages.page = e.page;
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                    }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_MESSAGES_DELAY_NOTE(this.defaultSettings.messages.delay), 1, 10, this.settings.messages.delay,
-                                (e) => {
-                                    this.settings.messages.delay = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0, 0.01, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.15, 0.2],
-                                stickToMarkers: true
-                            }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_LIMIT, TEMPS.LABELS.FIELD_MESSAGES_LIMIT_NOTE(this.defaultSettings.messages.limit), 6, 54, this.settings.messages.limit,
-                                (e) => {
-                                    this.settings.messages.limit = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [10, 15, 20, 25, 30, 35, 50, 65, 100],
-                                stickToMarkers: true
-                            }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_MESSAGES_DURATION_NOTE(this.defaultSettings.messages.duration), 1, 10, this.settings.messages.duration,
-                                (e) => {
-                                    this.settings.messages.duration = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 2],
-                                stickToMarkers: true
-                            }
-                            )
-
-                        ),
-
-                        new Settings.SettingGroup(TEMPS.LABELS.GROUP_POPOUTS).append(
-
-                            new Settings.SettingField(null, null, null,
-                                ButtonsPanel(
-                                    [
-                                        {
-                                            buttons: [
-                                                {
-                                                    color: 'blurple',
-                                                    label: TEMPS.LABELS.BUTTON_RESET_POPOUTS,
-                                                    id: 'animations-reset-popouts',
-                                                    svgView: '0 0 20 20',
-                                                    svgPaths: [
-                                                        'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
-                                                    ],
-                                                    onclick: async (e) => {
-        
-                                                        let button = e.currentTarget;
-                                                        button.querySelector('span').innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
-                                                        await this.wait(500);
-        
-                                                        this.settings.popouts = this.defaultSettings.popouts
-                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
-                                                        this.changeStyles();
-                                                        this.closeSettings();
-                                                    },
-                                                }
-                                            ],
-                                            options: {
-                                                widthAll: '100%',
-                                                align: 'space-between'
-                                            }
-                                        }
-                                    ]
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_POPOUTS_NAME_NOTE(this.defaultSettings.popouts.name), null,
-                                PreviewsPanel([
-                                    { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
-                                    { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
-                                    { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
-                                    { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
-                                    { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
-                                    { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
-                                ], {
-                                    type: 'popouts-name',
-                                    class: 'popouts',
-                                    horizontal: false,
-                                    tempBlocks: {
-                                        count: 1,
-                                        height: '36%',
-                                        margin: '36px 4px'
-                                    },
-                                    custom: {
-                                        data: this.settings.popouts.custom,
-                                    }
-                                },
-                                    this.settings.popouts.name, (e) => {
-                                        this.settings.popouts.name = e.value;
-                                        this.settings.popouts.page = e.page;
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                    }).class,
-                                { noteOnTop: true }
-                            ),
-
-                            new Settings.Slider(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_POPOUTS_DURATION_NOTE(this.defaultSettings.popouts.duration), 1, 10, this.settings.popouts.duration,
-                                (e) => {
-                                    this.settings.popouts.duration = e;
-                                    this.changeStyles()
-                                }, {
-                                markers: [0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 2],
-                                stickToMarkers: true
-                            }
-                            )
-                        ),
-
-                        new Settings.SettingGroup(TEMPS.LABELS.GROUP_ADVANCED).append(
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_LISTS_SELECTORS, TEMPS.LABELS.FIELD_LISTS_SELECTORS_NOTE, null,
-                                TextareaPanel({
-                                    buttonsPanel: {
-                                        containersTemp: [
-                                            {
-                                                buttons: [
+                            TabsPanel([
+                                {
+                                    name: TEMPS.LABELS.GROUP_LISTS,
+                                    content: [
+                                        Field(null, null,
+                                            ElementsPanel(
+                                                [
                                                     {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_LISTS_DEFAULT,
-                                                        id: 'lists-selectors-default',
-                                                        svgPaths: [
-                                                            'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
+                                                        elements: [
+                                                            {
+                                                                component: 'button',
+                                                                color: 'blurple',
+                                                                label: TEMPS.LABELS.BUTTON_RESET_LISTS,
+                                                                id: 'animations-reset-lists',
+                                                                svgView: '0 0 20 20',
+                                                                svgPaths: [
+                                                                    'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
+                                                                ],
+                                                                onclick: async (e) => {
+                    
+                                                                    let button = e.currentTarget;
+                                                                    button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
+                                                                    await this.wait(500);
+                    
+                                                                    this.settings.lists = this.defaultSettings.lists
+                                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
+                                                                    this.changeStyles();
+                                                                    this.closeSettings();
+                                                                },
+                                                            }
                                                         ],
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = Animations.selectorsLists.join(',\n\n')
-                                                            textarea.style.color = '';
-
-                                                            this.settings.lists.selectors = '';
-                                                            PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        }
-                                                    },
-                                                    {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_LISTS_CLEAR,
-                                                        id: 'lists-selectors-clear',
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = '';
-                                                            textarea.focus();
-                                                        }
-                                                    },
-                                                ]
-                                            }
-                                        ],
-                                        options: {
-                                            widthAll: '100%'
-                                        }
-                                    }
-                                },
-                                this.settings.lists.selectors ? this.settings.lists.selectors : Animations.selectorsLists.join(',\n\n'),
-                                (e) => {
-                                    var textarea = e.currentTarget;
-                                    var value = textarea.value;
-
-                                    if(value=='' || this.isValidSelector(value)) {
-                                        this.settings.lists.selectors = (value==Animations.selectorsLists?'':value)
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                        textarea.style.color = ''
-                                    } else {
-                                        textarea.style.color = this.colors.red
-                                    }
-                                }
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_BUTTONS_SELECTORS, TEMPS.LABELS.FIELD_BUTTONS_SELECTORS_NOTE, null,
-                                TextareaPanel({
-                                    buttonsPanel: {
-                                        containersTemp: [
-                                            {
-                                                buttons: [
-                                                    {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_BUTTONS_DEFAULT,
-                                                        id: 'buttons-selectors-default',
-                                                        svgPaths: [
-                                                            'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
-                                                        ],
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = Animations.selectorsButtons.join(',\n\n')
-                                                            textarea.style.color = '';
-
-                                                            this.settings.lists.selectors = '';
-                                                            PluginUtilities.saveSettings(this.getName(), this.settings);
-                                                        }
-                                                    },
-                                                    {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_BUTTONS_CLEAR,
-                                                        id: 'buttons-selectors-clear',
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = '';
-                                                            textarea.focus();
+                                                        options: {
+                                                            widthAll: '100%',
+                                                            align: 'space-between'
                                                         }
                                                     }
                                                 ]
-                                            }
-                                        ],
-                                        options: {
-                                            widthAll: '100%'
-                                        }
-                                    }
-                                },
-                                this.settings.buttons.selectors ? this.settings.buttons.selectors : Animations.selectorsButtons.join(',\n\n'),
-                                (e) => {
-                                    var textarea = e.currentTarget;
-                                    var value = textarea.value;
-
-                                    if(value=='' || this.isValidSelector(value)) {
-                                        this.settings.buttons.selectors = (value==Animations.selectorsButtons?'':value)
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                        textarea.style.color = ''
-                                    } else {
-                                        textarea.style.color = this.colors.red
-                                    }
-                                }
-                                ).class
-                            ),
-
-                            new Settings.SettingField(TEMPS.LABELS.FIELD_POPOUTS_SELECTORS, TEMPS.LABELS.FIELD_POPOUTS_SELECTORS_NOTE, null,
-                                TextareaPanel({
-                                    buttonsPanel: {
-                                        containersTemp: [
-                                            {
-                                                buttons: [
-                                                    {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_POPOUTS_DEFAULT,
-                                                        id: 'popouts-selectors-default',
-                                                        svgPaths: [
-                                                            'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
-                                                        ],
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = Animations.selectorsPopouts.join(',\n\n')
-                                                            textarea.style.color = '';
-
-                                                            this.settings.lists.selectors = '';
-                                                            PluginUtilities.saveSettings(this.getName(), this.settings);
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_LISTS_NAME_NOTE(this.defaultSettings.lists.name),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
+                                                { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
+                                                { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
+                                                { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
+                                                { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
+                                            ], {
+                                                type: 'lists-name',
+                                                class: 'lists',
+                                                custom: {
+                                                    data: this.settings.lists.custom,
+                                                }
+                                            },
+                                                this.settings.lists.name, (e) => {
+                                                    this.settings.lists.name = e.value;
+                                                    this.settings.lists.page = e.page;
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_SEQUENCE, TEMPS.LABELS.FIELD_LISTS_SEQUENCE_NOTE(this.defaultSettings.lists.sequence),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_VERTICAL_FROM_FIRST, value: 'fromFirst' },
+                                                { label: TEMPS.LABELS.PREVIEW_VERTICAL_FROM_LAST, value: 'fromLast' },
+                                            ], {
+                                                type: 'lists-sequence'
+                                            }, this.settings.lists.sequence, (e) => {
+                                                this.settings.lists.sequence = e.value;
+                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_LISTS_DELAY_NOTE(this.defaultSettings.lists.delay),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.lists.delay,
+                                                            max: 0.35,
+                                                            step: 0.01,
+                                                            type: 'number',
+                                                            onchange: (e) => {
+                                                                var value = Number(e.currentTarget.value);
+            
+                                                                this.settings.lists.delay = value;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
                                                         }
-                                                    },
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_LIMIT, TEMPS.LABELS.FIELD_LISTS_LIMIT_NOTE(this.defaultSettings.lists.limit),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.lists.limit,
+                                                            max: 100,
+                                                            step: 5,
+                                                            type: 'integer',
+                                                            onchange: (e, v) => {
+                                                                this.settings.lists.limit = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_LISTS_DURATION_NOTE(this.defaultSettings.lists.duration),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.lists.duration,
+                                                            max: 3,
+                                                            step: 0.1,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.lists.duration = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+                                    ]
+                                },
+                                {
+                                    name: TEMPS.LABELS.GROUP_BUTTONS,
+                                    content: [
+                                        Field(null, null,
+                                            ElementsPanel(
+                                                [
                                                     {
-                                                        label: TEMPS.LABELS.BUTTON_SELECTORS_POPOUTS_CLEAR,
-                                                        id: 'popouts-selectors-clear',
-                                                        onclick: (e) => {
-                                                            var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
-                                                            textarea.value = '';
-                                                            textarea.focus();
+                                                        elements: [
+                                                            {
+                                                                component: 'button',
+                                                                color: 'blurple',
+                                                                label: TEMPS.LABELS.BUTTON_RESET_BUTTONS,
+                                                                id: 'animations-reset-buttons',
+                                                                svgView: '0 0 20 20',
+                                                                svgPaths: [
+                                                                    'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
+                                                                ],
+                                                                onclick: async (e) => {
+                    
+                                                                    let button = e.currentTarget;
+                                                                    button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
+                                                                    await this.wait(500);
+                    
+                                                                    this.settings.buttons = this.defaultSettings.buttons
+                                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
+                                                                    this.changeStyles();
+                                                                    this.closeSettings();
+                                                                },
+                                                            }
+                                                        ],
+                                                        options: {
+                                                            widthAll: '100%',
+                                                            align: 'space-between'
                                                         }
                                                     }
                                                 ]
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_BUTTONS_NAME_NOTE(this.defaultSettings.buttons.name),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
+                                                { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
+                                                { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
+                                                { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
+                                                { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
+                                            ], {
+                                                type: 'buttons-name',
+                                                class: 'buttons',
+                                                horizontal: true,
+                                                custom: {
+                                                    data: this.settings.buttons.custom,
+                                                }
+                                            },
+                                                this.settings.buttons.name, (e) => {
+                                                    this.settings.buttons.name = e.value;
+                                                    this.settings.buttons.page = e.page;
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_SEQUENCE, TEMPS.LABELS.FIELD_BUTTONS_SEQUENCE_NOTE(this.defaultSettings.buttons.sequence),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_HORIZONTAL_FROM_FIRST, value: 'fromFirst' },
+                                                { label: TEMPS.LABELS.PREVIEW_HORIZONTAL_FROM_LAST, value: 'fromLast' },
+                                            ], {
+                                                type: 'buttons-sequence',
+                                                horizontal: true
+                                            }, this.settings.buttons.sequence, (e) => {
+                                                this.settings.buttons.sequence = e.value;
+                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_BUTTONS_DELAY_NOTE(this.defaultSettings.buttons.delay),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.buttons.delay,
+                                                            max: 0.5,
+                                                            step: 0.01,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.buttons.delay = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_BUTTONS_DURATION_NOTE(this.defaultSettings.buttons.duration),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.buttons.duration,
+                                                            max: 3,
+                                                            step: 0.1,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.buttons.duration = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+                                    ]
+                                },
+                                {
+                                    name: TEMPS.LABELS.GROUP_MESSAGES,
+                                    content: [
+                                        Field(null, null,
+                                            ElementsPanel(
+                                                [
+                                                    {
+                                                        elements: [
+                                                            {
+                                                                component: 'button',
+                                                                color: 'blurple',
+                                                                label: TEMPS.LABELS.BUTTON_RESET_MESSAGES,
+                                                                id: 'animations-reset-messages',
+                                                                svgView: '0 0 20 20',
+                                                                svgPaths: [
+                                                                    'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
+                                                                ],
+                                                                onclick: async (e) => {
+                    
+                                                                    let button = e.currentTarget;
+                                                                    button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
+                                                                    await this.wait(500);
+                    
+                                                                    this.settings.messages = this.defaultSettings.messages
+                                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
+                                                                    this.changeStyles();
+                                                                    this.closeSettings();
+                                                                },
+                                                            }
+                                                        ],
+                                                        options: {
+                                                            widthAll: '100%',
+                                                            align: 'space-between'
+                                                        }
+                                                    }
+                                                ]
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_MESSAGES_NAME_NOTE(this.defaultSettings.messages.name),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
+                                                { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
+                                                { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
+                                                { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
+                                                { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
+                                            ], {
+                                                type: 'messages-name',
+                                                class: 'messages',
+                                                custom: {
+                                                    data: this.settings.messages.custom,
+                                                }
+                                            },
+                                                this.settings.messages.name, (e) => {
+                                                    this.settings.messages.name = e.value;
+                                                    this.settings.messages.page = e.page;
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DELAY, TEMPS.LABELS.FIELD_MESSAGES_DELAY_NOTE(this.defaultSettings.messages.delay),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.messages.delay,
+                                                            max: 0.5,
+                                                            step: 0.01,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.messages.delay = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_LIMIT, TEMPS.LABELS.FIELD_MESSAGES_LIMIT_NOTE(this.defaultSettings.messages.limit),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.messages.limit,
+                                                            max: 100,
+                                                            step: 1,
+                                                            type: 'integer',
+                                                            onchange: (e, v) => {
+                                                                this.settings.messages.limit = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_MESSAGES_DURATION_NOTE(this.defaultSettings.messages.duration),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.messages.duration,
+                                                            max: 3,
+                                                            step: 0.01,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.messages.duration = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+                                    ]
+                                },
+                                {
+                                    name: TEMPS.LABELS.GROUP_POPOUTS,
+                                    content: [
+                                        Field(null, null,
+                                            ElementsPanel(
+                                                [
+                                                    {
+                                                        elements: [
+                                                            {
+                                                                component: 'button',
+                                                                color: 'blurple',
+                                                                label: TEMPS.LABELS.BUTTON_RESET_POPOUTS,
+                                                                id: 'animations-reset-popouts',
+                                                                svgView: '0 0 20 20',
+                                                                svgPaths: [
+                                                                    'M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z',
+                                                                ],
+                                                                onclick: async (e) => {
+                    
+                                                                    let button = e.currentTarget;
+                                                                    button.getElementsByTagName('span')[0].innerText = TEMPS.LABELS.BUTTON_ANIMATIONS_RESET_RESETING;
+                                                                    await this.wait(500);
+                    
+                                                                    this.settings.popouts = this.defaultSettings.popouts
+                                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    this.settings = PluginUtilities.loadSettings(this.getName(), this.defaultSettings);
+                                                                    this.changeStyles();
+                                                                    this.closeSettings();
+                                                                },
+                                                            }
+                                                        ],
+                                                        options: {
+                                                            widthAll: '100%',
+                                                            align: 'space-between'
+                                                        }
+                                                    }
+                                                ]
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_NAME, TEMPS.LABELS.FIELD_POPOUTS_NAME_NOTE(this.defaultSettings.popouts.name),
+                                            PreviewsPanel([
+                                                { label: TEMPS.LABELS.PREVIEW_IN, value: 'in' },
+                                                { label: TEMPS.LABELS.PREVIEW_OUT, value: 'out' },
+                                                { label: TEMPS.LABELS.PREVIEW_CIRCLE, value: 'circle' },
+                                                { label: TEMPS.LABELS.PREVIEW_POLYGON, value: 'polygon' },
+                                                { label: TEMPS.LABELS.PREVIEW_OPACITY, value: 'opacity' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIME, value: 'slime' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_RIGHT, value: 'brick-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_LEFT, value: 'brick-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_UP, value: 'brick-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_BRICK_DOWN, value: 'brick-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_RIGHT, value: 'slide-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_LEFT, value: 'slide-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP, value: 'slide-up' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN, value: 'slide-down' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_RIGHT, value: 'slide-up-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_UP_LEFT, value: 'slide-up-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_RIGHT, value: 'slide-down-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SLIDE_DOWN_LEFT, value: 'slide-down-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_RIGHT, value: 'skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_SKEW_LEFT, value: 'skew-left' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_RIGHT, value: 'wide-skew-right' },
+                                                { label: TEMPS.LABELS.PREVIEW_WIDE_SKEW_LEFT, value: 'wide-skew-left' },
+                                            ], {
+                                                type: 'popouts-name',
+                                                class: 'popouts',
+                                                horizontal: false,
+                                                tempBlocks: {
+                                                    count: 1,
+                                                    height: '36%'
+                                                },
+                                                custom: {
+                                                    data: this.settings.popouts.custom,
+                                                }
+                                            },
+                                                this.settings.popouts.name, (e) => {
+                                                    this.settings.popouts.name = e.value;
+                                                    this.settings.popouts.page = e.page;
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                            }).render,
+                                            { noteOnTop: true }
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_DURATION, TEMPS.LABELS.FIELD_POPOUTS_DURATION_NOTE(this.defaultSettings.popouts.duration),
+                                            ElementsPanel([
+                                                {
+                                                    elements: [
+                                                        {
+                                                            component: 'input',
+                                                            value: this.settings.popouts.duration,
+                                                            max: 3,
+                                                            step: 0.01,
+                                                            type: 'number',
+                                                            onchange: (e, v) => {
+                                                                this.settings.popouts.duration = v;
+                                                                PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                this.changeStyles()
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]).render
+                                        ).render,
+                                    ]
+                                },
+                                {
+                                    name: TEMPS.LABELS.GROUP_ADVANCED,
+                                    content: [
+                                        Field(TEMPS.LABELS.FIELD_LISTS_SELECTORS, TEMPS.LABELS.FIELD_LISTS_SELECTORS_NOTE,
+                                            TextareaPanel({
+                                                elementsPanel: {
+                                                    containersTemp: [
+                                                        {
+                                                            elements: [
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_LISTS_DEFAULT,
+                                                                    id: 'lists-selectors-default',
+                                                                    svgPaths: [
+                                                                        'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
+                                                                    ],
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = Animations.selectorsLists.join(',\n\n')
+                                                                        textarea.style.color = '';
+            
+                                                                        this.settings.lists.selectors = '';
+                                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    }
+                                                                },
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_LISTS_CLEAR,
+                                                                    id: 'lists-selectors-clear',
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = '';
+                                                                        textarea.focus();
+                                                                    }
+                                                                },
+                                                            ]
+                                                        }
+                                                    ],
+                                                    options: {
+                                                        widthAll: '100%'
+                                                    }
+                                                }
+                                            },
+                                            this.settings.lists.selectors ? this.settings.lists.selectors : Animations.selectorsLists.join(',\n\n'),
+                                            (e) => {
+                                                var textarea = e.currentTarget;
+                                                var value = textarea.value;
+            
+                                                if(value=='' || this.isValidSelector(value)) {
+                                                    this.settings.lists.selectors = (value==Animations.selectorsLists?'':value)
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                                    textarea.style.color = ''
+                                                } else {
+                                                    textarea.style.color = this.colors.red
+                                                }
                                             }
-                                        ],
-                                        options: {
-                                            widthAll: '100%'
-                                        },
-                                    },
-                                    textarea: {
-                                        height: '92px'
-                                    },
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_BUTTONS_SELECTORS, TEMPS.LABELS.FIELD_BUTTONS_SELECTORS_NOTE,
+                                            TextareaPanel({
+                                                elementsPanel: {
+                                                    containersTemp: [
+                                                        {
+                                                            elements: [
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_BUTTONS_DEFAULT,
+                                                                    id: 'buttons-selectors-default',
+                                                                    svgPaths: [
+                                                                        'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
+                                                                    ],
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = Animations.selectorsButtons.join(',\n\n')
+                                                                        textarea.style.color = '';
+            
+                                                                        this.settings.lists.selectors = '';
+                                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    }
+                                                                },
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_BUTTONS_CLEAR,
+                                                                    id: 'buttons-selectors-clear',
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = '';
+                                                                        textarea.focus();
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    options: {
+                                                        widthAll: '100%'
+                                                    }
+                                                }
+                                            },
+                                            this.settings.buttons.selectors ? this.settings.buttons.selectors : Animations.selectorsButtons.join(',\n\n'),
+                                            (e) => {
+                                                var textarea = e.currentTarget;
+                                                var value = textarea.value;
+            
+                                                if(value=='' || this.isValidSelector(value)) {
+                                                    this.settings.buttons.selectors = (value==Animations.selectorsButtons?'':value)
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                                    textarea.style.color = ''
+                                                } else {
+                                                    textarea.style.color = this.colors.red
+                                                }
+                                            }
+                                            ).render
+                                        ).render,
+            
+                                        Field(TEMPS.LABELS.FIELD_POPOUTS_SELECTORS, TEMPS.LABELS.FIELD_POPOUTS_SELECTORS_NOTE,
+                                            TextareaPanel({
+                                                elementsPanel: {
+                                                    containersTemp: [
+                                                        {
+                                                            elements: [
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_POPOUTS_DEFAULT,
+                                                                    id: 'popouts-selectors-default',
+                                                                    svgPaths: [
+                                                                        'M 13 3 c -4.97 0 -9 4.03 -9 9 H 1 l 3.89 3.89 l 0.07 0.14 L 9 12 H 6 c 0 -3.87 3.13 -7 7 -7 s 7 3.13 7 7 s -3.13 7 -7 7 c -1.93 0 -3.68 -0.79 -4.94 -2.06 l -1.42 1.42 C 8.27 19.99 10.51 21 13 21 c 4.97 0 9 -4.03 9 -9 s -4.03 -9 -9 -9 z',
+                                                                    ],
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = Animations.selectorsPopouts.join(',\n\n')
+                                                                        textarea.style.color = '';
+            
+                                                                        this.settings.lists.selectors = '';
+                                                                        PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                                    }
+                                                                },
+                                                                {
+                                                                    component: 'button',
+                                                                    label: TEMPS.LABELS.BUTTON_SELECTORS_POPOUTS_CLEAR,
+                                                                    id: 'popouts-selectors-clear',
+                                                                    onclick: (e) => {
+                                                                        var textarea = e.currentTarget.closest('.animTextareaPanel').querySelector('.animTextarea')
+                                                                        textarea.value = '';
+                                                                        textarea.focus();
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    options: {
+                                                        widthAll: '100%'
+                                                    },
+                                                },
+                                                textarea: {
+                                                    height: '92px'
+                                                },
+                                            },
+                                            this.settings.popouts.selectors ? this.settings.popouts.selectors : Animations.selectorsPopouts.join(',\n\n'),
+                                            (e) => {
+                                                var textarea = e.currentTarget;
+                                                var value = textarea.value;
+            
+                                                if(value=='' || this.isValidSelector(value)) {
+                                                    this.settings.popouts.selectors = (value==Animations.selectorsPopouts?'':value)
+                                                    PluginUtilities.saveSettings(this.getName(), this.settings);
+                                                    this.changeStyles()
+                                                    textarea.style.color = ''
+                                                } else {
+                                                    textarea.style.color = this.colors.red
+                                                }
+                                            },
+                                            ).render
+                                        ).render,
+                                    ]
                                 },
-                                this.settings.popouts.selectors ? this.settings.popouts.selectors : Animations.selectorsPopouts.join(',\n\n'),
-                                (e) => {
-                                    var textarea = e.currentTarget;
-                                    var value = textarea.value;
-
-                                    if(value=='' || this.isValidSelector(value)) {
-                                        this.settings.popouts.selectors = (value==Animations.selectorsPopouts?'':value)
-                                        PluginUtilities.saveSettings(this.getName(), this.settings);
-                                        this.changeStyles()
-                                        textarea.style.color = ''
-                                    } else {
-                                        textarea.style.color = this.colors.red
-                                    }
-                                },
-                                ).class
-                            ),
-
-                        )
+                            ]).class
+                        ),
                     )
+
+                    return settings_panel
                 }
 
                 start() {
                     this.CompStyles =
                     `/*components*/
+
+                    .animFieldDivider {
+                        width: 100%;
+                    }
+
+                    .animFieldDivider:not(.animField:first-child > *) {
+                        width: 100%;
+                        height: 1px;
+                        border-top: thin solid var(--background-modifier-accent);
+                        margin: 20px 0;
+                    }
+
+                    .animFieldNote {
+                        color: var(--header-secondary);
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-weight: 400;
+                    }
+
+                    .animFieldTitle {
+                        color: var(--header-secondary);
+                        margin-bottom: 8px;
+                        font-size: 12px;
+                        line-height: 16px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                    }
+
+                    .animTab {
+                        display: inline-block;
+                        padding: 16px 20px;
+                        width: fit-content;
+                        color: var(--header-primary);
+                        box-sizing: border-box;
+                        text-align: center;
+                        font-family: Whitney, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                        font-size: 14px;
+                    }
+
+                    .animTab.selected, .animTab:hover {
+                        padding-bottom: 6px;
+                        border-bottom: 2px solid white;
+                    }
+
+                    .animTabsContainer {
+                        border-bottom: 1px solid transparent;
+                        background-color: #36393f;
+                        justify-content: space-around;
+                        display: flex;
+                        position: sticky;
+                        z-index: 1;
+                        top: 0;
+                    }
+
+                    .animContent {
+                        display: none;
+                        width: 100%;
+                        height: fit-content;
+                        margin-top: 20px;
+                    }
+
+                    .animContent.show {
+                        display: block;
+                    }
 
                     .animPreviewsPanel {
                         overflow: hidden;
@@ -2527,8 +3654,8 @@
                     .switchActionButton {
                         display: inline-flex;
                         justify-content: space-between;
-                        line-height: initial;
-                        width: 120px;
+                        line-height: 125%;
+                        width: 180px;
                         padding: 3px 8px;
                         transition: 0.2s background;
                         background-size: cover;
@@ -2656,6 +3783,24 @@
                     .animPreview.enabled {
                         background-color: var(--brand-experiment);
                     }
+
+                    .vertical .animPreviewTempsContainer {
+                        display: flex;
+                        width: 100%;
+                        height: 100%;
+                        flex-direction: column;
+                        flex-wrap: nowrap;
+                        justify-content: space-evenly;
+                    }
+
+                    .horizontal .animPreviewTempsContainer {
+                        display: flex;
+                        width: 100%;
+                        height: 26px;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: space-between;
+                    }
                     
                     .vertical .animPreview .animTempBlock {
                         border-radius: 3pt;
@@ -2663,9 +3808,6 @@
                     }
 
                     .horizontal .animPreview .animTempBlock {
-                        width: 15%;
-                        height: 26px;
-                        margin: 4px;
                         border-radius: 3pt;
                         background-color: var(--interactive-normal);
                         display: inline-block;
@@ -2682,8 +3824,6 @@
                     .animPreview .animPreviewLabel {
                         box-sizing: border-box;
                         overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
                         color: var(--interactive-normal);
                         font-size: 10pt;
                         margin: 4px;
@@ -2691,16 +3831,16 @@
                     }
                     
                     .vertical .animPreview .animPreviewLabel {
-                        height: 25px;
+                        height: 58px;
                         width: auto;
                         bottom: 6pt;
-                        line-height: 150%;
+                        line-height: 100%;
                         text-align: center;
                     }
 
                     .horizontal .animPreview .animPreviewLabel {
                         height: 26px;
-                        width: 30%;
+                        width: 50%;
                         display: inline-block;
                         float: right;
                         line-height: 200%;
@@ -2712,6 +3852,13 @@
                         border-color: #fff;
                     }
 
+
+                    .elementsContainer.nosidemargin > :first-child {
+                        margin-left: 0 !important;
+                    }
+                    .elementsContainer.nosidemargin > :last-child {
+                        margin-right: 0 !important;
+                    }
                     
                     button.blurple.filled {
                         color: white;
@@ -2818,8 +3965,8 @@
 
                     this.BadSendingStyles = (e)=>{
                         if(e.key=="Enter") { // finding parent
-                            var BadSendingTextNode = document.getElementsByClassName(WebpackModules.getByProps('chatContent').chatContent)[0]
-                            .querySelector(`.${WebpackModules.getByProps('isSending').isSending}, .${WebpackModules.getByProps('isFailed').isFailed}`)
+                            var BadSendingTextNode = document.getElementsByClassName(Animations.modules.ChatContent)[0]
+                            .querySelector(`.${Animations.modules.IsSending}, .${Animations.modules.IsFailed}`)
 
                             if(!BadSendingTextNode) {
                                 setTimeout(()=>{
@@ -2827,8 +3974,7 @@
                                     return BadSendingTextNode
                                 }, 50)// frequency of checks after pressing Enter
                             } else {
-                                var result = BadSendingTextNode.closest(`.${WebpackModules.getByProps('message').message}`);// this is where we found it
-                                Logger.log('done')
+                                var result = BadSendingTextNode.closest(`.${Animations.modules.Message}`);// this is where we found it
                                 // there styles for parent
                                 result.style.animation = 'none'
                                 result.style.transform = 'none'
