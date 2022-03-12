@@ -2,7 +2,7 @@
  * @name NotificationSounds
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.6.4
+ * @version 3.6.7
  * @description Allows you to replace the native Sounds with custom Sounds
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,12 +17,12 @@ module.exports = (_ => {
 		"info": {
 			"name": "NotificationSounds",
 			"author": "DevilBro",
-			"version": "3.6.4",
+			"version": "3.6.7",
 			"description": "Allows you to replace the native Sounds with custom Sounds"
 		},
 		"changeLog": {
 			"fixed": {
-				"Double Play": "No longer plays the default and custom sound when Desktop Notifications are enabled"
+				"Message Notifications": "No longer plays them for every message or for no messages if desktop notifications are enabled"
 			}
 		}
 	};
@@ -185,8 +185,8 @@ module.exports = (_ => {
 							name: name,
 							src: src,
 							mute: id.startsWith("call_") ? null : false,
-							force: null,
-							focus: null
+							force: id == "message1" ? false : null,
+							focus: id == "message1" ? true : false
 						};
 						if (id == "message1") {
 							types[id].mute = true;
@@ -240,38 +240,45 @@ module.exports = (_ => {
 								this.playAudio(isGroupDM ? "groupdm" : "dm");
 								return;
 							}
-							else if (BDFDB.LibraryModules.MentionUtils.isRawMessageMentioned(message, BDFDB.UserUtils.me.id)) {
-								if (message.mentions.length && !this.isSuppressMentionEnabled(guildId, message.channel_id)) for (const mention of message.mentions) if (mention.id == BDFDB.UserUtils.me.id) {
-									if (message.message_reference && (!muted || choices.reply.force) && !(choices.reply.focus && focused)) {
-										this.fireEvent("reply");
-										this.playAudio("reply");
-										return;
+							else if (guildId) {
+								if (BDFDB.LibraryModules.MentionUtils.isRawMessageMentioned(message, BDFDB.UserUtils.me.id)) {
+									if (message.mentions.length && !this.isSuppressMentionsEnabled(guildId, message.channel_id)) for (const mention of message.mentions) if (mention.id == BDFDB.UserUtils.me.id) {
+										if (message.message_reference && (!muted || choices.reply.force) && !(choices.reply.focus && focused)) {
+											this.fireEvent("reply");
+											this.playAudio("reply");
+											return;
+										}
+										if (!message.message_reference && (!muted || choices.mentioned.force) && !(choices.mentioned.focus && focused)) {
+											this.fireEvent("mentioned");
+											this.playAudio("mentioned");
+											return;
+										}
 									}
-									if (!message.message_reference && (!muted || choices.mentioned.force) && !(choices.mentioned.focus && focused)) {
-										this.fireEvent("mentioned");
-										this.playAudio("mentioned");
-										return;
+									if (message.mention_roles.length && !BDFDB.LibraryModules.MutedUtils.isSuppressRolesEnabled(guildId, message.channel_id) && (!muted || choices.role.force) && !(choices.role.focus && focused)) {
+										const member = BDFDB.LibraryModules.MemberStore.getMember(guildId, BDFDB.UserUtils.me.id);
+										if (member && member.roles.length) for (const roleId of message.mention_roles) if (member.roles.includes(roleId)) {
+											this.fireEvent("role");
+											this.playAudio("role");
+											return;
+										}
+									}
+									if (message.mention_everyone && !BDFDB.LibraryModules.MutedUtils.isSuppressEveryoneEnabled(guildId, message.channel_id)) {
+										if (message.content.indexOf("@everyone") > -1 && (!muted || choices.everyone.force) && !(choices.everyone.focus && focused)) {
+											this.fireEvent("everyone");
+											this.playAudio("everyone");
+											return;
+										}
+										if (message.content.indexOf("@here") > -1 && (!muted || choices.here.force) && !(choices.here.focus && focused)) {
+											this.fireEvent("here");
+											this.playAudio("here");
+											return;
+										}
 									}
 								}
-								if (guildId && message.mention_roles.length && !BDFDB.LibraryModules.MutedUtils.isSuppressRolesEnabled(guildId, message.channel_id) && (!muted || choices.role.force) && !(choices.role.focus && focused)) {
-									const member = BDFDB.LibraryModules.MemberStore.getMember(guildId, BDFDB.UserUtils.me.id);
-									if (member && member.roles.length) for (const roleId of message.mention_roles) if (member.roles.includes(roleId)) {
-										this.fireEvent("role");
-										this.playAudio("role");
-										return;
-									}
-								}
-								if (message.mention_everyone && !BDFDB.LibraryModules.MutedUtils.isSuppressEveryoneEnabled(guildId, message.channel_id)) {
-									if (message.content.indexOf("@everyone") > -1 && (!muted || choices.everyone.force) && !(choices.everyone.focus && focused)) {
-										this.fireEvent("everyone");
-										this.playAudio("everyone");
-										return;
-									}
-									if (message.content.indexOf("@here") > -1 && (!muted || choices.here.force) && !(choices.here.focus && focused)) {
-										this.fireEvent("here");
-										this.playAudio("here");
-										return;
-									}
+								if (BDFDB.LibraryModules.MutedUtils.allowAllMessages(BDFDB.LibraryModules.ChannelStore.getChannel(message.channel_id)) && (!muted || choices.message1.force) && !(choices.message1.focus && focused)) {
+									this.fireEvent("message1");
+									this.playAudio("message1");
+									return;
 								}
 							}
 						}
@@ -279,18 +286,16 @@ module.exports = (_ => {
 				}});
 				
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.DesktopNotificationUtils, "showNotification", {before: e => {
-					if (e.methodArguments[3] && e.methodArguments[3].sound && e.methodArguments[3].sound.includes("message")) e.methodArguments[3].sound = `_BDFDB_${e.methodArguments[3].sound.split("").reverse().join("")}`;
+					if (e.methodArguments[3] && e.methodArguments[3].sound && e.methodArguments[3].sound.includes("message")) e.methodArguments[3].sound = null;
 				}});
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "playSound", {instead: e => {
 					let type = e.methodArguments[0];
-					if (!type) return;
-					if (type.indexOf("_BDFDB_") == 0) type = type.replace("_BDFDB_", "").split("").reverse().join("");
-					if (choices[type]) {
+					if (type && choices[type]) {
 						e.stopOriginalMethodCall();
 						BDFDB.TimeUtils.timeout(_ => {
 							if (type == "message1") {
 								let called = false;
-								for (let subType in message1Types) if (firedEvents[subType]) {
+								for (let subType of [type].concat(Object.keys(message1Types))) if (firedEvents[subType]) {
 									delete firedEvents[subType];
 									called = true;
 									break;
@@ -303,12 +308,13 @@ module.exports = (_ => {
 					else e.callOriginalMethodAfterwards();
 				}});
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "createSound", {after: e => {
-					if (choices[e.methodArguments[0]]) {
-						let audio = new WebAudioSound(e.methodArguments[0]);
-						createdAudios[e.methodArguments[0]] = audio;
+					let type = e.methodArguments[0];
+					if (type && choices[type]) {
+						let audio = new WebAudioSound(type);
+						createdAudios[type] = audio;
 						return audio;
 					}
-					else BDFDB.LogUtils.warn(`Could not create Sound for "${e.methodArguments[0]}".`, this);
+					else BDFDB.LogUtils.warn(`Could not create Sound for "${type}".`, this);
 				}});
 
 				this.loadAudios();
@@ -722,7 +728,7 @@ module.exports = (_ => {
 				createdAudios[type].play();
 			}
 
-			isSuppressMentionEnabled (guildId, channelId) {
+			isSuppressMentionsEnabled (guildId, channelId) {
 				let channelSettings = BDFDB.LibraryModules.MutedUtils.getChannelMessageNotifications(guildId, channelId);
 				return channelSettings && (channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES || channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NULL && BDFDB.LibraryModules.MutedUtils.getMessageNotifications(guildId) == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES);
 			}

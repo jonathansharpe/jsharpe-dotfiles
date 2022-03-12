@@ -290,10 +290,10 @@
 			"volume": 100
 		},
 		"groupdm": {
-			"category": "---",
+			"category": "zelda",
 			"focus": true,
 			"mute": true,
-			"sound": "---",
+			"sound": "pause-select",
 			"volume": 100
 		}
 	},

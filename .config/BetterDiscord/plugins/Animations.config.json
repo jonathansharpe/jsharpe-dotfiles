@@ -1,12 +1,12 @@
 {
     "currentVersionInfo": {
-        "version": "1.2.8.2",
+        "version": "1.2.10.3",
         "hasShownChangelog": true
     },
     "settings": {
         "lists": {
             "enabled": true,
-            "name": "brick-down",
+            "name": "polygon",
             "page": 1,
             "sequence": "fromFirst",
             "selectors": "",
