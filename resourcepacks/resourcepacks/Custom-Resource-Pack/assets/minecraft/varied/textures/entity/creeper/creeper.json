@@ -1,0 +1,536 @@
+{
+	"root": {
+		"options": [
+			{
+				"below": 1,
+				"then": {
+					"options": [
+						{
+							"above": "50",
+							"below": "-0",
+							"then": {
+								"options": [
+									{
+										"match": [
+											"minecraft:taiga",
+											"minecraft:mountains",
+											"minecraft:desert",
+											"minecraft:savanna",
+											"minecraft:jungle",
+											"minecraft:swamp",
+											"minecraft:badlands",
+											"minecraft:swamp"
+										],
+										"then": {
+											"options": [
+												{
+													"below": 1,
+													"then": {
+														"identifier": "minecraft:varied/textures/entity/creeper/creeper2.png",
+														"type": "reselect:constant"
+													}
+												}
+											],
+											"type": "reselect:range",
+											"when": {
+												"max": 1,
+												"min": 0,
+												"type": "reselect:random"
+											}
+										}
+									}
+								],
+								"type": "reselect:string",
+								"when": {
+									"type": "reselect:entity_biome"
+								}
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"type": "reselect:entity_y"
+					}
+				}
+			},
+			{
+				"below": 2,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:taiga",
+								"minecraft:mountains"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper3.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 3,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:desert"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper4.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 4,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper5.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 5,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:savanna"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper6.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 6,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper7.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 7,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:jungle"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper8.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 8,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:swamp"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper9.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 9,
+				"then": {
+					"options": [
+						{
+							"match": [
+								"minecraft:badlands"
+							],
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper10.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:string",
+					"when": {
+						"type": "reselect:entity_biome"
+					}
+				}
+			},
+			{
+				"below": 10,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper11.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 11,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper12.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 12,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper13.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 13,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper14.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 14,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper15.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 15,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper16.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 16,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper17.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 17,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper18.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 18,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper19.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			},
+			{
+				"below": 19,
+				"then": {
+					"options": [
+						{
+							"above": "50",
+							"below": "-0",
+							"then": {
+								"options": [
+									{
+										"below": 1,
+										"then": {
+											"identifier": "minecraft:varied/textures/entity/creeper/creeper20.png",
+											"type": "reselect:constant"
+										}
+									}
+								],
+								"type": "reselect:range",
+								"when": {
+									"max": 1,
+									"min": 0,
+									"type": "reselect:random"
+								}
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"type": "reselect:entity_y"
+					}
+				}
+			},
+			{
+				"below": 20,
+				"then": {
+					"options": [
+						{
+							"below": 1,
+							"then": {
+								"identifier": "minecraft:varied/textures/entity/creeper/creeper21.png",
+								"type": "reselect:constant"
+							}
+						}
+					],
+					"type": "reselect:range",
+					"when": {
+						"max": 1,
+						"min": 0,
+						"type": "reselect:random"
+					}
+				}
+			}
+		],
+		"type": "reselect:range",
+		"when": {
+			"max": 20,
+			"min": 0,
+			"type": "reselect:random"
+		}
+	},
+	"version": 1
+}
