@@ -1,0 +1,114 @@
+HDMI-0 Height 1536x864=794
+HDMI-0 Width 1536x864=1520
+HDMI-0 XPosition 1536x864=8
+HDMI-0 YPosition 1536x864=62
+MenuBar=Disabled
+
+[CompactMode]
+FontWeight=57
+
+[Desktop Entry]
+DefaultProfile=snazzy.profile
+
+[DetailsMode]
+ExpandableFolders=false
+FontWeight=57
+PreviewSize=22
+
+[General]
+ShowFullPathInTitlebar=true
+Version=201
+ViewPropsTimestamp=2021,8,23,16,57,49.528
+
+[IconsMode]
+FontWeight=57
+PreviewSize=48
+
+[KFileDialog Settings]
+Recent Files[$e]=ltex-ls,file:$HOME/Downloads/ltex-ls-15.2.0/bin/ltex-ls,file:$HOME/Downloads/ltex-ls-15.2.0/bin/ltex-cli
+Recent URLs[$e]=file:$HOME/Downloads/ltex-ls-15.2.0/bin/,file:$HOME/Downloads/ltex-ls-15.2.0/,file:$HOME/Downloads/
+listViewIconSize=21
+
+[KPropertiesDialog]
+DP-0 HDMI-0 Height 2293x960=583
+DP-0 HDMI-0 Width 2293x960=647
+HDMI-0 Height 1536x864=568
+HDMI-0 Height 1617x909=471
+HDMI-0 Height 3840x2160=964
+HDMI-0 Width 1536x864=478
+HDMI-0 Width 1617x909=488
+HDMI-0 Width 3840x2160=989
+
+[MainWindow]
+DP-0 HDMI-0 Height 1440x2560=981
+DP-0 HDMI-0 Height 1720x720=489
+DP-0 HDMI-0 Height 2293x960=873
+DP-0 HDMI-0 Width 1440x2560=1141
+DP-0 HDMI-0 Width 1720x720=760
+DP-0 HDMI-0 Width 2293x960=1131
+DP-0 HDMI-0 XPosition 1440x2560=3660
+DP-0 HDMI-0 XPosition 1720x720=723
+DP-0 HDMI-0 XPosition 2293x960=11
+DP-0 HDMI-0 YPosition 1440x2560=1409
+DP-0 HDMI-0 YPosition 1720x720=1300
+DP-0 HDMI-0 YPosition 2293x960=1274
+HDMI-0 Height 1280x720=653
+HDMI-0 Height 1536x864=832
+HDMI-0 Height 1617x909=436
+HDMI-0 Height 2293x960=901
+HDMI-0 Height 3840x2160=2080
+HDMI-0 Height 768x432=411
+HDMI-0 Width 1280x720=636
+HDMI-0 Width 1536x864=763
+HDMI-0 Width 1617x909=803
+HDMI-0 Width 2293x960=1143
+HDMI-0 Width 3840x2160=3824
+HDMI-0 Width 768x432=762
+HDMI-0 XPosition 1280x720=641
+HDMI-0 XPosition 1536x864=770
+HDMI-0 XPosition 1617x909=810
+HDMI-0 XPosition 1707x960=794
+HDMI-0 XPosition 2293x960=4
+HDMI-0 XPosition 3840x2160=8
+HDMI-0 XPosition 768x432=3
+HDMI-0 YPosition 1280x720=24
+HDMI-0 YPosition 1536x864=29
+HDMI-0 YPosition 1617x909=470
+HDMI-0 YPosition 1707x960=136
+HDMI-0 YPosition 2293x960=58
+HDMI-0 YPosition 3840x2160=72
+HDMI-0 YPosition 768x432=18
+HDMI-1 Height 2560x1440=640
+HDMI-1 Width 2560x1440=984
+HDMI-1 XPosition 1536x864=0
+HDMI-1 XPosition 2560x1440=603
+HDMI-1 YPosition 1536x864=50
+HDMI-1 YPosition 2560x1440=472
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[MainWindow][Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[Open-with settings]
+CompletionMode=1
+History=only,kate,neo,kat
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,cursorthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,rawthumbnail
+
+[Search]
+Location=Everywhere
+
+[SettingsDialog]
+HDMI-0 Height 1536x864=535
+HDMI-0 Height 3840x2160=884
+HDMI-0 Width 1536x864=649
+HDMI-0 Width 3840x2160=1368
+
+[Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[ViewPropertiesDialog]
+HDMI-0 Height 1536x864=608
+HDMI-0 Width 1536x864=385
