@@ -1,13 +1,14 @@
 /**
  * @name BetterAnimations
  * @author arg0NNY
- * @authorId 224538553944637440
- * @version 1.0.3
+ * @authorLink https://github.com/arg0NNY/DiscordPlugins
+ * @invite M8DBtcZjXD
+ * @version 1.1.2
  * @description Improves your whole experience using Discord. Adds highly customizable switching animations between guilds, channels, etc. Introduces smooth new message reveal animations, along with the popouts animations and more.
  * @website https://github.com/arg0NNY/DiscordPlugins/tree/master/BetterAnimations
- * @source https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/master/BetterAnimations/BetterAnimations.plugin.js
+ * @source https://github.com/arg0NNY/DiscordPlugins/blob/master/BetterAnimations/BetterAnimations.plugin.js
  * @updateUrl https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/master/BetterAnimations/BetterAnimations.plugin.js
-*/
+ */
 
 module.exports = (() => {
     const config = {
@@ -17,21 +18,24 @@ module.exports = (() => {
                 {
                     "name": "arg0NNY",
                     "discord_id": '224538553944637440',
-  					"github_username": 'arg0NNY'
+                    "github_username": 'arg0NNY'
                 }
             ],
-            "version": "1.0.3",
+            "version": "1.1.2",
             "description": "Improves your whole experience using Discord. Adds highly customizable switching animations between guilds, channels, etc. Introduces smooth new message reveal animations, along with the popouts animations and more.",
             github: "https://github.com/arg0NNY/DiscordPlugins/tree/master/BetterAnimations",
-  			github_raw: "https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/master/BetterAnimations/BetterAnimations.plugin.js"
+            github_raw: "https://raw.githubusercontent.com/arg0NNY/DiscordPlugins/master/BetterAnimations/BetterAnimations.plugin.js"
         },
-        "changelog": [{
-    		"type": "fixed",
-    		"title": "Fixed",
-    		"items": [
-    			"Fixed false animation execution on Custom CSS editor."
-    		]
-    	}]
+        "changelog": [
+            {
+                "type": "fixed",
+                "title": "Fixed",
+                "items": [
+                    "Fixed animations flickering with transparent themes enabled when switching between Friends and Nitro tabs. Flickering can still be observed when switching between pages too quickly (to be fixed in further updates).",
+                    "Most likely fixed problem when animation element is not removed at the end."
+                ]
+            }
+        ]
     };
 
     return !global.ZeresPluginLibrary ? class {
@@ -50,7 +54,7 @@ module.exports = (() => {
                 cancelText: "Cancel",
                 onConfirm: () => {
                     require("request").get("https://rauenzi.github.io/BDPluginLibrary/release/0PluginLibrary.plugin.js", async (error, response, body) => {
-                        if (error) return require("electron").shell.openExternal("https://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/rauenzi/BDPluginLibrary/master/release/0PluginLibrary.plugin.js");
+                        if (error) return require("electron").shell.openExternal("https://betterdiscord.app/Download?id=9");
                         await new Promise(r => require("fs").writeFile(require("path").join(BdApi.Plugins.folder, "0PluginLibrary.plugin.js"), body, r));
                     });
                 }
@@ -100,6 +104,7 @@ module.exports = (() => {
             const ReferencePositionLayer = WebpackModules.getModule(m => m.default?.displayName === 'ReferencePositionLayer');
             const RouteWithImpression = WebpackModules.getModule(m => m.default?.displayName === 'RouteWithImpression');
             const Button = WebpackModules.getByProps('ButtonLink');
+            const GuildDiscoveryActions = WebpackModules.getByProps('searchGuildDiscovery');
 
             const Selectors = {
                 Chat: WebpackModules.getByProps('chat', 'channelName'),
@@ -300,9 +305,11 @@ module.exports = (() => {
                     selectorNoHeader: "selectorNoHeader-3ewg-2",
                     spacingTop24: "spacingTop24-3-CM_Q",
                     uploadIconOption: "uploadIconOption-3HeiVP"
-                })
+                }),
+                StudentHubs: WebpackModules.getByProps('footerDescription', 'scroller')
             };
 
+            const PARENT_NODE_CLASSNAME = 'BetterAnimations-parentNode';
             const CLONED_NODE_CLASSNAME = 'BetterAnimations-clonedNode';
             const SETTINGS_CLASSNAME = 'BetterAnimations-settings';
 
@@ -325,6 +332,7 @@ module.exports = (() => {
             const ChannelIntegrationsSectionHistory = new History();
             const ExpressionPickerViewHistory = new History();
             const ThreadsPopoutSectionHistory = new History();
+            const GuildDiscoveryCategoryHistory = new History();
 
             class Route {
                 constructor(name, path, {element, scrollers, getter, forceGuildChange, noGuilds}) {
@@ -672,6 +680,7 @@ module.exports = (() => {
 
                     this.animation = ContainerAnimator.TYPES[type];
                     this.node = typeof element === 'string' ? document.querySelector(element) : element;
+                    this.parentNode = this.node.parentNode;
                     this.scrollSelectors = scrollSelectors;
                     if (elementToAppear) this.elementToAppear = elementToAppear;
                     this.zIndex = zIndex ?? 10;
@@ -690,11 +699,18 @@ module.exports = (() => {
                         height: this.node.clientHeight
                     };
 
-                    this.node.parentNode.style.position = getComputedStyle(this.node.parentNode).position === 'static' ? 'relative' : '';
+                    if (getComputedStyle(this.parentNode).position === 'static') this.parentNode.classList.add(PARENT_NODE_CLASSNAME);
 
                     this.clonedNode = this.node.cloneNode(true);
                     this.node.after(this.clonedNode);
+                    this.node.style.opacity = 0;
+                    if (document.querySelector(this.elementToAppear) === null) {
+                        this.tempStyle = document.createElement('style');
+                        this.tempStyle.innerHTML = `${this.elementToAppear} { opacity: 0 !important; }`;
+                        this.node.after(this.tempStyle);
+                    }
 
+                    this.clonedNode.querySelectorAll('video').forEach(v => v.volume = 0);
                     this.clonedNode.style.position = getComputedStyle(this.node).position === 'fixed' ? 'fixed' : 'absolute';
                     this.clonedNode.style.zIndex = this.zIndex;
                     this.clonedNode.style.pointerEvents = 'none';
@@ -710,6 +726,8 @@ module.exports = (() => {
                     const getNode = e => typeof e === 'string' ? document.querySelector(e) : e;
 
                     const exec = () => {
+                        this.node.removeAttribute('style');
+                        this.tempStyle?.remove();
                         params.duration = params.duration ?? 500;
                         params.easing = params.easing ?? Easing.easeInOut;
                         params.zIndex = this.zIndex;
@@ -735,8 +753,10 @@ module.exports = (() => {
                 }
 
                 end() {
-                    if (!this.clonedNode) return;
+                    this.tempStyle?.remove();
+                    this.parentNode.classList.remove(PARENT_NODE_CLASSNAME);
 
+                    if (!this.clonedNode) return;
                     this.clonedNode.remove();
                     this.clonedNode = null;
                 }
@@ -989,7 +1009,7 @@ module.exports = (() => {
                 patches() {
                     this.patchChannelActions();
                     this.patchPages();
-                    //this.patchGuildDiscovery();
+                    this.patchGuildDiscovery();
                     this.patchSettingsView();
                     this.patchMessages();
                     this.patchPopouts();
@@ -1044,12 +1064,36 @@ module.exports = (() => {
                     if (mainAnimator) mainAnimator.animate(params);
                 }
 
-                async patchGuildDiscovery() {
-                    // TODO: Animate Discovery Sections
-                    const GuildDiscovery = (await ReactComponents.getComponentByName('GuildDiscovery', '.pageWrapper-2PwDoS')).component;
+                patchGuildDiscovery() {
+                    let animator = null;
 
-                    Patcher.before(GuildDiscovery.prototype, 'render', (self, _) => {
-                        //console.log('discovery');
+                    const before = () => {
+                        if (!this.settings.settings.enabled) return;
+
+                        if (animator?.clonedNode) animator.forceEnd();
+                        animator = new ContainerAnimator(this.settings.channel.type, `.${Selectors.Pages.pageWrapper}, .${Selectors.StudentHubs.scroller}`, [Selectors.Content.scrollerBase]);
+                    };
+
+                    const after = () => {
+                        if (animator) animator.animate({
+                            duration: this.settings.channel.duration,
+                            easing: Easing[this.settings.channel.easing],
+                            offset: 75,
+                            scale: .1
+                        });
+                    };
+
+                    Patcher.before(GuildDiscoveryActions, 'selectCategory', (self, _) => {
+                        GuildDiscoveryCategoryHistory.push(_[0]);
+
+                        if (GuildDiscoveryCategoryHistory.current === GuildDiscoveryCategoryHistory.previous) return;
+
+                        before();
+                    });
+                    Patcher.after(GuildDiscoveryActions, 'selectCategory', () => {
+                        if (GuildDiscoveryCategoryHistory.current === GuildDiscoveryCategoryHistory.previous) return;
+
+                        after();
                     });
                 }
 
@@ -1160,9 +1204,7 @@ module.exports = (() => {
                     Patcher.before(ReferencePositionLayer.default.prototype, 'componentDidMount', (self, _) => {
                         if (!this.settings.popouts.enabled) return;
 
-                        if (document.getElementById('bd-editor-panel')) return; // prevent customcss from freaking out
-
-                        const node = document.getElementById(self.props.id) ?? document.querySelector(`.${self.props.className}`) ?? self.elementRef.current;
+                        const node = self.elementRef.current ?? document.getElementById(self.props.id) ?? document.querySelector(`.${self.props.className}`);
                         if (!node) return;
 
                         const animator = new RevealAnimator(this.settings.popouts.type, node);
@@ -1177,9 +1219,7 @@ module.exports = (() => {
                     Patcher.before(ReferencePositionLayer.default.prototype, 'componentWillUnmount', (self, _) => {
                         if (!this.settings.popouts.enabled) return;
 
-                        if (document.getElementById('bd-editor-panel')) return; // prevent customcss from freaking out
-
-                        const node = document.getElementById(self.props.id) ?? document.querySelector(`.${self.props.className}`) ?? self.elementRef.current;
+                        const node = self.elementRef.current ?? document.getElementById(self.props.id) ?? document.querySelector(`.${self.props.className}`);
                         if (!node) return;
 
                         const animator = new RevealAnimator(this.settings.popouts.type, node, {
@@ -1376,6 +1416,10 @@ module.exports = (() => {
                 injectCss() {
                     this.PLUGIN_STYLE_ID = `${this.getName()}-style`;
                     PluginUtilities.addStyle(this.PLUGIN_STYLE_ID, `
+                            .${PARENT_NODE_CLASSNAME} {
+                                position: relative !important;
+                            }
+                    
                             /* Settings View Fix */
                             /* .${Selectors.Sidebar.standardSidebarView}, .${Selectors.Sidebar.contentRegionScroller} {
                                 background: var(--background-tertiary) !important;
@@ -1402,7 +1446,7 @@ module.exports = (() => {
 
                             /* Expression Picker Fix */
                             .${Selectors.EmojiPicker.emojiPickerInExpressionPicker}, .${Selectors.StickerPicker.wrapper}, .${Selectors.GifPicker.container} {
-                                background-color: var(--background-secondary) !important;
+                                background-color: inherit;
                             }
 
 
@@ -1885,7 +1929,7 @@ module.exports = (() => {
                             },
                             {
                                 children: 'Reset settings to default',
-                                color: Button.ButtonColors.GREY,
+                                color: Button.ButtonColors.TRANSPARENT,
                                 size: Button.ButtonSizes.SMALL,
                                 onClick: () => {
                                     this.settings = this.defaultSettings;

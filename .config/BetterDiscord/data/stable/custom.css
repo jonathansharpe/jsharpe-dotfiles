@@ -1,9 +1,8 @@
 ::-webkit-input-placeholder, body, button, input, select, textarea {
-    font-family: "Public Sans" !important;
-	font-weight: lighter;
+    font-family: system-ui !important;
 }
 element.style {
 }
 code.inline, .markup-2BOw-j code {
-    font-family: "JetBrainsMono Nerd Font" !important;
+    font-family: "InputMonoCompressed Nerd Font" !important;
 }
