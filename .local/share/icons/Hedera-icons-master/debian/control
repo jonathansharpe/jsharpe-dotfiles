@@ -1,0 +1,11 @@
+Source: hedera-icon-theme
+Section: xfce
+Priority: optional
+Maintainer: SSF <ssf@NeverEver.com>
+Build-Depends: libfile-fcntllock-perl, debhelper (>= 7) 
+Standards-Version: 3.9.6
+
+Package: hedera-icon-theme
+Architecture: all
+Depends: hicolor-icon-theme
+Description: A classic icon theme for bright themes 
