@@ -34,6 +34,11 @@
     "VoiceUsersCounter": true,
     "PermissionsViewer": false,
     "DoubleClickToEdit": false,
-    "BetterMessageLinks": false,
-    "Animations": true
+    "BetterMessageLinks": true,
+    "Animations": false,
+    "ChannelDms": false,
+    "InMyVoice": true,
+    "ChannelsPreview": false,
+    "ActivityIcons": true,
+    "BetterAnimations": false
 }
