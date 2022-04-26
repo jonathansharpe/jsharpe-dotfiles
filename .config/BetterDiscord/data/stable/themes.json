@@ -45,7 +45,7 @@
     "SoftX": false,
     "EzLight": false,
     "Tokyo Night": false,
-    "Comfy": true,
+    "Comfy": false,
     "Slate": false,
     "Nebula": false,
     "Smooth Theme": false,
@@ -58,5 +58,16 @@
     "Simplify": false,
     "Ultra": false,
     "        Quiet": false,
-    "Float": true
+    "Float": false,
+    "Discord 11": false,
+    "IEYTD": false,
+    "Catppuccin": false,
+    "Fluent Discord": false,
+    "New BNHA Theme": false,
+    "New Kemono Friends Theme": false,
+    "Fluent": false,
+    "Lavender": false,
+    "MinimalImprovement": false,
+    "Bubble Theme v2": false,
+    "Neptune": true
 }
