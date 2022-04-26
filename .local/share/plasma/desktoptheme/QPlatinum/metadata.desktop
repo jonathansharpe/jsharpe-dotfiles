@@ -1,0 +1,16 @@
+[ContrastEffect]
+contrast=0.2
+enabled=true
+intensity=2.0
+saturation=1.7
+
+[Desktop Entry]
+X-KDE-PluginInfo-Author=Zinjanthr0pus
+X-KDE-PluginInfo-Category=Plasma Theme
+X-KDE-PluginInfo-Email=crtrolsen3@gmail.com
+X-KDE-PluginInfo-EnabledByDefault=true
+X-KDE-PluginInfo-License=GPLv3
+X-KDE-PluginInfo-Name=QPlatinum
+X-KDE-PluginInfo-Version=0.1.36
+X-KDE-PluginInfo-Website=https://www.pling.com/u/zinjanthr0pus/products
+X-Plasma-API=5.0
