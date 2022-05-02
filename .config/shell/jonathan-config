@@ -10,6 +10,7 @@ export MULTIMC18="$HOME/.local/share/multimc/instances/1.18-Fabric/.minecraft"
 export RIIV="$HOME/.local/share/dolphin-emu/Load/Riivolution"
 export WEBS="$HOME/git/baseball-website"
 export JW="$HOME/OneDrive/school-papers/jw-junior-winter/"
+export JS="$HOME/OneDrive/school-papers/js-junior-spring/"
 export DOTS="$HOME/git/jsharpe-dotfiles"
 export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keymaps/jsharpe"
 
@@ -17,6 +18,6 @@ export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keym
 alias ex="exa"
 alias lu='launch'
 alias lux='launch xdg-open'
-alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview'
+alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel'
 alias nvimconf='nvim $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
 alias shellconf='nvim $HOME/.config/shell/jonathan-config $HOME/.zshrc'
