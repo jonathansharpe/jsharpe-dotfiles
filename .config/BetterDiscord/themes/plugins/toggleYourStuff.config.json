@@ -1,0 +1,16 @@
+{
+    "settings": {
+        "plugins": {},
+        "themes": {
+            "Frosted Glass": {
+                "hotkey": "KeyD",
+                "ctrl": true,
+                "shift": false,
+                "alt": false,
+                "keycode": 68
+            }
+        },
+        "cancelDefault": false,
+        "_note": "The plugin uses the keycodes for detecting a match. The hotkeys are for display in settings only."
+    }
+}

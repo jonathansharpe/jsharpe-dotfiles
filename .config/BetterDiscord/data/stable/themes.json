@@ -14,7 +14,7 @@
     "iPadOS": false,
     "Nocturnal": false,
     "Roundmoled": false,
-    "Twitter Dim Mode": false,
+    "Twitter Dim Mode": true,
     "Zelk": false,
     "Discord+": false,
     "Dark Matter": false,
@@ -69,5 +69,5 @@
     "Lavender": false,
     "MinimalImprovement": false,
     "Bubble Theme v2": false,
-    "Neptune": true
+    "Neptune": false
 }
