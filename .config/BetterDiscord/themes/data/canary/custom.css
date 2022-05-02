@@ -1,0 +1,9 @@
+::-webkit-input-placeholder, body, button, input, select, textarea {
+    font-family: "Inconsolata SemiCondensed Medium" !important;
+	font-weight: lighter;
+}
+element.style {
+}
+code.inline, .markup-2BOw-j code {
+    font-family: "GohuFont Nerd Font Mono" !important;
+}
