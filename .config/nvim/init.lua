@@ -53,108 +53,58 @@ map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
 
 -- BUFFERLINE SETUP
 -- plugin is cokeline.nvim
-local is_picking_focus = require('cokeline/mappings').is_picking_focus
-local is_picking_close = require('cokeline/mappings').is_picking_close
 local get_hex = require('cokeline/utils').get_hex
 
-local blue = vim.g.terminal_color_4
-local gray = vim.g.terminal_color_8
-local lightgray = vim.g.terminal_color_7
-local lightblue = vim.g.terminal_color_6
-local darkgray = get_hex('ColorColumn', 'bg')
-
-
-local components_cokeline = {
-	space = {
-		text = ' ',
-	},
-	separator_left = {
-		text = function(buffer)
-			return buffer.index == 1 and '' or ''
-		end,
-		hl = {
-			fg = function(buffer)
-				return buffer.is_focused and darkgray or lightblue
-			end,
-			bg = function(buffer)
-				return buffer.is_focused and lightblue or darkgray
-			end,
-		},
-	},
-	separator_right = {
-		text = '',
-		hl = {
-			bg = function(buffer)
-				return buffer.is_focused and darkgray or lightblue
-			end,
-			fg = function(buffer)
-				return buffer.is_focused and lightblue or darkgray
-			end,
-		},
-	},
-	devicon = {
-		text = function(buffer)
-			return
-			(is_picking_focus() or is_picking_close())
-			and buffer.pick_letter .. ' '
-			or buffer.devicon.icon
-		end,
-		hl = {
-			fg = function(buffer)
-				return
-				(is_picking_focus() and yellow)
-				or (is_picking_close() and red)
-				or buffer.devicon.color
-			end,
-			style = function(_)
-				return
-				(is_picking_focus() or is_picking_close())
-				and 'italic,bold'
-				or nil
-			end,
-		}
-	},
-	index = {
-		text = function(buffer)
-			return buffer.index .. ': '
-		end,
-	},
-	filename = {
-		text = function(buffer) return buffer.filename .. '  ' end,
-		hl = {
-			style = function(buffer)
-				return buffer.is_focused and 'bold' or nil
-			end,
-		}
-	},
-	close_button = {
-		text = '',
-		delete_buffer_on_left_click = true,
-    },
-}
-
 require('cokeline').setup({
-	default_hl = {
-		focused = {
-			fg = darkgray,
-			bg = lightblue,
-		},
-		unfocused = {
-			bg = darkgray,
-			fg = lightblue,
-		},
-	},
-	components = {
-		components_cokeline.separator_left,
-		components_cokeline.space,
-		components_cokeline.devicon,
-		components_cokeline.space,
-		components_cokeline.index,
-		components_cokeline.filename,
-		components_cokeline.space,
-		components_cokeline.separator_right,
-	},
+  default_hl = {
+    fg = function(buffer)
+      return
+        buffer.is_focused
+        and get_hex('Normal', 'fg')
+         or get_hex('Comment', 'fg')
+    end,
+    bg = get_hex('ColorColumn', 'bg'),
+  },
+
+  components = {
+    {
+      text = ' ',
+      bg = get_hex('Normal', 'bg'),
+    },
+    {
+      text = '',
+      fg = get_hex('ColorColumn', 'bg'),
+      bg = get_hex('Normal', 'bg'),
+    },
+    {
+      text = function(buffer)
+        return buffer.devicon.icon
+      end,
+      fg = function(buffer)
+        return buffer.devicon.color
+      end,
+    },
+    {
+      text = ' ',
+    },
+    {
+      text = function(buffer) return buffer.filename .. '  ' end,
+      style = function(buffer)
+        return buffer.is_focused and 'bold' or nil
+      end,
+    },
+    {
+      text = '',
+      delete_buffer_on_left_click = true,
+    },
+    {
+      text = '',
+      fg = get_hex('ColorColumn', 'bg'),
+      bg = get_hex('Normal', 'bg'),
+    },
+  },
 })
+
 -- base00 = '#000000', base01 = '#404040', base02 = '#404040', base03 = '#808080',
 -- base04 = '#808080', base05 = '#c0c0c0', base06 = '#c0c0c0', base07 = '#ffffff',
 -- base08 = '#dd0907', base09 = '#ff6403', base0A = '#fbf305', base0B = '#1fb714',
