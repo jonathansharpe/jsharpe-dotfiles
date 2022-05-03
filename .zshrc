@@ -74,3 +74,8 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -x "$(command -v fzf)"]
+then
+	source /usr/share/fzf/key-bindings.zsh
+fi
