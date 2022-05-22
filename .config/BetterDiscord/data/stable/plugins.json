@@ -40,5 +40,7 @@
     "InMyVoice": true,
     "ChannelsPreview": false,
     "ActivityIcons": true,
-    "BetterAnimations": false
+    "BetterAnimations": false,
+    "EmojiParty": false,
+    "EmojiStatistics": false
 }
