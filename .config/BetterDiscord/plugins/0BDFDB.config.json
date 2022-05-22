@@ -3,6 +3,7 @@
 		"changeLogs": {
 			"BDFDB": "2.3.2",
 			"CompleteTimestamps": "1.6.1",
+			"EmojiStatistics": "2.9.8",
 			"ImageUtilities": "4.7.1",
 			"NotificationSounds": "3.6.8"
 		},
@@ -16,7 +17,7 @@
 			"shareData": true
 		},
 		"hashes": {
-			"0BDFDB.data.json": "f139b14e08340e954da6d563bc02c5cd44e5d60a",
+			"0BDFDB.data.json": "4c29df47c8dee3140c64089d30c13b5ecd96e759",
 			"0BDFDB.raw.css": "e8d30d44e567f6a77ef4e90734c27c2b47306d20"
 		}
 	}

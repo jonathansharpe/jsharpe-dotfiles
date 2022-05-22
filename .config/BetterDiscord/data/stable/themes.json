@@ -14,7 +14,7 @@
     "iPadOS": false,
     "Nocturnal": false,
     "Roundmoled": false,
-    "Twitter Dim Mode": true,
+    "Twitter Dim Mode": false,
     "Zelk": false,
     "Discord+": false,
     "Dark Matter": false,
@@ -69,5 +69,9 @@
     "Lavender": false,
     "MinimalImprovement": false,
     "Bubble Theme v2": false,
-    "Neptune": false
+    "Neptune": false,
+    "MixPack": false,
+    "piOS Forever": false,
+    "        Alan Walker Theme": false,
+    "kaleidoscope": true
 }
