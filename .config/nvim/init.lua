@@ -5,6 +5,9 @@ require'lspconfig'.html.setup({
 	}
 })
 require'lspconfig'.denols.setup{}
+require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.cssls.setup({
+})
 -- require'lspconfig'.ltex.setup{}
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
