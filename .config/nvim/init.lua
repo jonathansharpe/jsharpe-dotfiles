@@ -1,5 +1,9 @@
 require('sharpe-plugins')
-require'lspconfig'.html.setup{}
+require'lspconfig'.html.setup({
+	cmd = {
+		"vscode-html-languageserver", "--stdio"
+	}
+})
 require'lspconfig'.denols.setup{}
 -- require'lspconfig'.ltex.setup{}
 vim.g.coq_settings = {
@@ -50,10 +54,13 @@ map('n', 'gk', 'k', opts)
 map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
 map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
 map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
+map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
 
 -- BUFFERLINE SETUP
 -- plugin is cokeline.nvim
 local get_hex = require('cokeline/utils').get_hex
+local is_picking_close = require('cokeline/mappings').is_picking_close
+local is_picking_focus = require('cokeline/mappings').is_picking_focus
 
 require('cokeline').setup({
   default_hl = {
@@ -77,12 +84,24 @@ require('cokeline').setup({
       bg = get_hex('Normal', 'bg'),
     },
     {
-      text = function(buffer)
-        return buffer.devicon.icon
-      end,
-      fg = function(buffer)
-        return buffer.devicon.color
-      end,
+		text = function(buffer)
+			return
+			(is_picking_focus() or is_picking_close())
+			and buffer.pick_letter .. ' '
+			or buffer.devicon.icon
+		end,
+		fg = function(buffer)
+			return
+			(is_picking_focus() and yellow)
+			or (is_picking_close() and red)
+			or buffer.devicon.color
+		end,
+		style = function(_)
+			return
+			(is_picking_focus() or is_picking_close())
+			and 'italic,bold'
+			or nil
+		end,
     },
     {
       text = ' ',
