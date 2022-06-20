@@ -13,6 +13,7 @@ export JW="$HOME/OneDrive/school-papers/jw-junior-winter/"
 export JS="$HOME/OneDrive/school-papers/js-junior-spring/"
 export DOTS="$HOME/git/jsharpe-dotfiles"
 export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keymaps/jsharpe"
+export QT_STYLE_OVERRIDE=kvantum
 
 # ALIASES
 alias ex="exa"
