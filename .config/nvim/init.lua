@@ -6,8 +6,13 @@ require'lspconfig'.html.setup({
 })
 require'lspconfig'.denols.setup{}
 require'lspconfig'.sumneko_lua.setup{}
-require'lspconfig'.cssls.setup({
+require'lspconfig'.jsonls.setup({
+	cmd = {
+		"vscode-json-languageserver", "--stdio"
+	}
 })
+require'lspconfig'.cssls.setup({})
+require("nvim-tree").setup()
 -- require'lspconfig'.ltex.setup{}
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
@@ -48,10 +53,6 @@ local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 -- GENERAL REMAPS
-map('n', 'j', 'gj', opts)
-map('n', 'k', 'gk', opts)
-map('n', 'gj', 'j', opts)
-map('n', 'gk', 'k', opts)
 
 -- COKELINE REMAPS
 map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
