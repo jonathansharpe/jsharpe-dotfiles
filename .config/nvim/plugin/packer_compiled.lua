@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/coq_nvim",
     url = "https://github.com/ms-jpq/coq_nvim"
   },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    url = "https://github.com/mattn/emmet-vim"
+  },
   ["feline.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/feline.nvim",
@@ -150,6 +155,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
+    url = "https://github.com/kyazdani42/nvim-tree.lua"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
