@@ -27,6 +27,9 @@ use {
 	"numToStr/FTerm.nvim"
 }
 use {
+	'kyazdani42/nvim-tree.lua'
+}
+use {
 	'junegunn/vim-easy-align'
 }
 use { -- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
@@ -43,10 +46,9 @@ use {
 use {
 	'feline-nvim/feline.nvim'
 }
--- use { -- for bufferline
--- 	'akinsho/bufferline.nvim',
--- 	requires = {'kyazdani42/nvim-web-devicons'}
--- }
+use {
+	'mattn/emmet-vim'
+}
 use { -- neovim completion!
 	'ms-jpq/coq_nvim',
 	branch = 'coq'
