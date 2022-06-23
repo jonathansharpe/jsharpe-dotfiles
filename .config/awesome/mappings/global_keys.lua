@@ -7,6 +7,8 @@ local ruled = require("ruled")
 local modkey = user_vars.modkey
 
 return gears.table.join(
+-- SHARPE KEYBINDS
+  -- END SHARPE KEYBINDS
   awful.key(
     { modkey },
     "#39",
