@@ -31,7 +31,7 @@ return function(s)
     align = 'center',
     valign = 'center',
     text = " ",
-    font = "JetBrains Mono Bold 30",
+    font = "Fantasque Sans Mono Nerd Font Mono 30",
     widget = wibox.widget.textbox
   }
 
@@ -89,7 +89,7 @@ return function(s)
             {
               {
                 text = name,
-                font = "JetBrains Mono Bold 30",
+                font = "Fantasque Sans Mono Nerd Font Mono 30",
                 widget = wibox.widget.textbox
               },
               margins = dpi(0),
