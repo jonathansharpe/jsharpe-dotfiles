@@ -19,4 +19,4 @@
  *
  */
 
-@import "../styles/arc.rasi"
+@import "../styles/material-dark/blue_grey.rasi"
