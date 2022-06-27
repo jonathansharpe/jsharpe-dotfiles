@@ -19,7 +19,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- SHARPE WIDGETS
-
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -212,6 +213,19 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+			batteryarc_widget({
+				show_current_level = true,
+				arc_thickness = 1,
+				size = 18,
+				warning_msg_text = "Low battery!"
+			}),
+			volume_widget{
+				mixer_cmd = "pavucontrol-qt",
+				main_color = "blue",
+				bg_color = "white",
+				widget_type = "horizontal_bar",
+				shape = "rounded_rect",
+			},
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
@@ -266,6 +280,7 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
+	-- SHARPE KEYBINDINGS
     awful.key({ modkey}, "Tab",
         function ()
 			awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/window-switch.sh")
@@ -276,6 +291,21 @@ globalkeys = gears.table.join(
 			awful.spawn.with_shell("bash ~/.config/rofi/applets/menu/powermenu-modified.sh")
         end,
         {description = "Power menu", group = "client"}),
+	awful.key({}, "XF86AudioLowerVolume",
+		function ()
+			volume_widget:dec(5)
+		end,
+		{description = "Lower volume", group = "awesome"}),
+	awful.key({}, "XF86AudioRaiseVolume",
+		function ()
+			volume_widget:inc(5)
+		end,
+		{description = "Raise volume", group = "awesome"}),
+	awful.key({}, "XF86AudioMute",
+		function ()
+			volume_widget:toggle(5)
+		end,
+		{description = "Toggle mute", group = "awesome"}),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
