@@ -13,6 +13,7 @@ require'lspconfig'.jsonls.setup({
 })
 require'lspconfig'.cssls.setup({})
 require("nvim-tree").setup()
+require("cleanfold").setup()
 -- require'lspconfig'.ltex.setup{}
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
@@ -53,6 +54,8 @@ local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 -- GENERAL REMAPS
+map('n', '<A-t>', ':NvimTreeToggle<CR>', {silent = true})
+map('n', '<A-T>', ':NvimTreeFocus<CR>', {silent = true})
 
 -- COKELINE REMAPS
 map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
