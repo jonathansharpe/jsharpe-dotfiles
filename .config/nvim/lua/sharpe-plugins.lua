@@ -23,18 +23,12 @@ use {
 		require('cokeline').setup()
 	end
 }
-use {
-	"numToStr/FTerm.nvim"
-}
-use {
-	'kyazdani42/nvim-tree.lua'
-}
-use {
-	'junegunn/vim-easy-align'
-}
-use { -- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
-'kyazdani42/nvim-web-devicons'
-}
+use {"numToStr/FTerm.nvim"}
+use {'kyazdani42/nvim-tree.lua'}
+use {"lewis6991/cleanfold.nvim"}
+use {'junegunn/vim-easy-align'}
+-- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
+use { 'kyazdani42/nvim-web-devicons'}
 use {
 	'sudormrfbin/cheatsheet.nvim',
 	requires = {
@@ -43,12 +37,8 @@ use {
 		{'nvim-lua/plenary.nvim'},
 	}
 }
-use {
-	'feline-nvim/feline.nvim'
-}
-use {
-	'mattn/emmet-vim'
-}
+use {'feline-nvim/feline.nvim'}
+use {'mattn/emmet-vim'}
 use { -- neovim completion!
 	'ms-jpq/coq_nvim',
 	branch = 'coq'
@@ -57,40 +47,28 @@ use { -- a dependency for coq
 	'ms-jpq/coq.artifacts',
 	branch = 'artifacts'
 }
-use { -- for language servers, i.e. autosuggestions for programming languages, and syntax checking
-	'neovim/nvim-lspconfig'
-}
+-- for language servers, i.e. autosuggestions for programming languages, and syntax checking
+use	{'neovim/nvim-lspconfig'}
 use {
 	'ms-jpq/coq.thirdparty',
 	branch = '3p'
 }
+use {'tpope/vim-surround'}
+-- tpope: Comments
+use {'tpope/vim-commentary'
+}
+-- Icons for each entry in the completion menu
+use { "onsails/lspkind-nvim"}
+-- markdown preview for notes
 use {
-	'tpope/vim-surround'
+	'iamcco/markdown-preview.nvim', 
+	run = 'cd app && yarn install'
 }
-use { -- tpope: Comments
-'tpope/vim-commentary'
-}
-use { -- Icons for each entry in the completion menu
-"onsails/lspkind-nvim"
-}
-use { -- markdown preview for notes
-'iamcco/markdown-preview.nvim', 
-run = 'cd app && yarn install'
-}
-use { -- code snippits
-"L3MON4D3/LuaSnip",
--- "hrsh7th/vim-vsnip",
--- "rafamadriz/friendly-snippets",
-}
-use {
-	'RRethy/nvim-base16'
-}
--- use { -- to make the window background transparent
---     'xiyaowong/nvim-transparent'
--- }
-use { -- highlights hex color codes in their respective color
-'norcalli/nvim-colorizer.lua'
-}
+-- code snippits
+use {"L3MON4D3/LuaSnip"}
+use {'RRethy/nvim-base16'}
+-- highlights hex color codes in their respective color
+use {'norcalli/nvim-colorizer.lua'}
 use { -- Smooth Scrolling
 "karb94/neoscroll.nvim"
 	}
