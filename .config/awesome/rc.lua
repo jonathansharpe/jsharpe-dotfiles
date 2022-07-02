@@ -2,6 +2,14 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
+-- START OF IMPORTING SHARPE MODULES
+require("main.error-handling")
+local main = {
+	layouts = require("main.layouts"),
+	tags = require("main.tags"),
+	menu = require("main.menu"),
+	rules = require("main.rules"),
+}
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -30,29 +38,15 @@ if awesome.startup_errors then
                      text = awesome.startup_errors })
 end
 
--- Handle runtime errors after startup
-do
-    local in_error = false
-    awesome.connect_signal("debug::error", function (err)
-        -- Make sure we don't go into an endless error loop
-        if in_error then return end
-        in_error = true
-
-        naughty.notify({ preset = naughty.config.presets.critical,
-                         title = "Oops, an error happened!",
-                         text = tostring(err) })
-        in_error = false
-    end)
-end
 -- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/themes/multicolor/theme-personal.lua")
+beautiful.init("~/.config/awesome/themes/sharpe-theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -64,8 +58,8 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.fair,
+    awful.layout.suit.floating,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
@@ -213,12 +207,12 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-			batteryarc_widget({
-				show_current_level = true,
-				arc_thickness = 1,
-				size = 18,
-				warning_msg_text = "Low battery!"
-			}),
+			-- batteryarc_widget({
+			-- 	show_current_level = true,
+			-- 	arc_thickness = 1,
+			-- 	size = 18,
+			-- 	warning_msg_text = "Low battery!"
+			-- }),
 			volume_widget{
 				mixer_cmd = "pavucontrol-qt",
 				main_color = "blue",
@@ -281,6 +275,11 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
 	-- SHARPE KEYBINDINGS
+    awful.key({ modkey, "Shift"}, "s",
+        function ()
+			awful.spawn.with_shell("spectacle -r -c")
+        end,
+        {description = "Screenshot of Retangular Region", group = "client"}),
     awful.key({ modkey}, "Tab",
         function ()
 			awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/window-switch.sh")
@@ -357,7 +356,7 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey },"d", function()
-		awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/app-launcher.sh") 
+		awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/app-launcher.sh")
 	end,
 	{description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },"e", function()
@@ -606,6 +605,10 @@ autorunApps = {
 	"fehbg",
 	"picom --experimental-backends --backend glx",
 	"NetworkManager",
+	"xscreensaver",
+	"pkill redshift",
+	"redshift-gtk",
+	"konsole -e ~/bin/rclone-start.sh"
 }
 if autorun then
 	for app = 1, #autorunApps do
