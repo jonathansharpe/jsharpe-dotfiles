@@ -2,14 +2,6 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
--- START OF IMPORTING SHARPE MODULES
-require("main.error-handling")
-local main = {
-	layouts = require("main.layouts"),
-	tags = require("main.tags"),
-	menu = require("main.menu"),
-	rules = require("main.rules"),
-}
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -26,27 +18,47 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+-- START OF IMPORTING SHARPE MODULES
+local vars = require("main.user-variables")
+require("main.error-handling")
+beautiful.init("~/.config/awesome/themes/sharpe-theme/theme.lua")
+modkey = vars.modkey
+local main = {
+	layouts		= require("main.layouts"),
+	tags		= require("main.tags"),
+	menu		= require("main.menu"),
+	rules		= require("main.rules"),
+}
+
+-- layouts = main.layouts
+
+-- tags = main.tags
+
+-- mainmenu = awful.menu({items = main.menu})
+-- launcher = awful.widget.launcher(
+-- 	{image = beautiful.awesome_icon, menu = mainmenu}
+-- )
+-- menubar.utils.terminal = vars.terminal
 -- SHARPE WIDGETS
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
-if awesome.startup_errors then
-    naughty.notify({ preset = naughty.config.presets.critical,
-                     title = "Oops, there were errors during startup!",
-                     text = awesome.startup_errors })
-end
+-- if awesome.startup_errors then
+--     naughty.notify({ preset = naughty.config.presets.critical,
+--                      title = "Oops, there were errors during startup!",
+--                      text = awesome.startup_errors })
+-- end
 
 -- }}}
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/themes/sharpe-theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
-editor = os.getenv("EDITOR") or "nvim"
+editor = "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -79,6 +91,7 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
+
 myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
@@ -95,7 +108,7 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
 
--- Menubar configuration
+-- -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
