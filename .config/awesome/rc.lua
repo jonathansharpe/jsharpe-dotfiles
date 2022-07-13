@@ -10,6 +10,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+local bling = require("bling")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -70,6 +71,7 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+	-- bling.layout.mstab,
     awful.layout.suit.fair,
     awful.layout.suit.floating,
     awful.layout.suit.fair.horizontal,
@@ -88,6 +90,8 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
+
+-- theme.mstab_bar_disable = false
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
@@ -194,7 +198,21 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        filter  = awful.widget.taglist.filter.noempty,
+		style = {
+			-- shape_border_width = 2,
+			-- shape_border_color = '#777777',
+			-- shape = gears.shape.rounded_rect,
+			shape = function(cr, width, height)
+				gears.shape.rounded_rect(cr, width, height, 3)
+			end,
+			fg_empty = '#FFFFFF',
+			bg_empty = '#000000',
+			fg_focus = '#051213',
+			bg_focus = '#74DBDC',
+			fg_occupied = '#FFFFFF',
+			bg_occupied = '#000000',
+		},
         buttons = taglist_buttons
     }
 
@@ -202,7 +220,15 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+		style = {
+			shape_border_width = 2,
+			shape_border_color = '#777777',
+			shape = gears.shape.rounded_rect,
+		},
+		layout = {
+			layout = wibox.layout.fixed.horizontal
+		}
     }
 
     -- Create the wibox
@@ -288,6 +314,11 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
 	-- SHARPE KEYBINDINGS
+    awful.key({ modkey}, "p",
+        function ()
+			bling.module.tabbed.pick()
+        end,
+        {description = "pick client to add to tabbing", group = "client"}),
     awful.key({ modkey, "Shift"}, "s",
         function ()
 			awful.spawn.with_shell("spectacle -r -c")
@@ -615,11 +646,12 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- Autorun programs
 autorun = true
 autorunApps = {
-	"fehbg",
 	"picom --experimental-backends --backend glx",
 	"NetworkManager",
 	"xscreensaver",
+	-- "pkill komorebi",
 	"pkill redshift",
+	-- "komorebi",
 	"redshift-gtk",
 	"konsole -e ~/bin/rclone-start.sh"
 }
