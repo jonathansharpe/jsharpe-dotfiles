@@ -38,8 +38,8 @@ set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-bespin'
-vim.g.mkdp_markdown_css = '/home/jonathansharpe/.config/nvim/markdown-preview.css'
+vim.cmd 'colorscheme base16-atelier-lakeside'
+vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
 set.mouse = 'a'
