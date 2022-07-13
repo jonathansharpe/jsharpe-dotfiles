@@ -8,9 +8,9 @@
  */
 
 configuration {
-	font:							"FantasqueSansMono Nerd Font 12";
+	font:							"Inter Medium 10";
     show-icons:                     true;
-	icon-theme: 					"Papirus";
+	icon-theme: 					"Pop Extended (Dark)";
     display-drun: 					"";
     drun-display-format:            "{name}";
     disable-history:                false;
@@ -88,7 +88,7 @@ prompt {
 	padding: 						0%;
 	background-color: 				@background-alt;
 	text-color: 					@foreground;
-	font:							"FantasqueSansMono Nerd Font 12";
+	font:							"Inter Medium 10";
 }
 
 entry {
