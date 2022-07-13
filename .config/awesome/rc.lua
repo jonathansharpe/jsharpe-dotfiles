@@ -326,7 +326,7 @@ globalkeys = gears.table.join(
         {description = "Screenshot of Retangular Region", group = "client"}),
     awful.key({ modkey}, "Tab",
         function ()
-			awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/window-switch.sh")
+			awful.spawn.with_shell("bash ~/.config/rofi/launchers/text/window-switch.sh")
         end,
         {description = "Window switcher", group = "client"}),
     awful.key({ modkey, "Shift"}, "e",
@@ -400,13 +400,13 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey },"d", function()
-		awful.spawn.with_shell("bash ~/.config/rofi/launchers/colorful/app-launcher.sh")
+		awful.spawn.with_shell("bash ~/.config/rofi/launchers/misc/launcher.sh")
 	end,
 	{description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },"e", function()
-		awful.spawn.with_shell("dolphin") 
+		awful.spawn.with_shell("bash ~/.config/rofi/launchers/text/file-explorer.sh")
 	end,
-	{description = "Open Dolphin", group = "launcher"})
+	{description = "Open Rofi file explorer", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
