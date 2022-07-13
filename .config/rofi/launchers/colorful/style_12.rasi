@@ -8,9 +8,9 @@
  */
 
 configuration {
-	font:							"Iosevka Nerd Font 10";
+	font:							"Inter Medium 10";
     show-icons:                     true;
-	icon-theme: 					"Papirus";
+	icon-theme: 					"Wow64";
     display-drun: 					" Applications";
     drun-display-format:            "{name}";
     disable-history:                false;
@@ -37,7 +37,7 @@ prompt {
 	padding: 						1.25% 0.75% 1.25% 0.75%;
 	background-color: 				@ac;
 	text-color: 					@fg;
-	font:							"Iosevka Nerd Font 12";
+	font:							"Inter Medium 12";
     border-radius:                  100%;
 }
 
