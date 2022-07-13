@@ -9,7 +9,7 @@
 
 configuration {
     show-icons:                     false;
-	font:                      		"Fantasque Sans Mono Nerd Font Mono 14";
+	font:                      		"JetBrainsMono Nerd Font Mono 14";
     disable-history:                false;
 	sidebar-mode: 					false;
 }
@@ -89,7 +89,7 @@ element {
 element-text {
     background-color: 				inherit;
     text-color:       				inherit;
-	font:							"Fantasque Sans Mono Nerd Font Mono 32";
+	font:							"JetBrainsMono Nerd Font Mono 32";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
