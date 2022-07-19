@@ -58,9 +58,9 @@ local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 -- Themes define colours, icons, font and wallpapers.
 
 -- This is used later as the default terminal and editor to run.
-terminal = "konsole"
+terminal = "wezterm"
 editor = "nvim"
-editor_cmd = terminal .. " -e " .. editor
+editor_cmd = terminal.." start -- "..editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -72,13 +72,13 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
 	-- bling.layout.mstab,
-    awful.layout.suit.fair,
-    awful.layout.suit.floating,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
+    awful.layout.suit.floating,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
@@ -266,6 +266,11 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 end)
+client.connect_signal("manage", function(c)
+	c.shape = function(cr,w,h)
+		gears.shape.rounded_rect(cr,w,h,10)
+	end
+end)
 -- }}}
 
 -- {{{ Mouse bindings
@@ -404,9 +409,9 @@ globalkeys = gears.table.join(
 	end,
 	{description = "show the menubar", group = "launcher"}),
     awful.key({ modkey },"e", function()
-		awful.spawn.with_shell("bash ~/.config/rofi/launchers/text/file-explorer.sh")
+		awful.spawn.with_shell("dolphin")
 	end,
-	{description = "Open Rofi file explorer", group = "launcher"})
+	{description = "Open Dolphin", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -623,10 +628,8 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -649,11 +652,12 @@ autorunApps = {
 	"picom --experimental-backends --backend glx",
 	"NetworkManager",
 	"xscreensaver",
-	-- "pkill komorebi",
+	"fehbg",
+	"dunst",
 	"pkill redshift",
-	-- "komorebi",
 	"redshift-gtk",
-	"konsole -e ~/bin/rclone-start.sh"
+	"konsole -e ~/bin/rclone-start.sh",
+	"notify-send \"awesome has loaded!\""
 }
 if autorun then
 	for app = 1, #autorunApps do
