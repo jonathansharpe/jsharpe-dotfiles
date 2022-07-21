@@ -123,6 +123,13 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%a %b %e, %I:%M %p')
 
+bling.widget.window_switcher.enable {
+	type = "thumbnail",
+	previous_key = "Right",
+	next_key = "Left",
+	vim_previous_key = "l",
+	vim_next_key = "h",
+}
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -200,9 +207,8 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.taglist.filter.noempty,
 		style = {
-			-- shape_border_width = 2,
-			-- shape_border_color = '#777777',
-			-- shape = gears.shape.rounded_rect,
+			shape_border_width = 2,
+			shape_border_color = '#777777',
 			shape = function(cr, width, height)
 				gears.shape.rounded_rect(cr, width, height, 3)
 			end,
@@ -221,18 +227,37 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
-		style = {
-			shape_border_width = 2,
-			shape_border_color = '#777777',
-			shape = gears.shape.rounded_rect,
-		},
 		layout = {
-			layout = wibox.layout.fixed.horizontal
-		}
+			spacing = 8,
+			layout = wibox.layout.fixed.horizontal,
+		},
+		widget_template = {
+			{
+				{
+					{
+						id     = 'clienticon',
+						widget = awful.widget.clienticon,
+					},
+					margins = 4,
+					widget  = wibox.container.margin
+				},
+				shape_border_width = 2,
+				shape_border_color = '#777777',
+				shape = gears.shape.rounded_rect,
+				widget = wibox.container.background,
+			},
+			layout = wibox.layout.align.vertical,
+		},
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar(
+		{
+			position = "bottom",
+			screen = s,
+			height = 48,
+		}
+	)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -294,7 +319,8 @@ globalkeys = gears.table.join(
 
     awful.key({ "Mod1",           }, "Tab",
         function ()
-            awful.client.focus.byidx( 1)
+			awesome.emit_signal("bling::window_switcher::turn_on")
+            -- awful.client.focus.byidx( 1)
         end,
         {description = "focus next by index", group = "client"}
     ),
@@ -613,7 +639,10 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+	local top_titlebar = awful.titlebar(c, {
+		size = 40,
+	})
+    top_titlebar : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
@@ -628,12 +657,13 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
+			awful.titlebar.widget.floatingbutton(c),
             awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
-        layout = wibox.layout.align.horizontal
+        layout = wibox.layout.align.horizontal,
     }
 end)
 
@@ -652,11 +682,10 @@ autorunApps = {
 	"picom --experimental-backends --backend glx",
 	"NetworkManager",
 	"xscreensaver",
-	"fehbg",
 	"dunst",
 	"pkill redshift",
 	"redshift-gtk",
-	"konsole -e ~/bin/rclone-start.sh",
+	"wezterm start -- ~/bin/rclone-start.sh",
 	"notify-send \"awesome has loaded!\""
 }
 if autorun then
