@@ -99,7 +99,7 @@ theme.titlebar_maximized_button_focus_inactive  = sharpe_path.."titlebar/maximiz
 theme.titlebar_maximized_button_normal_active = sharpe_path.."titlebar/restore.svg"
 theme.titlebar_maximized_button_focus_active  = sharpe_path.."titlebar/restore.svg"
 
-theme.wallpaper = themes_path.."default/background.png"
+theme.wallpaper = sharpe_path.."images/nephrite-light.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
