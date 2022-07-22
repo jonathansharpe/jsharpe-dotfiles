@@ -12,7 +12,7 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "Inter Medium 10"
+theme.font          = "Metropolis Medium 10"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
@@ -74,9 +74,10 @@ theme.menu_width  = dpi(100)
 -- Define the image to load
 theme.titlebar_close_button_normal = sharpe_path.."titlebar/close.svg"
 theme.titlebar_close_button_focus  = sharpe_path.."titlebar/close.svg"
+theme.titlebar_close_button_focus_hover  = sharpe_path.."titlebar/close-hover.svg"
 
 theme.titlebar_minimize_button_normal = sharpe_path.."titlebar/minimize.svg"
-theme.titlebar_minimize_button_normal_hover = sharpe_path.."titlebar/minimize-hover.svg"
+theme.titlebar_minimize_button_focus_hover = sharpe_path.."titlebar/minimize-hover.svg"
 theme.titlebar_minimize_button_focus  = sharpe_path.."titlebar/minimize.svg"
 
 theme.titlebar_ontop_button_normal_inactive = themes_path.."default/titlebar/ontop_normal_inactive.png"
@@ -96,6 +97,7 @@ theme.titlebar_floating_button_focus_active  = themes_path.."default/titlebar/fl
 
 theme.titlebar_maximized_button_normal_inactive = sharpe_path.."titlebar/maximize.svg"
 theme.titlebar_maximized_button_focus_inactive  = sharpe_path.."titlebar/maximize.svg"
+theme.titlebar_maximized_button_focus_inactive_hover  = sharpe_path.."titlebar/maximize-hover.svg"
 theme.titlebar_maximized_button_normal_active = sharpe_path.."titlebar/restore.svg"
 theme.titlebar_maximized_button_focus_active  = sharpe_path.."titlebar/restore.svg"
 
