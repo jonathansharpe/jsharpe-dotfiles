@@ -27,12 +27,12 @@ confirm_exit() {
 		-i\
 		-no-fixed-num-lines\
 		-p "Are You Sure? : "\
-		-theme $HOME/.config/rofi/applets/styles/confirm.rasi
+		-theme $HOME/.config/rofi/applets/styles/confirm-sharpe.rasi
 }
 
 # Message
 msg() {
-	rofi -theme "$HOME/.config/rofi/applets/styles/message.rasi" -e "Available Options  -  yes / y / no / n"
+	rofi -theme "$HOME/.config/rofi/applets/styles/message-sharpe.rasi" -e "Available Options  -  yes / y / no / n"
 }
 
 # Variable passed to rofi

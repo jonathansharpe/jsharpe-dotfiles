@@ -8,7 +8,7 @@
  */
 
 configuration {
-    font: 							"JetBrainsMono Nerd Font Mono 12";
+    font: 							"Dosis Medium 14";
     fixed-num-lines: 				true;
     show-icons: 					false;
     sidebar-mode: 					true;
