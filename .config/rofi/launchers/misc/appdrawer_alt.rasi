@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"JetBrainsMono Nerd Font Mono 10";
+	font:							"Metropolis Medium 10";
     show-icons:                     true;
 	icon-theme: 					"Wow64";
     display-drun: 					"";
