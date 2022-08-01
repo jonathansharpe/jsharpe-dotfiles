@@ -37,6 +37,9 @@ set.fdm = 'indent'
 set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
+-- ALIASES
+vim.cmd 'command! PS PackerSync'
+vim.cmd 'command! NVR NvimTreeRefresh'
 vim.cmd 'set noexpandtab'
 vim.cmd 'colorscheme base16-atelier-lakeside'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
@@ -48,6 +51,7 @@ set.mouse = 'a'
 -- may want to put the following in a separate file at some point idk
 -- STATUSLINE SETUP
 -- plugin is feline.nvim
+require'colorizer'.setup()
 local components_feline = {}
 require('feline').setup()
 local map = vim.api.nvim_set_keymap
