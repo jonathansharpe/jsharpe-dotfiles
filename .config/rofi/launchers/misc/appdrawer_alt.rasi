@@ -8,7 +8,7 @@
  */
 
 configuration {
-	font:							"Metropolis Medium 10";
+	font:							"Dosis Medium 10";
     show-icons:                     true;
 	icon-theme: 					"Wow64";
     display-drun: 					"";
