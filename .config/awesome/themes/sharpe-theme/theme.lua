@@ -5,6 +5,7 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local gears = require("gears")
 
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
@@ -12,10 +13,49 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "Metropolis Medium 10"
+theme.font          = "Dosis Medium 11"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#535d6c"
+-- TITLEBAR
+--
+theme.taglist_bg_focus = "#8aadf4"
+theme.taglist_bg_urgent = "#ff0000"
+theme.taglist_bg_occupied = "#000000"
+theme.taglist_shape_border_color_focus = "#24273a"
+theme.taglist_shape_border_color = "#8aadf4"
+theme.taglist_shape_border_width = 2
+theme.taglist_shape = function(cr, width, height)
+	gears.shape.rounded_rect(cr, width, height, 5)
+end
+-- theme.taglist_bg_empty = "#000000"		-- uncomment if all tags are shown
+-- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
+theme.taglist_fg_focus = "#24273a"
+theme.taglist_fg_urgent = "#000000"
+theme.taglist_fg_occupied = "#8aadf4"
+-- theme.taglist_fg_empty = "#000000"		-- uncomment if all tags are shown
+-- theme.taglist_fg_volatile = "#000000"	-- no idea what this means
+
+theme.tasklist_bg_normal = "#000000"
+theme.tasklist_bg_urgent = "#ff0000"
+theme.tasklist_bg_focus = "#8aadf4"
+theme.tasklist_fg_normal = "#ffffff"
+theme.tasklist_fg_urgent = "#8aadf4"
+theme.tasklist_fg_focus = "#24273a"
+theme.tasklist_shape_border_color_focus = "#24273a"
+theme.tasklist_shape_border_color = "#8aadf4"
+theme.tasklist_shape_border_width = 2
+theme.tasklist_shape = function(cr, width, height)
+	gears.shape.rounded_rect(cr, width, height, 5)
+end
+theme.tasklist_fg_minimize = "#ffffff"
+theme.tasklist_bg_minimize = "#444444"
+
+theme.titlebar_bg_normal = "#000000"
+theme.titlebar_bg_focus = "#24273a"
+theme.titlebar_fg_normal = "#8aadf4"
+theme.titlebar_fg_focus = "#8aadf4"
+
+theme.bg_normal     = "#24273a"
+theme.bg_focus      = "#777777"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -25,10 +65,10 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = 8
-theme.border_width  = dpi(1)
+theme.useless_gap   = 0
+theme.border_width  = dpi(2)
 theme.border_normal = "#000000"
-theme.border_focus  = "#535d6c"
+theme.border_focus  = "#8AADF4"
 theme.border_marked = "#91231c"
 
 -- There are other variable sets
@@ -42,15 +82,14 @@ theme.border_marked = "#91231c"
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
---theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(8)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
+    taglist_square_size, theme.taglist_fg_focus
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
+    taglist_square_size, theme.taglist_fg_occupied
 )
 
 -- Variables set for theming notifications:

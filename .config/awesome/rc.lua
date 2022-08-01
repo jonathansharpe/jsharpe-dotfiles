@@ -21,6 +21,7 @@ require("awful.hotkeys_popup.keys")
 
 -- START OF IMPORTING SHARPE MODULES
 local vars = require("main.user-variables")
+local capslock = require("awesomewm-capslock-widget")
 require("main.error-handling")
 beautiful.init("~/.config/awesome/themes/sharpe-theme/theme.lua")
 modkey = vars.modkey
@@ -43,6 +44,8 @@ local main = {
 -- SHARPE WIDGETS
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -72,11 +75,11 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
 	-- bling.layout.mstab,
+    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.floating,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
@@ -122,6 +125,19 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock('%a %b %e, %I:%M %p')
+
+-- CALENDAR WIDGET
+local cw = calendar_widget({
+	placement = 'bottom_right',
+	start_sunday = true,
+	radius = 5,
+})
+mytextclock:connect_signal("button::press",
+	function(_, _, _, button)
+		if button == 1 then cw.toggle() end
+	end
+)
+
 
 bling.widget.window_switcher.enable {
 	type = "thumbnail",
@@ -206,18 +222,22 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.noempty,
-		style = {
-			shape_border_width = 2,
-			shape_border_color = '#777777',
-			shape = function(cr, width, height)
-				gears.shape.rounded_rect(cr, width, height, 3)
-			end,
-			fg_empty = '#FFFFFF',
-			bg_empty = '#000000',
-			fg_focus = '#051213',
-			bg_focus = '#74DBDC',
-			fg_occupied = '#FFFFFF',
-			bg_occupied = '#000000',
+		layout = {
+			layout = wibox.layout.fixed.horizontal,
+		},
+		widget_template = {
+			{
+				{
+					id = 'text_role',
+					widget = wibox.widget.textbox,
+					align = "center",
+				},
+				left = 20,
+				right = 20,
+				widget = wibox.container.margin,
+			},
+			id = 'background_role',
+			widget = wibox.container.background,
 		},
         buttons = taglist_buttons
     }
@@ -228,25 +248,27 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
 		layout = {
-			spacing = 8,
+			spacing = 2,
 			layout = wibox.layout.fixed.horizontal,
 		},
 		widget_template = {
 			{
 				{
 					{
-						id     = 'clienticon',
-						widget = awful.widget.clienticon,
+						{
+							id     = 'icon_role',
+							widget = wibox.widget.imagebox,
+						},
+						margins = 2,
+						widget  = wibox.container.margin,
 					},
-					margins = 4,
-					widget  = wibox.container.margin
+					layout = wibox.layout.fixed.horizontal,
 				},
-				shape_border_width = 2,
-				shape_border_color = '#777777',
-				shape = gears.shape.rounded_rect,
-				widget = wibox.container.background,
+				margins = 3,
+				widget = wibox.container.margin,
 			},
-			layout = wibox.layout.align.vertical,
+			id     = 'background_role',
+			widget = wibox.container.background,
 		},
     }
 
@@ -284,7 +306,19 @@ awful.screen.connect_for_each_screen(function(s)
 				widget_type = "horizontal_bar",
 				shape = "rounded_rect",
 			},
-            mykeyboardlayout,
+			weather_widget({
+				api_key='0a730da1dd8d10eb980eec4b9e4ae5e7',
+				coordinates = {48.468, -122.401},
+				time_format_12h = true,
+				font_name = "Dosis",
+				units = 'imperial',
+				both_units_widget = false,
+				icons = 'weather-underground-icons',
+				icons_extension = '.png',
+				show_hourly_forecast = true,
+				show_daily_forecast = true,
+			}),
+			capslock,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -308,6 +342,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+	capslock.key,
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
