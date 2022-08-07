@@ -12,9 +12,12 @@ return require('packer').startup(function()
 }
 use {
 	'windwp/nvim-autopairs',
-	config = function() 
+	config = function()
 		require('nvim-autopairs').setup{}
 	end
+}
+use {
+	'xiyaowong/nvim-transparent'
 }
 use {
 	'noib3/nvim-cokeline',
