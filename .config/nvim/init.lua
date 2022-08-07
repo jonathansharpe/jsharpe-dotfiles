@@ -39,9 +39,8 @@ set.laststatus=2
 set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
-vim.cmd 'command! NVR NvimTreeRefresh'
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-atelier-lakeside'
+vim.cmd 'colorscheme base16-blueforest'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
@@ -49,6 +48,9 @@ set.mouse = 'a'
 
 -- CONFIG STUFF
 -- may want to put the following in a separate file at some point idk
+require("transparent").setup({
+	-- enable = true,
+})
 -- STATUSLINE SETUP
 -- plugin is feline.nvim
 require'colorizer'.setup()
@@ -66,6 +68,9 @@ map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
 map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
 map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
 map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
+
+-- NVIM TREE REMAPS
+vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
 
 -- BUFFERLINE SETUP
 -- plugin is cokeline.nvim
