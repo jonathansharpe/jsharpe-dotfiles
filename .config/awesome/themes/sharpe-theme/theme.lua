@@ -17,21 +17,22 @@ theme.font          = "Dosis Medium 11"
 
 -- TITLEBAR
 --
-theme.taglist_bg_focus = "#8aadf4"
+theme.taglist_bg_focus = "#000000"
 theme.taglist_bg_urgent = "#ff0000"
-theme.taglist_bg_occupied = "#000000"
-theme.taglist_shape_border_color_focus = "#24273a"
-theme.taglist_shape_border_color = "#8aadf4"
-theme.taglist_shape_border_width = 2
+theme.taglist_bg_occupied = "#8aadf4"
+theme.taglist_bg_empty = "#8aadf4"
+theme.taglist_shape_border_color_focus = "#000000"
+theme.taglist_shape_border_color = "#000000"
+theme.taglist_shape_border_width = 0
 theme.taglist_shape = function(cr, width, height)
-	gears.shape.rounded_rect(cr, width, height, 5)
+	gears.shape.rounded_rect(cr, width, height, 10)
 end
--- theme.taglist_bg_empty = "#000000"		-- uncomment if all tags are shown
+theme.taglist_font = "Dosis Bold 11"
 -- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
-theme.taglist_fg_focus = "#24273a"
+theme.taglist_fg_focus = "#8aadf4"
 theme.taglist_fg_urgent = "#000000"
-theme.taglist_fg_occupied = "#8aadf4"
--- theme.taglist_fg_empty = "#000000"		-- uncomment if all tags are shown
+theme.taglist_fg_occupied = "#000000"
+theme.taglist_fg_empty = "#777777"
 -- theme.taglist_fg_volatile = "#000000"	-- no idea what this means
 
 theme.tasklist_bg_normal = "#000000"
@@ -43,8 +44,8 @@ theme.tasklist_fg_focus = "#24273a"
 theme.tasklist_shape_border_color_focus = "#24273a"
 theme.tasklist_shape_border_color = "#8aadf4"
 theme.tasklist_shape_border_width = 2
-theme.tasklist_shape = function(cr, width, height)
-	gears.shape.rounded_rect(cr, width, height, 5)
+theme.tasklist_shape = function(cr, w, h)
+	gears.shape.rounded_rect(cr, w, h, 5)
 end
 theme.tasklist_fg_minimize = "#ffffff"
 theme.tasklist_bg_minimize = "#444444"
@@ -84,13 +85,13 @@ theme.border_marked = "#91231c"
 -- Example:
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(8)
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.taglist_fg_focus
-)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.taglist_fg_occupied
-)
+-- local taglist_square_size = dpi(8)
+-- theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
+--     taglist_square_size, theme.taglist_fg_focus
+-- )
+-- theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
+--     taglist_square_size, theme.taglist_fg_occupied
+-- )
 
 -- Variables set for theming notifications:
 -- notification_font
