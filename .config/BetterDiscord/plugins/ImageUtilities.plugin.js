@@ -2,7 +2,7 @@
  * @name ImageUtilities
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 4.7.1
+ * @version 4.7.9
  * @description Adds several Utilities for Images/Videos (Gallery, Download, Reverse Search, Zoom, Copy, etc.)
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,13 +17,8 @@ module.exports = (_ => {
 		"info": {
 			"name": "ImageUtilities",
 			"author": "DevilBro",
-			"version": "4.7.1",
+			"version": "4.7.9",
 			"description": "Adds several Utilities for Images/Videos (Gallery, Download, Reverse Search, Zoom, Copy, etc.)"
-		},
-		"changeLog": {
-			"fixed": {
-				"Embed Thumbnails": "No longer tries to resize embed thumbnails, causing embeds to look distorted"
-			}
 		}
 	};
 	
@@ -75,6 +70,12 @@ module.exports = (_ => {
 		
 		const imgUrlReplaceString = "DEVILBRO_BD_REVERSEIMAGESEARCH_REPLACE_IMAGEURL";
 		
+		const rescaleOptions = {
+			NONE: "No Resize",
+			ORIGINAL: "Resize to Original Size",
+			WINDOW: "Resize to Window Size"
+		};
+		
 		const fileTypes = {
 			"3gp":		{copyable: false,	searchable: false,	video: true},
 			"3g2":		{copyable: false,	searchable: false,	video: true},
@@ -122,7 +123,10 @@ module.exports = (_ => {
 				}
 				return BDFDB.ReactUtils.createElement("div", {
 					className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN._imageutilitiessibling, this.props.className),
-					onClick: _ => _this.switchImages(this.props.modalInstance, this.props.offset),
+					onClick: event => {
+						BDFDB.ListenerUtils.stopEvent(event);
+						_this.switchImages(this.props.modalInstance, this.props.offset);
+					},
 					children: [
 						this.props.loadedImage || BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Spinner, {
 							type: BDFDB.LibraryComponents.Spinner.Type.SPINNING_CIRCLE
@@ -204,21 +208,24 @@ module.exports = (_ => {
 				cachedImages = null;
 				
 				this.defaults = {
+					general: {
+						nsfwMode: 				{value: false,	description: "Blur Media that is posted in NSFW Channels"}
+					},
 					viewerSettings: {
 						zoomMode: 				{value: true,	description: "Enable Zoom Mode to zoom into Images while holding down your Mouse"},
 						galleryMode: 			{value: true,	description: "Enable Gallery Mode to quick-switch between Images"},
 						details: 				{value: true,	description: "Add Image Details (Name, Size, Amount)"},
 						copyImage: 				{value: true,	description: "Add a 'Copy Image' Option"},
-						saveImage: 				{value: true,	description: "Add a 'Save Image as' Option"},
+						saveImage: 				{value: true,	description: "Add a 'Save Image as' Option"}
 					},
 					zoomSettings: {
 						pixelMode: 				{value: false,	label: "Use Pixel Lens instead of a Blur Lens"},
 						zoomLevel:				{value: 2,		digits: 1,	minValue: 1,	maxValue: 20,	unit: "x",		label: "ACCESSIBILITY_ZOOM_LEVEL_LABEL"},
 						lensSize:				{value: 200,	digits: 0,	minValue: 50,	maxValue: 5000,	unit: "px",		label: "context_lenssize"}
 					},
-					resizeSettings: {
-						messages: 				{value: false, 	description: "Messages"},
-						imageViewer: 			{value: false, 	description: "Image Viewer"}
+					rescaleSettings: {
+						messages: 				{value: "NONE",	description: "Messages"},
+						imageViewer: 			{value: "NONE",	description: "Image Viewer"}
 					},
 					detailsSettings: {
 						footnote:				{value: true, 	description: "in the Image Description"},
@@ -249,12 +256,14 @@ module.exports = (_ => {
 			
 				this.patchedModules = {
 					before: {
-						LazyImage: "render"
+						LazyImage: "render",
+						SimpleMessageAccessories: "default"
 					},
 					after: {
 						ImageModal: ["render", "componentDidMount", "componentWillUnmount"],
-						LazyImage: "componentDidMount",
+						LazyImage: ["componentDidMount", "componentDidUpdate"],
 						LazyImageZoomable: "render",
+						Spoiler: "render",
 						UserBanner: "default"
 					}
 				};
@@ -290,6 +299,16 @@ module.exports = (_ => {
 						transform: unset !important;
 						filter: unset !important;
 						backdrop-filter: unset !important;
+					}
+					${BDFDB.dotCNS.imagemodal + BDFDB.notCN._imageutilitiessibling} > ${BDFDB.dotCN.imagewrapper} {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						min-width: 500px;
+					}
+					${BDFDB.dotCNS.imagemodal + BDFDB.notCN._imageutilitiessibling} > ${BDFDB.dotCN.imagewrapper} img {
+						object-fit: contain;
+						width: unset;
 					}
 					${BDFDB.dotCN._imageutilitiessibling} {
 						display: flex;
@@ -331,6 +350,9 @@ module.exports = (_ => {
 					}
 					${BDFDB.dotCN._imageutilitiessibling}:hover ${BDFDB.dotCN._imageutilitiesswitchicon} {
 						background: rgba(0, 0, 0, 0.5);
+					}
+					${BDFDB.dotCNS._imageutilitiesgallery + BDFDB.dotCN.imagemodalnavbutton} {
+						display: none;
 					}
 					${BDFDB.dotCN._imageutilitiesdetailswrapper} {
 						position: fixed;
@@ -375,7 +397,7 @@ module.exports = (_ => {
 				
 				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.MediaComponentUtils, "renderImageComponent", {
 					after: e => {
-						if (this.settings.detailsSettings.footnote && e.methodArguments[0].original && e.methodArguments[0].src.indexOf("https://media.discordapp.net/attachments") == 0 && (e.methodArguments[0].className || "").indexOf(BDFDB.disCN.embedmedia) == -1 && (e.methodArguments[0].className || "").indexOf(BDFDB.disCN.embedthumbnail) == -1 && BDFDB.ReactUtils.findChild(e.returnValue, {name: ["LazyImageZoomable", "LazyImage"]})) {
+						if (this.settings.detailsSettings.footnote && e.methodArguments[0].original && e.methodArguments[0].src.indexOf("https://media.discordapp.net/attachments") == 0 && (e.methodArguments[0].className || "").indexOf(BDFDB.disCN.embedmedia) == -1 && (e.methodArguments[0].className || "").indexOf(BDFDB.disCN.embedthumbnail) == -1 && BDFDB.ReactUtils.findChild(e.returnValue, {name: ["ConnectedLazyImageZoomable", "LazyImageZoomable", "LazyImage"]})) {
 							const altText = e.returnValue.props.children[1] && e.returnValue.props.children[1].props.children;
 							const details = BDFDB.ReactUtils.createElement(ImageDetailsComponent, {
 								original: e.methodArguments[0].original,
@@ -420,6 +442,18 @@ module.exports = (_ => {
 						let settingsItems = [];
 						
 						settingsItems.push(BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.CollapseContainer, {
+							title: "General",
+							collapseStates: collapseStates,
+							children: Object.keys(this.defaults.general).map(key => BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
+								type: "Switch",
+								plugin: this,
+								keys: ["general", key],
+								label: this.defaults.general[key].description,
+								value: this.settings.general[key]
+							}))
+						}));
+						
+						settingsItems.push(BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.CollapseContainer, {
 							title: "Image Viewer Settings",
 							collapseStates: collapseStates,
 							children: Object.keys(this.defaults.viewerSettings).map(key => BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
@@ -436,12 +470,14 @@ module.exports = (_ => {
 							collapseStates: collapseStates,
 							children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsPanelList, {
 								title: "Automatically Resize Images in: ",
-								children: Object.keys(this.defaults.resizeSettings).map(key => BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
-									type: "Switch",
+								children: Object.keys(this.defaults.rescaleSettings).map(key => BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsSaveItem, {
+									type: "Select",
 									plugin: this,
-									keys: ["resizeSettings", key],
-									label: this.defaults.resizeSettings[key].description,
-									value: this.settings.resizeSettings[key]
+									keys: ["rescaleSettings", key],
+									label: this.defaults.rescaleSettings[key].description,
+									basis: "50%",
+									options: Object.keys(rescaleOptions).map(n => ({value: n, label: rescaleOptions[n]})),
+									value: this.settings.rescaleSettings[key]
 								}))
 							})
 						}));
@@ -661,8 +697,27 @@ module.exports = (_ => {
 			}
 
 			onGroupDMContextMenu (e) {
-				if (e.instance.props.channel && e.instance.props.channel.isGroupDM() && this.settings.places.groupIcons) this.injectItem(e, [(BDFDB.DMUtils.getIcon(e.instance.props.channel.id) || "").replace(/\.webp|\.gif/, ".png")]);
+				if (e.instance.props.channel && e.instance.props.channel.isGroupDM() && this.settings.places.groupIcons) this.injectItem(e, );
 			}
+
+			onChannelContextMenu (e) {
+				if (e.instance.props.channel && e.instance.props.channel.isGroupDM() && this.settings.places.groupIcons && e.subType == "useChannelLeaveItem") {
+					let validUrls = this.filterUrls((BDFDB.DMUtils.getIcon(e.instance.props.channel.id) || "").replace(/\.webp|\.gif/, ".png"));
+					if (!validUrls.length) return;
+					
+					if (e.returnvalue.length) e.returnvalue.unshift(BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuSeparator, {}));
+					e.returnvalue.unshift(BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
+						label: this.isValid(validUrls[0].file, "video") ? BDFDB.LanguageUtils.LanguageStrings.VIDEO : BDFDB.LanguageUtils.LanguageStrings.IMAGE + " " + BDFDB.LanguageUtils.LanguageStrings.ACTIONS,
+						id: BDFDB.ContextMenuUtils.createItemId(this.name, "main-subitem"),
+						children: this.createSubMenus({
+							instance: e.instance,
+							urls: validUrls,
+							prefix: BDFDB.LanguageUtils.LanguageStrings.USER_SETTINGS_AVATAR
+						})
+					}));
+				}
+			}
+
 
 			onNativeContextMenu (e) {
 				if (e.type == "NativeImageContextMenu" && (e.instance.props.href || e.instance.props.src)) this.injectItem(e, [e.instance.props.href || e.instance.props.src]);
@@ -1111,124 +1166,136 @@ module.exports = (_ => {
 			
 			processLazyImage (e) {
 				if (e.node) {
-					if (e.instance.props.resized && e.instance.state.readyState != BDFDB.LibraryComponents.Image.ImageReadyStates.READY) {
-						e.instance.state.readyState = BDFDB.LibraryComponents.Image.ImageReadyStates.READY;
-						BDFDB.ReactUtils.forceUpdate(e.instance);
+					if (e.instance.props.resized) {
+						let embed = BDFDB.DOMUtils.getParent(BDFDB.dotCN.embedfull, e.node);
+						if (embed) embed.style.setProperty("max-width", "unset", "important");
+						if (e.instance.state.readyState != BDFDB.LibraryComponents.Image.ImageReadyStates.READY) {
+							e.instance.state.readyState = BDFDB.LibraryComponents.Image.ImageReadyStates.READY;
+							BDFDB.ReactUtils.forceUpdate(e.instance);
+						}
 					}
-					let isVideo = (typeof e.instance.props.children == "function" && e.instance.props.children(Object.assign({}, e.instance.props, {size: e.instance.props})) || {type: {}}).type.displayName == "Video";
-					if (this.settings.viewerSettings.zoomMode && !isVideo && !BDFDB.DOMUtils.containsClass(e.node.parentElement, BDFDB.disCN._imageutilitiessibling) && BDFDB.ReactUtils.findOwner(BDFDB.ReactUtils.getInstance(e.node), {name: "ImageModal", up: true})) {
-						e.node.addEventListener("mousedown", event => {
-							if (event.which != 1) return;
-							BDFDB.ListenerUtils.stopEvent(event);
+					if (e.methodname == "componentDidMount") {
+						let isVideo = (typeof e.instance.props.children == "function" && e.instance.props.children(Object.assign({}, e.instance.props, {size: e.instance.props})) || {type: {}}).type.displayName == "Video";
+						if (this.settings.viewerSettings.zoomMode && !isVideo && !BDFDB.DOMUtils.containsClass(e.node.parentElement, BDFDB.disCN._imageutilitiessibling) && BDFDB.ReactUtils.findOwner(BDFDB.ReactUtils.getInstance(e.node), {name: "ImageModal", up: true})) {
+							e.node.addEventListener("mousedown", event => {
+								if (event.which != 1) return;
+								BDFDB.ListenerUtils.stopEvent(event);
 
-							let vanishObserver;
-							
-							let imgRects = BDFDB.DOMUtils.getRects(e.node.firstElementChild);
+								let vanishObserver;
+								
+								let imgRects = BDFDB.DOMUtils.getRects(e.node.firstElementChild);
 
-							let lens = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCN._imageutilitieslense}" style="border-radius: 50% !important; pointer-events: none !important; z-index: 10000 !important; width: ${this.settings.zoomSettings.lensSize}px !important; height: ${this.settings.zoomSettings.lensSize}px !important; position: fixed !important;"><div style="position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;"><${e.node.firstElementChild.tagName} src="${e.instance.props.src}" style="width: ${imgRects.width * this.settings.zoomSettings.zoomLevel}px; height: ${imgRects.height * this.settings.zoomSettings.zoomLevel}px; position: fixed !important;${this.settings.zoomSettings.pixelMode ? " image-rendering: pixelated !important;" : ""}"${e.node.firstElementChild.tagName == "VIDEO" ? " loop autoplay" : ""}></${e.node.firstElementChild.tagName}></div></div>`);
-							let pane = lens.firstElementChild.firstElementChild;
-							let backdrop = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCN._imageutilitieslensebackdrop}" style="background: rgba(0, 0, 0, 0.3) !important; position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; pointer-events: none !important; z-index: 8000 !important;"></div>`);
-							let appMount = document.querySelector(BDFDB.dotCN.appmount);
-							appMount.appendChild(lens);
-							appMount.appendChild(backdrop);
+								let lens = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCN._imageutilitieslense}" style="border-radius: 50% !important; pointer-events: none !important; z-index: 10000 !important; width: ${this.settings.zoomSettings.lensSize}px !important; height: ${this.settings.zoomSettings.lensSize}px !important; position: fixed !important;"><div style="position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;"><${e.node.firstElementChild.tagName} src="${e.instance.props.src}" style="width: ${imgRects.width * this.settings.zoomSettings.zoomLevel}px; height: ${imgRects.height * this.settings.zoomSettings.zoomLevel}px; position: fixed !important;${this.settings.zoomSettings.pixelMode ? " image-rendering: pixelated !important;" : ""}"${e.node.firstElementChild.tagName == "VIDEO" ? " loop autoplay" : ""}></${e.node.firstElementChild.tagName}></div></div>`);
+								let pane = lens.firstElementChild.firstElementChild;
+								let backdrop = BDFDB.DOMUtils.create(`<div class="${BDFDB.disCN._imageutilitieslensebackdrop}" style="background: rgba(0, 0, 0, 0.3) !important; position: absolute !important; top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; pointer-events: none !important; z-index: 8000 !important;"></div>`);
+								let appMount = document.querySelector(BDFDB.dotCN.appmount);
+								appMount.appendChild(lens);
+								appMount.appendChild(backdrop);
 
-							let lensRects = BDFDB.DOMUtils.getRects(lens);
-							
-							let halfW = lensRects.width / 2, halfH = lensRects.height / 2;
-							let minX = imgRects.left, maxX = minX + imgRects.width;
-							let minY = imgRects.top, maxY = minY + imgRects.height;
-							
-							lens.update = _ => {
-								let x = event.clientX > maxX ? maxX - halfW : event.clientX < minX ? minX - halfW : event.clientX - halfW;
-								let y = event.clientY > maxY ? maxY - halfH : event.clientY < minY ? minY - halfH : event.clientY - halfH;
-								lens.style.setProperty("left", x + "px", "important");
-								lens.style.setProperty("top", y + "px", "important");
-								lens.style.setProperty("width", this.settings.zoomSettings.lensSize + "px", "important");
-								lens.style.setProperty("height", this.settings.zoomSettings.lensSize + "px", "important");
-								lens.style.setProperty("clip-path", `circle(${(this.settings.zoomSettings.lensSize/2) + 2}px at center)`, "important");
-								lens.firstElementChild.style.setProperty("clip-path", `circle(${this.settings.zoomSettings.lensSize/2}px at center)`, "important");
-								pane.style.setProperty("left", imgRects.left + ((this.settings.zoomSettings.zoomLevel - 1) * (imgRects.left - x - halfW)) + "px", "important");
-								pane.style.setProperty("top", imgRects.top + ((this.settings.zoomSettings.zoomLevel - 1) * (imgRects.top - y - halfH)) + "px", "important");
-								pane.style.setProperty("width", imgRects.width * this.settings.zoomSettings.zoomLevel + "px", "important");
-								pane.style.setProperty("height", imgRects.height * this.settings.zoomSettings.zoomLevel + "px", "important");
-							};
-							lens.update();
-							
-							e.node.style.setProperty("pointer-events", "none", "important");
-
-							let dragging = event2 => {
-								event = event2;
+								let lensRects = BDFDB.DOMUtils.getRects(lens);
+								
+								let halfW = lensRects.width / 2, halfH = lensRects.height / 2;
+								let minX = imgRects.left, maxX = minX + imgRects.width;
+								let minY = imgRects.top, maxY = minY + imgRects.height;
+								
+								lens.update = _ => {
+									let x = event.clientX > maxX ? maxX - halfW : event.clientX < minX ? minX - halfW : event.clientX - halfW;
+									let y = event.clientY > maxY ? maxY - halfH : event.clientY < minY ? minY - halfH : event.clientY - halfH;
+									lens.style.setProperty("left", x + "px", "important");
+									lens.style.setProperty("top", y + "px", "important");
+									lens.style.setProperty("width", this.settings.zoomSettings.lensSize + "px", "important");
+									lens.style.setProperty("height", this.settings.zoomSettings.lensSize + "px", "important");
+									lens.style.setProperty("clip-path", `circle(${(this.settings.zoomSettings.lensSize/2) + 2}px at center)`, "important");
+									lens.firstElementChild.style.setProperty("clip-path", `circle(${this.settings.zoomSettings.lensSize/2}px at center)`, "important");
+									pane.style.setProperty("left", imgRects.left + ((this.settings.zoomSettings.zoomLevel - 1) * (imgRects.left - x - halfW)) + "px", "important");
+									pane.style.setProperty("top", imgRects.top + ((this.settings.zoomSettings.zoomLevel - 1) * (imgRects.top - y - halfH)) + "px", "important");
+									pane.style.setProperty("width", imgRects.width * this.settings.zoomSettings.zoomLevel + "px", "important");
+									pane.style.setProperty("height", imgRects.height * this.settings.zoomSettings.zoomLevel + "px", "important");
+								};
 								lens.update();
-							};
-							let releasing = _ => {
-								e.node.style.removeProperty("pointer-events");
+								
+								e.node.style.setProperty("pointer-events", "none", "important");
+
+								let dragging = event2 => {
+									event = event2;
+									lens.update();
+								};
+								let releasing = _ => {
+									e.node.style.removeProperty("pointer-events");
+									this.cleanupListeners("Zoom");
+									document.removeEventListener("mousemove", dragging);
+									document.removeEventListener("mouseup", releasing);
+									if (vanishObserver) vanishObserver.disconnect();
+									BDFDB.DOMUtils.remove(lens, backdrop);
+									BDFDB.DataUtils.save(this.settings.zoomSettings, this, "zoomSettings");
+								};
+								document.addEventListener("mousemove", dragging);
+								document.addEventListener("mouseup", releasing);
+								
 								this.cleanupListeners("Zoom");
-								document.removeEventListener("mousemove", dragging);
-								document.removeEventListener("mouseup", releasing);
-								if (vanishObserver) vanishObserver.disconnect();
-								BDFDB.DOMUtils.remove(lens, backdrop);
-								BDFDB.DataUtils.save(this.settings.zoomSettings, this, "zoomSettings");
-							};
-							document.addEventListener("mousemove", dragging);
-							document.addEventListener("mouseup", releasing);
-							
-							this.cleanupListeners("Zoom");
-							this.addListener("wheel", "Zoom", event2 => {
-								if (!document.contains(e.node)) this.cleanupListeners("Zoom");
-								else {
-									if (event2.deltaY < 0 && (this.settings.zoomSettings.zoomLevel + 0.1) <= this.defaults.zoomSettings.zoomLevel.maxValue) {
-										this.settings.zoomSettings.zoomLevel += 0.1;
-										lens.update();
+								this.addListener("wheel", "Zoom", event2 => {
+									if (!document.contains(e.node)) this.cleanupListeners("Zoom");
+									else {
+										if (event2.deltaY < 0 && (this.settings.zoomSettings.zoomLevel + 0.1) <= this.defaults.zoomSettings.zoomLevel.maxValue) {
+											this.settings.zoomSettings.zoomLevel += 0.1;
+											lens.update();
+										}
+										else if (event2.deltaY > 0 && (this.settings.zoomSettings.zoomLevel - 0.1) >= this.defaults.zoomSettings.zoomLevel.minValue) {
+											this.settings.zoomSettings.zoomLevel -= 0.1;
+											lens.update();
+										}
 									}
-									else if (event2.deltaY > 0 && (this.settings.zoomSettings.zoomLevel - 0.1) >= this.defaults.zoomSettings.zoomLevel.minValue) {
-										this.settings.zoomSettings.zoomLevel -= 0.1;
-										lens.update();
+								});
+								this.addListener("keydown", "Zoom", event2 => {
+									if (!document.contains(e.node)) this.cleanupListeners("Zoom");
+									else if (!firedEvents.includes("Zoom")) {
+										firedEvents.push("Zoom");
+										if (event2.keyCode == 187 && (this.settings.zoomSettings.zoomLevel + 0.5) <= this.defaults.zoomSettings.zoomLevel.maxValue) {
+											this.settings.zoomSettings.zoomLevel += 0.5;
+											lens.update();
+										}
+										else if (event2.keyCode == 189 && (this.settings.zoomSettings.zoomLevel - 0.5) >= this.defaults.zoomSettings.zoomLevel.minValue) {
+											this.settings.zoomSettings.zoomLevel -= 0.5;
+											lens.update();
+										}
 									}
-								}
+								});
+								this.addListener("keyup", "Zoom", _ => {
+									BDFDB.ArrayUtils.remove(firedEvents, "Zoom", true);
+									if (!document.contains(e.node)) this.cleanupListeners("Zoom");
+								});
+								
+								vanishObserver = new MutationObserver(changes => {if (!document.contains(e.node)) releasing();});
+								vanishObserver.observe(appMount, {childList: true, subtree: true});
 							});
-							this.addListener("keydown", "Zoom", event2 => {
-								if (!document.contains(e.node)) this.cleanupListeners("Zoom");
-								else if (!firedEvents.includes("Zoom")) {
-									firedEvents.push("Zoom");
-									if (event2.keyCode == 187 && (this.settings.zoomSettings.zoomLevel + 0.5) <= this.defaults.zoomSettings.zoomLevel.maxValue) {
-										this.settings.zoomSettings.zoomLevel += 0.5;
-										lens.update();
-									}
-									else if (event2.keyCode == 189 && (this.settings.zoomSettings.zoomLevel - 0.5) >= this.defaults.zoomSettings.zoomLevel.minValue) {
-										this.settings.zoomSettings.zoomLevel -= 0.5;
-										lens.update();
-									}
-								}
-							});
-							this.addListener("keyup", "Zoom", _ => {
-								BDFDB.ArrayUtils.remove(firedEvents, "Zoom", true);
-								if (!document.contains(e.node)) this.cleanupListeners("Zoom");
-							});
-							
-							vanishObserver = new MutationObserver(changes => {if (!document.contains(e.node)) releasing();});
-							vanishObserver.observe(appMount, {childList: true, subtree: true});
-						});
+						}
 					}
 				}
 				else {
-					if (this.settings.resizeSettings.imageViewer && BDFDB.ReactUtils.findOwner(BDFDB.ObjectUtils.get(e, `instance.${BDFDB.ReactUtils.instanceKey}`), {name: "ImageModal", up: true})) {
+					let reactInstance = BDFDB.ObjectUtils.get(e, `instance.${BDFDB.ReactUtils.instanceKey}`);
+					if (this.settings.rescaleSettings.imageViewer != "NONE" && BDFDB.ReactUtils.findOwner(reactInstance, {name: "ImageModal", up: true})) {
 						let aRects = BDFDB.DOMUtils.getRects(document.querySelector(BDFDB.dotCN.appmount));
 						let ratio = Math.min((aRects.width * (this.settings.viewerSettings.galleryMode ? 0.8 : 1) - 20) / e.instance.props.width, (aRects.height - (this.settings.viewerSettings.details ? 280 : 100)) / e.instance.props.height);
+						ratio = this.settings.rescaleSettings.imageViewer == "ORIGINAL" && ratio > 1 ? 1 : ratio;
 						let width = Math.round(ratio * e.instance.props.width);
 						let height = Math.round(ratio * e.instance.props.height);
-						e.instance.props.width = width;
-						e.instance.props.maxWidth = width;
-						e.instance.props.height = height;
-						e.instance.props.maxHeight = height;
-						e.instance.props.src = e.instance.props.src.replace(/width=\d+/, `width=${width}`).replace(/height=\d+/, `height=${height}`);
-						e.instance.props.resized = true;
+						if (e.instance.props.width != width || e.instance.props.maxWidth != width || e.instance.props.height != height || e.instance.props.maxHeight != height) {
+							e.instance.props.width = width;
+							e.instance.props.maxWidth = width;
+							e.instance.props.height = height;
+							e.instance.props.maxHeight = height;
+							e.instance.props.src = e.instance.props.src.replace(/width=\d+/, `width=${width}`).replace(/height=\d+/, `height=${height}`);
+							e.instance.props.resized = true;
+						}
 					}
-					if (this.settings.resizeSettings.messages && (!e.instance.props.className || (e.instance.props.className.indexOf(BDFDB.disCN.embedmedia) == -1 && e.instance.props.className.indexOf(BDFDB.disCN.embedthumbnail) == -1)) && BDFDB.ReactUtils.findOwner(BDFDB.ObjectUtils.get(e, `instance.${BDFDB.ReactUtils.instanceKey}`), {name: "LazyImageZoomable", up: true})) {
+					if (this.settings.rescaleSettings.messages != "NONE" && (!e.instance.props.className || e.instance.props.className.indexOf(BDFDB.disCN.embedthumbnail) == -1) && BDFDB.ReactUtils.findOwner(reactInstance, {name: "LazyImageZoomable", up: true})) {
 						let aRects = BDFDB.DOMUtils.getRects(document.querySelector(BDFDB.dotCN.appmount));
 						let mRects = BDFDB.DOMUtils.getRects(document.querySelector(BDFDB.dotCNC.messageaccessory + BDFDB.dotCN.messagecontents));
 						let mwRects = BDFDB.DOMUtils.getRects(document.querySelector(BDFDB.dotCN.messagewrapper));
 						if (mRects.width || mwRects.width) {
-							let ratio = (mRects.width || (mwRects.width - 120)) / e.instance.props.width;
+							let embed = BDFDB.ReactUtils.findValue(reactInstance, "embed", {up: true});
+							let ratio = ((mRects.width || (mwRects.width - 120)) - (embed && embed.color ? 100 : 0)) / e.instance.props.width;
+							ratio = this.settings.rescaleSettings.messages == "ORIGINAL" && ratio > 1 ? 1 : ratio;
 							let width = Math.round(ratio * e.instance.props.width);
 							let height = Math.round(ratio * e.instance.props.height);
 							if (height > (aRects.height * 0.66)) {
@@ -1236,12 +1303,14 @@ module.exports = (_ => {
 								width = (newHeight/height) * width;
 								height = newHeight;
 							}
-							e.instance.props.width = width;
-							e.instance.props.maxWidth = width;
-							e.instance.props.height = height;
-							e.instance.props.maxHeight = height;
-							e.instance.props.src = e.instance.props.src.replace(/width=\d+/, `width=${width}`).replace(/height=\d+/, `height=${height}`);
-							e.instance.props.resized = true;
+							if (e.instance.props.width != width || e.instance.props.maxWidth != width || e.instance.props.height != height || e.instance.props.maxHeight != height) {
+								e.instance.props.width = width;
+								e.instance.props.maxWidth = width;
+								e.instance.props.height = height;
+								e.instance.props.maxHeight = height;
+								e.instance.props.src = e.instance.props.src.replace(/width=\d+/, `width=${width}`).replace(/height=\d+/, `height=${height}`);
+								e.instance.props.resized = true;
+							}
 						}
 					}
 				}
@@ -1262,8 +1331,36 @@ module.exports = (_ => {
 								delay: this.settings.detailsSettings.tooltipDelay
 							});
 							return onMouseEnter(...args);
-						});
+						}, "Error in onMouseEnter of LazyImageZoomable!");
 					}
+				}
+			}
+
+			processSimpleMessageAccessories (e) {
+				if (this.settings.general.nsfwMode && e.instance.props.channel.nsfw) {
+					e.instance.props.message = new BDFDB.DiscordObjects.Message(e.instance.props.message);
+					e.instance.props.message.attachments = [].concat(e.instance.props.message.attachments);
+					for (let i in e.instance.props.message.attachments) if (e.instance.props.message.attachments[i].spoiler != undefined) {
+						e.instance.props.message.attachments[i] = Object.assign({}, e.instance.props.message.attachments[i], {spoiler: true, nsfw: !e.instance.props.message.attachments[i].spoiler});
+					}
+				}
+			}
+
+			processSpoiler (e) {
+				if (this.settings.general.nsfwMode) {
+					let childrenRender = e.returnvalue.props.children;
+					e.returnvalue.props.children = BDFDB.TimeUtils.suppress((...args) => {
+						let children = childrenRender(...args);
+						let attachment = BDFDB.ReactUtils.findValue(children, "attachment");
+						if (attachment && attachment.nsfw) {
+							let [children2, index] = BDFDB.ReactUtils.findParent(children, {name: "SpoilerWarning"});
+							if (index > -1) children2[index] = BDFDB.ReactUtils.createElement("div", {
+								className: BDFDB.disCN.spoilerwarning,
+								children: "NSFW"
+							});
+						}
+						return children;
+					}, "Error in Children Render of Spoiler!");
 				}
 			}
 			
@@ -1393,7 +1490,7 @@ module.exports = (_ => {
 			}
 			
 			filterMessagesForImages (messages, img) {
-				return messages.filter(m => m && m.hit && m.channel_id == img.channelId && (m.id == firstViewedImage.messageId || m.id == img.messageId || m.embeds.length || m.attachments.filter(a => !a.filename.startsWith("SPOILER_")).length)).map(m => [m.attachments, m.embeds].flat(10).filter(n => n).map(i => Object.assign({messageId: m.id, channelId: img.channelId}, i, i.thumbnail, i.video))).flat(10);
+				return messages.filter(m => m && m.hit && m.channel_id == img.channelId && (m.id == firstViewedImage.messageId || m.id == img.messageId || m.embeds.length || m.attachments.filter(a => !a.filename.startsWith("SPOILER_")).length)).map(m => [m.attachments, m.embeds].flat(10).filter(n => n).map(i => Object.assign({messageId: m.id, channelId: img.channelId}, i, i.image, i.thumbnail, i.video))).flat(10);
 			}
 			
 			switchImages (modalInstance, offset) {
@@ -1477,7 +1574,8 @@ module.exports = (_ => {
 					height: videoData.size.height,
 					naturalWidth: viewedImage.width,
 					naturalHeight: viewedImage.height,
-					play: true
+					play: true,
+					playOnHover: !!BDFDB.LibraryModules.LocalSettingsStore.useReducedMotion
 				}));
 				BDFDB.ReactUtils.forceUpdate(modalInstance);
 			}

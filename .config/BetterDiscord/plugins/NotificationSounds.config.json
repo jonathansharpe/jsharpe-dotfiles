@@ -14,45 +14,45 @@
 		},
 		"choices": {
 			"message1": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": null,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"dm": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"mentioned": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"role": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"everyone": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"here": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"deafen": {
@@ -280,10 +280,10 @@
 				"volume": 100
 			},
 			"reply": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"success": {
@@ -294,10 +294,10 @@
 				"volume": 100
 			},
 			"groupdm": {
-				"category": "wii",
+				"category": "zelda",
 				"focus": true,
 				"mute": true,
-				"sound": "wii-select",
+				"sound": "pause-select",
 				"volume": 100
 			},
 			"poggermode_enabled": {

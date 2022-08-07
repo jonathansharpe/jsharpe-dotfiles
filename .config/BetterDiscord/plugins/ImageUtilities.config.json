@@ -23,15 +23,7 @@
 			"Yandex": true
 		},
 		"general": {
-			"resizeImage": true,
-			"addDetails": true,
-			"showInDescription": true,
-			"showOnHover": false,
-			"enableGallery": true,
-			"enableZoom": true,
-			"pixelZoom": false,
-			"enableCopyImg": true,
-			"enableSaveImg": true
+			"nsfwMode": true
 		},
 		"places": {
 			"userAvatars": true,
@@ -39,9 +31,17 @@
 			"guildIcons": true,
 			"emojis": true
 		},
+		"rescaleSettings": {
+			"messages": "NONE",
+			"imageViewer": "NONE"
+		},
 		"resizeSettings": {
 			"messages": false,
 			"imageViewer": false
+		},
+		"scaleSettings": {
+			"messages": "NONE",
+			"imageViewer": "NONE"
 		},
 		"viewerSettings": {
 			"zoomMode": true,
@@ -53,7 +53,7 @@
 		"zoomSettings": {
 			"lensSize": 874,
 			"pixelMode": false,
-			"zoomLevel": 2
+			"zoomLevel": 2.5000000000000004
 		}
 	}
 }
