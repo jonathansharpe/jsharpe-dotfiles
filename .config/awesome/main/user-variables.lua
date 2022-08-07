@@ -1,9 +1,11 @@
 local home = os.getenv("HOME")
+modkey = "Mod4"
 
-local _M = {
-	terminal = "konsole",
+local uservars = {
+	terminal = "wezterm",
 	editor = "nvim",
-	modkey = "Mod4",
+	browser = "firefox",
+	fileManager = "dolphin",
 }
 
-return _M
+return uservars

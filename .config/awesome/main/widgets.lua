@@ -1,0 +1,6 @@
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+local net_speed_widget = require("awesome-wm-widgets.net-speed-widget.net-speed")
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
