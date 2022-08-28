@@ -11,13 +11,22 @@ return require('packer').startup(function()
 	'wbthomason/packer.nvim'
 }
 use {
-	'windwp/nvim-autopairs',
-	config = function()
-		require('nvim-autopairs').setup{}
-	end
+	"folke/which-key.nvim"
+}
+use {
+	"mbbill/undotree"
 }
 use {
 	'xiyaowong/nvim-transparent'
+}
+use {
+	'RRethy/vim-illuminate'
+}
+use {
+	'lewis6991/hover.nvim',
+}
+use {
+	'lewis6991/spellsitter.nvim',
 }
 use {
 	'noib3/nvim-cokeline',
@@ -26,7 +35,23 @@ use {
 		require('cokeline').setup()
 	end
 }
+use {
+	'danymat/neogen'
+}
+use {
+	"lukas-reineke/indent-blankline.nvim"
+}
+use {
+	"lewis6991/gitsigns.nvim"
+}
+use {
+	"nathom/filetype.nvim"
+}
+use {
+	"JoosepAlviste/nvim-ts-context-commentstring"
+}
 use {"numToStr/FTerm.nvim"}
+use {"nvim-treesitter/nvim-treesitter"}
 use {'kyazdani42/nvim-tree.lua'}
 use {"lewis6991/cleanfold.nvim"}
 use {'junegunn/vim-easy-align'}
@@ -56,7 +81,7 @@ use {
 	'ms-jpq/coq.thirdparty',
 	branch = '3p'
 }
-use {'tpope/vim-surround'}
+use {'windwp/nvim-autopairs'}
 -- tpope: Comments
 use {'tpope/vim-commentary'
 }
@@ -64,7 +89,7 @@ use {'tpope/vim-commentary'
 use { "onsails/lspkind-nvim"}
 -- markdown preview for notes
 use {
-	'iamcco/markdown-preview.nvim', 
+	'iamcco/markdown-preview.nvim',
 	run = 'cd app && yarn install'
 }
 -- code snippits

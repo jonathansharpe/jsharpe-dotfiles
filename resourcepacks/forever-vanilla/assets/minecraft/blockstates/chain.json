@@ -1,0 +1,65 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "axis": "x",
+		"waterlogged": "false"
+      },
+      "apply": {
+		 "model": "minecraft:block/chain",
+		 "x": 90,
+		 "y": 90
+      }
+    },
+	{
+      "when": {
+        "axis": "y",
+		"waterlogged": "false"
+      },
+      "apply": {
+		 "model": "minecraft:block/chain"
+      }
+    },
+	{
+      "when": {
+        "axis": "z",
+		"waterlogged": "false"
+      },
+      "apply": {
+		 "model": "minecraft:block/chain",
+		 "x": 90
+      }
+    },
+	
+	{
+      "when": {
+        "axis": "x",
+		"waterlogged": "true"
+      },
+      "apply": {
+		 "model": "minecraft:block/waterlogged_chain",
+		 "x": 90,
+		 "y": 90
+      }
+    },
+	{
+      "when": {
+        "axis": "y",
+		"waterlogged": "true"
+      },
+      "apply": {
+		 "model": "minecraft:block/waterlogged_chain"
+      }
+    },
+	{
+      "when": {
+        "axis": "z",
+		"waterlogged": "true"
+      },
+      "apply": {
+		 "model": "minecraft:block/waterlogged_chain",
+		 "x": 90
+      }
+    }
+  ]
+}

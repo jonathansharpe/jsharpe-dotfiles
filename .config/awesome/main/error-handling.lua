@@ -1,4 +1,5 @@
 local naughty = require("naughty")
+local awful = require "awful"
 -- Handle runtime errors after startup
 do
     local in_error = false
@@ -7,6 +8,7 @@ do
         if in_error then return end
         in_error = true
 
+		awful.spawn_with_shell("notify-send.py --replaces-process \"AwesomeWM error alert!\""..tostring(err))
         naughty.notify({ preset = naughty.config.presets.critical,
                          title = "Oops, an error happened!",
                          text = tostring(err) })
