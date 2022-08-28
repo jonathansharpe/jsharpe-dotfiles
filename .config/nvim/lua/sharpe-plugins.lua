@@ -5,29 +5,29 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	vim.cmd 'packadd packer.nvim'
 end
 
+-- Packer, which is the plugin manager; 100% necessary, which is why it's required
 return require('packer').startup(function()
-	-- Packer
-	use { -- plugins
-	'wbthomason/packer.nvim'
-}
-use {
-	"folke/which-key.nvim"
-}
-use {
-	"mbbill/undotree"
-}
-use {
-	'xiyaowong/nvim-transparent'
-}
-use {
-	'RRethy/vim-illuminate'
-}
-use {
-	'lewis6991/hover.nvim',
-}
-use {
-	'lewis6991/spellsitter.nvim',
-}
+	use { 'wbthomason/packer.nvim' }
+
+-- shows what keys do what; e.g., press 'z' once and it'll show motions
+use { "folke/which-key.nvim" }
+
+-- an undo tree, to make it easier to go back without spamming Ctrl+R 100 times
+use { "mbbill/undotree" }
+
+-- adds transparency to nvim, only useful if the vim color scheme exact matches the terminal's
+use { 'xiyaowong/nvim-transparent' }
+
+-- allows for light/dark theme syncing i think
+use { 'RRethy/vim-illuminate' }
+
+-- shows hover helps by pressing a key
+use { 'lewis6991/hover.nvim', }
+
+-- uses context-sensitive spell check, so the spell check doesn't tell you your variables are spelled wrong
+use { 'lewis6991/spellsitter.nvim', }
+
+-- bufferline plugin
 use {
 	'noib3/nvim-cokeline',
 	requires = 'kyazdani42/nvim-web-devicons',
@@ -35,28 +35,41 @@ use {
 		require('cokeline').setup()
 	end
 }
-use {
-	'danymat/neogen'
-}
-use {
-	"lukas-reineke/indent-blankline.nvim"
-}
-use {
-	"lewis6991/gitsigns.nvim"
-}
-use {
-	"nathom/filetype.nvim"
-}
-use {
-	"JoosepAlviste/nvim-ts-context-commentstring"
-}
+
+-- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
+use { 'danymat/neogen' }
+
+-- shows vertical lines that line up how many indents over you are
+use { "lukas-reineke/indent-blankline.nvim" }
+
+-- shows signs for the changes in a text file located in a git repo
+use { "lewis6991/gitsigns.nvim" }
+
+-- makes loading files faster or something
+use { "nathom/filetype.nvim" }
+
+-- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
+use { "JoosepAlviste/nvim-ts-context-commentstring" }
+
+-- adds a pop-up terminal by pressing a keybind
 use {"numToStr/FTerm.nvim"}
+
+-- massively improves nvim's syntax highlighting, in both speed and readability
 use {"nvim-treesitter/nvim-treesitter"}
+
+-- shows a file tree tab on the side of the window
 use {'kyazdani42/nvim-tree.lua'}
+
+-- makes folds cleaner
 use {"lewis6991/cleanfold.nvim"}
+
+-- makes it easier to align stuff ig
 use {'junegunn/vim-easy-align'}
+
 -- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
 use { 'kyazdani42/nvim-web-devicons'}
+
+-- gives a cheatsheet when running a command
 use {
 	'sudormrfbin/cheatsheet.nvim',
 	requires = {
@@ -65,8 +78,12 @@ use {
 		{'nvim-lua/plenary.nvim'},
 	}
 }
+-- the statusline on the bottom
 use {'feline-nvim/feline.nvim'}
+
+-- i forgor :forgor:
 use {'mattn/emmet-vim'}
+
 use { -- neovim completion!
 	'ms-jpq/coq_nvim',
 	branch = 'coq'
@@ -77,30 +94,39 @@ use { -- a dependency for coq
 }
 -- for language servers, i.e. autosuggestions for programming languages, and syntax checking
 use	{'neovim/nvim-lspconfig'}
+
+-- completion menus
 use {
 	'ms-jpq/coq.thirdparty',
 	branch = '3p'
 }
+
+-- creates a closing bracket when typing an opening one, and is context sensitive, etc.
 use {'windwp/nvim-autopairs'}
+
 -- tpope: Comments
-use {'tpope/vim-commentary'
-}
+use {'tpope/vim-commentary' }
+
 -- Icons for each entry in the completion menu
 use { "onsails/lspkind-nvim"}
+
 -- markdown preview for notes
 use {
 	'iamcco/markdown-preview.nvim',
 	run = 'cd app && yarn install'
 }
+
 -- code snippits
 use {"L3MON4D3/LuaSnip"}
+
+-- adds the base-16 color schemes to nvim
 use {'RRethy/nvim-base16'}
+
 -- highlights hex color codes in their respective color
 use {'norcalli/nvim-colorizer.lua'}
-use { -- Smooth Scrolling
-"karb94/neoscroll.nvim"
-	}
-	use { -- for google keep integration!
-	'stevearc/gkeep.nvim', run = ':UpdateRemotePlugins'
-	}
+
+-- smooth scrolling plugin
+use { "karb94/neoscroll.nvim" }
+-- google keep integration
+use { 'stevearc/gkeep.nvim', run = ':UpdateRemotePlugins' }
 end)
