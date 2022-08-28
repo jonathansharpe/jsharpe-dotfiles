@@ -13,6 +13,7 @@ local beautiful = require("beautiful")
 local bling = require("bling")
 -- Notification library
 local naughty = require("naughty")
+package.loaded["naughty.dbus"] = {}
 local menubar = require("menubar")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -29,6 +30,8 @@ local menu = require("main.menu")
 local rules = require("main.rules")
 local bindings = require("bindings.bindings")
 local widgets = require("main.widgets")
+
+gears.wallpaper.centered(beautiful.wallpaper, s, "#000000", 2)
 
 awful.keyboard.append_global_keybindings({
 	awful.key ({
@@ -196,18 +199,21 @@ awful.screen.connect_for_each_screen(function(s)
 				{
 					{
 						{
-							id     = 'icon_role',
-							widget = wibox.widget.imagebox,
+							id     = 'clienticon',
+							widget = awful.widget.clienticon,
+							halign = 'center',
+							valign = 'center',
 						},
-						margins = 2,
 						widget  = wibox.container.margin,
 					},
 					layout = wibox.layout.fixed.horizontal,
 				},
-				margins = 3,
+				margins = 5,
 				widget = wibox.container.margin,
 			},
-			id     = 'background_role',
+			forced_width = 48,
+			forced_height = 48,
+			id = 'background_role',
 			widget = wibox.container.background,
 		},
     }
@@ -218,69 +224,87 @@ awful.screen.connect_for_each_screen(function(s)
 			position = "bottom",
 			screen = s,
 			height = 48,
+			-- opacity = .75,
 		}
 	)
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            launcher,
+	s.mywibox:setup {
+		layout = wibox.layout.align.horizontal,
+		{ -- Left widgets
+		layout = wibox.layout.fixed.horizontal,
+		launcher,
+		{
 			{
-				{
-					color = "#8aadf4",
-					widget = wibox.container.margin(s.mytaglist),
-					margins = 5,
-				},
-				widget = wibox.container.background,
-				bg = "#8aadf4",
-				shape = function(cr, width, height)
-					gears.shape.rounded_rect(cr, width, height, 10)
-				end,
+				color = beautiful.taglist_bg_empty,
+				widget = wibox.container.margin(s.mytaglist),
+				margins = 5,
 			},
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-			-- batteryarc_widget({
-			-- 	show_current_level = true,
-			-- 	arc_thickness = 1,
-			-- 	size = 18,
-			-- 	warning_msg_text = "Low battery!"
-			-- }),
-			volume_widget{
-				mixer_cmd = "pavucontrol-qt",
-				bg_color = "white",
-				widget_type = "horizontal_bar",
-				main_color = beautiful.tasklist_bg_focus,
-				mute_color = beautiful.tasklist_bg_urgent,
-				shape = 'rounded_rect',
-				with_icon = true,
+			widget = wibox.container.background,
+			bg = beautiful.taglist_bg_empty,
+			shape = function(cr, width, height)
+				gears.shape.rounded_rect(cr, width, height, 10)
+			end,
+		},
+		s.mypromptbox,
+		{
+			widget = wibox.container.margin,
+			margins = 5,
+		},
+		{
+			{
+				color = beautiful.tasklist_bg_normal,
+				widget = wibox.container.margin(s.mytasklist),
 			},
-			weather_widget({
-				api_key='0a730da1dd8d10eb980eec4b9e4ae5e7',
-				coordinates = {48.4718, -122.3259},
-				time_format_12h = true,
-				units = 'imperial',
-				both_units_widget = false,
-				icons = 'weather-underground-icons',
-				icons_extension = '.png',
-				show_hourly_forecast = true,
-				show_daily_forecast = true,
-			}),
-			ram_widget({
-				widget_height = 40,
-				widget_width = 40,
-			}),
-			capslock,
-            wibox.widget.systray(),
-			net_speed_widget(),
-            mytextclock,
-            s.mylayoutbox,
-        },
-    }
+			widget = wibox.container.background,
+			shape = function(cr, width, height)
+				gears.shape.rounded_rect(cr, width, height, 10)
+			end,
+		}
+	},
+	{ -- middle widgets
+		widget = wibox.container.margin,
+		margins = 0,
+	},
+	{ -- Right widgets
+	layout = wibox.layout.fixed.horizontal,
+	-- batteryarc_widget({
+	-- 	show_current_level = true,
+	-- 	arc_thickness = 1,
+	-- 	size = 18,
+	-- 	warning_msg_text = "Low battery!"
+	-- }),
+	volume_widget{
+		mixer_cmd = "pavucontrol-qt",
+		bg_color = "white",
+		widget_type = "horizontal_bar",
+		main_color = beautiful.tasklist_bg_focus,
+		mute_color = beautiful.tasklist_bg_urgent,
+		shape = 'rounded_rect',
+		with_icon = true,
+	},
+	weather_widget({
+		api_key='0a730da1dd8d10eb980eec4b9e4ae5e7',
+		coordinates = {48.4718, -122.3259},
+		time_format_12h = true,
+		units = 'imperial',
+		both_units_widget = false,
+		icons = 'weather-underground-icons',
+		icons_extension = '.png',
+		show_hourly_forecast = true,
+		show_daily_forecast = true,
+	}),
+	ram_widget({
+		widget_height = 40,
+		widget_width = 40,
+	}),
+	capslock,
+	wibox.widget.systray(),
+	net_speed_widget(),
+	mytextclock,
+	s.mylayoutbox,
+},
+	}
 end)
 client.connect_signal("manage", function(c)
 	c.shape = function(cr,w,h)
@@ -375,49 +399,49 @@ end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
-    -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
+	-- buttons for the titlebar
+	local buttons = gears.table.join(
+	awful.button({ }, 1, function()
+		c:emit_signal("request::activate", "titlebar", {raise = true})
+		awful.mouse.client.move(c)
+	end),
+	awful.button({ }, 3, function()
+		c:emit_signal("request::activate", "titlebar", {raise = true})
+		awful.mouse.client.resize(c)
+	end)
+	)
 
 	local top_titlebar = awful.titlebar(c, {
 		size = 40,
 	})
-    top_titlebar : setup {
-        { -- Left
-            awful.titlebar.widget.iconwidget(c),
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
-        },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-			awful.titlebar.widget.floatingbutton(c),
-            awful.titlebar.widget.minimizebutton(c),
-            awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.layout.align.horizontal,
-    }
+	top_titlebar : setup {
+		{ -- Left
+		awful.titlebar.widget.iconwidget(c),
+		buttons = buttons,
+		layout  = wibox.layout.fixed.horizontal
+	},
+	{ -- Middle
+	{ -- Title
+	align  = "center",
+	widget = awful.titlebar.widget.titlewidget(c)
+},
+buttons = buttons,
+layout  = wibox.layout.flex.horizontal
+		},
+		{ -- Right
+		awful.titlebar.widget.floatingbutton(c),
+		awful.titlebar.widget.minimizebutton(c),
+		awful.titlebar.widget.maximizedbutton(c),
+		awful.titlebar.widget.closebutton    (c),
+		layout = wibox.layout.fixed.horizontal()
+	},
+	layout = wibox.layout.align.horizontal,
+}
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+	c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
@@ -430,11 +454,12 @@ autorunApps = {
 	"picom --experimental-backends --backend glx",
 	"NetworkManager",
 	"xscreensaver",
-	"dunst",
 	"pkill redshift",
+	"dunst",
 	"redshift-gtk",
+	"fehbg",
 	"wezterm start -- ~/bin/rclone-start.sh",
-	"notify-send \"awesome has loaded!\""
+	"notify-send \"Awesome has loaded!\" "
 }
 if autorun then
 	for app = 1, #autorunApps do

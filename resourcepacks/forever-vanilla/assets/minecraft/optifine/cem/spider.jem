@@ -1,0 +1,116 @@
+{
+	"texture": "textures/entity/spider/spider.png",
+	"textureSize": [64, 32],
+	"shadowSize": 0,
+	"models": [
+		{
+			"part": "head",
+			"id": "head",
+			"invertAxis": "xy",
+			"translate": [0, -9, 3],
+			"rotate": [10, 0, 0],
+			"boxes": [
+				{"coordinates": [-4, 5, -11, 8, 8, 8], "textureOffset": [32, 4]}
+			]
+		},
+		{
+			"part": "neck",
+			"id": "neck",
+			"invertAxis": "xy",
+			"translate": [0, -9, 0],
+			"boxes": [
+				{"coordinates": [-3, 6, -3, 6, 6, 6], "textureOffset": [0, 0]}
+			]
+		},
+		{
+			"part": "body",
+			"id": "body",
+			"invertAxis": "xy",
+			"translate": [0, -11, -8.7],
+			"rotate": [-12.5, 0, 0],
+			"boxes": [
+				{"coordinates": [-5, 7, 3.4, 10, 8, 12], "textureOffset": [0, 12]}
+			]
+		},
+		{
+			"part": "leg1",
+			"id": "leg1",
+			"invertAxis": "xy",
+			"translate": [-4, -9, -4],
+			"rotate": [0, 0, -5],
+			"boxes": [
+				{"coordinates": [3, 8, 3, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg2",
+			"id": "leg2",
+			"invertAxis": "xy",
+			"translate": [4, -9, -4],
+			"rotate": [0, 0, 5],
+			"boxes": [
+				{"coordinates": [-17, 8, 3, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg3",
+			"id": "leg3",
+			"invertAxis": "xy",
+			"translate": [-4, -9, -1],
+			"rotate": [0, 0, -5],
+			"boxes": [
+				{"coordinates": [3, 8, 0, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg4",
+			"id": "leg4",
+			"invertAxis": "xy",
+			"translate": [4, -9, -1],
+			"rotate": [0, 0, 5],
+			"boxes": [
+				{"coordinates": [-17, 8, 0, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg5",
+			"id": "leg5",
+			"invertAxis": "xy",
+			"translate": [-4, -9, 2],
+			"rotate": [0, 0, -5],
+			"boxes": [
+				{"coordinates": [3, 8, -3, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg6",
+			"id": "leg6",
+			"invertAxis": "xy",
+			"translate": [4, -9, 2],
+			"rotate": [0, 0, 5],
+			"boxes": [
+				{"coordinates": [-17, 8, -3, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg7",
+			"id": "leg7",
+			"invertAxis": "xy",
+			"translate": [-4, -9, 5],
+			"rotate": [0, 0, -5],
+			"boxes": [
+				{"coordinates": [3, 8, -6, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		},
+		{
+			"part": "leg8",
+			"id": "leg8",
+			"invertAxis": "xy",
+			"translate": [4, -9, 5],
+			"rotate": [0, 0, 5],
+			"boxes": [
+				{"coordinates": [-17, 8, -6, 14, 2, 2], "textureOffset": [18, 0]}
+			]
+		}
+	]
+}

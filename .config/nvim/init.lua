@@ -14,7 +14,97 @@ require'lspconfig'.jsonls.setup({
 require'lspconfig'.cssls.setup({})
 require("nvim-tree").setup()
 require("cleanfold").setup()
--- require'lspconfig'.ltex.setup{}
+require('hover').setup{
+	init = function()
+		-- Require providers
+		require('hover.providers.lsp')
+		-- require('hover.providers.gh')
+		-- require('hover.providers.man')
+		-- require('hover.providers.dictionary')
+	end,
+	preview_opts = {
+		border = nil
+	},
+	title = true
+}
+require("which-key").setup{}
+require("nvim-autopairs").setup{}
+require("neogen").setup{
+	enabled = true,
+}
+
+require("neogen").generate()
+require("nvim-treesitter.configs").setup{
+	ensure_installed = {
+		"bash",
+		"c",
+		"cmake",
+		"comment",
+		"cpp",
+		"css",
+		"html",
+		"java",
+		"javascript",
+		"json",
+		"jsonc",
+		"lua",
+		"make",
+		"markdown",
+		"python",
+		"regex",
+		"rust",
+		"rst",
+	},
+	highlight = {
+		enable = true,
+	},
+}
+require("spellsitter").setup()
+require("indent_blankline").setup{
+	show_current_context = true,
+	show_current_context_start = true,
+}
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    interval = 1000,
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+    delay = 1000,
+    ignore_whitespace = false,
+  },
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  sign_priority = 6,
+  update_debounce = 100,
+  status_formatter = nil, -- Use default
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
+  preview_config = {
+    -- Options passed to nvim_open_win
+    border = 'single',
+    style = 'minimal',
+    relative = 'cursor',
+    row = 0,
+    col = 1
+  },
+  yadm = {
+    enable = false
+  },
+}
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
 }
@@ -40,7 +130,8 @@ set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-blueforest'
+vim.cmd 'colorscheme base16-tokyo-night-dark'
+vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
@@ -51,6 +142,7 @@ set.mouse = 'a'
 require("transparent").setup({
 	-- enable = true,
 })
+
 -- STATUSLINE SETUP
 -- plugin is feline.nvim
 require'colorizer'.setup()
@@ -72,6 +164,9 @@ map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
 -- NVIM TREE REMAPS
 vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
 
+-- HOVER REMAPS
+vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
+
 -- BUFFERLINE SETUP
 -- plugin is cokeline.nvim
 local get_hex = require('cokeline/utils').get_hex
@@ -79,65 +174,65 @@ local is_picking_close = require('cokeline/mappings').is_picking_close
 local is_picking_focus = require('cokeline/mappings').is_picking_focus
 
 require('cokeline').setup({
-  default_hl = {
-    fg = function(buffer)
-      return
-        buffer.is_focused
-        and get_hex('Normal', 'fg')
-         or get_hex('Comment', 'fg')
-    end,
-    bg = get_hex('ColorColumn', 'bg'),
-  },
-
-  components = {
-    {
-      text = ' ',
-      bg = get_hex('Normal', 'bg'),
-    },
-    {
-      text = '',
-      fg = get_hex('ColorColumn', 'bg'),
-      bg = get_hex('Normal', 'bg'),
-    },
-    {
-		text = function(buffer)
-			return
-			(is_picking_focus() or is_picking_close())
-			and buffer.pick_letter .. ' '
-			or buffer.devicon.icon
-		end,
+	default_hl = {
 		fg = function(buffer)
 			return
-			(is_picking_focus() and yellow)
-			or (is_picking_close() and red)
-			or buffer.devicon.color
+			buffer.is_focused
+			and get_hex('Normal', 'fg')
+			or get_hex('Comment', 'fg')
 		end,
-		style = function(_)
-			return
-			(is_picking_focus() or is_picking_close())
-			and 'italic,bold'
-			or nil
-		end,
-    },
-    {
-      text = ' ',
-    },
-    {
-      text = function(buffer) return buffer.filename .. '  ' end,
-      style = function(buffer)
-        return buffer.is_focused and 'bold' or nil
-      end,
-    },
-    {
-      text = '',
-      delete_buffer_on_left_click = true,
-    },
-    {
-      text = '',
-      fg = get_hex('ColorColumn', 'bg'),
-      bg = get_hex('Normal', 'bg'),
-    },
-  },
+		bg = get_hex('ColorColumn', 'bg'),
+	},
+
+	components = {
+		{
+			text = ' ',
+			bg = get_hex('Normal', 'bg'),
+		},
+		{
+			text = '',
+			fg = get_hex('ColorColumn', 'bg'),
+			bg = get_hex('Normal', 'bg'),
+		},
+		{
+			text = function(buffer)
+				return
+				(is_picking_focus() or is_picking_close())
+				and buffer.pick_letter .. ' '
+				or buffer.devicon.icon
+			end,
+			fg = function(buffer)
+				return
+				(is_picking_focus() and yellow)
+				or (is_picking_close() and red)
+				or buffer.devicon.color
+			end,
+			style = function(_)
+				return
+				(is_picking_focus() or is_picking_close())
+				and 'italic,bold'
+				or nil
+			end,
+		},
+		{
+			text = ' ',
+		},
+		{
+			text = function(buffer) return buffer.filename .. '  ' end,
+			style = function(buffer)
+				return buffer.is_focused and 'bold' or nil
+			end,
+		},
+		{
+			text = '',
+			delete_buffer_on_left_click = true,
+		},
+		{
+			text = '',
+			fg = get_hex('ColorColumn', 'bg'),
+			bg = get_hex('Normal', 'bg'),
+		},
+	},
 })
 
 -- base00 = '#000000', base01 = '#404040', base02 = '#404040', base03 = '#808080',

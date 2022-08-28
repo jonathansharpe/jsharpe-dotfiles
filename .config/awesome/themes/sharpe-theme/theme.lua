@@ -13,50 +13,52 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "Dosis Medium 11"
+theme.font          = "M PLUS 2 Medium 10"
 
 -- TITLEBAR
 --
 theme.taglist_bg_focus = "#000000"
 theme.taglist_bg_urgent = "#ff0000"
-theme.taglist_bg_occupied = "#8aadf4"
-theme.taglist_bg_empty = "#8aadf4"
+theme.taglist_bg_occupied = "#bce5fa"
+theme.taglist_bg_empty = "#bce5fa"
 theme.taglist_shape_border_color_focus = "#000000"
 theme.taglist_shape_border_color = "#000000"
 theme.taglist_shape_border_width = 0
 theme.taglist_shape = function(cr, width, height)
 	gears.shape.rounded_rect(cr, width, height, 10)
 end
-theme.taglist_font = "Dosis Bold 11"
+theme.taglist_font = "M PLUS 2 Bold 11"
 -- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
-theme.taglist_fg_focus = "#8aadf4"
+theme.taglist_fg_focus = "#bce5fa"
 theme.taglist_fg_urgent = "#000000"
 theme.taglist_fg_occupied = "#000000"
 theme.taglist_fg_empty = "#777777"
 -- theme.taglist_fg_volatile = "#000000"	-- no idea what this means
 
-theme.tasklist_bg_normal = "#000000"
+theme.tasklist_bg_normal = "#1a2022"
 theme.tasklist_bg_urgent = "#ff0000"
-theme.tasklist_bg_focus = "#8aadf4"
+theme.tasklist_bg_focus = "#bce5fa"
 theme.tasklist_fg_normal = "#ffffff"
-theme.tasklist_fg_urgent = "#8aadf4"
-theme.tasklist_fg_focus = "#24273a"
-theme.tasklist_shape_border_color_focus = "#24273a"
-theme.tasklist_shape_border_color = "#8aadf4"
-theme.tasklist_shape_border_width = 2
+theme.tasklist_fg_urgent = "#ffffff"
+theme.tasklist_fg_focus = "#ffffff"
+-- theme.tasklist_shape_border_color_focus = "#24273a"
+-- theme.tasklist_shape_border_color = "#8aadf4"
+theme.tasklist_shape_border_width = 0
 theme.tasklist_shape = function(cr, w, h)
-	gears.shape.rounded_rect(cr, w, h, 5)
+	gears.shape.rounded_rect(cr, w, h, 0)
 end
 theme.tasklist_fg_minimize = "#ffffff"
-theme.tasklist_bg_minimize = "#444444"
+theme.tasklist_bg_minimize = "#777777"
 
-theme.titlebar_bg_normal = "#000000"
-theme.titlebar_bg_focus = "#24273a"
-theme.titlebar_fg_normal = "#8aadf4"
-theme.titlebar_fg_focus = "#8aadf4"
+theme.titlebar_bg_normal = "#1a2022"
+theme.titlebar_bg_focus = "#1e2529"
+theme.titlebar_fg_normal = "#7f95a0"
+theme.titlebar_fg_focus = "#bce5fa"
 
-theme.bg_normal     = "#24273a"
-theme.bg_focus      = "#777777"
+-- theme.wibar.opacity = .75
+
+theme.bg_normal     = "#1a2022"
+theme.bg_focus      = "#1e2529"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -68,8 +70,8 @@ theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = 0
 theme.border_width  = dpi(2)
-theme.border_normal = "#000000"
-theme.border_focus  = "#8AADF4"
+theme.border_normal = "#1a2022"
+theme.border_focus  = "#bce5fa"
 theme.border_marked = "#91231c"
 
 -- There are other variable sets
@@ -141,7 +143,7 @@ theme.titlebar_maximized_button_focus_inactive_hover  = sharpe_path.."titlebar/m
 theme.titlebar_maximized_button_normal_active = sharpe_path.."titlebar/restore.svg"
 theme.titlebar_maximized_button_focus_active  = sharpe_path.."titlebar/restore.svg"
 
-theme.wallpaper = sharpe_path.."images/nephrite-light.png"
+theme.wallpaper = sharpe_path.."images/my-art-bytes-apr-13-2022.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

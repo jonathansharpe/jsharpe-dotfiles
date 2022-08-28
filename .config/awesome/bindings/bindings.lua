@@ -21,6 +21,12 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
+    awful.key({modkey, "Shift",           }, "s",
+        function ()
+			awful.spawn.with_shell("flameshot gui")
+        end,
+        {description = "Flameshot rectangular region", group = "client"}
+    ),
     awful.key({ "Mod1",           }, "Tab",
         function ()
 			-- awesome.emit_signal("bling::window_switcher::turn_on")
@@ -29,6 +35,18 @@ globalkeys = gears.table.join(
         {description = "Cycle by index", group = "client"}
     ),
     awful.key({ "Mod1", "Shift"}, "Tab",
+        function ()
+            awful.client.focus.byidx(-1)
+        end,
+        {description = "Cycle by index (reversed)", group = "client"}
+    ),
+    awful.key({ modkey,           }, "j",
+        function ()
+            awful.client.focus.byidx(1)
+        end,
+        {description = "Cycle by index", group = "client"}
+    ),
+    awful.key({	modkey,}, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -49,19 +67,14 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
 	-- SHARPE KEYBINDINGS
-    awful.key({ modkey, "Shift"}, "s",
-        function ()
-			awful.spawn.with_shell("spectacle -r -c")
-        end,
-        {description = "Screenshot of Retangular Region", group = "client"}),
     awful.key({ modkey}, "Tab",
         function ()
-			awful.spawn.with_shell("bash ~/.config/rofi/launchers/text/window-switch.sh")
+			awful.spawn.with_shell("bash ~/.config/rofi/launchers/type-1/window-switch.sh")
         end,
         {description = "Window Switcher", group = "client"}),
     awful.key({ modkey, "Shift"}, "e",
         function ()
-			awful.spawn.with_shell("bash ~/.config/rofi/applets/menu/powermenu-modified.sh")
+			awful.spawn.with_shell("bash ~/.config/rofi/powermenu/type-1/powermenu-modified.sh")
         end,
         {description = "Power Menu", group = "client"}),
 	awful.key({}, "XF86AudioLowerVolume",
@@ -130,7 +143,7 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey },"d", function()
-		awful.spawn.with_shell("bash ~/.config/rofi/launchers/misc/launcher.sh")
+		awful.spawn.with_shell("bash ~/.config/rofi/launchers/type-1/launcher.sh")
 	end,
 	{description = "Rofi the menubar", group = "launcher"}),
     awful.key({ modkey },"e", function()
