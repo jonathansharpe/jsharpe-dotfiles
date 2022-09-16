@@ -6,6 +6,7 @@ require'lspconfig'.html.setup({
 })
 require'lspconfig'.denols.setup{}
 require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.bashls.setup{}
 require'lspconfig'.jsonls.setup({
 	cmd = {
 		"vscode-json-languageserver", "--stdio"
@@ -34,6 +35,31 @@ require("neogen").setup{
 }
 
 require("neogen").generate()
+require("lsp_signature").setup(cfg)
+require('refactoring').setup({
+    prompt_func_return_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    prompt_func_param_type = {
+        go = false,
+        java = false,
+
+        cpp = false,
+        c = false,
+        h = false,
+        hpp = false,
+        cxx = false,
+    },
+    printf_statements = {},
+    print_var_statements = {},
+})
 require("nvim-treesitter.configs").setup{
 	ensure_installed = {
 		"bash",
@@ -57,17 +83,21 @@ require("nvim-treesitter.configs").setup{
 	},
 	highlight = {
 		enable = true,
+		additional_vim_regex_highlighting = true,
 	},
 }
-require("spellsitter").setup()
+require("spellsitter").setup{
+	enable = true,
+}
+require('luatab').setup{}
 require("indent_blankline").setup{
 	show_current_context = true,
 	show_current_context_start = true,
 }
 require('gitsigns').setup {
   signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '*', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
     delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
     changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
@@ -130,7 +160,7 @@ set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-tokyo-night-dark'
+vim.cmd 'colorscheme base16-atelier-cave'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
@@ -144,10 +174,15 @@ require("transparent").setup({
 })
 
 -- STATUSLINE SETUP
--- plugin is feline.nvim
+-- plugin is windline.nvim
+local windline = require('windline')
+require('wlsample.bubble')
+-- windline.setup({
+-- 	statuslines = {
+-- 	}
+-- })
+
 require'colorizer'.setup()
-local components_feline = {}
-require('feline').setup()
 local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
@@ -156,10 +191,12 @@ map('n', '<A-t>', ':NvimTreeToggle<CR>', {silent = true})
 map('n', '<A-T>', ':NvimTreeFocus<CR>', {silent = true})
 
 -- COKELINE REMAPS
-map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
-map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
-map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
-map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
+-- map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
+-- map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
+-- map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
+-- map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
+
+-- REFACTORING KEYMAPS
 
 -- NVIM TREE REMAPS
 vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
@@ -167,73 +204,85 @@ vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
 -- HOVER REMAPS
 vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
 
--- BUFFERLINE SETUP
+-- COKELINE SETUP
 -- plugin is cokeline.nvim
-local get_hex = require('cokeline/utils').get_hex
-local is_picking_close = require('cokeline/mappings').is_picking_close
-local is_picking_focus = require('cokeline/mappings').is_picking_focus
+-- local get_hex = require('cokeline/utils').get_hex
+-- local is_picking_close = require('cokeline/mappings').is_picking_close
+-- local is_picking_focus = require('cokeline/mappings').is_picking_focus
+-- local yellow = vim.g.terminal_color_3
 
-require('cokeline').setup({
-	default_hl = {
-		fg = function(buffer)
-			return
-			buffer.is_focused
-			and get_hex('Normal', 'fg')
-			or get_hex('Comment', 'fg')
-		end,
-		bg = get_hex('ColorColumn', 'bg'),
-	},
+-- require('cokeline').setup({
+-- 	default_hl = {
+-- 		fg = function(buffer)
+-- 			return
+-- 			buffer.is_focused
+-- 			and get_hex('ColorColumn', 'bg')
+-- 			or get_hex('Normal', 'fg')
+-- 		end,
+-- 		bg = function(buffer)
+-- 			return
+-- 			buffer.is_focused
+-- 			and get_hex('Normal', 'fg')
+-- 			or get_hex('ColorColumn', 'bg')
+-- 		end,
+-- 	},
 
-	components = {
-		{
-			text = ' ',
-			bg = get_hex('Normal', 'bg'),
-		},
-		{
-			text = '',
-			fg = get_hex('ColorColumn', 'bg'),
-			bg = get_hex('Normal', 'bg'),
-		},
-		{
-			text = function(buffer)
-				return
-				(is_picking_focus() or is_picking_close())
-				and buffer.pick_letter .. ' '
-				or buffer.devicon.icon
-			end,
-			fg = function(buffer)
-				return
-				(is_picking_focus() and yellow)
-				or (is_picking_close() and red)
-				or buffer.devicon.color
-			end,
-			style = function(_)
-				return
-				(is_picking_focus() or is_picking_close())
-				and 'italic,bold'
-				or nil
-			end,
-		},
-		{
-			text = ' ',
-		},
-		{
-			text = function(buffer) return buffer.filename .. '  ' end,
-			style = function(buffer)
-				return buffer.is_focused and 'bold' or nil
-			end,
-		},
-		{
-			text = '',
-			delete_buffer_on_left_click = true,
-		},
-		{
-			text = '',
-			fg = get_hex('ColorColumn', 'bg'),
-			bg = get_hex('Normal', 'bg'),
-		},
-	},
-})
+-- 	sidebar = {
+-- 		filetype = 'NvimTree',
+-- 		components = {
+-- 			{
+-- 				text = '  NvimTree',
+-- 				fg = yellow,
+-- 				bg = get_hex('NvimTreeNormal', 'bg'),
+-- 				style = 'bold',
+-- 			},
+-- 		}
+-- 	},
+-- 	components = {
+-- 		{
+-- 			text = function(buffer) return ' ' .. buffer.devicon.icon end,
+-- 			fg = function(buffer) return buffer.devicon.color end,
+-- 		},
+-- 		{
+-- 			text = function(buffer) return buffer.unique_prefix end,
+-- 			fg = get_hex('Comment', 'fg'),
+-- 			style = 'italic',
+-- 		},
+-- 		{
+-- 			text = function(buffer)
+-- 				return
+-- 				(is_picking_focus() or is_picking_close())
+-- 				and buffer.pick_letter .. ' '
+-- 				or '  '
+-- 			end,
+-- 			fg = function(buffer)
+-- 				return
+-- 				(is_picking_focus() and yellow)
+-- 				or (is_picking_close() and red)
+-- 				or buffer.devicon.color
+-- 			end,
+-- 			style = function(_)
+-- 				return
+-- 				(is_picking_focus() or is_picking_close())
+-- 				and 'italic,bold'
+-- 				or nil
+-- 			end,
+-- 		},
+-- 		{
+-- 			text = function(buffer) return buffer.filename .. '  ' end,
+-- 			style = function(buffer)
+-- 				return buffer.is_focused and 'bold' or nil
+-- 			end,
+-- 		},
+-- 		{
+-- 			text = '',
+-- 			delete_buffer_on_left_click = true,
+-- 		},
+-- 		{
+-- 			text = ' ',
+-- 		},
+-- 	},
+-- })
 
 -- base00 = '#000000', base01 = '#404040', base02 = '#404040', base03 = '#808080',
 -- base04 = '#808080', base05 = '#c0c0c0', base06 = '#c0c0c0', base07 = '#ffffff',

@@ -109,11 +109,6 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/emmet-vim",
     url = "https://github.com/mattn/emmet-vim"
   },
-  ["feline.nvim"] = {
-    loaded = true,
-    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/feline.nvim",
-    url = "https://github.com/feline-nvim/feline.nvim"
-  },
   ["filetype.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/filetype.nvim",
@@ -134,15 +129,30 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/hover.nvim",
     url = "https://github.com/lewis6991/hover.nvim"
   },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
+  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
+  },
+  ["luatab.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/luatab.nvim",
+    url = "https://github.com/alvarosevilla95/luatab.nvim"
   },
   ["markdown-preview.nvim"] = {
     loaded = true,
@@ -168,12 +178,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-base16",
     url = "https://github.com/RRethy/nvim-base16"
-  },
-  ["nvim-cokeline"] = {
-    config = { "\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rcokeline\frequire\0" },
-    loaded = true,
-    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-cokeline",
-    url = "https://github.com/noib3/nvim-cokeline"
   },
   ["nvim-colorizer.lua"] = {
     loaded = true,
@@ -225,6 +229,11 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["refactoring.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/refactoring.nvim",
+    url = "https://github.com/ThePrimeagen/refactoring.nvim"
+  },
   ["spellsitter.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/spellsitter.nvim",
@@ -250,23 +259,34 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
   },
+  ["vim-eunuch"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/vim-eunuch",
+    url = "https://github.com/tpope/vim-eunuch"
+  },
   ["vim-illuminate"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/vim-illuminate",
     url = "https://github.com/RRethy/vim-illuminate"
   },
+  ["vim-matchup"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/vim-matchup",
+    url = "https://github.com/andymass/vim-matchup"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/which-key.nvim",
     url = "https://github.com/folke/which-key.nvim"
+  },
+  ["windline.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/windline.nvim",
+    url = "https://github.com/windwp/windline.nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: nvim-cokeline
-time([[Config for nvim-cokeline]], true)
-try_loadstring("\27LJ\2\n6\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\rcokeline\frequire\0", "config", "nvim-cokeline")
-time([[Config for nvim-cokeline]], false)
 if should_profile then save_profiles() end
 
 end)
