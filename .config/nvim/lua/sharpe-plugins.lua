@@ -9,14 +9,40 @@ end
 return require('packer').startup(function()
 	use { 'wbthomason/packer.nvim' }
 
+local use = require('packer').use
+
 -- shows what keys do what; e.g., press 'z' once and it'll show motions
 use { "folke/which-key.nvim" }
+
+-- pop-up with function parameter guide
+use {"ray-x/lsp_signature.nvim"}
+
+-- speeds up nvim load times
+use {"lewis6991/impatient.nvim"}
 
 -- an undo tree, to make it easier to go back without spamming Ctrl+R 100 times
 use { "mbbill/undotree" }
 
 -- adds transparency to nvim, only useful if the vim color scheme exact matches the terminal's
 use { 'xiyaowong/nvim-transparent' }
+
+-- adds a fuzzy finder
+use {
+	"nvim-telescope/telescope.nvim", tag = '0.1.0',
+	requires = {{'nvim-lua/plenary.nvim'}}
+}
+
+-- adds more matches to the % key when pressed
+use {"andymass/vim-matchup"}
+
+-- refactoring help
+use {
+	"ThePrimeagen/refactoring.nvim",
+	requires = {
+		{"nvim-lua/plenary.nvim"},
+		{"nvim-treesitter/nvim-treesitter"},
+	}
+}
 
 -- allows for light/dark theme syncing i think
 use { 'RRethy/vim-illuminate' }
@@ -27,14 +53,17 @@ use { 'lewis6991/hover.nvim', }
 -- uses context-sensitive spell check, so the spell check doesn't tell you your variables are spelled wrong
 use { 'lewis6991/spellsitter.nvim', }
 
--- bufferline plugin
-use {
-	'noib3/nvim-cokeline',
-	requires = 'kyazdani42/nvim-web-devicons',
-	config = function()
-		require('cokeline').setup()
-	end
-}
+-- bufferline plugin; not using at the moment
+-- use {
+-- 	'noib3/nvim-cokeline',
+-- 	requires = 'kyazdani42/nvim-web-devicons',
+-- 	config = function()
+-- 		require('cokeline').setup()
+-- 	end
+-- }
+
+-- tabline plugin
+use {"alvarosevilla95/luatab.nvim", requires='kyazdani42/nvim-web-devicons'}
 
 -- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
 use { 'danymat/neogen' }
@@ -50,6 +79,9 @@ use { "nathom/filetype.nvim" }
 
 -- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
 use { "JoosepAlviste/nvim-ts-context-commentstring" }
+
+-- adds a few UNIX commands to nvim, notably :SudoWrite
+use {"tpope/vim-eunuch"}
 
 -- adds a pop-up terminal by pressing a keybind
 use {"numToStr/FTerm.nvim"}
@@ -79,7 +111,7 @@ use {
 	}
 }
 -- the statusline on the bottom
-use {'feline-nvim/feline.nvim'}
+use {'windwp/windline.nvim'}
 
 -- i forgor :forgor:
 use {'mattn/emmet-vim'}
