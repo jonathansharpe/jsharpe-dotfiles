@@ -14,6 +14,12 @@ local use = require('packer').use
 -- shows what keys do what; e.g., press 'z' once and it'll show motions
 use { "folke/which-key.nvim" }
 
+-- adds a startup screen
+use {
+	'goolord/alpha-nvim',
+	requires = {'kyazdani42/nvim-web-devicons'},
+}
+
 -- pop-up with function parameter guide
 use {"ray-x/lsp_signature.nvim"}
 
@@ -68,7 +74,8 @@ use { 'lewis6991/spellsitter.nvim', }
 -- }
 
 -- tabline plugin
-use {"alvarosevilla95/luatab.nvim", requires='kyazdani42/nvim-web-devicons'}
+-- use {"alvarosevilla95/luatab.nvim", requires='kyazdani42/nvim-web-devicons'}
+use { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
 
 -- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
 use { 'danymat/neogen' }
