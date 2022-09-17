@@ -13,7 +13,7 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "M PLUS 2 Medium 10"
+theme.font          = "Manrope Medium 10"
 
 -- TITLEBAR
 --
@@ -27,7 +27,7 @@ theme.taglist_shape_border_width = 0
 theme.taglist_shape = function(cr, width, height)
 	gears.shape.rounded_rect(cr, width, height, 10)
 end
-theme.taglist_font = "M PLUS 2 Bold 11"
+theme.taglist_font = "Manrope Bold 11"
 -- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
 theme.taglist_fg_focus = "#bce5fa"
 theme.taglist_fg_urgent = "#000000"
