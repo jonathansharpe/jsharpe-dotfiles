@@ -26,6 +26,11 @@ use { "mbbill/undotree" }
 -- adds transparency to nvim, only useful if the vim color scheme exact matches the terminal's
 use { 'xiyaowong/nvim-transparent' }
 
+-- bookmarks which add bookmarks
+use { 'crusj/bookmarks.nvim',
+	branch = 'main',
+}
+
 -- adds a fuzzy finder
 use {
 	"nvim-telescope/telescope.nvim", tag = '0.1.0',

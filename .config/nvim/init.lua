@@ -12,6 +12,7 @@ require'lspconfig'.jsonls.setup({
 		"vscode-json-languageserver", "--stdio"
 	}
 })
+require("bookmarks").setup()
 require'lspconfig'.cssls.setup({})
 require("nvim-tree").setup()
 require("cleanfold").setup()
