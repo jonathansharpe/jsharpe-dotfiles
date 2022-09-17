@@ -16,12 +16,13 @@ export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keym
 export DESKFFOX="$HOME/.mozilla/firefox/cly1yg59.default-release/chrome/"
 export GIT="$HOME/git"
 export EDITOR="nvim"
-export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+export SUDO_ASKPASS="/bin/ksshaskpass"
+# export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 
 # ALIASES
 alias lu='launch'
 alias lux='launch xdg-open'
 alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel'
-alias nvimconf='nvim $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
-alias shellconf='nvim $HOME/.config/shell/jonathan-config $HOME/.zshrc'
+alias nvimconf='nvim -p $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
+alias shellconf='nvim -p $HOME/.config/shell/jonathan-config $HOME/.zshrc'
 alias cpwd='pwd | xclip -selection clipboard'
