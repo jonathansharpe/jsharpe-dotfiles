@@ -346,6 +346,10 @@ awful.rules.rules = {
           "DTA",  -- Firefox addon DownThemAll.
           "copyq",  -- Includes session name in class.
           "pinentry",
+		  "keeweb",
+		  "multimc",
+		  "java",
+		  "kcalc",
         },
         class = {
           "Arandr",
@@ -449,20 +453,13 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 --
 -- Autorun programs
-autorun = true
-autorunApps = {
-	"picom --experimental-backends --backend glx",
-	"NetworkManager",
-	"xscreensaver",
-	"pkill redshift",
-	"dunst",
-	"redshift-gtk",
-	"fehbg",
-	"wezterm start -- ~/bin/rclone-start.sh",
-	"notify-send \"Awesome has loaded!\" "
-}
-if autorun then
-	for app = 1, #autorunApps do
-		awful.util.spawn(autorunApps[app])
-	end
-end
+awful.spawn.with_shell("$HOME/.config/awesome/autostart.sh")
+-- autorun = true
+-- autorunApps = {
+-- 	"~/.config/awesome/autostart.sh",
+-- }
+-- if autorun then
+-- 	for app = 1, #autorunApps do
+-- 		awful.util.spawn(autorunApps[app])
+-- 	end
+-- end

@@ -74,7 +74,7 @@ globalkeys = gears.table.join(
         {description = "Window Switcher", group = "client"}),
     awful.key({ modkey, "Shift"}, "e",
         function ()
-			awful.spawn.with_shell("bash ~/.config/rofi/powermenu/type-1/powermenu-modified.sh")
+			awful.spawn.with_shell("bash ~/.config/rofi/powermenu/type-2/powermenu-modified.sh")
         end,
         {description = "Power Menu", group = "client"}),
 	awful.key({}, "XF86AudioLowerVolume",
