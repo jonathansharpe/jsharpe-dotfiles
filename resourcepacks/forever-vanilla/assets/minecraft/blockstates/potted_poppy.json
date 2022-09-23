@@ -1,9 +1,0 @@
-{
-	"variants": {
-		"": [
-			{ "model": "block/potted_poppy" },
-			{ "model": "block/potted_poppy_2" },
-			{ "model": "block/potted_poppy_3" }
-		]
-	}
-}
