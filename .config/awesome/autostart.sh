@@ -1,17 +1,24 @@
-killall -q dunst
-while pgrep -u $UID -x dunst >/dev/null; do sleep 1; done
-dunst && notify-send "dunst restarted"
+#! /bin/bash
+fehbg
+if [ -z "$(pidof dunst)" ]; then
+	dunst & 
+	notify-send "dunst started"
+fi
 
-picom --experimental-backends --backend glx && notify-send "picom started"
+if [ -z "$(pidof picom)" ]; then
+	picom --experimental-backends -b && notify-send "picom started"
+fi
 
 NetworkManager
-xscreensaver && notify-send "xscreensaver restarted"
+if [ -z "$(pidof xscreensaver)" ]; then
+	xscreensaver &
+fi
 
-killall -q redshift
-while pgrep -u $UID -x redshift >/dev/null; do sleep 1; done
-redshift-gtk && notify-send "redshift restarted"
+if [ -z "$(pidof redshift)" ]; then
+	redshift-gtk & 
+	notify-send "redshift started"
+fi
 
-fehbg
-wezterm start -- ~/bin/rclone-start.sh && notify-send "rclone restarted"
+wezterm start -- ~/bin/rclone-start.sh
 
 notify-send "Awesome has loaded!" 
