@@ -84,13 +84,19 @@ mytextclock:connect_signal("button::press",
 	end
 )
 
-
+bling.module.wallpaper.setup {
+	set_function = bling.module.wallpaper.setters.random,
+	wallpaper = os.getenv("HOME").."/.config/awesome/wallpaper",
+	change_timer = 631,
+	position = "maximized"
+}
 bling.widget.window_switcher.enable {
 	type = "thumbnail",
 	previous_key = "Right",
 	next_key = "Left",
 	vim_previous_key = "l",
 	vim_next_key = "h",
+	filterClients = awful.widget.tasklist.filter.currenttags,
 }
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
