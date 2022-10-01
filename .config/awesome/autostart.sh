@@ -1,5 +1,4 @@
 #! /bin/bash
-fehbg
 if [ -z "$(pidof dunst)" ]; then
 	dunst & 
 	notify-send "dunst started"

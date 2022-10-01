@@ -13,7 +13,7 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "Manrope Medium 10"
+theme.font          = "Gilroy Medium 10"
 
 -- TITLEBAR
 --
@@ -27,7 +27,7 @@ theme.taglist_shape_border_width = 0
 theme.taglist_shape = function(cr, width, height)
 	gears.shape.rounded_rect(cr, width, height, 10)
 end
-theme.taglist_font = "Manrope Bold 11"
+theme.taglist_font = "Gilroy Bold 11"
 -- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
 theme.taglist_fg_focus = "#bce5fa"
 theme.taglist_fg_urgent = "#000000"
@@ -143,7 +143,8 @@ theme.titlebar_maximized_button_focus_inactive_hover  = sharpe_path.."titlebar/m
 theme.titlebar_maximized_button_normal_active = sharpe_path.."titlebar/restore.svg"
 theme.titlebar_maximized_button_focus_active  = sharpe_path.."titlebar/restore.svg"
 
-theme.wallpaper = sharpe_path.."images/my-art-bytes-apr-13-2022.png"
+-- uncomment the below line if you'd like to set one wallpaper
+-- theme.wallpaper = sharpe_path.."images/my-art-bytes-apr-13-2022.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"
