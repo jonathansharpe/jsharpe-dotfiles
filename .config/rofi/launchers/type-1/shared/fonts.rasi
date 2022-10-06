@@ -8,5 +8,5 @@
  **/
 
 * {
-    font: "Manrope 10";
+    font: "IBM Plex Sans Medium 10";
 }

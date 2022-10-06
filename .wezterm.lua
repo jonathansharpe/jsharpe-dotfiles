@@ -7,7 +7,7 @@ return {
 	window_background_opacity = .85,
 	font_size = 10.0,
 	window_frame = {
-		font = wezterm.font({family="Manrope", weight="Medium"}),
+		font = wezterm.font({family="IBM Plex Sans", weight="Medium"}),
 		font_size = 10.0,
 	},
 	warn_about_missing_glyphs = false,

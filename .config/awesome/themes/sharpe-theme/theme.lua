@@ -13,7 +13,7 @@ local sharpe_path = "~/.config/awesome/themes/sharpe-theme/"
 
 local theme = {}
 
-theme.font          = "Gilroy Medium 10"
+theme.font          = "IBM Plex Sans Medium 10"
 
 -- TITLEBAR
 --
@@ -27,7 +27,7 @@ theme.taglist_shape_border_width = 0
 theme.taglist_shape = function(cr, width, height)
 	gears.shape.rounded_rect(cr, width, height, 10)
 end
-theme.taglist_font = "Gilroy Bold 11"
+theme.taglist_font = "IBM Plex Sans Bold 11"
 -- theme.taglist_bg_volatile = "#000000"	-- no idea what this means
 theme.taglist_fg_focus = "#bce5fa"
 theme.taglist_fg_urgent = "#000000"
@@ -68,7 +68,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = 0
+theme.useless_gap   = 8
 theme.border_width  = dpi(2)
 theme.border_normal = "#1a2022"
 theme.border_focus  = "#bce5fa"
