@@ -212,7 +212,7 @@ set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme base16-atelier-cave'
+-- vim.cmd 'colorscheme base16-atelier-cave'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
@@ -255,6 +255,9 @@ vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
 
 -- HOVER REMAPS
 vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
+
+map('n', '<A-c>', ':bprevious<CR>', {silent = true})
+map('n', '<A-v>', ':bnext<CR>', {silent = true})
 
 -- COKELINE SETUP
 -- plugin is cokeline.nvim

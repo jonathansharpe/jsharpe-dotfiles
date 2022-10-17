@@ -14,6 +14,17 @@ local use = require('packer').use
 -- shows what keys do what; e.g., press 'z' once and it'll show motions
 use { "folke/which-key.nvim" }
 
+-- adds catppuccin theme
+use {
+	"catppuccin/nvim",
+	as = "catppuccin",
+	config = function()
+		vim.g.catppuccin_flavour = "mocha"
+		require("catppuccin").setup()
+		vim.api.nvim_command "colorscheme catppuccin"
+	end
+}
+
 -- adds a startup screen
 use {
 	'goolord/alpha-nvim',
