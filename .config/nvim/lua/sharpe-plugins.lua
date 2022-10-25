@@ -18,13 +18,9 @@ use { "folke/which-key.nvim" }
 use {
 	"catppuccin/nvim",
 	as = "catppuccin",
-	config = function()
-		vim.g.catppuccin_flavour = "mocha"
-		require("catppuccin").setup()
-		vim.api.nvim_command "colorscheme catppuccin"
-	end
 }
-
+use "stevearc/dressing.nvim"
+use({"ziontee113/icon-picker.nvim"})
 -- adds a startup screen
 use {
 	'goolord/alpha-nvim',
@@ -113,7 +109,11 @@ use {"numToStr/FTerm.nvim"}
 use {"nvim-treesitter/nvim-treesitter"}
 
 -- shows a file tree tab on the side of the window
-use {'kyazdani42/nvim-tree.lua'}
+-- use {'kyazdani42/nvim-tree.lua'}
+use {
+	"luukvbaal/nnn.nvim",
+	config = function() require("nnn").setup() end
+}
 
 -- makes folds cleaner
 use {"lewis6991/cleanfold.nvim"}
