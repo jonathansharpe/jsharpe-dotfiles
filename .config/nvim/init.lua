@@ -12,10 +12,12 @@ require'lspconfig'.jsonls.setup({
 		"vscode-json-languageserver", "--stdio"
 	}
 })
+require'lspconfig'.marksman.setup{}
 require('alpha').setup(require'alpha.themes.startify'.config)
 require("bookmarks").setup()
 require'lspconfig'.cssls.setup({})
-require("nvim-tree").setup()
+-- require("nvim-tree").setup()
+-- require('nnn').setup()
 require("cleanfold").setup()
 require('hover').setup{
 	init = function()
@@ -31,6 +33,9 @@ require('hover').setup{
 	title = true
 }
 require("which-key").setup{}
+require("icon-picker").setup({
+	disable_legacy_commands = true
+})
 require("nvim-autopairs").setup{}
 require("neogen").setup{
 	enabled = true,
@@ -212,7 +217,7 @@ set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
--- vim.cmd 'colorscheme base16-atelier-cave'
+vim.cmd 'colorscheme catppuccin-macchiato'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
@@ -239,8 +244,7 @@ local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 -- GENERAL REMAPS
-map('n', '<A-t>', ':NvimTreeToggle<CR>', {silent = true})
-map('n', '<A-T>', ':NvimTreeFocus<CR>', {silent = true})
+map('n', '<A-t>', ':NnnExplore<CR>', {silent = true})
 
 -- COKELINE REMAPS
 -- map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
@@ -250,14 +254,12 @@ map('n', '<A-T>', ':NvimTreeFocus<CR>', {silent = true})
 
 -- REFACTORING KEYMAPS
 
--- NVIM TREE REMAPS
-vim.keymap.set('n', '<A-s>', require("nvim-tree.api").marks.navigate.select)
-
 -- HOVER REMAPS
 vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
 
 map('n', '<A-c>', ':bprevious<CR>', {silent = true})
 map('n', '<A-v>', ':bnext<CR>', {silent = true})
+map('n', '<A-x>', ':bdelete<CR>', {silent = true})
 
 -- COKELINE SETUP
 -- plugin is cokeline.nvim
