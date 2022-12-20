@@ -217,7 +217,7 @@ set.showtabline=2
 -- ALIASES
 vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme catppuccin-macchiato'
+vim.cmd 'colorscheme gruvbox'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
