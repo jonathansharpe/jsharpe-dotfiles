@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/gkeep.nvim",
     url = "https://github.com/stevearc/gkeep.nvim"
   },
+  ["gruvbox.nvim"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
+  },
   ["hover.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/hover.nvim",
@@ -244,6 +249,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
