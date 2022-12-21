@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+ # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -7,6 +7,8 @@ fi
 
 # CONFIG FILES
 source ~/.config/shell/jonathan-config
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 set -o vi
 bindkey -v
@@ -50,12 +52,6 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # Use powerline
 # USE_POWERLINE="true"
 # Use manjaro zsh prompt
-if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
-  source /usr/share/zsh/manjaro-zsh-config
-fi
-if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
-  source /usr/share/zsh/manjaro-zsh-prompt
-fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
