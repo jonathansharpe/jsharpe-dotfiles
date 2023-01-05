@@ -10,6 +10,16 @@ source ~/.config/shell/jonathan-config
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
+# Ensure the HISTFILE variable is set
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zhistory"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+# Set zsh history options
+setopt appendhistory
+setopt inc_append_history
+setopt histfindnodups
+setopt histignorealldups
+
 set -o vi
 bindkey -v
 # Base16 Shell
