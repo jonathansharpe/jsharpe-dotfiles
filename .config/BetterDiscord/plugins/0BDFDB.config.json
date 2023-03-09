@@ -1,12 +1,16 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "2.3.2",
-			"CompleteTimestamps": "1.6.1",
-			"EmojiStatistics": "2.9.8",
-			"ImageUtilities": "4.7.4",
-			"NotificationSounds": "3.6.8",
-			"ShowHiddenChannels": "3.1.9"
+			"BDFDB": "3.1.5",
+			"CompleteTimestamps": "1.6.6",
+			"CustomStatusPresets": "1.1.4",
+			"EmojiStatistics": "3.0.0",
+			"ImageUtilities": "5.1.8",
+			"NotificationSounds": "3.7.7",
+			"PluginRepo": "2.4.6",
+			"ServerDetails": "1.1.4",
+			"ShowHiddenChannels": "9.9.9",
+			"ThemeRepo": "2.4.9"
 		},
 		"choices": {
 			"toastPosition": "right"
@@ -18,8 +22,8 @@
 			"shareData": true
 		},
 		"hashes": {
-			"0BDFDB.data.json": "2a1079d0818e8e795f7f920bb6a92ed293fc4516",
-			"0BDFDB.raw.css": "96fb638350f77c79c3648050d58a0ea7a700ea1b"
+			"0BDFDB.data.json": "128bb45e968aa6e22194ba68934114c2bfe4d123",
+			"0BDFDB.raw.css": "a1c4a8b6f28c4765c6af2853ddf13a35922a2b9e"
 		}
 	}
 }

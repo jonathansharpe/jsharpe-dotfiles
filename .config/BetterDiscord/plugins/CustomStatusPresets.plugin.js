@@ -2,7 +2,7 @@
  * @name CustomStatusPresets
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.1.2
+ * @version 1.1.5
  * @description Allows you to save Custom Statuses as Quick Select
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -13,20 +13,16 @@
  */
 
 module.exports = (_ => {
-	const config = {
-		"info": {
-			"name": "CustomStatusPresets",
-			"author": "DevilBro",
-			"version": "1.1.2",
-			"description": "Allows you to save Custom Statuses as Quick Select"
-		}
+	const changeLog = {
+		
 	};
 
 	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return `The Library Plugin needed for ${config.info.name} is missing. Open the Plugin Settings to download it. \n\n${config.info.description}`;}
+		constructor (meta) {for (let key in meta) this[key] = meta[key];}
+		getName () {return this.name;}
+		getAuthor () {return this.author;}
+		getVersion () {return this.version;}
+		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
 		
 		downloadLibrary () {
 			require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
@@ -39,7 +35,7 @@ module.exports = (_ => {
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
-				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${config.info.name} is missing. Please click "Download Now" to install it.`, {
+				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
 					confirmText: "Download Now",
 					cancelText: "Cancel",
 					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
@@ -49,13 +45,13 @@ module.exports = (_ => {
 					}
 				});
 			}
-			if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
+			if (!window.BDFDB_Global.pluginQueue.includes(this.name)) window.BDFDB_Global.pluginQueue.push(this.name);
 		}
 		start () {this.load();}
 		stop () {}
 		getSettingsPanel () {
 			let template = document.createElement("template");
-			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${config.info.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
+			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${this.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
 			template.content.firstElementChild.querySelector("a").addEventListener("click", this.downloadLibrary);
 			return template.content.firstElementChild;
 		}
@@ -230,14 +226,13 @@ module.exports = (_ => {
 			onLoad () {
 				_this = this;
 				
-				this.patchedModules = {
-					before: {
-						Menu: "default"
-					},
-					after: {
-						Account: "render",
-						CustomStatusModal: "render"
-					}
+				this.modulePatches = {
+					before: [
+						"Menu"
+					],
+					after: [
+						"CustomStatusModal"
+					]
 				};
 				
 				this.css = `
@@ -297,7 +292,7 @@ module.exports = (_ => {
 						flex: 0 0 auto;
 					}
 					${BDFDB.dotCN._customstatuspresetssortdivider} {
-						background: ${BDFDB.DiscordConstants.Colors.STATUS_GREEN};
+						background: ${BDFDB.DiscordConstants.Colors.GREEN};
 						height: 2px;
 						margin: 0 26px 8px 0;
 					}
@@ -376,9 +371,9 @@ module.exports = (_ => {
 											})
 										})
 									}),
-									BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Status, {
+									BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {
 										className: BDFDB.disCN._customstatuspresetsstatus,
-										status: presets[id].status || BDFDB.DiscordConstants.StatusTypes.ONLINE
+										status: presets[id].status || BDFDB.LibraryComponents.StatusComponents.Types.ONLINE
 									}),
 									BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextScroller, {
 										children: presets[id].text
@@ -394,14 +389,12 @@ module.exports = (_ => {
 									let date = new Date;
 									expiresAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1).getTime() - date.getTime();
 								}
-								BDFDB.LibraryModules.SettingsUtilsOld.updateRemoteSettings({
-									status: presets[id].status,
-									customStatus: {
-										text: presets[id].text && presets[id].text.length > 0 ? presets[id].text : null,
-										expiresAt: expiresAt ? BDFDB.DiscordObjects.Timestamp().add(expiresAt, "ms").toISOString() : null,
-										emojiId: presets[id].emojiInfo ? presets[id].emojiInfo.id : null,
-										emojiName: presets[id].emojiInfo ? presets[id].emojiInfo.name : null
-									}
+								if (presets[id].status) BDFDB.DiscordUtils.setSetting("status", "status", presets[id].status);
+								BDFDB.DiscordUtils.setSetting("status", "customStatus", {
+									text: presets[id].text && presets[id].text.length > 0 ? presets[id].text : "",
+									expiresAtMs: expiresAt ? BDFDB.DiscordObjects.Timestamp().add(expiresAt, "ms").toDate().getTime().toString() : "0",
+									emojiId: presets[id].emojiInfo ? presets[id].emojiInfo.id : "0",
+									emojiName: presets[id].emojiInfo ? presets[id].emojiInfo.name : ""
 								});
 							}
 						}))
@@ -410,9 +403,10 @@ module.exports = (_ => {
 			}
 			
 			processCustomStatusModal (e) {
+				let footer = BDFDB.ReactUtils.findChild(e.returnvalue, {name: "ModalFooter"});
+				if (!footer) return;
 				let id = BDFDB.NumberUtils.generateId(Object.keys(presets));
-				let footer = BDFDB.ReactUtils.findChild(e.returnvalue, {name: ["ModalFooter", "Footer"]});
-				if (footer) footer.props.children.splice(1, 0, BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Button, {
+				footer.props.children.splice(1, 0, BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Button, {
 					color: BDFDB.disCN.modalcancelbutton,
 					look: BDFDB.LibraryComponents.Button.Looks.LINK,
 					onClick: event => {
@@ -538,5 +532,5 @@ module.exports = (_ => {
 				}
 			}
 		};
-	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));
+	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));
 })();

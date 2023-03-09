@@ -1,11 +1,13 @@
 {
-    "version": "1.5.3",
+    "version": "1.8.5",
     "addonlistControls": {
         "theme": {
             "view": "grid"
         },
         "plugin": {
-            "view": "grid"
+            "view": "grid",
+            "sort": "name",
+            "ascending": true
         }
     },
     "emoteVersion": "v1.2.1",

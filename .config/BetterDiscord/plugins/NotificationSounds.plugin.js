@@ -2,7 +2,7 @@
  * @name NotificationSounds
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.7.2
+ * @version 3.7.7
  * @description Allows you to replace the native Sounds with custom Sounds
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -13,20 +13,16 @@
  */
 
 module.exports = (_ => {
-	const config = {
-		"info": {
-			"name": "NotificationSounds",
-			"author": "DevilBro",
-			"version": "3.7.2",
-			"description": "Allows you to replace the native Sounds with custom Sounds"
-		}
+	const changeLog = {
+		
 	};
 
 	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
-		getName () {return config.info.name;}
-		getAuthor () {return config.info.author;}
-		getVersion () {return config.info.version;}
-		getDescription () {return `The Library Plugin needed for ${config.info.name} is missing. Open the Plugin Settings to download it. \n\n${config.info.description}`;}
+		constructor (meta) {for (let key in meta) this[key] = meta[key];}
+		getName () {return this.name;}
+		getAuthor () {return this.author;}
+		getVersion () {return this.version;}
+		getDescription () {return `The Library Plugin needed for ${this.name} is missing. Open the Plugin Settings to download it. \n\n${this.description}`;}
 		
 		downloadLibrary () {
 			require("request").get("https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js", (e, r, b) => {
@@ -39,7 +35,7 @@ module.exports = (_ => {
 			if (!window.BDFDB_Global || !Array.isArray(window.BDFDB_Global.pluginQueue)) window.BDFDB_Global = Object.assign({}, window.BDFDB_Global, {pluginQueue: []});
 			if (!window.BDFDB_Global.downloadModal) {
 				window.BDFDB_Global.downloadModal = true;
-				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${config.info.name} is missing. Please click "Download Now" to install it.`, {
+				BdApi.showConfirmationModal("Library Missing", `The Library Plugin needed for ${this.name} is missing. Please click "Download Now" to install it.`, {
 					confirmText: "Download Now",
 					cancelText: "Cancel",
 					onCancel: _ => {delete window.BDFDB_Global.downloadModal;},
@@ -49,13 +45,13 @@ module.exports = (_ => {
 					}
 				});
 			}
-			if (!window.BDFDB_Global.pluginQueue.includes(config.info.name)) window.BDFDB_Global.pluginQueue.push(config.info.name);
+			if (!window.BDFDB_Global.pluginQueue.includes(this.name)) window.BDFDB_Global.pluginQueue.push(this.name);
 		}
 		start () {this.load();}
 		stop () {}
 		getSettingsPanel () {
 			let template = document.createElement("template");
-			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${config.info.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
+			template.innerHTML = `<div style="color: var(--header-primary); font-size: 16px; font-weight: 300; white-space: pre; line-height: 22px;">The Library Plugin needed for ${this.name} is missing.\nPlease click <a style="font-weight: 500;">Download Now</a> to install it.</div>`;
 			template.content.firstElementChild.querySelector("a").addEventListener("click", this.downloadLibrary);
 			return template.content.firstElementChild;
 		}
@@ -66,7 +62,7 @@ module.exports = (_ => {
 		const removeAllKey = "REMOVE_ALL_BDFDB_DEVILBRO_DO_NOT_COPY";
 		const defaultDevice = "default";
 		
-		var currentDevice = defaultDevice, createdAudios = {}, repatchIncoming;
+		var currentDevice = defaultDevice, createdAudios = {};
 		
 		let types = {};
 		
@@ -89,9 +85,9 @@ module.exports = (_ => {
 		
 		const WebAudioSound = class WebAudioSound {
 			constructor (type) {
-				this._name = type;
-				this._src = audios[choices[type].category][choices[type].sound] || types[type].src;
-				this._volume = choices[type].volume;
+				this.name = type;
+				this._src = choices[type] && audios[choices[type].category][choices[type].sound] || types[type] && types[type].src || BDFDB.LibraryModules.SoundParser(`./${type}.mp3`);
+				this._volume = (choices[type] ? choices[type].volume : 100) / 100;
 			}
 			loop () {
 				this._ensureAudio().then(audio => {
@@ -137,8 +133,8 @@ module.exports = (_ => {
 					let audio = new Audio;
 					audio.src = this._src && this._src.startsWith("data") ? this._src.replace(/ /g, "") : this._src;
 					audio.onloadeddata = _ => {
-						audio.volume = Math.min((BDFDB.LibraryModules.MediaDeviceUtils.getOutputVolume() / 100) * (this._volume / 100) * (volumes.globalVolume / 100), 1);
-						BDFDB.LibraryModules.PlatformUtils.embedded && audio.setSinkId(currentDevice || defaultDevice);
+						audio.volume = Math.min((BDFDB.LibraryStores.MediaEngineStore.getOutputVolume() / 100) * this._volume * (volumes.globalVolume / 100), 1);
+						BDFDB.DiscordUtils.isPlaformEmbedded() && audio.setSinkId(currentDevice || defaultDevice);
 						callback(audio);
 					};
 					audio.onerror = _ => errorCallback(new Error("could not play audio"));
@@ -161,16 +157,18 @@ module.exports = (_ => {
 				};
 				
 				this.patchPriority = 9;
-				
+			}
+			
+			onStart () {
 				const soundKeys = BDFDB.LibraryModules.SoundParser.keys();
 				for (let key of soundKeys) {	
 					const id = key.replace("./", "").replace(".mp3", "");
-					const name = id == "reconnect" ? "Invited To Speak" : id.replace("ddr-", "HotKeys_").replace("ptt_", "Push2Talk_").split("_").map(BDFDB.LibraryModules.StringUtils.upperCaseFirstChar).join(" ").replace(/1$/g, "");
+					const name = id == "reconnect" ? "Invited To Speak" : id.replace("ddr-", "HotKeys_").replace("ptt_", "Push2Talk_").split("_").map(BDFDB.StringUtils.upperCaseFirstChar).join(" ").replace(/1$/g, "");
 					const src = BDFDB.LibraryModules.SoundParser(key);	
 					
 					let soundPackName = id.split("_")[0];
 					if (soundPackName != id && soundKeys.filter(n => n.indexOf(`./${soundPackName}`) > -1).length > 10) {
-						soundPackName = BDFDB.LibraryModules.StringUtils.upperCaseFirstChar(soundPackName);
+						soundPackName = BDFDB.StringUtils.upperCaseFirstChar(soundPackName);
 						if (!defaultAudios[soundPackName]) defaultAudios[soundPackName] = {};
 						defaultAudios[soundPackName][name.replace(new RegExp(`${soundPackName} `, "i"), "").replace(/bootup/i, "Discodo")] = src;
 					}
@@ -197,15 +195,13 @@ module.exports = (_ => {
 					types = BDFDB.ObjectUtils.sort(types, "name");
 				}
 				for (let pack in defaultAudios) defaultAudios[pack] = BDFDB.ObjectUtils.sort(defaultAudios[pack]);
-			}
-			
-			onStart () {
-				if (BDFDB.LibraryModules.PlatformUtils.embedded) {
+				
+				if (BDFDB.DiscordUtils.isPlaformEmbedded()) {
 					let change = _ => {
 						if (window.navigator.mediaDevices && window.navigator.mediaDevices.enumerateDevices) {
 							window.navigator.mediaDevices.enumerateDevices().then(enumeratedDevices => {
-								let id = BDFDB.LibraryModules.MediaDeviceUtils.getOutputDeviceId();
-								let allDevices = BDFDB.LibraryModules.MediaDeviceUtils.getOutputDevices();
+								let id = BDFDB.LibraryStores.MediaEngineStore.getOutputDeviceId();
+								let allDevices = BDFDB.LibraryStores.MediaEngineStore.getOutputDevices();
 								let filteredDevices = enumeratedDevices.filter(d => d.kind == "audiooutput" && d.deviceId != "communications");
 								let deviceIndex = BDFDB.LibraryModules.ArrayUtils(allDevices).sortBy(d => d.index).findIndex(d => d.id == id);
 								let deviceViaId = allDevices[id];
@@ -217,7 +213,7 @@ module.exports = (_ => {
 							});
 						}
 					};
-					BDFDB.StoreChangeUtils.add(this, BDFDB.LibraryModules.MediaDeviceUtils, change);
+					BDFDB.StoreChangeUtils.add(this, BDFDB.LibraryStores.MediaEngineStore, change);
 					change();
 				}
 				
@@ -225,11 +221,11 @@ module.exports = (_ => {
 					if (BDFDB.ObjectUtils.is(e.methodArguments[0]) && e.methodArguments[0].type == "MESSAGE_CREATE" && e.methodArguments[0].message) {
 						const message = e.methodArguments[0].message;
 						const guildId = message.guild_id || null;
-						if (message.author.id != BDFDB.UserUtils.me.id && !BDFDB.LibraryModules.RelationshipStore.isBlocked(message.author.id)) {
-							const channel = BDFDB.LibraryModules.ChannelStore.getChannel(message.channel_id);
+						if (message.author.id != BDFDB.UserUtils.me.id && !BDFDB.LibraryStores.RelationshipStore.isBlocked(message.author.id)) {
+							const channel = BDFDB.LibraryStores.ChannelStore.getChannel(message.channel_id);
 							const isGroupDM = channel.isGroupDM();
-							const muted = BDFDB.LibraryModules.MutedUtils.isGuildOrCategoryOrChannelMuted(guildId, channel.id);
-							const focused = document.hasFocus() && BDFDB.LibraryModules.LastChannelStore.getChannelId() == channel.id;
+							const muted = BDFDB.ChannelUtils.isThread(channel) ? BDFDB.LibraryStores.JoinedThreadsStore.isMuted(channel.id) : BDFDB.LibraryStores.UserGuildSettingsStore.isGuildOrCategoryOrChannelMuted(guildId, channel.id);
+							const focused = document.hasFocus() && BDFDB.LibraryStores.SelectedChannelStore.getChannelId() == channel.id;
 							if (!guildId && !muted && !(choices[isGroupDM ? "groupdm" : "dm"].focus && focused)) {
 								this.fireEvent(isGroupDM ? "groupdm" : "dm");
 								this.playAudio(isGroupDM ? "groupdm" : "dm");
@@ -249,15 +245,15 @@ module.exports = (_ => {
 											return;
 										}
 									}
-									if (message.mention_roles.length && !BDFDB.LibraryModules.MutedUtils.isSuppressRolesEnabled(guildId, channel.id) && (!muted || choices.role.force) && !(choices.role.focus && focused)) {
-										const member = BDFDB.LibraryModules.MemberStore.getMember(guildId, BDFDB.UserUtils.me.id);
+									if (message.mention_roles.length && !BDFDB.LibraryStores.UserGuildSettingsStore.isSuppressRolesEnabled(guildId, channel.id) && (!muted || choices.role.force) && !(choices.role.focus && focused)) {
+										const member = BDFDB.LibraryStores.GuildMemberStore.getMember(guildId, BDFDB.UserUtils.me.id);
 										if (member && member.roles.length) for (const roleId of message.mention_roles) if (member.roles.includes(roleId)) {
 											this.fireEvent("role");
 											this.playAudio("role");
 											return;
 										}
 									}
-									if (message.mention_everyone && !BDFDB.LibraryModules.MutedUtils.isSuppressEveryoneEnabled(guildId, channel.id)) {
+									if (message.mention_everyone && !BDFDB.LibraryStores.UserGuildSettingsStore.isSuppressEveryoneEnabled(guildId, channel.id)) {
 										if (message.content.indexOf("@everyone") > -1 && (!muted || choices.everyone.force) && !(choices.everyone.focus && focused)) {
 											this.fireEvent("everyone");
 											this.playAudio("everyone");
@@ -270,7 +266,7 @@ module.exports = (_ => {
 										}
 									}
 								}
-								if (BDFDB.LibraryModules.MutedUtils.allowAllMessages(channel) && (!muted || choices.message1.force) && !(choices.message1.focus && focused)) {
+								if (BDFDB.LibraryStores.UserGuildSettingsStore.allowAllMessages(channel) && (!muted || choices.message1.force) && !(choices.message1.focus && focused)) {
 									this.fireEvent("message1");
 									this.playAudio("message1");
 									return;
@@ -284,49 +280,49 @@ module.exports = (_ => {
 					let soundObjIndex = Array.from(e.methodArguments).findIndex(n => n && n.sound);
 					if (soundObjIndex && e.methodArguments[soundObjIndex].sound.includes("message")) e.methodArguments[soundObjIndex].sound = null;
 				}});
-				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "playSound", {instead: e => {
-					let type = e.methodArguments[0];
-					if (type && choices[type]) {
-						e.stopOriginalMethodCall();
-						BDFDB.TimeUtils.timeout(_ => {
-							if (type == "message1") {
-								let called = false;
-								for (let subType of [type].concat(Object.keys(message1Types))) if (firedEvents[subType]) {
-									delete firedEvents[subType];
-									called = true;
-									break;
+				if (BDFDB.LibraryModules.SoundUtils && BDFDB.LibraryModules.SoundUtils.createSound) {
+					let cancel = BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "createSound", {after: e => {
+						if (e.returnValue && e.returnValue.constructor && e.returnValue.constructor.prototype && typeof e.returnValue.constructor.prototype.play == "function") {
+							cancel();
+							BDFDB.PatchUtils.patch(this, e.returnValue.constructor.prototype, ["play", "loop"], {instead: e2 => {
+								let type = e2.instance && e2.instance.name;
+								let loop = e2.originalMethodName == "loop";
+								if (type && choices[type]) {
+									e2.stopOriginalMethodCall();
+									BDFDB.TimeUtils.timeout(_ => {
+										if (type == "message1") {
+											let called = false;
+											for (let subType of [type].concat(Object.keys(message1Types))) if (firedEvents[subType]) {
+												delete firedEvents[subType];
+												called = true;
+												break;
+											}
+											if (!called) this.playAudio(type, loop);
+										}
+										else this.playAudio(type, loop);
+									});
 								}
-								if (!called) this.playAudio(type);
-							}
-							else this.playAudio(type);
-						});
-					}
-					else e.callOriginalMethodAfterwards();
-				}});
-				BDFDB.PatchUtils.patch(this, BDFDB.LibraryModules.SoundUtils, "createSound", {after: e => {
-					let type = e.methodArguments[0];
-					if (type && choices[type]) {
-						let audio = new WebAudioSound(type);
-						createdAudios[type] = audio;
-						return audio;
-					}
-					else BDFDB.LogUtils.warn(`Could not create Sound for "${type}".`, this);
-				}});
+								else this.playAudio(type, loop);
+							}});
+							BDFDB.PatchUtils.patch(this, e.returnValue.constructor.prototype, "stop", {after: e2 => {
+								let type = e2.instance && e2.instance.name;
+								if (type && createdAudios[type]) createdAudios[type].stop();
+							}});
+						}
+						return;
+						let type = e.methodArguments[0];
+						if (type && choices[type]) {
+							let audio = new WebAudioSound(type);
+							createdAudios[type] = audio;
+							return audio;
+						}
+						else BDFDB.LogUtils.warn(`Could not create Sound for "${type}".`, this);
+					}}, {noCache: true});
+					BDFDB.LibraryModules.SoundUtils.createSound("call_calling");
+				}
 
 				this.loadAudios();
 				this.loadChoices();
-				
-				let callListenerModule = BDFDB.ModuleUtils.findByProperties("handleRingUpdate");
-				if (callListenerModule) {
-					callListenerModule.terminate();
-					BDFDB.PatchUtils.patch(this, callListenerModule, "handleRingUpdate", {instead: e => {
-						if (BDFDB.LibraryModules.CallUtils.getCalls().filter(call => call.ringing.length > 0 && BDFDB.LibraryModules.VoiceUtils.getCurrentClientVoiceChannelId() === call.channelId).length > 0 && !BDFDB.LibraryModules.SoundStateUtils.isSoundDisabled("call_calling") && !BDFDB.LibraryModules.StreamerModeStore.disableSounds) {
-							createdAudios["call_calling"].loop();
-						}
-						else createdAudios["call_calling"].stop();
-					}});
-					callListenerModule.initialize();
-				}
 				
 				this.forceUpdateAll();
 			}
@@ -424,9 +420,9 @@ module.exports = (_ => {
 													}
 													BDFDB.NotificationUtils.toast("Use a valid direct link to a video or audio source, they usually end on something like .mp3, .mp4 or .wav", {type: "danger"});
 												});
-												else BDFDB.LibraryRequires.fs.readFile(source, (error, response) => {
+												else BDFDB.LibraryRequires.fs.readFile(source, "", (error, buffer) => {
 													if (error) BDFDB.NotificationUtils.toast("Could not fetch file. Please make sure the file exists", {type: "danger"});
-													else return successSavedAudio({category, sound, source: `data:audio/mpeg;base64,${response.toString("base64")}`});
+													else return successSavedAudio({category, sound, source: `data:audio/mpeg;base64,${Buffer.from(buffer).toString("base64")}`});
 												});
 											},
 											children: BDFDB.LanguageUtils.LanguageStrings.SAVE
@@ -493,10 +489,10 @@ module.exports = (_ => {
 											mini: true,
 											grow: 0,
 											label: "Mute in",
-											labelChildren: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Status, {
+											labelChildren: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {
 												style: {marginLeft: 6},
 												size: 12,
-												status: BDFDB.DiscordConstants.StatusTypes.DND
+												status: BDFDB.LibraryComponents.StatusComponents.Types.DND
 											}),
 											value: choices[type].mute,
 											onChange: value => {
@@ -676,9 +672,8 @@ module.exports = (_ => {
 			}
 		
 			forceUpdateAll () {
-				repatchIncoming = true;
-				createdAudios["call_calling"] = BDFDB.LibraryModules.SoundUtils.createSound("call_calling");
 				volumes = BDFDB.DataUtils.get(this, "volumes");
+				
 				BDFDB.PatchUtils.forceAllUpdates(this);
 				BDFDB.DiscordUtils.rerenderAll();
 			}
@@ -717,21 +712,21 @@ module.exports = (_ => {
 				}
 			}
 
-			playAudio (type) {
-				if (this.dontPlayAudio(type) || BDFDB.LibraryModules.StreamerModeStore.disableSounds) return;
+			playAudio (type, loop = false) {
+				if (this.dontPlayAudio(type) || BDFDB.LibraryStores.StreamerModeStore.disableSounds) return;
 				if (createdAudios[type]) createdAudios[type].stop();
 				createdAudios[type] = new WebAudioSound(type);
-				createdAudios[type].play();
+				createdAudios[type][loop ? "loop" : "play"]();
 			}
 			
 			isSuppressMentionsEnabled (guildId, channelId) {
-				let channelSettings = BDFDB.LibraryModules.MutedUtils.getChannelMessageNotifications(guildId, channelId);
-				return channelSettings && (channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES || channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NULL && BDFDB.LibraryModules.MutedUtils.getMessageNotifications(guildId) == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES);
+				let channelSettings = BDFDB.LibraryStores.UserGuildSettingsStore.getChannelMessageNotifications(guildId, channelId);
+				return channelSettings && (channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES || channelSettings == BDFDB.DiscordConstants.UserNotificationSettings.NULL && BDFDB.LibraryStores.UserGuildSettingsStore.getMessageNotifications(guildId) == BDFDB.DiscordConstants.UserNotificationSettings.NO_MESSAGES);
 			}
 
 			dontPlayAudio (type) {
 				let status = BDFDB.UserUtils.getStatus();
-				return choices[type].mute && (status == "dnd" || status == "streaming");
+				return choices[type] && choices[type].mute && (status == "dnd" || status == "streaming");
 			}
 
 			fireEvent (type) {
@@ -743,5 +738,5 @@ module.exports = (_ => {
 				return type != "human_man" && type != "robot_man" && type != "discodo" && type != "overlayunlock" && type != "call_ringing_beat" && !(type != "message1" && /\d$/.test(type));
 			}
 		};
-	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));
+	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));
 })();

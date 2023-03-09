@@ -1,20 +1,19 @@
 {
     "general": {
-        "emotes": true,
-        "publicServers": true,
+        "emotes": false,
+        "publicServers": false,
         "voiceDisconnect": false,
         "showToasts": true,
         "mediaKeys": false
     },
     "addons": {
         "addonErrors": true,
-        "autoReload": true,
-        "editAction": "detached"
+        "editAction": "system"
     },
     "customcss": {
         "customcss": true,
         "liveUpdate": false,
-        "openAction": "settings"
+        "openAction": "system"
     },
     "editor": {
         "lineNumbers": true,
@@ -25,8 +24,8 @@
         "renderWhitespace": "selection"
     },
     "window": {
-        "transparency": false,
-        "removeMinimumSize": false,
+        "transparency": true,
+        "removeMinimumSize": true,
         "frame": false
     },
     "developer": {
