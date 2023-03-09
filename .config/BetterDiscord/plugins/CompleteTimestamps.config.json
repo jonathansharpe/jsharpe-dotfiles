@@ -10,12 +10,12 @@
 		"dates": {
 			"timestampDate": {
 				"formatString": "$day $date $time12 ",
-				"dateString": "$m.$d.$yyyy",
+				"dateString": "$mm.$dd.$yyyy",
 				"timeString": "$h:$mm"
 			},
 			"tooltipDate": {
 				"formatString": "$day $date $time12 ",
-				"dateString": "$m.$d.$yyyy",
+				"dateString": "$mm.$dd.$yyyy",
 				"timeString": "$h:$mm"
 			}
 		},
@@ -32,6 +32,12 @@
 			"changeForEdit": true,
 			"changeForMarkup": true
 		},
+		"places": {
+			"chat": true,
+			"embed": true,
+			"markup": true,
+			"auditLogs": true
+		},
 		"settings": {
 			"changeForChat": true,
 			"changeForEdit": true,
@@ -44,6 +50,11 @@
 			"showInChat": true,
 			"showInEmbed": true,
 			"useDateInDaysAgo": false
+		},
+		"tooltips": {
+			"chat": true,
+			"edit": true,
+			"markup": true
 		}
 	}
 }
