@@ -1,3 +1,27 @@
+local set = vim.opt
+-- Set the behavior of tab
+set.tabstop = 4
+set.shiftwidth = 4
+set.softtabstop = 4
+set.expandtab = true
+set.number = true
+set.relativenumber = true
+set.spell = true
+set.spelllang = 'en_us'
+set.fdm = 'indent'
+set.termguicolors = true
+set.laststatus=2
+set.showtabline=2
+-- ALIASES
+vim.cmd 'command! PS PackerSync'
+vim.cmd 'set noexpandtab'
+vim.cmd 'set signcolumn=yes'
+vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
+vim.g.mkdp_auto_close = 0
+vim.g.mkdp_auto_start = 0
+vim.g.mapleader = " "
+set.mouse = 'a'
+vim.cmd 'colorscheme catppuccin-macchiato'
 require('sharpe-plugins')
 require'lspconfig'.html.setup({
 	cmd = {
@@ -5,14 +29,16 @@ require'lspconfig'.html.setup({
 	}
 })
 require'lspconfig'.denols.setup{}
-require'lspconfig'.sumneko_lua.setup{}
+require'lspconfig'.lua_ls.setup{}
 require'lspconfig'.bashls.setup{}
+require'lspconfig'.ltex.setup{}
 require'lspconfig'.jsonls.setup({
 	cmd = {
 		"vscode-json-languageserver", "--stdio"
 	}
 })
 require'lspconfig'.marksman.setup{}
+require'lspconfig'.clangd.setup{}
 require('alpha').setup(require'alpha.themes.startify'.config)
 require("bookmarks").setup()
 require'lspconfig'.cssls.setup({})
@@ -40,57 +66,12 @@ require("nvim-autopairs").setup{}
 require("neogen").setup{
 	enabled = true,
 }
--- Try it:
 require('tabline_framework').setup {
-  render = require('tabline_framework.examples.diagonal_tiles'),
+  render = require('tabline_framework.examples.fancy_indexes'),
   hl = { fg = '#abb2bf', bg = '#181A1F' },
   hl_sel = { fg = '#abb2bf', bg = '#282c34'},
   hl_fill = { fg = '#ffffff', bg = '#000000'},
 }
-local colors = {
-  black = '#000000',
-  white = '#ffffff',
-  bg = '#181A1F',
-  bg_sel = '#282c34',
-  fg = '#696969'
-}
-
-local render = function(f)
-  f.add { '  ' }
-
-  f.make_tabs(function(info)
-    f.add {  ' ', fg = colors.black }
-    f.set_fg(not info.current and colors.fg or nil)
-
-    f.add( info.index .. ' ')
-
-    if info.filename then
-      f.add(info.modified and '+')
-      f.add(info.filename)
-      f.add {
-        ' ' .. f.icon(info.filename),
-        fg = info.current and f.icon_color(info.filename) or nil
-      }
-    else
-      f.add(info.modified and '[+]' or '[-]')
-    end
-
-    f.add {
-      ' ',
-      fg = info.current and colors.bg_sel or colors.bg,
-      bg = colors.black
-    }
-  end)
-
-  f.add_spacer()
-
-  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-
-  f.add { '  ' .. errors, fg = "#e86671" }
-  f.add { '  ' .. warnings, fg = "#e5c07b"}
-  f.add ' '
-end
 require("neogen").generate()
 require("lsp_signature").setup(cfg)
 require('refactoring').setup({
@@ -130,6 +111,7 @@ require("nvim-treesitter.configs").setup{
 		"javascript",
 		"json",
 		"jsonc",
+		"latex",
 		"lua",
 		"make",
 		"markdown",
@@ -150,6 +132,25 @@ require("spellsitter").setup{
 require("indent_blankline").setup{
 	show_current_context = true,
 	show_current_context_start = true,
+}
+local dap = require('dap')
+dap.adapters.lldb = {
+	type = 'executable',
+	command = '/usr/bin/lldb-vscode',
+	name = 'lldb'
+}
+dap.configurations.cpp = {
+	{
+		name = 'Launch',
+		type = 'lldb',
+		request = 'launch',
+		program = function()
+			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+		end,
+		cwd = '${workspaceFolder}',
+		stopOnEntry = false,
+		args = {},
+	},
 }
 require('gitsigns').setup {
   signs = {
@@ -200,29 +201,6 @@ local coq = require "coq"
 -- require('lspconfig').pylsp.setup{}
 -- require('lspconfig/prolog_lsp')
 -- require('lspconfig').prolog_lsp.setup{}
-local set = vim.opt
--- Set the behavior of tab
-set.tabstop = 4
-set.shiftwidth = 4
-set.softtabstop = 4
-set.expandtab = true
-set.number = true
-set.relativenumber = true
-set.spell = true
-set.spelllang = 'en_us'
-set.fdm = 'indent'
-set.termguicolors = true
-set.laststatus=2
-set.showtabline=2
--- ALIASES
-vim.cmd 'command! PS PackerSync'
-vim.cmd 'set noexpandtab'
-vim.cmd 'colorscheme gruvbox'
-vim.cmd 'set signcolumn=yes'
-vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
-vim.g.mkdp_auto_close = 0
-vim.g.mkdp_auto_start = 0
-set.mouse = 'a'
 
 -- CONFIG STUFF
 -- may want to put the following in a separate file at some point idk
@@ -253,9 +231,16 @@ map('n', '<A-t>', ':NnnExplore<CR>', {silent = true})
 -- map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
 
 -- REFACTORING KEYMAPS
+-- let mapleader = " "
 
 -- HOVER REMAPS
 vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
+
+-- DAP KEYMAPS
+vim.keymap.set('n', '<Leader><F2>', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<Leader><F3>', function() require('dap').step_into() end)
+vim.keymap.set('n', '<Leader><F4>', function() require('dap').step_over() end)
+vim.keymap.set('n', '<Leader><F5>', function() require('dap').continue() end)
 
 map('n', '<A-c>', ':bprevious<CR>', {silent = true})
 map('n', '<A-v>', ':bnext<CR>', {silent = true})

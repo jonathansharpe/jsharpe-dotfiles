@@ -2,7 +2,7 @@
  * @name NotificationSounds
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 3.7.7
+ * @version 3.7.8
  * @description Allows you to replace the native Sounds with custom Sounds
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -178,15 +178,18 @@ module.exports = (_ => {
 							name: name,
 							src: src,
 							mute: id.startsWith("call_") ? null : false,
+							streamMute: false,
 							force: id == "message1" ? false : null,
 							focus: id == "message1" ? true : false
 						};
 						if (id == "message1") {
 							types[id].mute = true;
+							types[id].streamMute = false;
 							for (let subType in message1Types) types[subType] = {
 								name: message1Types[subType].name,
 								src: BDFDB.LibraryModules.SoundParser(message1Types[subType].src),
 								mute: true,
+								streamMute: false,
 								force: message1Types[subType].force,
 								focus: message1Types[subType].focus
 							}
@@ -309,14 +312,6 @@ module.exports = (_ => {
 								if (type && createdAudios[type]) createdAudios[type].stop();
 							}});
 						}
-						return;
-						let type = e.methodArguments[0];
-						if (type && choices[type]) {
-							let audio = new WebAudioSound(type);
-							createdAudios[type] = audio;
-							return audio;
-						}
-						else BDFDB.LogUtils.warn(`Could not create Sound for "${type}".`, this);
 					}}, {noCache: true});
 					BDFDB.LibraryModules.SoundUtils.createSound("call_calling");
 				}
@@ -444,61 +439,45 @@ module.exports = (_ => {
 										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsLabel, {
 											label: types[type].name
 										}),
-										types[type].force != null ? BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
-											type: "Switch",
-											mini: true,
-											grow: 0,
-											label: "Force Play",
-											labelChildren: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-												text: "Plays the Sound even if the Channel, the Message was sent in, is muted",
-												children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
-													name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
-													style: {marginLeft: 4, marginRight: -2},
-													width: 14,
-													height: 14
-												})
-											}),
-											value: choices[type].force,
-											onChange: value => {
-												choices[type].force = value;
-												this.saveChoice(type, false);
-											}
-										}) : null,
-										types[type].focus != null ? BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
-											type: "Switch",
-											mini: true,
-											grow: 0,
-											label: "Focus Mute",
-											labelChildren: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-												text: "Does not play the Sound when the Channel, the Message was sent in, is currently opened",
-												children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
-													name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
-													style: {marginLeft: 4, marginRight: -2},
-													width: 14,
-													height: 14
-												})
-											}),
-											value: choices[type].focus,
-											onChange: value => {
-												choices[type].focus = value;
-												this.saveChoice(type, false);
-											}
-										}) : null,
-										types[type].mute !== null && BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsItem, {
-											type: "Switch",
-											mini: true,
-											grow: 0,
-											label: "Mute in",
-											labelChildren: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {
-												style: {marginLeft: 6},
-												size: 12,
-												status: BDFDB.LibraryComponents.StatusComponents.Types.DND
-											}),
-											value: choices[type].mute,
-											onChange: value => {
-												choices[type].mute = value;
-												this.saveChoice(type, false);
-											}
+										["force", "focus", "mute", "streamMute"].some(n => types[type][n] !== null) && BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Clickable, {
+											onClick: event => BDFDB.ContextMenuUtils.open(this, event, BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuGroup, {
+												children: [
+													{key: "force", label: "Force Play", hint: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
+														text: "Plays the Message Sound even if the Channel of the Message is muted",
+														children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
+															name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
+															width: 18,
+															height: 18
+														})
+													})},
+													{key: "focus", label: "Focus Mute", hint: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
+														text: "Does not play the Message Sound when the Channel of the Message is currently opened",
+														children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
+															name: BDFDB.LibraryComponents.SvgIcon.Names.QUESTIONMARK,
+															width: 18,
+															height: 18
+														})
+													})},
+													{key: "mute", label: ["Mute in", BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {style: {marginLeft: 6}, size: 12, status: BDFDB.LibraryComponents.StatusComponents.Types.DND})]},
+													{key: "streamMute", label: ["Mute while", BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.StatusComponents.Status, {style: {marginLeft: 6}, size: 12, status: BDFDB.LibraryComponents.StatusComponents.Types.STREAMING})]},
+												].map(n => types[type][n.key] !== null && BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuCheckboxItem, {
+													label: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Flex, {
+														children: n.label
+													}),
+													hint: n.hint,
+													id: BDFDB.ContextMenuUtils.createItemId(this.name, type, n.key),
+													checked: types[type][n.key],
+													action: state => {
+														choices[type][n.key] = state;
+														this.saveChoice(type, false);
+													}
+												})).filter(n => n)
+											})),
+											children: BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SvgIcon, {
+												width: 20,
+												height: 20,
+												name: BDFDB.LibraryComponents.SvgIcon.Names.COG
+											})
 										})
 									].filter(n => n)
 								}),
@@ -696,6 +675,7 @@ module.exports = (_ => {
 						sound: "---",
 						volume: 100,
 						mute: types[type].mute,
+						streamMute: types[type].streamMute,
 						focus: types[type].focus
 					};
 					choices[type] = choice;
@@ -726,7 +706,7 @@ module.exports = (_ => {
 
 			dontPlayAudio (type) {
 				let status = BDFDB.UserUtils.getStatus();
-				return choices[type] && choices[type].mute && (status == "dnd" || status == "streaming");
+				return choices[type] && (choices[type].mute && status == "dnd" || choices[type].streamMute && status == "streaming");
 			}
 
 			fireEvent (type) {
@@ -735,7 +715,7 @@ module.exports = (_ => {
 			}
 			
 			isSoundUsedAnywhere (type) {
-				return type != "human_man" && type != "robot_man" && type != "discodo" && type != "overlayunlock" && type != "call_ringing_beat" && !(type != "message1" && /\d$/.test(type));
+				return type && type.indexOf("poggermode_") != 0 && type != "human_man" && type != "robot_man" && type != "discodo" && type != "overlayunlock" && type != "call_ringing_beat" && !(type != "message1" && /\d$/.test(type));
 			}
 		};
 	})(window.BDFDB_Global.PluginUtils.buildPlugin(changeLog));

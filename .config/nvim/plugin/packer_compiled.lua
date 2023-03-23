@@ -149,11 +149,6 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/gkeep.nvim",
     url = "https://github.com/stevearc/gkeep.nvim"
   },
-  ["gruvbox.nvim"] = {
-    loaded = true,
-    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
-  },
   ["hover.nvim"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/hover.nvim",
@@ -220,6 +215,21 @@ _G.packer_plugins = {
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-dap}"] = {
+    loaded = true,
+    path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-dap}",
+    url = "https://github.com/{mfussenegger/nvim-dap}"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -253,7 +263,7 @@ _G.packer_plugins = {
   playground = {
     loaded = true,
     path = "/home/jonathan/.local/share/nvim/site/pack/packer/start/playground",
-    url = "https://github.com/nvim-treesitter/playground"
+    url = "https://github.com//nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
