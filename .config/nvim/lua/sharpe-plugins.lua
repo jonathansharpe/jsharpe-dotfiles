@@ -19,7 +19,14 @@ use {
 	"catppuccin/nvim",
 	as = "catppuccin",
 }
-use {"ellisonleao/gruvbox.nvim"}
+-- adds debugging features
+use "mfussenegger/nvim-dap"
+
+use {
+	"rcarriga/nvim-dap-ui", 
+	requires = "{mfussenegger/nvim-dap}"
+}
+
 use "stevearc/dressing.nvim"
 use({"ziontee113/icon-picker.nvim"})
 -- adds a startup screen
@@ -62,8 +69,7 @@ use {
 		{"nvim-treesitter/nvim-treesitter"},
 	}
 }
-
-use {'nvim-treesitter/playground'}
+use { '/nvim-treesitter/playground' }
 
 -- allows for light/dark theme syncing i think
 use { 'RRethy/vim-illuminate' }

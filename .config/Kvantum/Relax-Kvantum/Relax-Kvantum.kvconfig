@@ -3,7 +3,7 @@ author=l4k1
 comment=Relax-Kvantum
 x11drag=all
 alt_mnemonic=true
-left_tabs=false
+left_tabs=true
 attach_active_tab=false
 embedded_tabs=true
 mirror_doc_tabs=false
@@ -68,6 +68,8 @@ drag_from_buttons=false
 intensity=1.00
 saturation=1.00
 shadowless_popup=false
+menu_blur_radius=0
+tooltip_blur_radius=0
 
 [Focus]
 inherits=PanelButtonCommand
