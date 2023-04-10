@@ -20,11 +20,12 @@ use {
 	as = "catppuccin",
 }
 -- adds debugging features
-use "mfussenegger/nvim-dap"
-
 use {
 	"rcarriga/nvim-dap-ui", 
-	requires = "{mfussenegger/nvim-dap}"
+	requires = "mfussenegger/nvim-dap"
+}
+use {
+	"mfussenegger/nvim-dap"
 }
 
 use "stevearc/dressing.nvim"
@@ -69,7 +70,7 @@ use {
 		{"nvim-treesitter/nvim-treesitter"},
 	}
 }
-use { '/nvim-treesitter/playground' }
+-- use { '/nvim-treesitter/playground' }
 
 -- allows for light/dark theme syncing i think
 use { 'RRethy/vim-illuminate' }
@@ -78,7 +79,7 @@ use { 'RRethy/vim-illuminate' }
 use { 'lewis6991/hover.nvim', }
 
 -- uses context-sensitive spell check, so the spell check doesn't tell you your variables are spelled wrong
-use { 'lewis6991/spellsitter.nvim', }
+-- use { 'lewis6991/spellsitter.nvim', }
 
 -- bufferline plugin; not using at the moment
 -- use {
@@ -91,7 +92,8 @@ use { 'lewis6991/spellsitter.nvim', }
 
 -- tabline plugin
 -- use {"alvarosevilla95/luatab.nvim", requires='kyazdani42/nvim-web-devicons'}
-use { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
+-- use { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
+use 'nanozuki/tabby.nvim'
 
 -- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
 use { 'danymat/neogen' }

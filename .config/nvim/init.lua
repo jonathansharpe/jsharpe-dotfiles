@@ -21,7 +21,7 @@ vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
 vim.g.mapleader = " "
 set.mouse = 'a'
-vim.cmd 'colorscheme catppuccin-macchiato'
+vim.cmd 'colorscheme base16-tokyo-night-terminal-dark'
 require('sharpe-plugins')
 require'lspconfig'.html.setup({
 	cmd = {
@@ -66,12 +66,6 @@ require("nvim-autopairs").setup{}
 require("neogen").setup{
 	enabled = true,
 }
-require('tabline_framework').setup {
-  render = require('tabline_framework.examples.fancy_indexes'),
-  hl = { fg = '#abb2bf', bg = '#181A1F' },
-  hl_sel = { fg = '#abb2bf', bg = '#282c34'},
-  hl_fill = { fg = '#ffffff', bg = '#000000'},
-}
 require("neogen").generate()
 require("lsp_signature").setup(cfg)
 require('refactoring').setup({
@@ -98,6 +92,24 @@ require('refactoring').setup({
     printf_statements = {},
     print_var_statements = {},
 })
+require('tabby.tabline').use_preset('active_wins_at_tail', {
+	theme = {
+		fill = 'Visual', -- tabline background
+		tab = 'StatusLine',
+		win = 'StatusLine',
+		head = 'StatusLine',
+		tail = 'StatusLine',
+	},
+	nerdfont = true, -- whether use nerdfont
+	tab_name = {
+			name_fallback = function(tabid)
+				return "fallback name"
+			end
+		},
+		buf_name = {
+			mode = "'unique'|'relative'|'tail'|'shorten'",
+		},
+	})
 require("nvim-treesitter.configs").setup{
 	ensure_installed = {
 		"bash",
@@ -125,9 +137,9 @@ require("nvim-treesitter.configs").setup{
 		additional_vim_regex_highlighting = true,
 	},
 }
-require("spellsitter").setup{
-	enable = true,
-}
+-- require("spellsitter").setup{
+-- 	enable = true,
+-- }
 -- require('luatab').setup{}
 require("indent_blankline").setup{
 	show_current_context = true,
