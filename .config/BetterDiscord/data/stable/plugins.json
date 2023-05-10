@@ -1,6 +1,6 @@
 {
     "BDFDB": true,
-    "ZeresPluginLibrary": true,
+    "ZeresPluginLibrary": false,
     "ActivityIcons": true,
     "BDContextMenu": true,
     "BetterAnimations": true,
@@ -16,7 +16,7 @@
     "ImageUtilities": true,
     "InMyVoice": true,
     "NotificationSounds": true,
-    "PermissionsViewer": false,
+    "PermissionsViewer": true,
     "PluginRepo": true,
     "ServerDetails": false,
     "ShutUpClyde": false,
@@ -24,7 +24,7 @@
     "ThemeRepo": true,
     "TypingIndicator": true,
     "TypingUsersAvatars": false,
-    "ViewProfilePicture": false,
+    "ViewProfilePicture": true,
     "VoiceUsersCounter": true,
     "Zalgo": true
 }

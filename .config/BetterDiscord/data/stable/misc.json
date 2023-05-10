@@ -1,5 +1,5 @@
 {
-    "version": "1.9.0",
+    "version": "1.9.2",
     "addonlistControls": {
         "theme": {
             "view": "grid"
@@ -14,7 +14,7 @@
     "drawerStates": {
         "settings": {
             "addons": false,
-            "customcss": false,
+            "customcss": true,
             "developer": true,
             "window": true,
             "appearance": false,

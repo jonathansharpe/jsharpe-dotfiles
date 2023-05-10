@@ -1,142 +1,36 @@
 /**
  * @name ViewProfilePicture
  * @description Adds a button to the user popout and profile that allows you to view the Avatar and banner.
- * @version 1.0.4
+ * @version 1.2.0
  * @author Skamt
  * @website https://github.com/Skamt/BDAddons/tree/main/ViewProfilePicture
  * @source https://raw.githubusercontent.com/Skamt/BDAddons/main/ViewProfilePicture/ViewProfilePicture.plugin.js
  */
+
 const config = {
-	info: {
-		name: "ViewProfilePicture",
-		version: "1.0.4",
-		description: "Adds a button to the user popout and profile that allows you to view the Avatar and banner.",
-		source: "https://raw.githubusercontent.com/Skamt/BDAddons/main/ViewProfilePicture/ViewProfilePicture.plugin.js",
-		github: "https://github.com/Skamt/BDAddons/tree/main/ViewProfilePicture",
-		authors: [{
-			name: "Skamt"
+	"info": {
+		"name": "ViewProfilePicture",
+		"version": "1.2.0",
+		"description": "Adds a button to the user popout and profile that allows you to view the Avatar and banner.",
+		"source": "https://raw.githubusercontent.com/Skamt/BDAddons/main/ViewProfilePicture/ViewProfilePicture.plugin.js",
+		"github": "https://github.com/Skamt/BDAddons/tree/main/ViewProfilePicture",
+		"authors": [{
+			"name": "Skamt"
 		}]
-	}
-};
-module.exports = (() => {
-	const {
-		UI,
-		DOM,
-		React,
-		Patcher,
-		Webpack: {
-			Filters,
-			getModule
-		}
-	} = new BdApi(config.info.name);
+	},
+	"changelog": [{
+		"title": "What's New?",
+		"type": "added",
+		"items": [
+			"VPP button can now bet set to show on hover."
+		]
+	}]
+}
 
-	// https://discord.com/channels/86004744966914048/196782758045941760/1062604534922367107
-	function getModuleAndKey(filter) {
-		let module;
-		const target = BdApi.Webpack.getModule((entry, m) => filter(entry) ? (module = m) : false, { searchExports: true })
-		return [module.exports, Object.keys(module.exports).find(k => module.exports[k] === target)];
-	}
-
-	// Modules
-	const Tooltip = getModule(m => m.defaultProps?.shouldShow, { searchExports: true });
-	const ModalRoot = getModule(Filters.byStrings('onAnimationEnd'), { searchExports: true });
-	const openModal = getModule(Filters.byStrings('onCloseCallback', 'Layer'), { searchExports: true });
-	const [ImageModalModule, ImageModalKey] = getModuleAndKey(m => {
-		if (!m?.toString || typeof(m?.toString) !== "function") return;
-		const strs = ["original", "maxHeight", "maxWidth", "noreferrer noopener"];
-		const funcStr = m?.toString();
-		for (const s of strs)
-			if (!funcStr.includes(s)) return false;
-		return true;
-	});
-	const ModalCarousel = getModule(m => m.prototype?.navigateTo && m.prototype?.preloadImage);
-	const UserBannerMask = getModule((m) => m.Z && m.Z.toString().includes('overrideAvatarDecorationURL'));
-	const ProfileTypeEnum = getModule(Filters.byProps('POPOUT', 'SETTINGS'), { searchExports: true });
-	const CurrentUserStore = getModule(Filters.byProps('getCurrentUser', 'getUsers'));
-	const SelectedGuildStore = getModule(Filters.byProps('getLastSelectedGuildId'));
-	const renderLinkComponent = getModule(m => m.type?.toString().includes('MASKED_LINK'));
-
-	// Constants
-	const IMG_WIDTH = 4096;
-
-	// Helper functions
-	const Utils = {
-		showToast: (content, type) => UI.showToast(`[${config.info.name}] ${content}`, { type }),
-		copy: (data) => {
-			DiscordNative.clipboard.copy(data);
-			Utils.showToast("Color Copied!", "success");
-		},
-		/* Stolen from Zlib until it gets added to BdApi */
-		getNestedProp: (obj, path) => path.split(".").reduce(function(ob, prop) {
-			return ob && ob[prop];
-		}, obj),
-		getImageModalComponent: (Url, props) => React.createElement(ImageModalModule[ImageModalKey], {
-			...props,
-			src: Url,
-			original: Url,
-			renderLinkComponent: p => React.createElement(renderLinkComponent, p)
-		})
-	};
-
-	// Components
-	const ViewProfilePictureButton = (props) => {
-		return (
-			React.createElement(Tooltip, {
-					text: "View profile picture",
-					position: "top"
-				},
-				(p) =>
-				React.createElement("div", {
-						...
-						p,
-						...
-						props
-					},
-					React.createElement("svg", {
-							"aria-label": p["aria-label"],
-							"aria-hidden": "false",
-							role: "img",
-							width: "18",
-							height: "18",
-							viewBox: "-50 -50 484 484"
-						},
-						React.createElement("path", {
-							fill: "currentColor",
-							d: "M341.333,0H42.667C19.093,0,0,19.093,0,42.667v298.667C0,364.907,19.093,384,42.667,384h298.667 C364.907,384,384,364.907,384,341.333V42.667C384,19.093,364.907,0,341.333,0z M42.667,320l74.667-96l53.333,64.107L245.333,192l96,128H42.667z"
-						})))));
-
-	};
-	const DisplayCarousel = ({ props, items }) => {
-		return (
-			React.createElement(ModalRoot, {
-					...
-					props,
-					className: "VPP-carousel carouselModal-1eUFoq zoomedCarouselModalRoot-beLNhM"
-				},
-				React.createElement(ModalCarousel, {
-					startWith: 0,
-					className: "modalCarouselWrapper-YK1MX4",
-					items: items.map((item) => ({ "component": item }))
-				})));
-
-	};
-	const ColorModal = ({ color, bannerColorCopyHandler }) => {
-		return (
-			React.createElement("div", {
-					className: "VPP-NoBanner wrapper-2bCXfR",
-					style: { backgroundColor: color }
-				},
-				React.createElement("a", {
-					className: "anchorUnderlineOnHover-2qPutX downloadLink-3cavAH",
-					onClick: (_) => Utils.copy(color)
-				}, "Copy Color")));
-
-	};
-
-	// styles
-	const css = `/* Warning circle in popouts of users who left server overlaps VPP button */
-svg.warningCircleIcon-2osUEe {
-    top: 75px;
+const css$1 = `
+/* Warning circle in popouts of users who left server overlaps VPP button */
+svg:has(path[d="M10 0C4.486 0 0 4.486 0 10C0 15.515 4.486 20 10 20C15.514 20 20 15.515 20 10C20 4.486 15.514 0 10 0ZM9 4H11V11H9V4ZM10 15.25C9.31 15.25 8.75 14.691 8.75 14C8.75 13.31 9.31 12.75 10 12.75C10.69 12.75 11.25 13.31 11.25 14C11.25 14.691 10.69 15.25 10 15.25Z"]){
+	top: 75px;
 }
 
 /* View Profile Button */
@@ -169,7 +63,7 @@ svg.warningCircleIcon-2osUEe {
 	top: 14px;
 }
 
-.VPP-profile..VPP-right{
+.VPP-profile.VPP-right{
     right:16px;
 }
 
@@ -222,65 +116,440 @@ svg.warningCircleIcon-2osUEe {
 
 .VPP-carousel .imageWrapper-oMkQl4 > img {
 	max-height: 80vh;
+}
+
+/* Copy color button */
+.copyColorBtn{
+	white-space: nowrap;
+    position: absolute;
+    top: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 30px;
+    transition: opacity .15s ease;
+    opacity: .5;
+}
+
+.copyColorBtn:hover{
+	opacity: 1;
+    text-decoration: underline;
+}
+
+.VPP-hover {
+    opacity:0;
+}
+
+.VPP-container:hover .VPP-hover{
+    opacity:1;
 }`;
 
-	return class ViewProfilePicture {
-		constructor() {}
+const Api = new BdApi(config.info.name);
 
-		openCarousel(items) {
-			openModal(props => React.createElement(DisplayCarousel, { props, items }));
-		}
+const UI = Api.UI;
+const DOM = Api.DOM;
+const Data = Api.Data;
+const React = Api.React;
+const Patcher = Api.Patcher;
 
-		clickHandler(user, bannerObject, isUserPopout) {
-			const { backgroundColor, backgroundImage } = bannerObject;
-			const guildId = isUserPopout ? SelectedGuildStore.getGuildId() : "";
-			const avatarURL = user.getAvatarURL(guildId, IMG_WIDTH, true);
-			const AvatarImageComponent = Utils.getImageModalComponent(avatarURL, { width: IMG_WIDTH, height: IMG_WIDTH });
-			const BannerImageComponent = backgroundImage ?
-				Utils.getImageModalComponent(`${backgroundImage.match(/(?<=\().*(?=\?)/)?.[0]}?size=${IMG_WIDTH}`, { width: IMG_WIDTH }) :
-				React.createElement(ColorModal, { color: backgroundColor });
-			this.openCarousel([AvatarImageComponent, BannerImageComponent]);
-		}
+const getModule = Api.Webpack.getModule;
+const Filters = Api.Webpack.Filters;
 
-		patchUserBannerMask() {
-			Patcher.after(UserBannerMask, "Z", (_, [{ user, isPremium, profileType }], returnValue) => {
+const css = `
+#changelog-container {
+	font-family: "gg sans", "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--added: #2dc770;
+	--improved: #949cf7;
+	--fixed: #f23f42;
+	--notice: #f0b132;
+	color:white;
+
+    padding: 10px;
+    max-width: 450px;
+}
+#changelog-container .title {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    margin-top: 20px;
+	color: var(--c);
+}
+#changelog-container .title:after {
+    content: "";
+    height: 1px;
+    flex: 1 1 auto;
+    margin-left: 8px;
+    opacity: .6;
+    background: currentColor;
+}
+#changelog-container ul {
+    list-style: none;
+    margin: 20px 0 8px 20px;
+}
+#changelog-container ul > li {
+    position:relative;
+    line-height: 20px;
+    margin-bottom: 8px;
+    color: #c4c9ce;
+}
+#changelog-container ul > li:before {
+    content: "";
+    position: absolute;
+    background:currentColor;
+    top: 10px;
+    left: -15px;
+    width: 6px;
+    height: 6px;
+    margin-top: -4px;
+    margin-left: -3px;
+    border-radius: 50%;
+    opacity: .5;
+}`;
+
+class ChangelogComponent extends React.Component {
+	constructor() {
+		super();
+	}
+
+	componentWillUnmount() {
+		BdApi.DOM.removeStyle("Changelog");
+	}
+
+	render() {
+		BdApi.DOM.addStyle("Changelog", css);
+		const { id, changelog } = this.props;
+		return React.createElement('div', { id: id, }, changelog);
+	}
+}
+
+function showChangelog() {
+	if (!config.changelog || !Array.isArray(config.changelog)) return;
+	const changelog = config.changelog?.map(({ title, type, items }) => [
+		React.createElement('h3', {
+			style: { "--c": `var(--${type})` },
+			className: "title",
+		}, title),
+		React.createElement('ul', null, items.map(item => (
+			React.createElement('li', null, item)
+		)))
+	]);
+
+	UI.showConfirmationModal(
+		config.info.name,
+		React.createElement(ChangelogComponent, {
+			id: "changelog-container",
+			changelog: changelog,
+		})
+	);
+}
+
+function shouldChangelog() {
+	const { version = config.info.version, changelog = false } = Data.load("metadata") || {};
+	if (version != config.info.version || !changelog) {
+		Data.save("metadata", { version: config.info.version, changelog: true });
+		return showChangelog;
+	}
+}
+
+function getModuleAndKey(filter, options) {
+	let module;
+	const target = getModule((entry, m) => filter(entry) ? (module = m) : false, options);
+	module = module?.exports;
+	if (!module) return undefined;
+	const key = Object.keys(module).find(k => module[k] === target);
+	if (!key) return undefined;
+	return { module, key };
+}
+
+const UserStore = getModule(m => m._dispatchToken && m.getName() === "UserStore");
+
+function copy(data) {
+	DiscordNative.clipboard.copy(data);
+}
+
+function getNestedProp(obj, path) {
+	return path.split(".").reduce(function(ob, prop) {
+		return ob && ob[prop];
+	}, obj);
+}
+
+function isSelf(user) {
+	const currentUser = UserStore.getCurrentUser();
+	return user?.id === currentUser?.id;
+}
+
+const Logger = {
+	error(...args) {
+		this.p(console.error, ...args);
+	},
+	patch(patchId) {
+		console.error(`%c[${config.info.name}] %c Error at %c[${patchId}]`, "color: #3a71c1;font-weight: bold;", "", "color: red;font-weight: bold;");
+	},
+	log(...args) {
+		this.p(console.error, ...args);
+	},
+	p(target, ...args) {
+		target(`%c[${config.info.name}]`, "color: #3a71c1;font-weight: bold;", ...args);
+	}
+};
+
+const ProfileTypeEnum = getModule(Filters.byProps("POPOUT", "SETTINGS"), { searchExports: true }) || {
+	"POPOUT": 0,
+	"MODAL": 1,
+	"SETTINGS": 2,
+	"PANEL": 3,
+	"CARD": 4
+};
+
+const UserBannerMask = getModuleAndKey(Filters.byStrings("overrideAvatarDecorationURL"), { searchExports: true });
+
+const SelectedGuildStore = getModule(m => m._dispatchToken && m.getName() === "SelectedGuildStore");
+
+const ImageModal = getModule(Filters.byStrings("original", "maxHeight", "maxWidth", "noreferrer noopener"), { searchExports: true });
+
+const RenderLinkComponent = getModule(m => m.type?.toString?.().includes("MASKED_LINK"), { searchExports: false });
+
+const Color = getModule(Filters.byProps("cmyk", "hex", "hsl"), { searchExports: false });
+
+const TheBigBoyBundle = getModule(Filters.byProps("openModal", "FormSwitch", "Anchor"), { searchExports: false });
+
+function showToast(content, type) {
+	UI.showToast(`[${config.info.name}] ${content}`, { type });
+}
+
+const Toast = {
+	success(content) { showToast(content, "success"); },
+	info(content) { showToast(content, "info"); },
+	warning(content) { showToast(content, "warning"); },
+	error(content) { showToast(content, "error"); }
+};
+
+const ColorModalComponent = ({ color }) => (
+	React.createElement('div', {
+		className: "VPP-NoBanner",
+		style: { backgroundColor: color },
+	}, React.createElement('a', {
+			className: "copyColorBtn",
+			onClick: () => {
+				copy(color);
+				Toast.success(`${color} Copied!`);
+			},
+		}, "Copy Color"
+
+	))
+);
+
+const ModalCarousel = getModule(Filters.byPrototypeFields("navigateTo", "preloadImage"), { searchExports: false });
+
+const ModalRoot = getModule(Filters.byStrings("onAnimationEnd"), { searchExports: true });
+
+const DisplayCarouselComponent = ({ props, items }) => {
+	return (
+		React.createElement(ModalRoot, {
+			...props,
+			className: "VPP-carousel carouselModal-1eUFoq zoomedCarouselModalRoot-beLNhM",
+		}, React.createElement(ModalCarousel, {
+			startWith: 0,
+			className: "modalCarouselWrapper-YK1MX4",
+			items: items.map(item => ({ "component": item })),
+		}))
+	);
+};
+
+class ErrorBoundary extends React.Component {
+	state = { hasError: false, error: null, info: null };
+
+	componentDidCatch(error, info) {
+		this.setState({ error, info, hasError: true });
+		const errorMessage = `\n\t${error?.message || ""}${(info?.componentStack || "").split("\n").slice(0, 20).join("\n")}`;
+		console.error(`%c[${this.props.plugin}] %cthrew an exception at %c[${this.props.id}]\n`, "color: #3a71c1;font-weight: bold;", "", "color: red;font-weight: bold;", errorMessage);
+	}
+
+	render() {
+		if (this.state.hasError) {
+			if (this.props.fallback) return this.props.fallback;
+			else {
+				return (
+					React.createElement('div', { style: { background: "#292c2c", padding: "20px", borderRadius: "10px" }, }, React.createElement('b', { style: { color: "#e0e1e5" }, }, "An error has occured while rendering ", React.createElement('span', { style: { color: "orange" }, }, this.props.id)))
+				);
+			}
+		} else return this.props.children;
+	}
+}
+
+const ErrorComponent = props => (
+	React.createElement('div', { ...props, }, React.createElement('svg', {
+		xmlns: "http://www.w3.org/2000/svg",
+		viewBox: "0 0 24 24",
+		fill: "red",
+		width: "18",
+		height: "18",
+	}, React.createElement('path', {
+		d: "M0 0h24v24H0z",
+		fill: "none",
+	}), React.createElement('path', { d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z", })))
+);
+
+const { Tooltip } = TheBigBoyBundle;
+
+const ViewProfilePictureButtonComponent = props => {
+	return (
+		React.createElement(Tooltip, {
+			text: "View profile picture",
+			position: "top",
+		}, p => (
+			React.createElement('div', {
+				...p,
+				...props,
+			}, React.createElement('svg', {
+				'aria-label': p["aria-label"],
+				'aria-hidden': "false",
+				role: "img",
+				width: "18",
+				height: "18",
+				viewBox: "-50 -50 484 484",
+			}, React.createElement('path', {
+				fill: "currentColor",
+				d: "M341.333,0H42.667C19.093,0,0,19.093,0,42.667v298.667C0,364.907,19.093,384,42.667,384h298.667 C364.907,384,384,364.907,384,341.333V42.667C384,19.093,364.907,0,341.333,0z M42.667,320l74.667-96l53.333,64.107L245.333,192l96,128H42.667z",
+			})))
+		))
+	);
+};
+
+const Switch = TheBigBoyBundle.FormSwitch ||
+	function SwitchComponentFallback(props) {
+		return (
+			React.createElement('div', { style: { color: "#fff" }, }, props.children, React.createElement('input', {
+				type: "checkbox",
+				checked: props.value,
+				onChange: e => props.onChange(e.target.checked),
+			}))
+		);
+	};
+
+const SettingComponent = props => {
+	const [enabled, setEnabled] = React.useState(props.value);
+	return (
+		React.createElement(Switch, {
+			value: enabled,
+			note: props.note,
+			hideBorder: true,
+			onChange: e => {
+				props.onChange(e);
+				setEnabled(e);
+			},
+		}, props.description)
+	);
+};
+
+const getImageModalComponent = (Url, props) => (
+	React.createElement(ImageModal, {
+		...props,
+		src: Url,
+		original: Url,
+		renderLinkComponent: p => React.createElement(RenderLinkComponent, { ...p, }),
+	})
+);
+
+const IMG_WIDTH = 4096;
+
+function openCarousel(items) {
+	TheBigBoyBundle.openModal(props => (
+		React.createElement(ErrorBoundary, {
+			id: "DisplayCarouselComponent",
+			plugin: config.info.name,
+			closeModal: props.onClose,
+		}, React.createElement(DisplayCarouselComponent, {
+			props: props,
+			items: items,
+		}))
+	));
+}
+
+function getButtonClasses(user, profileType, banner, showOnHover) {
+	let res = "VPP-Button";
+	if (profileType === ProfileTypeEnum.MODAL) res += " VPP-profile";
+	if (isSelf(user)) res += " VPP-self";
+	else {
+		if (banner) res += " VPP-left";
+		else res += " VPP-right";
+	}
+	if (showOnHover) res += " VPP-hover";
+	return res;
+}
+
+class ViewProfilePicture {
+	constructor() {
+		this.settings = Data.load("settings") || { showOnHover: false };
+	}
+
+	clickHandler(user, bannerObject, isUserPopout) {
+		const { backgroundColor, backgroundImage } = bannerObject;
+		const guildId = isUserPopout ? SelectedGuildStore.getGuildId() : "";
+		const avatarURL = user.getAvatarURL(guildId, IMG_WIDTH, true);
+		const AvatarImageComponent = getImageModalComponent(avatarURL, { width: IMG_WIDTH, height: IMG_WIDTH });
+		const BannerImageComponent = backgroundImage ? getImageModalComponent(`${backgroundImage.match(/(?<=\().*(?=\?)/)?.[0]}?size=${IMG_WIDTH}`, { width: IMG_WIDTH }) : React.createElement(ColorModalComponent, { color: Color ? Color(backgroundColor).hex() : backgroundColor, });
+		openCarousel([AvatarImageComponent, BannerImageComponent]);
+	}
+
+	patchUserBannerMask() {
+		const { module, key } = UserBannerMask;
+		if (module && key)
+			Patcher.after(module, key, (_, [{ user, profileType }], returnValue) => {
 				if (profileType === ProfileTypeEnum.SETTINGS) return;
 
-				const currentUser = CurrentUserStore.getCurrentUser();
-				let className = "VPP-Button";
-				if (profileType === ProfileTypeEnum.MODAL)
-					className += " VPP-profile"
+				returnValue.props.className += " VPP-container";
 
-				const bannerObject = Utils.getNestedProp(returnValue, "props.children.1.props.children.props.style");
-				const children = Utils.getNestedProp(returnValue, "props.children.1.props.children.props.children");
-				className += user.id === currentUser.id ?
-					" VPP-self" :
-					bannerObject.backgroundImage ?
-					" VPP-left" :
-					" VPP-right";
+				const bannerObject = getNestedProp(returnValue, "props.children.1.props.children.props.style");
+				const children = getNestedProp(returnValue, "props.children.1.props.children.props.children");
 
-				if (Array.isArray(children) && bannerObject)
+				const buttonClasses = getButtonClasses(user, profileType, bannerObject?.backgroundImage, this.settings.showOnHover);
+
+				if (Array.isArray(children) && bannerObject) {
 					children.push(
-						React.createElement(ViewProfilePictureButton, {
-							className,
-							onClick: _ => this.clickHandler(user, bannerObject, ProfileTypeEnum.POPOUT === profileType)
-						})
+						React.createElement(ErrorBoundary, {
+							id: "ViewProfilePictureButtonComponent",
+							plugin: config.info.name,
+							fallback: React.createElement(ErrorComponent, { className: buttonClasses, }),
+						}, React.createElement(ViewProfilePictureButtonComponent, {
+							className: buttonClasses,
+							onClick: () => this.clickHandler(user, bannerObject, ProfileTypeEnum.POPOUT === profileType),
+						}))
 					);
+				}
 			});
-		}
+		else Logger.patch("patchUserBannerMask");
+	}
 
-		start() {
-			try {
-				DOM.addStyle(css);
-				this.patchUserBannerMask();
-			} catch (e) {
-				console.error(e);
-			}
+	start() {
+		try {
+			DOM.addStyle(css$1);
+			shouldChangelog()?.();
+			this.patchUserBannerMask();
+		} catch (e) {
+			Logger.error(e);
 		}
+	}
 
-		stop() {
-			DOM.removeStyle();
-			Patcher.unpatchAll();
-		}
-	};
-})();
+	stop() {
+		DOM.removeStyle();
+		Patcher.unpatchAll();
+	}
+
+	getSettingsPanel() {
+		return (
+			React.createElement(SettingComponent, {
+				description: "Show on hover",
+				note: "By default hide ViewProfilePicture button and show on hover.",
+				value: this.settings.showOnHover,
+				onChange: e => {
+					this.settings.showOnHover = e;
+					Data.save("settings", this.settings);
+				},
+			})
+		);
+	}
+}
+
+module.exports = ViewProfilePicture;

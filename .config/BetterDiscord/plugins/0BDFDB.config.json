@@ -1,16 +1,16 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.1.9",
-			"CompleteTimestamps": "1.6.6",
+			"BDFDB": "3.2.8",
+			"CompleteTimestamps": "1.6.7",
 			"CustomStatusPresets": "1.1.4",
 			"EmojiStatistics": "3.0.0",
-			"ImageUtilities": "5.1.9",
-			"NotificationSounds": "3.7.8",
-			"PluginRepo": "2.4.6",
+			"ImageUtilities": "5.2.4",
+			"NotificationSounds": "3.8.0",
+			"PluginRepo": "2.5.0",
 			"ServerDetails": "1.1.4",
 			"ShowHiddenChannels": "9.9.9",
-			"ThemeRepo": "2.4.9"
+			"ThemeRepo": "2.5.0"
 		},
 		"choices": {
 			"toastPosition": "right"
@@ -22,8 +22,8 @@
 			"shareData": true
 		},
 		"hashes": {
-			"0BDFDB.data.json": "a6567d782bfade3434800f57ac73d037d233a5b2",
-			"0BDFDB.raw.css": "26087554c644b93f1f9d6c64e7a7918b6ec66dfe"
+			"0BDFDB.data.json": "4fa62c6b427dac9470121312280d636ab822a22c",
+			"0BDFDB.raw.css": "669b57713c736057d0465f4f6258d01a964161e8"
 		}
 	}
 }

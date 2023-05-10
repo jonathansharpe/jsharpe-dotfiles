@@ -48,11 +48,12 @@
 			"userAvatars": true,
 			"groupIcons": true,
 			"guildIcons": true,
+			"streamPreviews": true,
 			"emojis": true
 		},
 		"rescaleSettings": {
-			"imageViewer": "NONE",
-			"messages": "NONE"
+			"messages": "NONE",
+			"imageViewer": "NONE"
 		},
 		"resizeSettings": {
 			"messages": false,
@@ -63,12 +64,12 @@
 			"imageViewer": "NONE"
 		},
 		"viewerSettings": {
-			"copyImage": true,
-			"details": true,
+			"zoomMode": true,
 			"galleryMode": false,
-			"jumpTo": true,
+			"details": true,
+			"copyImage": true,
 			"saveImage": true,
-			"zoomMode": true
+			"jumpTo": true
 		},
 		"zoomSettings": {
 			"lensSize": 874,
