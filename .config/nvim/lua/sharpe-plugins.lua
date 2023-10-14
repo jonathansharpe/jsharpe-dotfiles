@@ -1,198 +1,195 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-	fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-	vim.cmd 'packadd packer.nvim'
+local lazypath = fn.stdpath('data')..'/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Packer, which is the plugin manager; 100% necessary, which is why it's required
-return require('packer').startup(function()
-	use { 'wbthomason/packer.nvim' }
+require("lazy").setup({
+	{
+		'nvim-neo-tree/neo-tree.nvim',
+		branch = 'v3.x',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'nvim-tree/nvim-web-devicons',
+			'MunifTanjim/nui.nvim'
+		}
+	},
 
-local use = require('packer').use
+	-- shows what keys do what; e.g., press 'z' once and it'll show motions
+	{ "folke/which-key.nvim" },
 
--- shows what keys do what; e.g., press 'z' once and it'll show motions
-use { "folke/which-key.nvim" }
+	-- adds a window picker
+	{
+		's1n7ax/nvim-window-picker',
+		name = 'window-picker',
+		event = 'VeryLazy',
+		version = '2.*',
+		config = function()
+			require'window-picker'.setup()
+		end,
+	},
 
--- adds catppuccin theme
-use {
-	"catppuccin/nvim",
-	as = "catppuccin",
-}
--- adds debugging features
-use {
-	"rcarriga/nvim-dap-ui", 
-	requires = "mfussenegger/nvim-dap"
-}
-use {
-	"mfussenegger/nvim-dap"
-}
+	-- adds catppuccin theme
+	{
+		"catppuccin/nvim",
+		as = "catppuccin",
+	},
+	-- adds debugging features
+	{
+		"rcarriga/nvim-dap-ui",
+		requires = "mfussenegger/nvim-dap"
+	},
+	{
+		"mfussenegger/nvim-dap"
+	},
 
-use "stevearc/dressing.nvim"
-use({"ziontee113/icon-picker.nvim"})
--- adds a startup screen
-use {
-	'goolord/alpha-nvim',
-	requires = {'kyazdani42/nvim-web-devicons'},
-}
+	{"stevearc/dressing.nvim"},
+	{"ziontee113/icon-picker.nvim"},
+	-- adds a startup screen
+	{
+		'goolord/alpha-nvim'
+	},
 
--- pop-up with function parameter guide
-use {"ray-x/lsp_signature.nvim"}
+	-- pop-up with function parameter guide
+	{"ray-x/lsp_signature.nvim"},
 
--- speeds up nvim load times
-use {"lewis6991/impatient.nvim"}
+	-- speeds up nvim load times
+	{"lewis6991/impatient.nvim"},
 
--- an undo tree, to make it easier to go back without spamming Ctrl+R 100 times
-use { "mbbill/undotree" }
+	-- an undo tree, to make it easier to go back without spamming Ctrl+R 100 times
+	{ "mbbill/undotree" },
 
--- adds transparency to nvim, only useful if the vim color scheme exact matches the terminal's
-use { 'xiyaowong/nvim-transparent' }
+	-- adds transparency to nvim, only ful if the vim color scheme exact matches the terminal's
+	{ 'xiyaowong/nvim-transparent' },
 
--- bookmarks which add bookmarks
-use { 'crusj/bookmarks.nvim',
-	branch = 'main',
-}
+	-- bookmarks which add bookmarks
+	{ 
+		'crusj/bookmarks.nvim',
+		branch = 'main' 
+	},
 
--- adds a fuzzy finder
-use {
-	"nvim-telescope/telescope.nvim", tag = '0.1.0',
-	requires = {{'nvim-lua/plenary.nvim'}}
-}
+	-- adds a fuzzy finder
+	{
+		"nvim-telescope/telescope.nvim", tag = '0.1.0',
+		requires = {{'nvim-lua/plenary.nvim'}}
+	},
 
--- adds more matches to the % key when pressed
-use {"andymass/vim-matchup"}
+	-- adds more matches to the % key when pressed
+	{"andymass/vim-matchup"},
 
--- refactoring help
-use {
-	"ThePrimeagen/refactoring.nvim",
-	requires = {
-		{"nvim-lua/plenary.nvim"},
-		{"nvim-treesitter/nvim-treesitter"},
-	}
-}
--- use { '/nvim-treesitter/playground' }
+	-- refactoring help
+	{
+		"ThePrimeagen/refactoring.nvim",
+		requires = {
+			{"nvim-lua/plenary.nvim"},
+			{"nvim-treesitter/nvim-treesitter"},
+		}
+	},
+	--  { '/nvim-treesitter/playground' }
 
--- allows for light/dark theme syncing i think
-use { 'RRethy/vim-illuminate' }
+	-- allows for light/dark theme syncing i think
+	{ 'RRethy/vim-illuminate' },
 
--- shows hover helps by pressing a key
-use { 'lewis6991/hover.nvim', }
+	-- shows hover helps by pressing a key
+	{ 'lewis6991/hover.nvim', },
+	{'nanozuki/tabby.nvim'},
 
--- uses context-sensitive spell check, so the spell check doesn't tell you your variables are spelled wrong
--- use { 'lewis6991/spellsitter.nvim', }
+	-- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
+	{ 'danymat/neogen' },
 
--- bufferline plugin; not using at the moment
--- use {
--- 	'noib3/nvim-cokeline',
--- 	requires = 'kyazdani42/nvim-web-devicons',
--- 	config = function()
--- 		require('cokeline').setup()
--- 	end
--- }
+	-- shows vertical lines that line up how many indents over you are
+	{ "lukas-reineke/indent-blankline.nvim" },
 
--- tabline plugin
--- use {"alvarosevilla95/luatab.nvim", requires='kyazdani42/nvim-web-devicons'}
--- use { "rafcamlet/tabline-framework.nvim",  requires = "kyazdani42/nvim-web-devicons" }
-use 'nanozuki/tabby.nvim'
+	-- shows signs for the changes in a text file located in a git repo
+	{ "lewis6991/gitsigns.nvim" },
 
--- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
-use { 'danymat/neogen' }
+	-- makes loading files faster or something
+	{ "nathom/filetype.nvim" },
 
--- shows vertical lines that line up how many indents over you are
-use { "lukas-reineke/indent-blankline.nvim" }
+	-- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
+	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 
--- shows signs for the changes in a text file located in a git repo
-use { "lewis6991/gitsigns.nvim" }
+	-- adds a few UNIX commands to nvim, notably :SudoWrite
+	{"tpope/vim-eunuch"},
 
--- makes loading files faster or something
-use { "nathom/filetype.nvim" }
+	-- adds a pop-up terminal by pressing a keybind
+	{"numToStr/FTerm.nvim"},
 
--- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
-use { "JoosepAlviste/nvim-ts-context-commentstring" }
+	-- massively improves nvim's syntax highlighting, in both speed and readability
+	{"nvim-treesitter/nvim-treesitter"},
 
--- adds a few UNIX commands to nvim, notably :SudoWrite
-use {"tpope/vim-eunuch"}
+	-- makes folds cleaner
+	{"lewis6991/cleanfold.nvim"},
 
--- adds a pop-up terminal by pressing a keybind
-use {"numToStr/FTerm.nvim"}
+	-- makes it easier to align stuff ig
+	{'junegunn/vim-easy-align'},
 
--- massively improves nvim's syntax highlighting, in both speed and readability
-use {"nvim-treesitter/nvim-treesitter"}
+	-- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
 
--- shows a file tree tab on the side of the window
--- use {'kyazdani42/nvim-tree.lua'}
-use {
-	"luukvbaal/nnn.nvim",
-	config = function() require("nnn").setup() end
-}
+	-- gives a cheatsheet when running a command
+	{
+		'sudormrfbin/cheatsheet.nvim',
+		requires = {
+			{'nvim-telescope/telescope.nvim'},
+			{'nvim-lua/popup.nvim'},
+			{'nvim-lua/plenary.nvim'},
+		}
+	},
+	-- the statusline on the bottom
+	{'windwp/windline.nvim'},
 
--- makes folds cleaner
-use {"lewis6991/cleanfold.nvim"}
+	-- i forgor :forgor:
+	{'mattn/emmet-vim'},
 
--- makes it easier to align stuff ig
-use {'junegunn/vim-easy-align'}
-
--- adds fancy icons, necessary for basically any plugin that modifies the tabline or statusline
-use { 'kyazdani42/nvim-web-devicons'}
-
--- gives a cheatsheet when running a command
-use {
-	'sudormrfbin/cheatsheet.nvim',
-	requires = {
-		{'nvim-telescope/telescope.nvim'},
-		{'nvim-lua/popup.nvim'},
-		{'nvim-lua/plenary.nvim'},
-	}
-}
--- the statusline on the bottom
-use {'windwp/windline.nvim'}
-
--- i forgor :forgor:
-use {'mattn/emmet-vim'}
-
-use { -- neovim completion!
+	{ -- neovim completion!
 	'ms-jpq/coq_nvim',
 	branch = 'coq'
-}
-use { -- a dependency for coq
-	'ms-jpq/coq.artifacts',
-	branch = 'artifacts'
-}
+},
+{ -- a dependency for coq
+'ms-jpq/coq.artifacts',
+branch = 'artifacts'
+},
 -- for language servers, i.e. autosuggestions for programming languages, and syntax checking
-use	{'neovim/nvim-lspconfig'}
+{'neovim/nvim-lspconfig'},
 
 -- completion menus
-use {
+{
 	'ms-jpq/coq.thirdparty',
 	branch = '3p'
-}
+},
 
 -- creates a closing bracket when typing an opening one, and is context sensitive, etc.
-use {'windwp/nvim-autopairs'}
+{'windwp/nvim-autopairs'},
 
 -- tpope: Comments
-use {'tpope/vim-commentary' }
+{'tpope/vim-commentary' },
 
 -- Icons for each entry in the completion menu
-use { "onsails/lspkind-nvim"}
+{ "onsails/lspkind-nvim"},
 
 -- markdown preview for notes
-use {
+{
 	'iamcco/markdown-preview.nvim',
 	run = 'cd app && yarn install'
-}
+},
 
 -- code snippits
-use {"L3MON4D3/LuaSnip"}
+{"L3MON4D3/LuaSnip"},
 
 -- adds the base-16 color schemes to nvim
-use {'RRethy/nvim-base16'}
+{'RRethy/nvim-base16'},
 
 -- highlights hex color codes in their respective color
-use {'norcalli/nvim-colorizer.lua'}
+{'norcalli/nvim-colorizer.lua'},
 
 -- smooth scrolling plugin
-use { "karb94/neoscroll.nvim" }
--- google keep integration
-use { 'stevearc/gkeep.nvim', run = ':UpdateRemotePlugins' }
-end)
+{ "karb94/neoscroll.nvim" },
+})
