@@ -13,7 +13,6 @@ set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
 -- ALIASES
-vim.cmd 'command! PS PackerSync'
 vim.cmd 'set noexpandtab'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
@@ -21,8 +20,8 @@ vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
 vim.g.mapleader = " "
 set.mouse = 'a'
-vim.cmd 'colorscheme base16-tokyo-night-terminal-dark'
 require('sharpe-plugins')
+vim.cmd 'colorscheme catppuccin-mocha'
 require'lspconfig'.html.setup({
 	cmd = {
 		"vscode-html-languageserver", "--stdio"
@@ -69,28 +68,28 @@ require("neogen").setup{
 require("neogen").generate()
 require("lsp_signature").setup(cfg)
 require('refactoring').setup({
-    prompt_func_return_type = {
-        go = false,
-        java = false,
+	prompt_func_return_type = {
+		go = false,
+		java = false,
 
-        cpp = false,
-        c = false,
-        h = false,
-        hpp = false,
-        cxx = false,
-    },
-    prompt_func_param_type = {
-        go = false,
-        java = false,
+		cpp = false,
+		c = false,
+		h = false,
+		hpp = false,
+		cxx = false,
+	},
+	prompt_func_param_type = {
+		go = false,
+		java = false,
 
-        cpp = false,
-        c = false,
-        h = false,
-        hpp = false,
-        cxx = false,
-    },
-    printf_statements = {},
-    print_var_statements = {},
+		cpp = false,
+		c = false,
+		h = false,
+		hpp = false,
+		cxx = false,
+	},
+	printf_statements = {},
+	print_var_statements = {},
 })
 require('tabby.tabline').use_preset('active_wins_at_tail', {
 	theme = {
@@ -104,7 +103,7 @@ require('tabby.tabline').use_preset('active_wins_at_tail', {
 	buf_name = {
 		mode = "'unique'|'relative'|'tail'|'shorten'",
 	},
-	})
+})
 require("nvim-treesitter.configs").setup{
 	ensure_installed = {
 		"bash",
@@ -139,10 +138,7 @@ require("nvim-treesitter.configs").setup{
 -- 	enable = true,
 -- }
 -- require('luatab').setup{}
-require("indent_blankline").setup{
-	show_current_context = true,
-	show_current_context_start = true,
-}
+require("ibl").setup()
 local dap = require('dap')
 dap.adapters.lldb = {
 	type = 'executable',
@@ -163,45 +159,45 @@ dap.configurations.cpp = {
 	},
 }
 require('gitsigns').setup {
-  signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '*', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-  },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    interval = 1000,
-    follow_files = true
-  },
-  attach_to_untracked = true,
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_opts = {
-    virt_text = true,
-    virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-    delay = 1000,
-    ignore_whitespace = false,
-  },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  sign_priority = 6,
-  update_debounce = 100,
-  status_formatter = nil, -- Use default
-  max_file_length = 40000, -- Disable if file is longer than this (in lines)
-  preview_config = {
-    -- Options passed to nvim_open_win
-    border = 'single',
-    style = 'minimal',
-    relative = 'cursor',
-    row = 0,
-    col = 1
-  },
-  yadm = {
-    enable = false
-  },
+	signs = {
+		add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+		change       = {hl = 'GitSignsChange', text = '*', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+		delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+		topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+		changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+	},
+	signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+	numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+	linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+	word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+	watch_gitdir = {
+		interval = 1000,
+		follow_files = true
+	},
+	attach_to_untracked = true,
+	current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+	current_line_blame_opts = {
+		virt_text = true,
+		virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+		delay = 1000,
+		ignore_whitespace = false,
+	},
+	current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+	sign_priority = 6,
+	update_debounce = 100,
+	status_formatter = nil, -- Use default
+	max_file_length = 40000, -- Disable if file is longer than this (in lines)
+	preview_config = {
+		-- Options passed to nvim_open_win
+		border = 'single',
+		style = 'minimal',
+		relative = 'cursor',
+		row = 0,
+		col = 1
+	},
+	yadm = {
+		enable = false
+	},
 }
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
@@ -232,19 +228,15 @@ local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
 -- GENERAL REMAPS
-map('n', '<A-t>', ':NnnExplore<CR>', {silent = true})
+map('n', "<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
+map('n', "<a-t>", ":Neotree<CR>", opts)
 
--- COKELINE REMAPS
--- map('n', '<A-c>', '<Plug>(cokeline-focus-prev)', {silent = true})
--- map('n', '<A-v>', '<Plug>(cokeline-focus-next)', {silent = true})
--- map('n', '<A-x>', '<Plug>(cokeline-pick-close)', {silent = true})
--- map('n', '<A-f>', '<Plug>(cokeline-pick-focus)', {silent = true})
 
 -- REFACTORING KEYMAPS
 -- let mapleader = " "
 
 -- HOVER REMAPS
-vim.keymap.set('n', 'K', require('hover').hover, {desc='hover.nvim'})
+vim.keymap.set('n', '<Leader>K', require('hover').hover, {desc='hover.nvim'})
 
 -- DAP KEYMAPS
 vim.keymap.set('n', '<Leader><F2>', function() require('dap').toggle_breakpoint() end)
@@ -256,90 +248,6 @@ map('n', '<A-c>', ':bprevious<CR>', {silent = true})
 map('n', '<A-v>', ':bnext<CR>', {silent = true})
 map('n', '<A-x>', ':bdelete<CR>', {silent = true})
 
--- COKELINE SETUP
--- plugin is cokeline.nvim
--- local get_hex = require('cokeline/utils').get_hex
--- local is_picking_close = require('cokeline/mappings').is_picking_close
--- local is_picking_focus = require('cokeline/mappings').is_picking_focus
--- local yellow = vim.g.terminal_color_3
-
--- require('cokeline').setup({
--- 	default_hl = {
--- 		fg = function(buffer)
--- 			return
--- 			buffer.is_focused
--- 			and get_hex('ColorColumn', 'bg')
--- 			or get_hex('Normal', 'fg')
--- 		end,
--- 		bg = function(buffer)
--- 			return
--- 			buffer.is_focused
--- 			and get_hex('Normal', 'fg')
--- 			or get_hex('ColorColumn', 'bg')
--- 		end,
--- 	},
-
--- 	sidebar = {
--- 		filetype = 'NvimTree',
--- 		components = {
--- 			{
--- 				text = '  NvimTree',
--- 				fg = yellow,
--- 				bg = get_hex('NvimTreeNormal', 'bg'),
--- 				style = 'bold',
--- 			},
--- 		}
--- 	},
--- 	components = {
--- 		{
--- 			text = function(buffer) return ' ' .. buffer.devicon.icon end,
--- 			fg = function(buffer) return buffer.devicon.color end,
--- 		},
--- 		{
--- 			text = function(buffer) return buffer.unique_prefix end,
--- 			fg = get_hex('Comment', 'fg'),
--- 			style = 'italic',
--- 		},
--- 		{
--- 			text = function(buffer)
--- 				return
--- 				(is_picking_focus() or is_picking_close())
--- 				and buffer.pick_letter .. ' '
--- 				or '  '
--- 			end,
--- 			fg = function(buffer)
--- 				return
--- 				(is_picking_focus() and yellow)
--- 				or (is_picking_close() and red)
--- 				or buffer.devicon.color
--- 			end,
--- 			style = function(_)
--- 				return
--- 				(is_picking_focus() or is_picking_close())
--- 				and 'italic,bold'
--- 				or nil
--- 			end,
--- 		},
--- 		{
--- 			text = function(buffer) return buffer.filename .. '  ' end,
--- 			style = function(buffer)
--- 				return buffer.is_focused and 'bold' or nil
--- 			end,
--- 		},
--- 		{
--- 			text = '',
--- 			delete_buffer_on_left_click = true,
--- 		},
--- 		{
--- 			text = ' ',
--- 		},
--- 	},
--- })
-
--- base00 = '#000000', base01 = '#404040', base02 = '#404040', base03 = '#808080',
--- base04 = '#808080', base05 = '#c0c0c0', base06 = '#c0c0c0', base07 = '#ffffff',
--- base08 = '#dd0907', base09 = '#ff6403', base0A = '#fbf305', base0B = '#1fb714',
--- base0C = '#02abea', base0D = '#0000d3', base0E = '#4700a5', base0F = '#90713a'
 require'FTerm'.setup({
 	cmd = "zsh"
 })
