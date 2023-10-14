@@ -101,14 +101,9 @@ require('tabby.tabline').use_preset('active_wins_at_tail', {
 		tail = 'StatusLine',
 	},
 	nerdfont = true, -- whether use nerdfont
-	tab_name = {
-			name_fallback = function(tabid)
-				return "fallback name"
-			end
-		},
-		buf_name = {
-			mode = "'unique'|'relative'|'tail'|'shorten'",
-		},
+	buf_name = {
+		mode = "'unique'|'relative'|'tail'|'shorten'",
+	},
 	})
 require("nvim-treesitter.configs").setup{
 	ensure_installed = {
@@ -131,6 +126,9 @@ require("nvim-treesitter.configs").setup{
 		"regex",
 		"rust",
 		"rst",
+		"vim",
+		"vimdoc",
+		"query"
 	},
 	highlight = {
 		enable = true,
