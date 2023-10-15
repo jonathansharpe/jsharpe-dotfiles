@@ -24,6 +24,13 @@ require("lazy").setup({
 		}
 	},
 
+	-- nice list of all the errors in your code
+	{
+		"folke/trouble.nvim",
+		dependencies = {'nvim-tree/nvim-web-devicons'},
+		opts = {}
+	},
+
 	-- shows what keys do what; e.g., press 'z' once and it'll show motions
 	{
 		"folke/which-key.nvim",
@@ -207,23 +214,34 @@ require("lazy").setup({
 
 	-- tab plugin
 	{
-		'nanozuki/tabby.nvim',
+		'rafcamlet/tabline-framework.nvim',
+		requires = 'kyazdani42/nvim-web-devicons',
 		config = function()
-			require('tabby.tabline').use_preset('active_wins_at_tail', {
-				theme = {
-					fill = 'Visual', -- tabline background
-					tab = 'StatusLine',
-					win = 'StatusLine',
-					head = 'StatusLine',
-					tail = 'StatusLine',
-				},
-				nerdfont = true, -- whether use nerdfont
-				buf_name = {
-					mode = "'unique'|'relative'|'tail'|'shorten'",
-				},
-			})
+			require('tabline_framework').setup {
+				render = require('tabline_framework.examples.diagonal_tiles'),
+				hl = { fg = '#abb2bf', bg = '#181A1F' },
+				hl_sel = { fg = '#abb2bf', bg = '#282c34'},
+				hl_fill = { fg = '#ffffff', bg = '#000000'},
+			}
 		end
 	},
+	-- 	'nanozuki/tabby.nvim',
+	-- 	config = function()
+	-- 		require('tabby.tabline').use_preset('active_wins_at_tail', {
+	-- 			theme = {
+	-- 				fill = 'Visual', -- tabline background
+	-- 				tab = 'StatusLine',
+	-- 				win = 'StatusLine',
+	-- 				head = 'StatusLine',
+	-- 				tail = 'StatusLine',
+	-- 			},
+	-- 			nerdfont = true, -- whether use nerdfont
+	-- 			buf_name = {
+	-- 				mode = "'unique'|'relative'|'tail'|'shorten'",
+	-- 			},
+	-- 		})
+	-- 	end
+	-- },
 
 	-- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
 	{
@@ -372,10 +390,13 @@ require("lazy").setup({
 	},
 	-- the statusline on the bottom
 	{
-		'windwp/windline.nvim',
+		'nvim-lualine/lualine.nvim',
+		requires = {
+			'nvim-tree/nvim-web-devicons',
+			opt = true
+		},
 		config = function()
-			require('windline')
-			require('wlsample.bubble')
+			require('lualine').setup{}
 		end
 	},
 
