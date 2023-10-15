@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+	-- adds file tree, very useful
 	{
 		'nvim-neo-tree/neo-tree.nvim',
 		branch = 'v3.x',
@@ -24,7 +25,55 @@ require("lazy").setup({
 	},
 
 	-- shows what keys do what; e.g., press 'z' once and it'll show motions
-	{ "folke/which-key.nvim" },
+	{
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup{}
+		end
+	},
+
+	-- makes motions very fast
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		-- @type Flash.Config
+		opts = {},
+		-- stylua: ignore
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+		},
+	},
+
+	-- shows a nice little buffer switcher
+	{
+		'matbme/JABS.nvim',
+		config = function()
+			require'jabs'.setup{}
+		end
+	},
+
+	-- highlights all matching words under the cursor
+	{
+		"yamatsum/nvim-cursorline",
+		config = function()
+			require('nvim-cursorline').setup{
+				cursorline = {
+					enable = true,
+					timeout = 1000,
+					number = false,
+				},
+				cursorword = {
+					enable = true,
+					min_length = 3,
+					hl = {underline = true},
+				}
+			}
+		end,
+	},
 
 	-- adds a window picker
 	{
@@ -37,10 +86,8 @@ require("lazy").setup({
 		end,
 	},
 
-	-- adds catppuccin theme
 	{
-		"catppuccin/nvim",
-		as = "catppuccin",
+		"ray-x/aurora",
 	},
 	-- adds debugging features
 	{
@@ -52,14 +99,29 @@ require("lazy").setup({
 	},
 
 	{"stevearc/dressing.nvim"},
-	{"ziontee113/icon-picker.nvim"},
+	{
+		"ziontee113/icon-picker.nvim",
+		config = function() 
+			require("icon-picker").setup({
+				disable_legacy_commands = true
+			})
+		end
+	},
 	-- adds a startup screen
 	{
-		'goolord/alpha-nvim'
+		'goolord/alpha-nvim',
+		config = function()
+			require('alpha').setup(require'alpha.themes.startify'.config)
+		end
 	},
 
 	-- pop-up with function parameter guide
-	{"ray-x/lsp_signature.nvim"},
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup(cfg)
+		end
+	},
 
 	-- speeds up nvim load times
 	{"lewis6991/impatient.nvim"},
@@ -67,13 +129,13 @@ require("lazy").setup({
 	-- an undo tree, to make it easier to go back without spamming Ctrl+R 100 times
 	{ "mbbill/undotree" },
 
-	-- adds transparency to nvim, only ful if the vim color scheme exact matches the terminal's
-	{ 'xiyaowong/nvim-transparent' },
-
-	-- bookmarks which add bookmarks
-	{ 
-		'crusj/bookmarks.nvim',
-		branch = 'main' 
+	-- adds transparency to nvim, only if the vim color scheme exact matches the terminal's
+	{
+		'xiyaowong/nvim-transparent',
+		config = function()
+			require("transparent").setup({
+			})
+		end
 	},
 
 	-- adds a fuzzy finder
@@ -91,25 +153,144 @@ require("lazy").setup({
 		requires = {
 			{"nvim-lua/plenary.nvim"},
 			{"nvim-treesitter/nvim-treesitter"},
-		}
-	},
-	--  { '/nvim-treesitter/playground' }
+		},
+		config = function()
+			require('refactoring').setup({
+				prompt_func_return_type = {
+					go = false,
+					java = false,
 
-	-- allows for light/dark theme syncing i think
-	{ 'RRethy/vim-illuminate' },
+					cpp = false,
+					c = false,
+					h = false,
+					hpp = false,
+					cxx = false,
+				},
+				prompt_func_param_type = {
+					go = false,
+					java = false,
+
+					cpp = false,
+					c = false,
+					h = false,
+					hpp = false,
+					cxx = false,
+				},
+				printf_statements = {},
+				print_var_statements = {},
+			})
+		end
+	},
+
+	-- highlights matching word under the cursor
+	-- { 'RRethy/vim-illuminate' },
 
 	-- shows hover helps by pressing a key
-	{ 'lewis6991/hover.nvim', },
-	{'nanozuki/tabby.nvim'},
+	{
+		'lewis6991/hover.nvim',
+		config = function()
+			require('hover').setup{
+				init = function()
+					-- Require providers
+					require('hover.providers.lsp')
+					-- require('hover.providers.gh')
+					-- require('hover.providers.man')
+					-- require('hover.providers.dictionary')
+				end,
+				preview_opts = {
+					border = nil
+				},
+				title = true
+			}
+		end
+	},
+
+	-- tab plugin
+	{
+		'nanozuki/tabby.nvim',
+		config = function()
+			require('tabby.tabline').use_preset('active_wins_at_tail', {
+				theme = {
+					fill = 'Visual', -- tabline background
+					tab = 'StatusLine',
+					win = 'StatusLine',
+					head = 'StatusLine',
+					tail = 'StatusLine',
+				},
+				nerdfont = true, -- whether use nerdfont
+				buf_name = {
+					mode = "'unique'|'relative'|'tail'|'shorten'",
+				},
+			})
+		end
+	},
 
 	-- automatically create annotation templates, which are the comments before functions that explain the parameters and return types
-	{ 'danymat/neogen' },
+	{
+		'danymat/neogen',
+		config = function()
+			require("neogen").setup{
+				enabled = true,
+			}
+			require("neogen").generate()
+		end
+	},
 
 	-- shows vertical lines that line up how many indents over you are
-	{ "lukas-reineke/indent-blankline.nvim" },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("ibl").setup()
+		end
+	},
 
 	-- shows signs for the changes in a text file located in a git repo
-	{ "lewis6991/gitsigns.nvim" },
+	{
+		"lewis6991/gitsigns.nvim",
+		config = function()
+			require('gitsigns').setup {
+				signs = {
+					add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+					change       = {hl = 'GitSignsChange', text = '*', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+					delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+					topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+					changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+				},
+				signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+				numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+				watch_gitdir = {
+					interval = 1000,
+					follow_files = true
+				},
+				attach_to_untracked = true,
+				current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+				current_line_blame_opts = {
+					virt_text = true,
+					virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+					delay = 1000,
+					ignore_whitespace = false,
+				},
+				current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+				sign_priority = 6,
+				update_debounce = 100,
+				status_formatter = nil, -- Use default
+				max_file_length = 40000, -- Disable if file is longer than this (in lines)
+				preview_config = {
+					-- Options passed to nvim_open_win
+					border = 'single',
+					style = 'minimal',
+					relative = 'cursor',
+					row = 0,
+					col = 1
+				},
+				yadm = {
+					enable = false
+				},
+			}
+		end
+	},
 
 	-- makes loading files faster or something
 	{ "nathom/filetype.nvim" },
@@ -121,13 +302,59 @@ require("lazy").setup({
 	{"tpope/vim-eunuch"},
 
 	-- adds a pop-up terminal by pressing a keybind
-	{"numToStr/FTerm.nvim"},
+	{
+		"numToStr/FTerm.nvim",
+		config = function()
+			require'FTerm'.setup({
+				cmd = "zsh"
+			})
+		end
+	},
 
 	-- massively improves nvim's syntax highlighting, in both speed and readability
-	{"nvim-treesitter/nvim-treesitter"},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup{
+				ensure_installed = {
+					"bash",
+					"c",
+					"cmake",
+					"comment",
+					"cpp",
+					"css",
+					"html",
+					"java",
+					"javascript",
+					"json",
+					"jsonc",
+					"latex",
+					"lua",
+					"make",
+					"markdown",
+					"python",
+					"regex",
+					"rust",
+					"rst",
+					"vim",
+					"vimdoc",
+					"query"
+				},
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = true,
+				},
+			}
+		end
+	},
 
 	-- makes folds cleaner
-	{"lewis6991/cleanfold.nvim"},
+	{
+		"lewis6991/cleanfold.nvim",
+		config = function() 
+			require("cleanfold").setup()
+		end
+	},
 
 	-- makes it easier to align stuff ig
 	{'junegunn/vim-easy-align'},
@@ -144,52 +371,93 @@ require("lazy").setup({
 		}
 	},
 	-- the statusline on the bottom
-	{'windwp/windline.nvim'},
+	{
+		'windwp/windline.nvim',
+		config = function()
+			require('windline')
+			require('wlsample.bubble')
+		end
+	},
 
 	-- i forgor :forgor:
 	{'mattn/emmet-vim'},
+	-- neovim completion!
 
-	{ -- neovim completion!
-	'ms-jpq/coq_nvim',
-	branch = 'coq'
-},
-{ -- a dependency for coq
-'ms-jpq/coq.artifacts',
-branch = 'artifacts'
-},
--- for language servers, i.e. autosuggestions for programming languages, and syntax checking
-{'neovim/nvim-lspconfig'},
+	{
+		'ms-jpq/coq_nvim',
+		branch = 'coq'
+	},
+	-- a dependency for coq
+	{
+		'ms-jpq/coq.artifacts',
+		branch = 'artifacts'
+	},
+	-- for language servers, i.e. autosuggestions for programming languages, and syntax checking
+	{
+		'neovim/nvim-lspconfig'
+	},
 
--- completion menus
-{
-	'ms-jpq/coq.thirdparty',
-	branch = '3p'
-},
+	-- completion menus
+	{
+		'ms-jpq/coq.thirdparty',
+		branch = '3p'
+	},
 
--- creates a closing bracket when typing an opening one, and is context sensitive, etc.
-{'windwp/nvim-autopairs'},
+	-- creates a closing bracket when typing an opening one, and is context sensitive, etc.
+	{
+		'windwp/nvim-autopairs',
+		config = function()
+			require("nvim-autopairs").setup{}
+		end
+	},
 
--- tpope: Comments
-{'tpope/vim-commentary' },
+	-- tpope: Comments
+	{
+		'numToStr/Comment.nvim',
+		opts = {
+		},
+		lazy = false,
+	},
 
--- Icons for each entry in the completion menu
-{ "onsails/lspkind-nvim"},
+	-- Icons for each entry in the completion menu
+	{ "onsails/lspkind-nvim"},
 
--- markdown preview for notes
-{
-	'iamcco/markdown-preview.nvim',
-	run = 'cd app && yarn install'
-},
+	-- markdown preview for notes
+	{
+		'iamcco/markdown-preview.nvim',
+		run = 'cd app && yarn install'
+	},
 
--- code snippits
-{"L3MON4D3/LuaSnip"},
+	-- code snippets
+	{"L3MON4D3/LuaSnip"},
 
--- adds the base-16 color schemes to nvim
-{'RRethy/nvim-base16'},
+	-- adds the base-16 color schemes to nvim (catppuccin is included here)
+	{'RRethy/nvim-base16'},
 
--- highlights hex color codes in their respective color
-{'norcalli/nvim-colorizer.lua'},
+	-- highlights hex color codes in their respective color
+	{
+		'norcalli/nvim-colorizer.lua',
+		config = function()
+			require'colorizer'.setup()
+		end
+	},
 
--- smooth scrolling plugin
-{ "karb94/neoscroll.nvim" },
+	-- smooth scrolling plugin
+	{
+		"karb94/neoscroll.nvim",
+		config = function()
+			require('neoscroll').setup({
+				mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+				'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+				hide_cursor = true,          -- Hide cursor while scrolling
+				stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+				use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+				respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+				cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+				easing_function = nil,        -- Default easing function
+				pre_hook = nil,              -- Function to run before the scrolling animation starts
+				post_hook = nil,              -- Function to run after the scrolling animation ends
+			})
+		end
+	},
 })
