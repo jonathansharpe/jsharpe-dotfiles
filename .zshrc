@@ -1,14 +1,25 @@
- # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# CONFIG FILES
+source ~/.config/shell/jonathan-config
+
+# Download Znap, if it's not there yet.
+[[ -r ~/.zsh/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/.zsh/znap
+source ~/.zsh/znap/znap.zsh  # Start Znap
+zstyle ':znap:*' repos-dir ~/.zsh/
+znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
+znap source zdharma-continuum/fast-syntax-highlighting
+znap source romkatv/powerlevel10k
+znap source MikeDacre/careful_rm
+znap source urbainvaes/fzf-marks
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-# CONFIG FILES
-source ~/.config/shell/jonathan-config
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/git/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # Ensure the HISTFILE variable is set
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zhistory"
@@ -22,68 +33,23 @@ setopt histignorealldups
 
 set -o vi
 bindkey -v
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
-
-# Where to install zinit -- either here or .cache/zinit are good places
-export ZINIT_HOME_DIR="$HOME/.local/share/zinit"
-####
-
-# Install zinit if not installed
-if [[ ! -f "$ZINIT_HOME_DIR/bin/zinit.zsh" ]]; then
-   print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-   command mkdir -p "$ZINIT_HOME_DIR" && command chmod g-rwX "$ZINIT_HOME_DIR"
-   command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME_DIR/bin" && \
-      print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-      print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-# Source zinit
-source "$ZINIT_HOME_DIR/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit load MikeDacre/careful_rm
-zinit load molovo/revolver
-zinit light-mode for \
-   zdharma-continuum/z-a-rust \
-   zdharma-continuum/z-a-as-monitor \
-   zdharma-continuum/z-a-patch-dl \
-   zdharma-continuum/z-a-bin-gem-node
-
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light micans/apparix
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-# Use powerline
-# USE_POWERLINE="true"
-# Use manjaro zsh prompt
-
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
 
 # PLUGINS
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# autocomplete config
+bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+zstyle -e ':autocomplete:list-choices:*' list-lines 'reply=($((LINES / 3)))'
+zstyle ':autocomplete:history-incremental-search-backward:*' list-lines 8
 
 if [ -x "$(command -v fzf)" ]
 then
 	source /usr/share/fzf/key-bindings.zsh
 fi
-fpath=($fpath "/home/jonathan/.zfunctions")
+# fpath=($fpath "/home/jonathan/.zfunctions")
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+PATH="$HOME/.local/bin:$PATH"

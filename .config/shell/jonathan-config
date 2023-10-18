@@ -4,26 +4,18 @@ launch() {
 	disown
 }
 
+
 # VARIABLES
-export FDOW="$HOME/Downloads"
-export MINC="$HOME/.local/share/multimc/instances/1.19-Fabric/.minecraft"
-export RIIV="$HOME/.local/share/dolphin-emu/Load/Riivolution"
-export WEBS="$HOME/git/baseball-website"
-export JW="$HOME/OneDrive/school-papers/jw-junior-winter/"
-export JS="$HOME/OneDrive/school-papers/js-junior-spring/"
-export DOTS="$HOME/git/jsharpe-dotfiles"
-export FKEYMAP="$HOME/qmk_firmware/keyboards/xwhatsit/brand_new_model_f/f77/keymaps/jsharpe"
-export DESKFFOX="$HOME/.mozilla/firefox/cly1yg59.default-release/chrome/"
-export W23="$HOME/OneDrive/school-papers/w23/"
-export GIT="$HOME/git"
 export EDITOR="nvim"
+export VISUAL="nvim"
 export SUDO_ASKPASS="/bin/ksshaskpass"
-# export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # ALIASES
 #alias lu='launch'
 alias lux='launch xdg-open'
 alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel'
 alias nvimconf='nvim -p $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
-alias shellconf='nvim -p $HOME/.config/shell/jonathan-config $HOME/.zshrc'
+alias shellconf='nvim -p $HOME/.zshrc $HOME/.config/shell/jonathan-config'
 alias cpwd='pwd | xclip -selection clipboard'
+alias webs='cd ~/git/baseball-website/'
