@@ -18,7 +18,7 @@ vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
-vim.g.mapleader = " "
+-- vim.g.mapleader = " "
 set.mouse = 'a'
 require('sharpe-plugins')
 vim.cmd 'colorscheme base16-tokyo-city-dark'
@@ -61,10 +61,9 @@ dap.configurations.cpp = {
 vim.g.coq_settings = {
 	auto_start = 'shut-up'
 }
-local coq = require "coq"
+require("coq")
+vim.cmd 'COQnow -s'
 
--- STATUSLINE SETUP
--- plugin is windline.nvim
 
 local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
