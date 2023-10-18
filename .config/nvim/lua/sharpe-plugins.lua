@@ -47,10 +47,10 @@ require("lazy").setup({
 		opts = {},
 		-- stylua: ignore
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-			{ "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-			{ "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-			{ "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+			{ "<Leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "<Leader>S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+			{ "<Leader>r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+			{ "<Leader>R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
 			{ "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
 		},
 	},
@@ -108,7 +108,7 @@ require("lazy").setup({
 	{"stevearc/dressing.nvim"},
 	{
 		"ziontee113/icon-picker.nvim",
-		config = function() 
+		config = function()
 			require("icon-picker").setup({
 				disable_legacy_commands = true
 			})
@@ -404,24 +404,46 @@ require("lazy").setup({
 	{'mattn/emmet-vim'},
 	-- neovim completion!
 
+	-- {
+	-- 	'echasnovski/mini.completion',
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require('mini.completion').setup()
+	-- 	end
+	-- },
 	{
 		'ms-jpq/coq_nvim',
-		branch = 'coq'
+		branch = 'coq',
+		dependencies = {
+			 {
+				 'ms-jpg/coq.artifacts',
+				 branch = 'artifacts'
+			 },
+			 {
+				 'ms-jpg/coq.thirdparty',
+				 branch = '3p'
+			 }
+		},
+		config = function ()
+			-- local vim.g.coq_settings = {
+			-- 	auto_start: 'shut-up'
+			-- }
+			-- require("coq")
+		end
 	},
-	-- a dependency for coq
-	{
-		'ms-jpq/coq.artifacts',
-		branch = 'artifacts'
-	},
+	-- -- a dependency for coq
+	-- {
+	-- 	'ms-jpq/coq.artifacts',
+	-- 	branch = 'artifacts'
+	-- },
+	-- completion menus
+	-- {
+	-- 	'ms-jpq/coq.thirdparty',
+	-- 	branch = '3p'
+	-- },
 	-- for language servers, i.e. autosuggestions for programming languages, and syntax checking
 	{
 		'neovim/nvim-lspconfig'
-	},
-
-	-- completion menus
-	{
-		'ms-jpq/coq.thirdparty',
-		branch = '3p'
 	},
 
 	-- creates a closing bracket when typing an opening one, and is context sensitive, etc.
