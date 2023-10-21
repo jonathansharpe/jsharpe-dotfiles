@@ -311,7 +311,7 @@ require("lazy").setup({
 	},
 
 	-- makes loading files faster or something
-	{ "nathom/filetype.nvim" },
+	-- { "nathom/filetype.nvim" },
 
 	-- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
 	{ "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -414,33 +414,20 @@ require("lazy").setup({
 	{
 		'ms-jpq/coq_nvim',
 		branch = 'coq',
-		dependencies = {
-			 {
-				 'ms-jpg/coq.artifacts',
-				 branch = 'artifacts'
-			 },
-			 {
-				 'ms-jpg/coq.thirdparty',
-				 branch = '3p'
-			 }
-		},
 		config = function ()
-			-- local vim.g.coq_settings = {
-			-- 	auto_start: 'shut-up'
-			-- }
-			-- require("coq")
+			require("coq")
 		end
 	},
-	-- -- a dependency for coq
-	-- {
-	-- 	'ms-jpq/coq.artifacts',
-	-- 	branch = 'artifacts'
-	-- },
+	-- a dependency for coq
+	{
+		'ms-jpq/coq.artifacts',
+		branch = 'artifacts'
+	},
 	-- completion menus
-	-- {
-	-- 	'ms-jpq/coq.thirdparty',
-	-- 	branch = '3p'
-	-- },
+	{
+		'ms-jpq/coq.thirdparty',
+		branch = '3p'
+	},
 	-- for language servers, i.e. autosuggestions for programming languages, and syntax checking
 	{
 		'neovim/nvim-lspconfig'
