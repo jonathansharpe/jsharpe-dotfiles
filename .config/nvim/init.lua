@@ -21,7 +21,7 @@ vim.g.mkdp_auto_start = 0
 -- vim.g.mapleader = " "
 set.mouse = 'a'
 require('sharpe-plugins')
-vim.cmd 'colorscheme base16-tokyo-city-dark'
+vim.cmd 'colorscheme base16-bright'
 require'lspconfig'.html.setup({
 	cmd = {
 		"vscode-html-languageserver", "--stdio"
