@@ -3,13 +3,18 @@ launch() {
 	$@ &> /dev/null &
 	disown
 }
-
+acp() {
+	git add .
+	git commit -m "$1"
+	git push
+}
 
 # VARIABLES
 export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_ASKPASS="/bin/ksshaskpass"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export FZF_CTRL_T_COMMAND="fd -E .git -H"
 
 # ALIASES
 #alias lu='launch'
@@ -18,4 +23,6 @@ alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademen
 alias nvimconf='nvim -p $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
 alias shellconf='nvim -p $HOME/.zshrc $HOME/.config/shell/jonathan-config'
 alias cpwd='pwd | xclip -selection clipboard'
-alias webs='cd ~/git/baseball-website/'
+alias frf='sudo fc-cache -rv'
+alias sfu='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel -Syu'
+alias gc='git clone'
