@@ -14,7 +14,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_ASKPASS="/bin/ksshaskpass"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-export FZF_CTRL_T_COMMAND="fd -E .git -H"
+export FZF_CTRL_T_COMMAND="fd -E OneDrive -E .git -H"
 
 # ALIASES
 #alias lu='launch'
@@ -26,4 +26,6 @@ alias cpwd='pwd | xclip -selection clipboard'
 alias frf='sudo fc-cache -rv'
 alias sfu='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel -Syu'
 alias gc='git clone'
-alias eza='eza --icons=always'
+alias ls='eza --icons=always'
+alias rm='rmtrash'
+alias cd='z'
