@@ -17,9 +17,9 @@ zstyle ':znap:*' repos-dir ~/.zsh/
 znap source marlonrichert/zsh-autocomplete
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source romkatv/powerlevel10k
-znap source MikeDacre/careful_rm
 znap source urbainvaes/fzf-marks
 znap source zsh-users/zsh-syntax-highlighting
+znap source NullSense/fuzzy-sys
 
 znap install zsh-users/zsh-autosuggestions
 # Ensure the HISTFILE variable is set
@@ -55,3 +55,4 @@ fi
 eval "$(zoxide init zsh)"
 source ~/.zsh/romkatv/powerlevel10k/powerlevel10k.zsh-theme
 PATH="$HOME/.local/bin:$PATH"
+export FPATH="$HOME/.zsh/eza/completions/zsh:$FPATH"
