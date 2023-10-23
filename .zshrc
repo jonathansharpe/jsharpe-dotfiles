@@ -21,7 +21,6 @@ znap source urbainvaes/fzf-marks
 znap source zsh-users/zsh-syntax-highlighting
 znap source NullSense/fuzzy-sys
 
-znap install zsh-users/zsh-autosuggestions
 # Ensure the HISTFILE variable is set
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zhistory"
 [ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
