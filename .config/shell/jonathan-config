@@ -1,6 +1,11 @@
 # LAUNCH COMMAND
 launch() {
-	$@ &> /dev/null &
+	if [ -z "$1" ]; then
+		echo "Usage: lu <command> [<args>]"
+		return 1
+	fi
+
+	"$@" >/dev/null 2>&1 &
 	disown
 }
 acp() {
@@ -17,7 +22,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_CTRL_T_COMMAND="fd -E OneDrive -E .git -H"
 
 # ALIASES
-#alias lu='launch'
+alias lu='launch'
 alias lux='launch xdg-open'
 alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel'
 alias nvimconf='nvim -p $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
