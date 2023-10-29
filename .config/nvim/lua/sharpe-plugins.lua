@@ -39,6 +39,9 @@ require("lazy").setup({
 		end
 	},
 
+	{
+		'rafamadriz/neon'
+	},
 	-- makes motions very fast
 	{
 		"folke/flash.nvim",
