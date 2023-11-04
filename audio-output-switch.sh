@@ -13,15 +13,6 @@ theme="$type/$style"
 prompt='Audio Outputs'
 mesg='Switch Audio Outputs'
 
-rofi_cmd() {
-	rofi \
-		-dmenu \
-		-i \
-		-p "$prompt" \
-		-mesg "$mesg" \
-		-theme ${theme}
-}
-
 sink_list=$(pactl list short sinks)
 sink_long_list=$(pactl list sinks)
 
@@ -33,9 +24,28 @@ if [ "${#sink_numbers[@]}" -ne "${#sink_descriptions[@]}" ]; then
 	exit 1
 fi
 
+longest_string=""
+
 for ((i = 0; i < ${#sink_numbers[@]}; i++)); do
 	options+=("${sink_descriptions[i]}")
+	string_length="$(echo -n "$sink_descriptions[i]" | wc -m)"
+	if [ "$string_length" -gt "$(echo -n "$longest_string" | wc -m)" ]; then
+		longest_string="{$sink_descriptions[i]}"
+	fi
 done
+
+longest_string_length="$(echo -n "$longest_string" | wc -m)"
+
+rofi_cmd() {
+	rofi \
+		-theme-str "window {width: $((longest_string_length*24))px;}" \
+		-theme-str "listview {columns: 1; lines: ${#sink_numbers[@]};}" \
+		-dmenu \
+		-i \
+		-p "$prompt" \
+		-mesg "$mesg" \
+		-theme ${theme}
+}
 
 selected_description=$(printf "%s\n" "${options[@]}" | rofi_cmd | cut -f1)
 
