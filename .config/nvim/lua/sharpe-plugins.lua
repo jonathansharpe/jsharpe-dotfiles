@@ -43,6 +43,36 @@ require("lazy").setup({
 	{
 		'EdenEast/nightfox.nvim'
 	},
+
+	-- shows line number while you type
+	{
+		'nacro90/numb.nvim',
+		config = function()
+			require('numb').setup()
+		end
+	},
+	-- darkens inactive window
+	{
+		'sunjon/Shade.nvim',
+		config = function()
+			require('shade').setup({
+				overlay_opacity = 50,
+				opacity_step = 1
+			})
+		end
+	},
+
+	{
+		'utilyre/barbecue.nvim',
+		name = "barbecue",
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons"
+		},
+		opts = {
+		}
+	},
 	-- makes motions very fast
 	{
 		"folke/flash.nvim",
@@ -61,9 +91,11 @@ require("lazy").setup({
 
 	-- shows a nice little buffer switcher
 	{
-		'matbme/JABS.nvim',
+		'toppair/reach.nvim',
 		config = function()
-			require'jabs'.setup{}
+			require('reach').setup({
+				notifications = true
+			})
 		end
 	},
 
@@ -97,13 +129,10 @@ require("lazy").setup({
 
 	-- adds a window picker
 	{
-		's1n7ax/nvim-window-picker',
-		name = 'window-picker',
-		event = 'VeryLazy',
-		version = '2.*',
+		'yorickpeterse/nvim-window',
 		config = function()
-			require'window-picker'.setup()
-		end,
+			require('nvim-window').setup{}
+		end
 	},
 
 	{
@@ -156,6 +185,11 @@ require("lazy").setup({
 			require("transparent").setup({
 			})
 		end
+	},
+
+	-- adds better command completion and stuff
+	{
+		'gelguy/wilder.nvim',
 	},
 
 	-- adds a fuzzy finder
@@ -483,6 +517,7 @@ require("lazy").setup({
 		end
 	},
 
+	-- smooth scrolling plugin
 	{
 		'declancm/cinnamon.nvim',
 		config = function()
@@ -494,23 +529,4 @@ require("lazy").setup({
 			vim.keymap.set('n', '<C-e>', "<Cmd>lua Scroll('<C-e>', 0, 1)<CR>")
 		end
 	},
-
-	-- smooth scrolling plugin
-	-- {
-	-- 	"karb94/neoscroll.nvim",
-	-- 	config = function()
-	-- 		require('neoscroll').setup({
-	-- 			mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-	-- 			'<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-	-- 			hide_cursor = true,          -- Hide cursor while scrolling
-	-- 			stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-	-- 			use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-	-- 			respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-	-- 			cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-	-- 			easing_function = nil,        -- Default easing function
-	-- 			pre_hook = nil,              -- Function to run before the scrolling animation starts
-	-- 			post_hook = nil,              -- Function to run after the scrolling animation ends
-	-- 		})
-	-- 	end
-	-- },
 })
