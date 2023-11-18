@@ -40,6 +40,27 @@ require'lspconfig'.jsonls.setup({
 require'lspconfig'.marksman.setup{}
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.cssls.setup({})
+local wilder = require('wilder')
+wilder.setup({modes = {':', '/', '?'}})
+wilder.set_option('renderer', wilder.renderer_mux({
+	[':'] = wilder.popupmenu_renderer({
+		highlighter = wilder.basic_highlighter(),
+	}),
+	['/'] = wilder.popupmenu_renderer({
+		highlighter = wilder.basic_highlighter(),
+	}),
+	['?'] = wilder.popupmenu_renderer({
+		highlighter = wilder.basic_highlighter(),
+	})
+}))
+wilder.set_option('renderer', wilder.popupmenu_renderer(
+	wilder.popupmenu_border_theme({
+		highlights = {
+			border = 'Normal',
+		},
+		border = 'rounded'
+	})
+))
 local dap = require('dap')
 dap.adapters.lldb = {
 	type = 'executable',
@@ -72,7 +93,10 @@ local opts = {noremap = true, silent = true}
 -- GENERAL REMAPS
 map('n', "<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
 map('n', "<a-t>", ":Neotree<CR>", opts)
-map('n', "<Leader><Tab>", ":JABSOpen<CR>", opts)
+map('n', "<Leader>1", ":ReachOpen buffers<CR>", opts)
+map('n', "<Leader>2", ":ReachOpen tabpages<CR>", opts)
+map('n', "<Leader>3", ":ReachOpen marks<CR>", opts)
+map('n', "<Leader><Tab>", ":lua require('nvim-window').pick()<CR>", opts)
 
 
 -- REFACTORING KEYMAPS
