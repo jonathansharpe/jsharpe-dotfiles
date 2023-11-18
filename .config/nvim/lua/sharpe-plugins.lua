@@ -39,8 +39,9 @@ require("lazy").setup({
 		end
 	},
 
+	-- use this space for whatever colorscheme you are using this hour
 	{
-		'rafamadriz/neon'
+		'EdenEast/nightfox.nvim'
 	},
 	-- makes motions very fast
 	{
@@ -83,6 +84,15 @@ require("lazy").setup({
 				}
 			}
 		end,
+	},
+	{
+		'camspiers/snap',
+		config = function()
+			local snap = require"snap"
+			snap.maps {
+				{"<Leader><Leader>", snap.config.file { producer = "fd.file"} },
+			}
+		end
 	},
 
 	-- adds a window picker

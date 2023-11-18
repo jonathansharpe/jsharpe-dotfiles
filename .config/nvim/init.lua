@@ -12,17 +12,17 @@ set.fdm = 'indent'
 set.termguicolors = true
 set.laststatus=2
 set.showtabline=2
+set.tw=70
 -- ALIASES
 vim.cmd 'set noexpandtab'
 vim.cmd 'set signcolumn=yes'
 vim.g.mkdp_markdown_css = '~/.config/nvim/markdown-preview.css'
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
--- vim.g.mapleader = " "
+vim.g.mapleader = " "
 set.mouse = 'a'
 require('sharpe-plugins')
-vim.g.neon_style = "dark"
-vim.cmd 'colorscheme neon'
+vim.cmd [[colorscheme nightfox]]
 require'lspconfig'.html.setup({
 	cmd = {
 		"vscode-html-languageserver", "--stdio"
@@ -31,7 +31,7 @@ require'lspconfig'.html.setup({
 require'lspconfig'.denols.setup{}
 require'lspconfig'.lua_ls.setup{}
 require'lspconfig'.bashls.setup{}
-require'lspconfig'.ltex.setup{}
+-- require'lspconfig'.ltex.setup{}
 require'lspconfig'.jsonls.setup({
 	cmd = {
 		"vscode-json-languageserver", "--stdio"
