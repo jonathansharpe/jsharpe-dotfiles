@@ -44,6 +44,15 @@ require("lazy").setup({
 		'EdenEast/nightfox.nvim'
 	},
 
+	-- splitting/joining blocks of code like if statements, etc.
+	{
+		'Wansmer/treesj',
+		dependencies = { 'nvim-treesitter/nvim-treesitter' },
+		config = function()
+			require('treesj').setup({})
+		end
+	},
+
 	-- shows line number while you type
 	{
 		'nacro90/numb.nvim',
@@ -51,17 +60,20 @@ require("lazy").setup({
 			require('numb').setup()
 		end
 	},
-	-- darkens inactive window
+
 	{
-		'sunjon/Shade.nvim',
+		'gen740/SmoothCursor.nvim',
 		config = function()
-			require('shade').setup({
-				overlay_opacity = 50,
-				opacity_step = 1
+			require('smoothcursor').setup({
+				fancy = {
+					enable = true
+				}
 			})
 		end
 	},
 
+	-- shows breadcrumb-like things at the top so you know what file
+	-- and function you're in
 	{
 		'utilyre/barbecue.nvim',
 		name = "barbecue",
@@ -91,11 +103,10 @@ require("lazy").setup({
 
 	-- shows a nice little buffer switcher
 	{
-		'toppair/reach.nvim',
+		'LukasPietzschmann/telescope-tabs',
+		dependencies = { 'nvim-telescope/telescope.nvim' },
 		config = function()
-			require('reach').setup({
-				notifications = true
-			})
+			require('telescope-tabs').setup{}
 		end
 	},
 
@@ -116,15 +127,6 @@ require("lazy").setup({
 				}
 			}
 		end,
-	},
-	{
-		'camspiers/snap',
-		config = function()
-			local snap = require"snap"
-			snap.maps {
-				{"<Leader><Leader>", snap.config.file { producer = "fd.file"} },
-			}
-		end
 	},
 
 	-- adds a window picker
@@ -194,8 +196,8 @@ require("lazy").setup({
 
 	-- adds a fuzzy finder
 	{
-		"nvim-telescope/telescope.nvim", tag = '0.1.0',
-		requires = {{'nvim-lua/plenary.nvim'}}
+		"nvim-telescope/telescope.nvim", branch = '0.1.x',
+		dependencies = {'nvim-lua/plenary.nvim'}
 	},
 
 	-- adds more matches to the % key when pressed
