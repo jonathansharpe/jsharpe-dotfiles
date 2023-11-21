@@ -90,30 +90,35 @@ vim.cmd 'COQnow -s'
 local map = vim.api.nvim_set_keymap
 local opts = {noremap = true, silent = true}
 
--- GENERAL REMAPS
+-- general maps
 map('n', "<Leader>nf", ":lua require('neogen').generate()<CR>", opts)
-map('n', "<a-t>", ":Neotree<CR>", opts)
-map('n', "<Leader>1", ":ReachOpen buffers<CR>", opts)
-map('n', "<Leader>2", ":ReachOpen tabpages<CR>", opts)
-map('n', "<Leader>3", ":ReachOpen marks<CR>", opts)
+map('n', "<Leader>t", ":Neotree<CR>", opts)
+map('n', "<Leader>1", ":Telescope buffers<CR>", opts)
+map('n', "<Leader>2", ":Telescope telescope-tabs list_tabs<CR>", opts)
 map('n', "<Leader><Tab>", ":lua require('nvim-window').pick()<CR>", opts)
 
 
--- REFACTORING KEYMAPS
--- let mapleader = " "
+-- telescope maps
+-- local builtin = require('telescope.builtin')
+map('n', "<Leader><Leader>", ":lua require('telescope.builtin').find_files()<CR>", opts)
+map('n', "<Leader>fg", ":lua require('telescope.builtin').live_grep()<CR>", opts)
+map('n', "<Leader>fb", ":lua require('telescope.builtin').buffers()<CR>", opts)
+map('n', "<Leader>fh", ":lua require('telescope.builtin').help_tags()<CR>", opts)
 
--- HOVER REMAPS
-vim.keymap.set('n', '<Leader>K', require('hover').hover, {desc='hover.nvim'})
+-- treesj maps
+map('n', "<Leader>j", ":lua require('treesj').toggle()<CR>", opts)
 
--- DAP KEYMAPS
-vim.keymap.set('n', '<Leader><F2>', function() require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader><F3>', function() require('dap').step_into() end)
-vim.keymap.set('n', '<Leader><F4>', function() require('dap').step_over() end)
-vim.keymap.set('n', '<Leader><F5>', function() require('dap').continue() end)
+-- hover maps
+map('n', '<Leader>K', ":lua require('hover').hover()<CR>", {desc='hover.nvim'})
+
+-- DAP maps
+map('n', '<Leader><F2>', ":lua require('dap').toggle_breakpoint()<CR>", opts)
+map('n', '<Leader><F3>', ":lua require('dap').step_into()<CR>", opts)
+map('n', '<Leader><F4>', ":lua require('dap').step_over()<CR>", opts)
+map('n', '<Leader><F5>', ":lua require('dap').continue()<CR>", opts)
 
 map('n', '<A-c>', ':bprevious<CR>', {silent = true})
 map('n', '<A-v>', ':bnext<CR>', {silent = true})
 map('n', '<A-x>', ':bdelete<CR>', {silent = true})
 
-map('n', '<A-i>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
-
+map('n', '<A-i>', ':lua require("FTerm").toggle()<CR>', opts)
