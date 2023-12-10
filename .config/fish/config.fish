@@ -113,11 +113,26 @@ if status is-interactive
 	fzf_configure_bindings --directory=\cf
 	set fzf_fd_opts --hidden --exclude=.git --exclude=OneDrive
 
+	function acp 
+		git add .
+		git commit -m "$argv[1]"
+		git push
+	end
+
+	function launch 
+		if test -z $argv[1]
+			echo "Usage: lu <command> [<args>]"
+			return 1
+		end
+
+		$argv >/dev/null 2>&1 &
+		disown
+	end
+
 	alias lu='launch'
-	alias lux='launch xdg-open'
 	alias paru='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel'
 	alias nvimconf='nvim -p $HOME/.config/nvim/init.lua $HOME/.config/nvim/lua/sharpe-plugins.lua'
-	alias shellconf='nvim -p $HOME/.zshrc $HOME/.config/shell/jonathan-config'
+	alias shellconf='nvim -p $HOME/.config/fish/config.fish'
 	alias cpwd='pwd | xclip -selection clipboard'
 	alias frf='sudo fc-cache -rv'
 	alias sfu='paru --color=auto --sudoloop --newsonupgrade --pgpfetch --upgrademenu --bottomup --skipreview --nodevel -Syu'
