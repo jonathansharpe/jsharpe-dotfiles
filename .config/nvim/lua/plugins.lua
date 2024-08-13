@@ -1,11 +1,4 @@
-
-require("lazy").setup({
-	-- use this space for whatever colorscheme you are using this hour
-	{
-		'EdenEast/nightfox.nvim',
-		lazy = false,
-		priority = 1000,
-	},
+return {
 	-- adds file tree, very useful
 	{
 		'nvim-neo-tree/neo-tree.nvim',
@@ -31,7 +24,6 @@ require("lazy").setup({
 			require("which-key").setup{}
 		end
 	},
-
 
 	-- splitting/joining blocks of code like if statements, etc.
 	{
@@ -323,4 +315,4 @@ require("lazy").setup({
 			require'colorizer'.setup()
 		end
 	},
-})
+}
