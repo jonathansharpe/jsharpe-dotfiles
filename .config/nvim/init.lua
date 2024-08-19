@@ -13,6 +13,6 @@ vim.opt.rtp:prepend(lazypath)
 require("vim-options")
 require("lazy").setup("plugins")
 require("keymaps")
--- ALIASES
+
 vim.g.mkdp_auto_close = 0
 vim.g.mkdp_auto_start = 0
