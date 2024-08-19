@@ -17,6 +17,8 @@ zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 zinit light MichaelAquilina/zsh-auto-notify
 
+AUTO_NOTIFY_IGNORE+=("lf", "nvim", "zellij", "tmux", "bpytop")
+
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
