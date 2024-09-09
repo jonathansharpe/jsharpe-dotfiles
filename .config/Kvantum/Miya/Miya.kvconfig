@@ -43,7 +43,7 @@ toolbar_icon_size=16
 combo_as_lineedit=true
 animate_states=true
 button_contents_shift=false
-combo_menu=true
+combo_menu=false
 hide_combo_checkboxes=true
 combo_focus_rect=false
 groupbox_top_label=true
@@ -71,6 +71,9 @@ intensity=1.00
 saturation=1.00
 click_behavior=0
 shadowless_popup=false
+drag_from_buttons=false
+menu_blur_radius=0
+tooltip_blur_radius=0
 
 [GeneralColors]
 window.color=#31313A
@@ -116,6 +119,10 @@ middle_click_scroll=false
 opaque_colors=false
 scroll_jump_workaround=true
 kinetic_scrolling=true
+blur_only_active_window=false
+centered_forms=false
+noninteger_translucency=false
+style_vertical_toolbars=false
 
 [PanelButtonCommand]
 frame=true
