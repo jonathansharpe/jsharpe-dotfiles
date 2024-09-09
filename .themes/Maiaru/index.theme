@@ -1,9 +1,0 @@
-[X-GNOME-Metatheme]
-Name=Maiaru
-Type=X-GNOME-Metatheme
-Comment=Ubuntu Yaru theme - forked with a stylish maia base color
-Encoding=UTF-8
-GtkTheme=Maiaru
-IconTheme=Maiaru
-CursorTheme=Maiaru
-CursorSize=24
