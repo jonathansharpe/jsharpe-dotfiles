@@ -3,7 +3,7 @@ author=Vince Liuice
 comment=A dark theme with translucency similar to the style of macOS Mojave
 x11drag=all
 alt_mnemonic=true
-left_tabs=false
+left_tabs=true
 attach_active_tab=false
 embedded_tabs=true
 mirror_doc_tabs=false
@@ -126,7 +126,7 @@ scroll_jump_workaround=false
 blur_only_active_window=false
 centered_forms=false
 kinetic_scrolling=false
-noninteger_translucency=false
+noninteger_translucency=true
 style_vertical_toolbars=false
 
 [PanelButtonCommand]
