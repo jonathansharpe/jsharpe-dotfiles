@@ -1,18 +1,9 @@
 import RegularWindow from "widget/RegularWindow"
+import layout from "./layout"
 import icons from "lib/icons"
 import options from "options"
-import { ThemesMenu } from "./pages/theme/index"
-import { SettingsMenu } from "./pages/config/index"
-import "./side_effects";
 
-type Page = "Configuration" | "Theming"
-
-const CurrentPage = Variable<Page>("Configuration");
-
-const pagerMap: Page[] = [
-    "Configuration",
-    "Theming",
-]
+const current = Variable(layout[0].attribute.name)
 
 const Header = () => Widget.CenterBox({
     class_name: "header",
@@ -25,7 +16,16 @@ const Header = () => Widget.CenterBox({
         tooltip_text: "Reset",
     }),
     center_widget: Widget.Box({
-
+        class_name: "pager horizontal",
+        children: layout.map(({ attribute: { name, icon } }) => Widget.Button({
+            xalign: 0,
+            class_name: current.bind().as(v => `${v === name ? "active" : ""}`),
+            on_clicked: () => current.value = name,
+            child: Widget.Box([
+                Widget.Icon(icon),
+                Widget.Label(name),
+            ]),
+        })),
     }),
     end_widget: Widget.Button({
         class_name: "close",
@@ -36,40 +36,11 @@ const Header = () => Widget.CenterBox({
     }),
 })
 
-const PageContainer = () => {
-    return Widget.Box({
-        hpack: "fill",
-        hexpand: true,
-        vertical: true,
-        children: CurrentPage.bind("value").as(v => {
-            return [
-                Widget.Box({
-                    class_name: "option-pages-container",
-                    hpack: "center",
-                    hexpand: true,
-                    children: pagerMap.map((page) => {
-                        return Widget.Button({
-                            xalign: 0,
-                            hpack: "center",
-                            class_name: `pager-button ${v === page ? 'active' : ''} category`,
-                            label: page,
-                            on_primary_click: () => CurrentPage.value = page
-                        })
-                    })
-                }),
-                Widget.Stack({
-                    vexpand: false,
-                    class_name: "themes-menu-stack",
-                    children: {
-                        "Configuration": SettingsMenu(),
-                        "Theming": ThemesMenu(),
-                    },
-                    shown: CurrentPage.bind("value")
-                })
-            ]
-        })
-    })
-}
+const PagesStack = () => Widget.Stack({
+    transition: "slide_left_right",
+    children: layout.reduce((obj, page) => ({ ...obj, [page.attribute.name]: page }), {}),
+    shown: current.bind() as never,
+})
 
 export default () => RegularWindow({
     name: "settings-dialog",
@@ -80,14 +51,13 @@ export default () => RegularWindow({
             win.hide()
             return true
         })
-        win.set_default_size(200, 300)
+        win.set_default_size(500, 600)
     },
     child: Widget.Box({
-        class_name: "settings-dialog-box",
         vertical: true,
         children: [
             Header(),
-            PageContainer()
+            PagesStack(),
         ],
     }),
 })
