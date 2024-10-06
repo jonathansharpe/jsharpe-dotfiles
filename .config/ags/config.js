@@ -1,6 +1,6 @@
 import GLib from "gi://GLib"
 
-const main = "/tmp/ags/hyprpanel/main.js"
+const main = "/tmp/asztal/main.js"
 const entry = `${App.configDir}/main.ts`
 const bundler = GLib.getenv("AGS_BUNDLER") || "bun"
 
@@ -33,7 +33,7 @@ try {
     }
 
     if (v.ags[1] < v.expect[1] || v.ags[2] < v.expect[2]) {
-        print(`HyprPanel needs atleast v${v.expect.join(".")} of AGS, yours is v${v.ags.join(".")}`)
+        print(`my config needs at least v${v.expect.join(".")}, yours is v${v.ags.join(".")}`)
         App.quit()
     }
 

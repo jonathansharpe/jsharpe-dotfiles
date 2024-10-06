@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Application } from "types/service/applications"
-import { NotificationAnchor } from "./types/options"
-import { OSDAnchor } from "lib/types/options";
 import icons, { substitutes } from "./icons"
 import Gtk from "gi://Gtk?version=3.0"
 import Gdk from "gi://Gdk"
 import GLib from "gi://GLib?version=2.0"
-import GdkPixbuf from "gi://GdkPixbuf";
-import { NotificationArgs } from "types/utils/notify"
 
 export type Binding<T> = import("types/service").Binding<any, any, T>
 
@@ -54,8 +50,8 @@ export async function sh(cmd: string | string[]) {
 }
 
 export function forMonitors(widget: (monitor: number) => Gtk.Window) {
-    const n = Gdk.Display.get_default()?.get_n_monitors() || 1;
-    return range(n, 0).flatMap(widget);
+    const n = Gdk.Display.get_default()?.get_n_monitors() || 1
+    return range(n, 0).flatMap(widget)
 }
 
 /**
@@ -77,12 +73,7 @@ export function dependencies(...bins: string[]) {
 
     if (missing.length > 0) {
         console.warn(Error(`missing dependencies: ${missing.join(", ")}`))
-        Notify({
-            summary: "Dependencies not found!",
-            body: `The following dependencies are missing: ${missing.join(", ")}`,
-            iconName: icons.ui.warning,
-            timeout: 7000
-        });
+        Utils.notify(`missing dependencies: ${missing.join(", ")}`)
     }
 
     return missing.length === 0
@@ -119,46 +110,4 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
     cr.fill()
     widget.draw(cr)
     return surface
-}
-
-/**
- * Ensure that the provided filepath is a valid image
- */
-export const isAnImage = (imgFilePath: string): boolean => {
-    try {
-        GdkPixbuf.Pixbuf.new_from_file(imgFilePath);
-        return true;
-    } catch (error) {
-        return false;
-    }
-}
-
-export const Notify = (notifPayload: NotificationArgs): void => {
-    let command = 'notify-send';
-    command += ` "${notifPayload.summary} "`;
-    if (notifPayload.body) command += ` "${notifPayload.body}" `;
-    if (notifPayload.appName) command += ` -a "${notifPayload.appName}"`;
-    if (notifPayload.iconName) command += ` -i "${notifPayload.iconName}"`;
-    if (notifPayload.urgency) command += ` -u "${notifPayload.urgency}"`;
-    if (notifPayload.timeout !== undefined) command += ` -t ${notifPayload.timeout}`;
-    if (notifPayload.category) command += ` -c "${notifPayload.category}"`;
-    if (notifPayload.transient) command += ` -e`;
-    if (notifPayload.id !== undefined) command += ` -r ${notifPayload.id}`;
-
-    Utils.execAsync(command)
-}
-
-export function getPosition(pos: NotificationAnchor | OSDAnchor): ("top" | "bottom" | "left" | "right")[] {
-    const positionMap: { [key: string]: ("top" | "bottom" | "left" | "right")[] } = {
-        "top": ["top"],
-        "top right": ["top", "right"],
-        "top left": ["top", "left"],
-        "bottom": ["bottom"],
-        "bottom right": ["bottom", "right"],
-        "bottom left": ["bottom", "left"],
-        "right": ["right"],
-        "left": ["left"],
-    };
-
-    return positionMap[pos] || ["top"];
 }
