@@ -7,6 +7,7 @@ if [ ! -d "$ZINIT_HOME" ]; then
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"
+source ~/.config/shell/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # plugins
 
@@ -17,11 +18,17 @@ zinit light Aloxaf/fzf-tab
 zinit light jeffreytse/zsh-vi-mode
 zinit light MichaelAquilina/zsh-auto-notify
 
-AUTO_NOTIFY_IGNORE+=("lf", "nvim", "zellij", "tmux", "bpytop")
+AUTO_NOTIFY_IGNORE+=("lf" "nvim" "zellij" "tmux" "bpytop")
 
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
 eval "$(fzf --zsh)"
 
 # Ensure the HISTFILE variable is set
