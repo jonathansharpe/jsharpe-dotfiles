@@ -6,8 +6,6 @@
 ## Applets : Change Audio Output Device
 
 # Import Current Theme
-source "$HOME"/.config/rofi/applets/shared/theme.bash
-theme="$type/$style"
 
 # Volume Info
 prompt='Audio Outputs'
@@ -38,13 +36,10 @@ longest_string_length="$(echo -n "$longest_string" | wc -m)"
 
 rofi_cmd() {
 	rofi \
-		-theme-str "window {width: $((longest_string_length*24))px;}" \
-		-theme-str "listview {columns: 1; lines: ${#sink_numbers[@]};}" \
 		-dmenu \
 		-i \
 		-p "$prompt" \
 		-mesg "$mesg" \
-		-theme ${theme}
 }
 
 selected_description=$(printf "%s\n" "${options[@]}" | rofi_cmd | cut -f1)
