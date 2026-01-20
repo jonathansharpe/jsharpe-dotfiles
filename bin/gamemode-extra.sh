@@ -5,7 +5,8 @@ HYPRGAMEMODE=$(hyprctl getoption animations:enabled | sed -n '1p' | awk '{print 
 if [ $HYPRGAMEMODE = 1 ]; then
 	hyprctl --batch "\
 		keyword general:border_size 3;\
-		keyword windowrulev2 opacity 1.0 1.0,class:^(.*)$"
+		keyword decoration:active_opacity 1.0 override;\
+		keyword decoration:inactive_opacity 1.0 override\
 	exit
 else
 	hyprctl reload
