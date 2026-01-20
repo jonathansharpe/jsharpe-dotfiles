@@ -11,10 +11,8 @@ return {
 	},
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-		},
+		version = "v2.*",
+		build = "make install_jsregexp"
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -57,7 +55,7 @@ return {
 			local ls = require "luasnip"
 			ls.config.set_config {
 				history = false,
-				updateevents = "TextChanged,TextChanged1"
+				updateevents = "TextChangedI,TextChangedP"
 			}
 
 			for _, ft_path in ipairs(vim.api.nvim_get_runtime_file("lua/custom/snippets/*.lua", true)) do
