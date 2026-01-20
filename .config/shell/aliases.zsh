@@ -23,12 +23,20 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+if [[ -f ~/.config/secrets/api.env ]]; then
+	source ~/.config/secrets/api.env
+fi
+
 # VARIABLES
 export EDITOR="nvim"
 export VISUAL="nvim"
 export SUDO_ASKPASS="/bin/ksshaskpass"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export FZF_CTRL_T_COMMAND="fd -E OneDrive -E .git -H"
+export MOZ_ENABLE_WAYLAND=1
+export XDG_SESSION_TYPE=wayland
+export QT_QPA_PLATFORM=wayland
+export XDG_CURRENT_DESKTOP=Hyprland
 
 # ALIASES
 alias lu='launch'
@@ -44,4 +52,3 @@ alias ls='eza --icons=always'
 alias rm='rmtrash'
 # alias cd='z'
 alias zls='zellij list sessions'
-alias hyprconf='cd ~/.config/hypr/ && nvim hyprland.conf hyprpaper.conf hyprlock.conf'

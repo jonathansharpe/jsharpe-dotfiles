@@ -1,3 +1,0 @@
-plasmoidheading - line
-dialogs - line
-checkmarks - check/circle

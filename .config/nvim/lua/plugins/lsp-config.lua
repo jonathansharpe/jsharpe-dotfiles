@@ -17,19 +17,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		config = function()
-			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			vim.g.markdown_fenced_languages = {
-				"ts=typescript",
-			}
-			lspconfig.lua_ls.setup({
-				capabilities = capabilities,
-			})
-			lspconfig.denols.setup({
-				capabilities = capabilities,
-			})
-		end,
 	},
 	-- detects embedded code within other file types, i.e. CSS within HTML, so doing the comment motion will create a comment in the correct language
 	{
