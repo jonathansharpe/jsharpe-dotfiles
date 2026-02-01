@@ -6,26 +6,26 @@ cursor_size = 32
 cursor_theme = "Simp1e-breeze-snow"
 document_font_size = 10
 explorer = "thunar"
-font = "IBM Plex Sans Medium"
+font = "Google Sans"
 font_size = 10
 gtk_theme = "Kripton"
 icon_theme = "Newaita-reborn"
 monospace_font = "PaperMono Nerd Font Mono"
 monospace_font_size = 9
-notifications = "swaync"
+notifications = "dunst"
 
 [notification]
-font = "IBM Plex Sans"
+font = "Google Sans"
 font_size = 10
 
 [qt5] 
-font = "IBM Plex Sans Medium"
+font = "Google Sans"
 font_size = 10
 monospace_font = "PaperMono Nerd Font Mono"
 monospace_font_size = 9
 
 [qt6] 
-font = "IBM Plex Sans Medium"
+font = "Google Sans"
 font_size = 10
 monospace_font = "PaperMono Nerd Font Mono"
 monospace_font_size = 9
