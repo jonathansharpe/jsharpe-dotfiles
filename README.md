@@ -32,9 +32,10 @@ it manually.
 1. Run these commands:
 ```
 cd
-mkdir git
-cd git
-git clone https://github.com/jonathansharpe/jsharpe-dotfiles/
-cd jsharpe-dotfiles
+git clone https://github.com/jonathansharpe/jsharpe-dotfiles/ dotfiles
+cd dotfiles
 ```
-2. I recommend `stow` for dotfiles syncing. I 
+2. I recommend `stow` for dotfiles syncing. Once it's installed with
+   your systems package manager, run `stow --adopt .` and it will
+   create symlinks in your `.config` folder, or wherever your configs
+   are stored.
