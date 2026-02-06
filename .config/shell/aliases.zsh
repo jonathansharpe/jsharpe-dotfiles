@@ -37,6 +37,8 @@ export MOZ_ENABLE_WAYLAND=1
 export XDG_SESSION_TYPE=wayland
 export QT_QPA_PLATFORM=wayland
 export XDG_CURRENT_DESKTOP=Hyprland
+export FZF_COMPLETION_OPTS="--multi"
+export FZF_DEFAULT_OPTS="--bind 'tab:toggle+down,shift-tab:toggle+up'"
 
 # ALIASES
 alias lu='launch'
